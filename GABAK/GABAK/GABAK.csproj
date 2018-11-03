@@ -260,6 +260,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AviFile.dll" />
+    <Content Include="gabak\availableservers.txt" />
+    <Content Include="gabak\concorde.exe" />
+    <Content Include="gabak\cygwin1.dll" />
+    <Content Include="gabak\lkh.exe" />
+    <Content Include="gabak\QSConcorde.dll" />
+    <Content Include="gabak\QSopt.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
