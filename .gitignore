@@ -13,14 +13,18 @@
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/
-[Rr]elease/
+#[Rr]elease/
 [Rr]eleases/
-[Xx]64/
+#[Xx]64/
 [Xx]86/
 [Bb]uild/
 bld/
-[Bb]in/
+#[Bb]in/
 [Oo]bj/
+GABAK.exe.config
+GABAK.vshost.exe
+GABAK.vshost.exe.config
+GABAK.vshost.exe.manifest
 
 # Visual Studio 2015 cache/options directory
 .vs/
