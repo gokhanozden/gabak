@@ -56,6 +56,7 @@ namespace GABAK
         {
             regionID = System.Threading.Interlocked.Increment(ref nextID);
             angle = p_angle % 180;
+            if (angle == 90 || angle == 0) angle = angle + options.getEpsilon();//If angle is exactly 90 or exactly 0 degrees, some errors occur in calculations, this is a temporary fix
             horizontaladjuster = p_horizontaladjuster;
             verticaladjuster = p_verticaladjuster;
             crossaislewidth = p_crossaislewidth;
@@ -78,6 +79,7 @@ namespace GABAK
         public void setRegionAngle(double p_angle)
         {
             angle = p_angle % 180;
+            if (angle == 90 || angle == 0) angle = angle + options.getEpsilon();//If angle is exactly 90 or exactly 0 degrees, some errors occur in calculations, this is a temporary fix
         }
 
         /// <summary>
