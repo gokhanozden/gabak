@@ -167,14 +167,20 @@ namespace GABAK
                     //Randomly create all the parameters between their lower and upper limits
                     for (int j = 0; j < this.size; j++)
                     {
-                        x[j] = uniformrandom(l[j], u[j], rnd[i]);
+                        if (l[j] != u[j])
+                            x[j] = uniformrandom(l[j], u[j], rnd[i]);
+                        else
+                            x[j] = l[j];
                     }
                 }
-                else
+                else//New encoding
                 {
                     for (int j = 0; j < l.Count(); j++)
                     {
-                        x[j] = uniformrandom(l[j], u[j], rnd[i]);
+                        if (l[j] != u[j])
+                            x[j] = uniformrandom(l[j], u[j], rnd[i]);
+                        else
+                            x[j] = l[j];
                     }
                     //This part is for connection instances part of the encoding
                     for (int j = l.Count(); j < this.size; j++)
@@ -866,7 +872,7 @@ namespace GABAK
                     {
                         x[k] = parents[parent[i]].getx()[k] + normalDist(0, sigma, rnd1[i]);//Single sigma is used
                     }
-
+                    setx(x);//Check if they are out of bounds and correct them, this has to be done in here before creating aisles randomly
                     for (int k = l.Count(); k < size; k++)//It won't enter this loop unless it is new encoding
                     {
                         int indexencodingprobability = k - (this.size - l.Count());
@@ -885,7 +891,7 @@ namespace GABAK
                         }
                         
                     }
-                    setx(x);//Check if they are out of bounds and correct them
+                    
                     child = new esvariable(size, x, l, u, wh, numberoforders, computing, optimal, mysocketservers, designclass);
                     //writeLog(logfile, child);
                 }

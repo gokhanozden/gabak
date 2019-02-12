@@ -1146,7 +1146,7 @@ namespace GABAK
             this.checkBoxAllSearch.AutoSize = true;
             this.checkBoxAllSearch.Checked = true;
             this.checkBoxAllSearch.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxAllSearch.Location = new System.Drawing.Point(109, 737);
+            this.checkBoxAllSearch.Location = new System.Drawing.Point(117, 737);
             this.checkBoxAllSearch.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.checkBoxAllSearch.Name = "checkBoxAllSearch";
             this.checkBoxAllSearch.Size = new System.Drawing.Size(117, 17);
