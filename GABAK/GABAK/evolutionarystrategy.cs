@@ -310,11 +310,11 @@ namespace GABAK
             }
             else//New encoding
             {
-                myexcel["Cost"] = getCost().ToString();
+                myexcel["Cost"] = getCost().ToString("R");
                 myexcel["Locs"] = getBestWarehouse().totalNumberOfLocations().ToString();
                 myexcel["SR"] = "None";
-                myexcel["Width"] = getBestWarehouse().getWidth().ToString();
-                myexcel["Depth"] = getBestWarehouse().getDepth().ToString();
+                myexcel["Width"] = getBestWarehouse().getWidth().ToString("R");
+                myexcel["Depth"] = getBestWarehouse().getDepth().ToString("R");
                 myexcel["Area"] = getBestWarehouse().area.ToString("R");
                 myexcel["Ratio"] = getBest().getx()[0].ToString("R");
                 myexcel["E1"] = getBest().getx()[1].ToString("R");
@@ -572,11 +572,11 @@ namespace GABAK
                 if (designclass != "All")
                 {
                     costarray[i] = currentcost;
-                    myexcel["Cost"] = getCost().ToString();
+                    myexcel["Cost"] = getCost().ToString("R");
                     myexcel["Locs"] = getBestWarehouse().totalNumberOfLocations().ToString();
-                    myexcel["SR"] = successrateperiteration.ToString();
-                    myexcel["Width"] = getBestWarehouse().getWidth().ToString();
-                    myexcel["Depth"] = getBestWarehouse().getDepth().ToString();
+                    myexcel["SR"] = successrateperiteration.ToString("R");
+                    myexcel["Width"] = getBestWarehouse().getWidth().ToString("R");
+                    myexcel["Depth"] = getBestWarehouse().getDepth().ToString("R");
                     myexcel["Area"] = getBestWarehouse().area.ToString("R");
                     myexcel["Ratio"] = getBest().getx()[0].ToString("R");
                     myexcel["E1"] = getBest().getx()[1].ToString("R");
@@ -608,7 +608,7 @@ namespace GABAK
                 else//New encoding
                 {
                     costarray[i] = currentcost;
-                    myexcel["Cost"] = getCost().ToString();
+                    myexcel["Cost"] = getCost().ToString("R");
                     myexcel["Locs"] = getBestWarehouse().totalNumberOfLocations().ToString();
                     myexcel["SR"] = successrateperiteration.ToString("R");
                     myexcel["Width"] = getBestWarehouse().getWidth().ToString("R");

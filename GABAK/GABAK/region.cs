@@ -56,7 +56,6 @@ namespace GABAK
         {
             regionID = System.Threading.Interlocked.Increment(ref nextID);
             angle = p_angle % 180;
-            if (angle == 90 || angle == 0) angle = angle + options.getEpsilon();//If angle is exactly 90 or exactly 0 degrees, some errors occur in calculations, this is a temporary fix
             horizontaladjuster = p_horizontaladjuster;
             verticaladjuster = p_verticaladjuster;
             crossaislewidth = p_crossaislewidth;
@@ -79,7 +78,6 @@ namespace GABAK
         public void setRegionAngle(double p_angle)
         {
             angle = p_angle % 180;
-            if (angle == 90 || angle == 0) angle = angle + options.getEpsilon();//If angle is exactly 90 or exactly 0 degrees, some errors occur in calculations, this is a temporary fix
         }
 
         /// <summary>
@@ -468,20 +466,87 @@ namespace GABAK
             //Find the starting point that is inside the picking aisle
             X = Xr;
             Y = Yr;
-            if (Yr < Ys)
+            if (Math.Abs(incy) > options.getEpsilon())//if the lines are not parallel then use this one
             {
-                while (Y < Ys)
+                if (Yr < Ys)
                 {
-                    X = X + incx;
-                    Y = Y + incy;
+                    if (incy > 0)
+                    {
+                        while (Y < Ys)
+                        {
+                            X = X + incx;
+                            Y = Y + incy;
+                        }
+                    }
+                    else
+                    {
+                        while (Y < Ys)
+                        {
+                            X = X - incx;
+                            Y = Y - incy;
+                        }
+                    }
+                }
+                else
+                {
+                    if (incy > 0)
+                    {
+                        while (Y > Ys)
+                        {
+                            X = X - incx;
+                            Y = Y - incy;
+                        }
+                    }
+                    else
+                    {
+                        while (Y > Ys)
+                        {
+                            X = X + incx;
+                            Y = Y + incy;
+                        }
+                    }
                 }
             }
-            else
+            else//angle is zero so no y increment
             {
-                while (Y > Ys)
+                if (Xr < Xs)
                 {
-                    X = X + incx;
-                    Y = Y + incy;
+                    if(incx > 0)
+                    {
+                        while (X < Xs)
+                        {
+                            X = X + incx;
+                            Y = Y + incy;
+                        }
+                    }
+                    else
+                    {
+                        while (X < Xs)
+                        {
+                            X = X - incx;
+                            Y = Y - incy;
+                        }
+                    }
+                    
+                }
+                else
+                {
+                    if(incx > 0)
+                    {
+                        while (X > Xs)
+                        {
+                            X = X - incx;
+                            Y = Y - incy;
+                        }
+                    }
+                    else
+                    {
+                        while (X > Xs)
+                        {
+                            X = X + incx;
+                            Y = Y + incy;
+                        }
+                    }
                 }
             }
 

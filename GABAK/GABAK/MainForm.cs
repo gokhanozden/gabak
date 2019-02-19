@@ -3075,9 +3075,9 @@ namespace GABAK
                                 if (checkBoxStraightAllocation.Checked) allocationmethod = 1;
                                 int warehouseareafit = myal.allocateSKUs(mylocalwh.getSKUs(), mylocalwh, allocationmethod);
                                 locations[m] = mylocalwh.totalNumberOfLocations().ToString();
-                                WW[m] = mylocalwh.getWidth().ToString();
-                                WD[m] = mylocalwh.getDepth().ToString();
-                                WA[m] = mylocalwh.area.ToString();
+                                WW[m] = mylocalwh.getWidth().ToString("R");
+                                WD[m] = mylocalwh.getDepth().ToString("R");
+                                WA[m] = mylocalwh.area.ToString("R");
                                 mylocalwh.setOrders(mylocalorders);
                                 //mywh.randomizeOrders();
                                 double totalcost = 0;
@@ -3268,8 +3268,8 @@ namespace GABAK
                                     }
                                 }
                                 TimeSpan elapsed2 = DateTime.Now - start2;
-                                TSPtime[m] = elapsed2.TotalSeconds.ToString();
-                                cost[m] = totalcost.ToString();
+                                TSPtime[m] = elapsed2.TotalSeconds.ToString("R");
+                                cost[m] = totalcost.ToString("R");
                             }
                         }
                     }
