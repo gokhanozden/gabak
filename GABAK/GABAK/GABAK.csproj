@@ -231,6 +231,7 @@
     <Compile Include="stateobject.cs" />
     <Compile Include="statistics.cs" />
     <Compile Include="storagelocation.cs" />
+    <Compile Include="svg.cs" />
     <Compile Include="tsp.cs" />
     <Compile Include="vector.cs" />
     <Compile Include="visualmath.cs" />

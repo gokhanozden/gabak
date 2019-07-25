@@ -154,9 +154,9 @@ namespace GABAK
                     lines.Add(lineIn);
                 }
                 reader.Close();
+                textBoxStatus.AppendText("Importing done.");
+                SplineChart(fileIn.Directory.FullName);
             }
-            textBoxStatus.AppendText("Importing done.");
-            SplineChart(fileIn.Directory.FullName);
         }
     }
 }

@@ -307,6 +307,7 @@ namespace GABAK
             this.labelPickListSize = new System.Windows.Forms.Label();
             this.labelOrderGenSeed = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.labelTotalAisles = new System.Windows.Forms.Label();
             this.menuStripTop.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -507,34 +508,34 @@ namespace GABAK
             // resetToolStripMenuItem
             // 
             this.resetToolStripMenuItem.Name = "resetToolStripMenuItem";
-            this.resetToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
+            this.resetToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.resetToolStripMenuItem.Text = "Reset";
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveAsToolStripMenuItem.Text = "Save As...";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
             // printToolStripMenuItem
             // 
             this.printToolStripMenuItem.Name = "printToolStripMenuItem";
-            this.printToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
+            this.printToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.printToolStripMenuItem.Text = "Print";
             this.printToolStripMenuItem.Click += new System.EventHandler(this.printToolStripMenuItem_Click);
             // 
             // exportToolStripMenuItem
             // 
             this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
-            this.exportToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
+            this.exportToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exportToolStripMenuItem.Text = "Export";
             this.exportToolStripMenuItem.Click += new System.EventHandler(this.exportToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -2866,12 +2867,22 @@ namespace GABAK
             this.label1.TabIndex = 558;
             this.label1.Text = "Concurrency";
             // 
+            // labelTotalAisles
+            // 
+            this.labelTotalAisles.AutoSize = true;
+            this.labelTotalAisles.Location = new System.Drawing.Point(150, 756);
+            this.labelTotalAisles.Name = "labelTotalAisles";
+            this.labelTotalAisles.Size = new System.Drawing.Size(62, 13);
+            this.labelTotalAisles.TabIndex = 559;
+            this.labelTotalAisles.Text = "Total Aisles:";
+            // 
             // MainForm
             // 
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 911);
+            this.Controls.Add(this.labelTotalAisles);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.labelOrderGenSeed);
             this.Controls.Add(this.labelPickListSize);
@@ -3418,6 +3429,7 @@ namespace GABAK
         private System.Windows.Forms.Label labelPickListSize;
         private System.Windows.Forms.Label labelOrderGenSeed;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label labelTotalAisles;
     }
 }
 

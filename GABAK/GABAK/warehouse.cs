@@ -3282,6 +3282,17 @@ namespace GABAK
             return count;
         }
 
+        public int totalNumberOfAisles()
+        {
+            int count = 0;
+            for (int i = 0; i < regions.Count; i++)
+            {
+                count = count + regions[i].pickingaisleedges.Count;
+            }
+
+            return count;
+        }
+
         private void addCrossAisle(node p_start, node p_end)
         {
             //Add connection in node level

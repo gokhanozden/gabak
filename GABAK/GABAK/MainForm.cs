@@ -6,11 +6,8 @@
  */
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using System.IO;
 using System.Drawing.Drawing2D;
@@ -24,8 +21,8 @@ namespace GABAK
     public partial class MainForm : Form
     {
         warehouse mywh;
-        System.Drawing.Graphics graphicsObj;
-        System.Drawing.Bitmap myBitmap;
+        Graphics graphicsObj;
+        Bitmap myBitmap;
         Pen mypen;
         List<order> myorders = new List<order>();
         List<sku> myskus = new List<sku>();
@@ -36,6 +33,7 @@ namespace GABAK
         bool solving = false;//Used for aspect ratio warehouse width auto conversion on key change if it is set to false then only it works on key focus
         string problemfolder = "";
         List<string[]> lines;//Used for importing designs
+        svg mysvg;
 
         public MainForm()
         {
@@ -248,7 +246,8 @@ namespace GABAK
                 mypen = new Pen(System.Drawing.Color.Blue, 1);
                 //Set alignment to center so aisles are correctly aligned
                 mypen.Alignment = PenAlignment.Center;
-
+                //Clear SVG content
+                mysvg = new svg(panelDrawing.Width, panelDrawing.Height);
 
                 TimeSpan elapsed1 = DateTime.Now - start1;
                 DateTime start2 = DateTime.Now;
@@ -291,6 +290,7 @@ namespace GABAK
                 drawWarehouse();
                 TimeSpan elapsed6 = DateTime.Now - start6;
                 labelTotalLocations.Text = "Total Locations: " + mywh.totalNumberOfLocations().ToString();
+                labelTotalAisles.Text = "Total Aisles: " + mywh.totalNumberOfAisles().ToString();
                 DateTime start7 = DateTime.Now;
                 al = new allocation(Convert.ToInt32(textBoxAllocationSeed.Text));
                 int allocationmethod = 0;
@@ -798,6 +798,8 @@ namespace GABAK
                 mypen = new Pen(System.Drawing.Color.Blue, 1);
                 //Set alignment to center so aisles are correctly aligned
                 mypen.Alignment = PenAlignment.Center;
+                //Clear svg content
+                mysvg = new svg(panelDrawing.Width, panelDrawing.Height);
 
                 TimeSpan elapsed1 = DateTime.Now - start1;
                 DateTime start2 = DateTime.Now;
@@ -840,6 +842,7 @@ namespace GABAK
                 this.drawWarehouse();
                 TimeSpan elapsed6 = DateTime.Now - start5;
                 labelTotalLocations.Text = "Total Locations: " + mywh.totalNumberOfLocations().ToString();
+                labelTotalAisles.Text = "Total Aisles: " + mywh.totalNumberOfAisles().ToString();
                 DateTime start7 = DateTime.Now;
                 int allocationmethod = 0;
                 if (checkBoxStraightAllocation.Checked) allocationmethod = 1;
@@ -1174,13 +1177,17 @@ namespace GABAK
                 mypen.Color = System.Drawing.Color.Black;
                 mypen.Width = 2 * m;
                 graphicsObj.DrawEllipse(mypen, ((float)mywh.regionedges[i].getStart().getX() - 1) * m, ((float)mywh.regionedges[i].getStart().getY() - 1) * m, m, m);
+                mysvg.addCircle(((float)mywh.regionedges[i].getStart().getX() - 1) * m, ((float)mywh.regionedges[i].getStart().getY() - 1) * m, m, mypen.Width, mypen.Color);
                 graphicsObj.DrawEllipse(mypen, ((float)mywh.regionedges[i].getEnd().getX() - 1) * m, ((float)mywh.regionedges[i].getEnd().getY() - 1) * m, m, m);
-                mypen.Color = System.Drawing.Color.Gray;
-                mypen.Width = (float)mywh.regionedges[i].width * m;
-                graphicsObj.DrawLine(mypen, (float)mywh.regionedges[i].getStart().getX() * m, (float)mywh.regionedges[i].getStart().getY() * m, (float)mywh.regionedges[i].getEnd().getX() * m, (float)mywh.regionedges[i].getEnd().getY() * m);
-                //mypen.Color = System.Drawing.Color.Black;
-                //mypen.Width = m;
+                mysvg.addCircle(((float)mywh.regionedges[i].getEnd().getX() - 1) * m, ((float)mywh.regionedges[i].getEnd().getY() - 1) * m, m, mypen.Width, mypen.Color);
+                //mypen.Color = Color.Gray;
+                //mypen.Width = (float)mywh.regionedges[i].width * m;
                 //graphicsObj.DrawLine(mypen, (float)mywh.regionedges[i].getStart().getX() * m, (float)mywh.regionedges[i].getStart().getY() * m, (float)mywh.regionedges[i].getEnd().getX() * m, (float)mywh.regionedges[i].getEnd().getY() * m);
+                //mysvg.addLine((float)mywh.regionedges[i].getStart().getX() * m, (float)mywh.regionedges[i].getStart().getY() * m, (float)mywh.regionedges[i].getEnd().getX() * m, (float)mywh.regionedges[i].getEnd().getY() * m, mypen.Width, mypen.Color);
+                mypen.Color = System.Drawing.Color.Black;
+                mypen.Width = m;
+                graphicsObj.DrawLine(mypen, (float)mywh.regionedges[i].getStart().getX() * m, (float)mywh.regionedges[i].getStart().getY() * m, (float)mywh.regionedges[i].getEnd().getX() * m, (float)mywh.regionedges[i].getEnd().getY() * m);
+                mysvg.addLine((float)mywh.regionedges[i].getStart().getX() * m, (float)mywh.regionedges[i].getStart().getY() * m, (float)mywh.regionedges[i].getEnd().getX() * m, (float)mywh.regionedges[i].getEnd().getY() * m, mypen.Width, mypen.Color);
             }
         }
 
@@ -1188,9 +1195,10 @@ namespace GABAK
         {
             for (int i = 0; i < mywh.pdnodes.Count; i++)
             {
-                mypen.Color = System.Drawing.Color.Black;
+                mypen.Color = Color.Black;
                 mypen.Width = 2 * m;
                 graphicsObj.DrawEllipse(mypen, ((float)mywh.pdnodes[i].getX() - 1) * m, ((float)mywh.pdnodes[i].getY() - 1) * m, m, m);
+                mysvg.addCircle(((float)mywh.pdnodes[i].getX() - 1) * m, ((float)mywh.pdnodes[i].getY() - 1) * m, m, mypen.Width, mypen.Color);
                 //using (System.IO.StreamWriter file =
                 //new System.IO.StreamWriter(@"C:\concorde\PDCoordinates.txt", true))
                 //{
@@ -1209,7 +1217,7 @@ namespace GABAK
                 {
                     if (mywh.connectivity[i, j])
                     {
-                        mypen.Color = System.Drawing.Color.Black;
+                        mypen.Color = Color.Black;
                         mypen.Width = (float)m/10;
                         graphicsObj.DrawLine(mypen, (float)mywh.graphnodes[i].getX() * m, (float)mywh.graphnodes[i].getY() * m, (float)mywh.graphnodes[j].getX() * m, (float)mywh.graphnodes[j].getY() * m);
                         mycounter++;
@@ -1252,10 +1260,12 @@ namespace GABAK
             for (int i = 0; i < p_pickingaisleedge.getOnEdgeNodes().Count; i++)
             {
                 int wavelength = 700 - Convert.ToInt32((Convert.ToDouble(p_pickingaisleedge.getOnEdgeNodes()[i].color + 1) / Convert.ToDouble(options.numbercolors)) * 320);
-                mypen.Color = getColorFromWaveLength(wavelength);
-                //mypen.Width = 2 * m;
+                //mypen.Color = getColorFromWaveLength(wavelength);
+                mypen.Color = Color.Black;
+                mypen.Width = 2 * m;
                 //mypen.Alignment = PenAlignment.Center;
                 //graphicsObj.DrawEllipse(mypen, (float)p_pickingaisleedge.getOnEdgeNodes()[i].getX() * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].getY() * m, m, m);
+                //mysvg.addCircle((float)p_pickingaisleedge.getOnEdgeNodes()[i].getX() * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].getY() * m, m, mypen.Width, mypen.Color);
                 //pickingaislecoordinates.Add(p_pickingaisleedge.getOnEdgeNodes()[i].getX().ToString() + "\t" + p_pickingaisleedge.getOnEdgeNodes()[i].getY().ToString());
                 //using (System.IO.StreamWriter file =
                 //new System.IO.StreamWriter(@"C:\concorde\LocationCoordinates.txt", true))
@@ -1270,6 +1280,11 @@ namespace GABAK
                     graphicsObj.DrawLine(mypen, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s1.X2 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s1.Y2 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s1.X4 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s1.Y4 * m);
                     graphicsObj.DrawLine(mypen, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s1.X4 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s1.Y4 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s1.X3 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s1.Y3 * m);
                     graphicsObj.DrawLine(mypen, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s1.X3 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s1.Y3 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s1.X1 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s1.Y1 * m);
+                    //Svg writing
+                    mysvg.addLine((float)p_pickingaisleedge.getOnEdgeNodes()[i].s1.X1 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s1.Y1, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s1.X2 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s1.Y2 * m, mypen.Width, mypen.Color);
+                    mysvg.addLine((float)p_pickingaisleedge.getOnEdgeNodes()[i].s1.X2 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s1.Y2, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s1.X4 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s1.Y4 * m, mypen.Width, mypen.Color);
+                    mysvg.addLine((float)p_pickingaisleedge.getOnEdgeNodes()[i].s1.X4 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s1.Y4, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s1.X3 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s1.Y3 * m, mypen.Width, mypen.Color);
+                    mysvg.addLine((float)p_pickingaisleedge.getOnEdgeNodes()[i].s1.X3 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s1.Y3, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s1.X1 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s1.Y1 * m, mypen.Width, mypen.Color);
                 }
                 if (p_pickingaisleedge.getOnEdgeNodes()[i].s2 != null)
                 {
@@ -1277,6 +1292,11 @@ namespace GABAK
                     graphicsObj.DrawLine(mypen, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s2.X2 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s2.Y2 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s2.X4 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s2.Y4 * m);
                     graphicsObj.DrawLine(mypen, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s2.X4 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s2.Y4 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s2.X3 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s2.Y3 * m);
                     graphicsObj.DrawLine(mypen, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s2.X3 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s2.Y3 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s2.X1 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s2.Y1 * m);
+                    //Svg writing
+                    mysvg.addLine((float)p_pickingaisleedge.getOnEdgeNodes()[i].s2.X1 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s2.Y1, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s2.X2 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s2.Y2 * m, mypen.Width, mypen.Color);
+                    mysvg.addLine((float)p_pickingaisleedge.getOnEdgeNodes()[i].s2.X2 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s2.Y2, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s2.X4 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s2.Y4 * m, mypen.Width, mypen.Color);
+                    mysvg.addLine((float)p_pickingaisleedge.getOnEdgeNodes()[i].s2.X4 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s2.Y4, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s2.X3 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s2.Y3 * m, mypen.Width, mypen.Color);
+                    mysvg.addLine((float)p_pickingaisleedge.getOnEdgeNodes()[i].s2.X3 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s2.Y3, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s2.X1 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s2.Y1 * m, mypen.Width, mypen.Color);
                 }
             }
         }
@@ -1288,16 +1308,18 @@ namespace GABAK
             //Do dash pattern for polygons
             float[] dashValues = { 5, 2};
             mypen.DashPattern = dashValues;
-            mypen.Color = System.Drawing.Color.Black;
+            mypen.Color = Color.Black;
             mypen.Width = m;
             for (int i = 0; i < mywh.polygons.Length; i++)
             {
                 for (int j = 0; j < mywh.polygons[i].vectors.Count - 1; j++)
                 {
                     graphicsObj.DrawLine(mypen, (float)mywh.polygons[i].vectors[j].X * m, (float)mywh.polygons[i].vectors[j].Y * m, (float)mywh.polygons[i].vectors[j + 1].X * m, (float)mywh.polygons[i].vectors[j + 1].Y * m);
+                    mysvg.addDashLine((float)mywh.polygons[i].vectors[j].X * m, (float)mywh.polygons[i].vectors[j].Y * m, (float)mywh.polygons[i].vectors[j + 1].X * m, (float)mywh.polygons[i].vectors[j + 1].Y * m, mypen.Width, mypen.Color);
                     //polygoncoordinates.Add(mywh.polygons[i].vectors[j].X.ToString() + "\t" + mywh.polygons[i].vectors[j].Y.ToString());
                 }
                 graphicsObj.DrawLine(mypen, (float)mywh.polygons[i].vectors[mywh.polygons[i].vectors.Count - 1].X * m, (float)mywh.polygons[i].vectors[mywh.polygons[i].vectors.Count - 1].Y * m, (float)mywh.polygons[i].vectors[0].X * m, (float)mywh.polygons[i].vectors[0].Y * m);
+                mysvg.addDashLine((float)mywh.polygons[i].vectors[mywh.polygons[i].vectors.Count - 1].X * m, (float)mywh.polygons[i].vectors[mywh.polygons[i].vectors.Count - 1].Y * m, (float)mywh.polygons[i].vectors[0].X * m, (float)mywh.polygons[i].vectors[0].Y * m, mypen.Width, mypen.Color);
                 //polygoncoordinates.Add(mywh.polygons[i].vectors[mywh.polygons[i].vectors.Count - 1].X.ToString() + "\t" + mywh.polygons[i].vectors[mywh.polygons[i].vectors.Count - 1].Y.ToString());
             }
             //System.IO.File.WriteAllLines(@"C:\concorde\PolygonCoordinates.txt", polygoncoordinates);
@@ -1401,6 +1423,7 @@ namespace GABAK
             panelDrawing.Refresh();
             graphicsObj.Dispose();
             labelTotalLocations.Text = "Total Locations:";
+            labelTotalAisles.Text = "Total Aisles: ";
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1445,15 +1468,14 @@ namespace GABAK
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
-            saveFileDialog1.Filter = "Png Image (.png)|*.png|Jpeg Image|*.jpg|Bitmap Image|*.bmp|Gif Image|*.gif";
+            saveFileDialog1.Filter = "Png Image (.png)|*.png|Jpeg Image|*.jpg|Bitmap Image|*.bmp|Gif Image|*.gif|SVG Image|*.svg";
             saveFileDialog1.Title = "Save an Image File";
             saveFileDialog1.ShowDialog();
             // If the file name is not an empty string open it for saving.
             if (saveFileDialog1.FileName != "")
             {
                 // Saves the Image via a FileStream created by the OpenFile method.
-                System.IO.FileStream fs =
-                   (System.IO.FileStream)saveFileDialog1.OpenFile();
+                FileStream fs = (FileStream)saveFileDialog1.OpenFile();
                 // Saves the Image in the appropriate ImageFormat based upon the
                 // File type selected in the dialog box.
                 // NOTE that the FilterIndex property is one-based.
@@ -1461,17 +1483,24 @@ namespace GABAK
                 {
                     case 1:
                         myBitmap.Save(fs,
-                           System.Drawing.Imaging.ImageFormat.Jpeg);
+                           System.Drawing.Imaging.ImageFormat.Png);
                         break;
 
                     case 2:
                         myBitmap.Save(fs,
-                           System.Drawing.Imaging.ImageFormat.Bmp);
+                           System.Drawing.Imaging.ImageFormat.Jpeg);
                         break;
 
                     case 3:
                         myBitmap.Save(fs,
+                           System.Drawing.Imaging.ImageFormat.Bmp);
+                        break;
+                    case 4:
+                        myBitmap.Save(fs,
                            System.Drawing.Imaging.ImageFormat.Gif);
+                        break;
+                    case 5:
+                        mysvg.save(fs);
                         break;
                 }
 
@@ -1851,6 +1880,7 @@ namespace GABAK
                 //Draw created warehouse to panel
                 this.drawWarehouse();
                 labelTotalLocations.Text = "Total Locations: " + mywh.totalNumberOfLocations().ToString();
+                labelTotalAisles.Text = "Total Aisles: " + mywh.totalNumberOfAisles().ToString();
                 //labelDistanceOutput.Text = "Average Distance: " + mywh.averageTotalDistancePerLocation().ToString();
                 labelDistanceOutput.Text = "Average Distance: " + es.getCost().ToString("0.0");
                 //labelDistanceOutput.Text = "Average Distance: " + mywh.averageDistancetoPDPerLocation().ToString();
@@ -2153,6 +2183,7 @@ namespace GABAK
                 //Draw created warehouse to panel
                 this.drawWarehouse();
                 labelTotalLocations.Text = "Total Locations: " + mywh.totalNumberOfLocations().ToString();
+                labelTotalAisles.Text = "Total Aisles: " + mywh.totalNumberOfAisles().ToString();
                 //labelDistanceOutput.Text = "Average Distance: " + mywh.averageTotalDistancePerLocation().ToString();
                 labelDistanceOutput.Text = "Average Distance: " + es.getCost().ToString("0.0");
                 //labelDistanceOutput.Text = "Average Distance: " + mywh.averageDistancetoPDPerLocation().ToString();
@@ -2199,18 +2230,21 @@ namespace GABAK
 
         private void colorToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            options.numbercolors = Convert.ToInt32(textBoxNumberColors.Text);
-            m = Convert.ToInt32(textBoxMagnify.Text);
-            panelDrawing.Width = Convert.ToInt32(mywh.getWidth() * m);
-            panelDrawing.Height = Convert.ToInt32(mywh.getDepth() * m);
-            myBitmap = new Bitmap(this.panelDrawing.Width, this.panelDrawing.Height, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
-            graphicsObj = Graphics.FromImage(myBitmap);
-            graphicsObj.Clear(Color.White);
-            mywh.rankLocations(Convert.ToDouble(textBoxAvgOrderSize.Text));
-            mywh.colorOverall();
-            this.drawWarehouse();
-            panelDrawing.BackgroundImage = myBitmap;
-            panelDrawing.Refresh();
+            if (mywh != null)
+            {
+                options.numbercolors = Convert.ToInt32(textBoxNumberColors.Text);
+                m = (float)Convert.ToDouble(textBoxMagnify.Text);
+                panelDrawing.Width = Convert.ToInt32(mywh.getWidth() * m);
+                panelDrawing.Height = Convert.ToInt32(mywh.getDepth() * m);
+                myBitmap = new Bitmap(this.panelDrawing.Width, this.panelDrawing.Height, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+                graphicsObj = Graphics.FromImage(myBitmap);
+                graphicsObj.Clear(Color.White);
+                mywh.rankLocations(Convert.ToDouble(textBoxAvgOrderSize.Text));
+                mywh.colorOverall();
+                this.drawWarehouse();
+                panelDrawing.BackgroundImage = myBitmap;
+                panelDrawing.Refresh();
+            }
         }
 
         private void buttonFindLocation_Click(object sender, EventArgs e)
@@ -4212,6 +4246,11 @@ namespace GABAK
             {
                 textBoxPickerSize.ReadOnly = true;
             }
+        }
+
+        private void saveSVG()
+        {
+            
         }
     }
 }
