@@ -1199,11 +1199,6 @@ namespace GABAK
                 mypen.Width = 2 * m;
                 graphicsObj.DrawEllipse(mypen, ((float)mywh.pdnodes[i].getX() - 1) * m, ((float)mywh.pdnodes[i].getY() - 1) * m, m, m);
                 mysvg.addCircle(((float)mywh.pdnodes[i].getX() - 1) * m, ((float)mywh.pdnodes[i].getY() - 1) * m, m, mypen.Width, mypen.Color);
-                //using (System.IO.StreamWriter file =
-                //new System.IO.StreamWriter(@"C:\concorde\PDCoordinates.txt", true))
-                //{
-                //    file.WriteLine(mywh.pdnodes[i].getX().ToString() + "\t" + mywh.pdnodes[i].getY().ToString());
-                //}
             }
         }
 
@@ -1260,8 +1255,9 @@ namespace GABAK
             for (int i = 0; i < p_pickingaisleedge.getOnEdgeNodes().Count; i++)
             {
                 int wavelength = 700 - Convert.ToInt32((Convert.ToDouble(p_pickingaisleedge.getOnEdgeNodes()[i].color + 1) / Convert.ToDouble(options.numbercolors)) * 320);
-                //mypen.Color = getColorFromWaveLength(wavelength);
-                mypen.Color = Color.Black;
+                mypen.Color = getColorFromWaveLength(wavelength);
+                //Set to black
+                if (options.numbercolors == 1) mypen.Color = Color.Black;
                 mypen.Width = 2 * m;
                 //mypen.Alignment = PenAlignment.Center;
                 //graphicsObj.DrawEllipse(mypen, (float)p_pickingaisleedge.getOnEdgeNodes()[i].getX() * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].getY() * m, m, m);
@@ -1557,6 +1553,8 @@ namespace GABAK
             mypen = new Pen(System.Drawing.Color.Blue, m);
             //Set alignment to center so aisles are correctly aligned
             mypen.Alignment = PenAlignment.Center;
+            //Clear SVG content
+            mysvg = new svg(panelDrawing.Width, panelDrawing.Height);
             //Draw created warehouse to panel
             this.drawWarehouse();
             panelDrawing.BackgroundImage = myBitmap;
@@ -1877,6 +1875,8 @@ namespace GABAK
                 mypen = new Pen(System.Drawing.Color.Blue, m);
                 //Set alignment to center so aisles are correctly aligned
                 mypen.Alignment = PenAlignment.Center;
+                //Clear SVG content
+                mysvg = new svg(panelDrawing.Width, panelDrawing.Height);
                 //Draw created warehouse to panel
                 this.drawWarehouse();
                 labelTotalLocations.Text = "Total Locations: " + mywh.totalNumberOfLocations().ToString();
@@ -2180,6 +2180,8 @@ namespace GABAK
                 mypen = new Pen(System.Drawing.Color.Blue, m);
                 //Set alignment to center so aisles are correctly aligned
                 mypen.Alignment = PenAlignment.Center;
+                //Clear SVG content
+                mysvg = new svg(panelDrawing.Width, panelDrawing.Height);
                 //Draw created warehouse to panel
                 this.drawWarehouse();
                 labelTotalLocations.Text = "Total Locations: " + mywh.totalNumberOfLocations().ToString();
@@ -2241,6 +2243,8 @@ namespace GABAK
                 graphicsObj.Clear(Color.White);
                 mywh.rankLocations(Convert.ToDouble(textBoxAvgOrderSize.Text));
                 mywh.colorOverall();
+                //Clear SVG content
+                mysvg = new svg(panelDrawing.Width, panelDrawing.Height);
                 this.drawWarehouse();
                 panelDrawing.BackgroundImage = myBitmap;
                 panelDrawing.Refresh();
