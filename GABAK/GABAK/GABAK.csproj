@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>GABAK</RootNamespace>
     <AssemblyName>GABAK</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
@@ -160,6 +160,7 @@
       <DependentUpon>AboutForm.cs</DependentUpon>
     </Compile>
     <Compile Include="allocation.cs" />
+    <Compile Include="ardesign.cs" />
     <Compile Include="Chart.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -177,6 +178,11 @@
     <Compile Include="edge.cs" />
     <Compile Include="esvariable.cs" />
     <Compile Include="evolutionarystrategy.cs" />
+    <Compile Include="gabakDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>gabakDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="polygon.cs" />
     <Compile Include="priorityqueue.cs" />
     <Compile Include="Settings.cs" />
@@ -215,6 +221,17 @@
     <None Include="app.config" />
     <None Include="ClassDiagram1.cd" />
     <None Include="ClassDiagram2.cd" />
+    <None Include="gabakDataSet.xsc">
+      <DependentUpon>gabakDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="gabakDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>gabakDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="gabakDataSet.xss">
+      <DependentUpon>gabakDataSet.xsd</DependentUpon>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -261,12 +278,20 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AviFile.dll" />
+    <Content Include="dbo.Table.sql" />
+    <Content Include="gabak.mdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="gabak\availableservers.txt" />
     <Content Include="gabak\concorde.exe" />
     <Content Include="gabak\cygwin1.dll" />
     <Content Include="gabak\lkh.exe" />
     <Content Include="gabak\QSConcorde.dll" />
     <Content Include="gabak\QSopt.dll" />
+    <Content Include="gabak_log.ldf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <DependentUpon>gabak.mdf</DependentUpon>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

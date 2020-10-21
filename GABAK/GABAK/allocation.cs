@@ -4,14 +4,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace GABAK
 {
     /// <summary>
     /// Allocation class has multiple allocation algorithms used in warehouse class to allocate SKUs (products) to storage locations
     /// </summary>
-    class allocation
+    internal class allocation
     {
         private int seed = 0;//Used for random allocation
         private Random rnd;//Used for random allocation
@@ -31,7 +30,7 @@ namespace GABAK
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="p_skus">List of SKUs</param>
         /// <param name="p_wh">Warehouse object</param>
@@ -87,7 +86,7 @@ namespace GABAK
                     }
                 }
             }
-            else if(method == 1) //Straight allocation (first SKU goes to first location based on location ID)
+            else if (method == 1) //Straight allocation (first SKU goes to first location based on location ID)
             {
                 int k = 0;
                 for (int i = 0; i < sortedskus.Count; i++)
@@ -119,12 +118,12 @@ namespace GABAK
             else //Randomized allocation, each SKU goes to a random location
             {
                 int n = 2;//Number of SKUs per pick location
-                while(sortedskus.Count > 0)
+                while (sortedskus.Count > 0)
                 {
                     node tmplocation = locations[rnd.Next(0, locations.Count - 1)];
                     for (int i = 0; i < n; i++)
                     {
-                        if(sortedskus.Count > 0)
+                        if (sortedskus.Count > 0)
                         {
                             sku tmpsku = sortedskus[rnd.Next(0, sortedskus.Count - 1)];
                             tmpsku.location = tmplocation;
