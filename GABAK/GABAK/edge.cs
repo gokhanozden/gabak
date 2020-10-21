@@ -2,6 +2,9 @@
 //Copyright(c) 2018 Sabahattin Gokhan Ozden
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Windows;
 
 namespace GABAK
 {
@@ -14,17 +17,14 @@ namespace GABAK
         public double width;
         public int connectionk;//Used for matching edge with connection array
         public int type;
-
         /// <summary>
         /// This variable is used in region finding algorithm for directions of the edge
         /// </summary>
         public bool crossed1;
-
         /// <summary>
         /// This variable is used in region finding algorithm for directions of the edge
         /// </summary>
         public bool crossed2;
-
         private List<node> onedgenodes;
         private node[] edgecornernodes;
 
@@ -124,7 +124,7 @@ namespace GABAK
                             angle = Math.Atan2(start.getY() - end.getY(), start.getX() - end.getX()) - Math.Atan2(end.edges[i].getEnd().getY() - end.edges[i].getStart().getY(), end.edges[i].getEnd().getX() - end.edges[i].getStart().getX());
                             tempangle = visualmath.radianToDegree(angle);
                         }
-
+                        
                         if (end.edges[i].getEnd() == end && end.edges[i].type == options.regionedge)
                         {
                             angle = Math.Atan2(start.getY() - end.getY(), start.getX() - end.getX()) - Math.Atan2(end.edges[i].getStart().getY() - end.edges[i].getEnd().getY(), end.edges[i].getStart().getX() - end.edges[i].getEnd().getX());
@@ -178,7 +178,7 @@ namespace GABAK
             double nointersection = -1000000;//A magic coordinate number used for no intersection
             node tempcoordinate = new node(options.tempnode);
             double ua, ub;
-
+            
             double x1 = this.getStart().getX();
             double x2 = this.getEnd().getX();
             double x3 = p_edge.getStart().getX();
@@ -197,13 +197,13 @@ namespace GABAK
 
             double denom = ((y4 - y3) * (x2 - x1)) - ((x4 - x3) * (y2 - y1));
 
-            if (denom == 0)//Lines are parallel
+            if(denom == 0)//Lines are parallel
             {
                 tempcoordinate.setX(nointersection);
                 tempcoordinate.setY(nointersection);
                 return tempcoordinate;
             }
-
+            
             double noma = ((x4 - x3) * (y1 - y3)) - ((y4 - y3) * (x1 - x3));
 
             double nomb = ((x2 - x1) * (y1 - y3)) - ((y2 - y1) * (x1 - x3));
@@ -433,6 +433,7 @@ namespace GABAK
                 }
             }
             return isInside;
+
         }
     }
 }

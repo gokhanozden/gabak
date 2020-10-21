@@ -1,19 +1,22 @@
-﻿using AviFile;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
+using AviFile;
 
 namespace GABAK
 {
     public partial class ChartForm : Form
     {
-        private List<string[]> lines;//Used for importing designs for optimization
-        private FileInfo fileIn;
-
+        List<string[]> lines;//Used for importing designs for optimization
+        FileInfo fileIn;
         public ChartForm()
         {
             InitializeComponent();
@@ -70,7 +73,7 @@ namespace GABAK
             chart2.ChartAreas[0].AxisX.IntervalAutoMode = IntervalAutoMode.VariableCount;
             chart2.ChartAreas[0].AxisX.IntervalType = DateTimeIntervalType.Number;
             chart2.ChartAreas[0].AxisX.IsStartedFromZero = true;
-            chart2.ChartAreas[0].AxisY.Minimum = Math.Floor(Convert.ToDouble(lines[lines.Count() - 1][0]));
+            chart2.ChartAreas[0].AxisY.Minimum = Math.Floor(Convert.ToDouble(lines[lines.Count()-1][0]));
             chart2.ChartAreas[0].AxisY.Maximum = Math.Ceiling(Convert.ToDouble(lines[1][0]));
 
             double cost = -1;
@@ -99,7 +102,7 @@ namespace GABAK
                 {
                     designpics.Add(new Bitmap(filedirectory + "/" + lasti.ToString() + ".bmp"));
                 }
-                series1.Points.AddXY(Convert.ToDouble(i - 1), cost);
+                series1.Points.AddXY(Convert.ToDouble(i-1), cost);
                 chart2.Invalidate();
                 //chart2.SaveImage(filedirectory + "/chart" + (i - 1).ToString() + ".bmp", System.Windows.Forms.DataVisualization.Charting.ChartImageFormat.Bmp);
                 chart2.SaveImage(ms, ChartImageFormat.Bmp);
@@ -107,7 +110,7 @@ namespace GABAK
             }
 
             //Merge pictures
-            for (int i = 0; i < lines.Count() - 1; i++)
+            for(int i = 0; i < lines.Count()-1; i++)
             {
                 mergedpics.Add(MergeTwoImages(chartpics[i], designpics[i], maxWidthdesign > chart2.Width ? maxWidthdesign : chart2.Width, maxHeightdesign + chart2.Width + 1));
             }
@@ -116,7 +119,7 @@ namespace GABAK
             AviManager avimanager = new AviManager(filedirectory + "/video.avi", false);
             //add a new video stream and one frame to the new file
             VideoStream aviStream = avimanager.AddVideoStream(false, 10, mergedpics[0]);
-            for (int i = 1; i < lines.Count() - 1; i++)
+            for (int i = 1; i < lines.Count()-1; i++)
             {
                 //aviStream.AddFrame(chartpics[i]);
                 aviStream.AddFrame(mergedpics[i]);

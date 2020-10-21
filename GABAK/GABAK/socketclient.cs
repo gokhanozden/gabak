@@ -2,28 +2,27 @@
 //Copyright(c) 2018 Sabahattin Gokhan Ozden
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
-using System.Threading;
 
 namespace GABAK
 {
-    internal class socketclient
+    class socketclient
     {
         // ManualResetEvent instances signal completion.
         private ManualResetEvent connectDone = new ManualResetEvent(false);
-
         private ManualResetEvent sendDone = new ManualResetEvent(false);
         private ManualResetEvent receiveDone = new ManualResetEvent(false);
-
         // The response from the remote device.
         private String response = String.Empty;
-
-        private byte[] m_clientData;
-        private List<byte[]> filelist;
-        private IPHostEntry ipHostInfo;
+        byte[] m_clientData;
+        List<byte[]> filelist;
+        IPHostEntry ipHostInfo;
         private int share;
         private int load = 0;
 
@@ -79,16 +78,15 @@ namespace GABAK
             filelist.Clear();
             return response;
         }
-
         private void StartClient(int portnumber)
         {
             // Connect to a remote device.
             try
             {
                 // Establish the remote endpoint for the socket.
-                // The name of the
+                // The name of the 
                 // remote device is "host.contoso.com".
-
+                
                 IPAddress ipAddress = ipHostInfo.AddressList[0];
                 IPEndPoint remoteEP = new IPEndPoint(ipAddress, portnumber);
 
@@ -104,7 +102,7 @@ namespace GABAK
                 {
                     totalfilesize += filelist[i].Length;
                 }
-                m_clientData = new byte[totalfilesize + 4];
+                m_clientData = new byte[totalfilesize+4];
                 //Copy all file data to filesend
                 int currentfilesizeindex = 0;
                 for (int i = 0; i < filelist.Count; i++)
@@ -135,8 +133,8 @@ namespace GABAK
                 //MethodInvoker action = delegate { textBoxOutput.Text += e.ToString() + "\r\n"; };
                 //textBoxOutput.BeginInvoke(action);
             }
-        }
 
+        }
         private void ConnectCallback(IAsyncResult ar)
         {
             try
@@ -151,6 +149,7 @@ namespace GABAK
                 }
                 catch (Exception e)
                 {
+
                 }
 
                 //Console.WriteLine("Socket connected to {0}",client.RemoteEndPoint.ToString());
@@ -192,7 +191,7 @@ namespace GABAK
             string content = "";
             try
             {
-                // Retrieve the state object and the client socket
+                // Retrieve the state object and the client socket 
                 // from the asynchronous state object.
                 stateobject state = (stateobject)ar.AsyncState;
                 Socket client = state.workSocket;
@@ -228,7 +227,9 @@ namespace GABAK
                 //MethodInvoker action = delegate { textBoxOutput.Text += e.ToString() + "\r\n"; };
                 //textBoxOutput.BeginInvoke(action);
             }
+
         }
+
 
         private void Send(Socket client, String data)
         {

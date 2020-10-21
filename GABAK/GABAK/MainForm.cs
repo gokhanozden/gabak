@@ -4,48 +4,47 @@
  * Copying, distributing, using this code is prohibited.
  * Contact the author for licensing options.
  */
-
 using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.IO;
 using System.Linq;
+using System.Windows.Forms;
+using System.IO;
+using System.Drawing.Drawing2D;
 using System.Media;
 using System.Threading.Tasks;
-using System.Windows.Forms;
+using System.Collections.Concurrent;
+using System.Diagnostics;
 
 namespace GABAK
 {
     public partial class MainForm : Form
     {
-        private warehouse mywh;
-        private Graphics graphicsObj;
-        private Bitmap myBitmap;
-        private Pen mypen;
-        private List<order> myorders = new List<order>();
-        private List<sku> myskus = new List<sku>();
-        private double[] CDF;
-        private allocation al;
-        private double avgTourLength = 1;
-        private float m = 1;//Magnify factor
-        private bool solving = false;//Used for aspect ratio warehouse width auto conversion on key change if it is set to false then only it works on key focus
-        private string problemfolder = "";
-        private List<string[]> lines;//Used for importing designs
-        private svg mysvg;
-        private ardesign myardesign;
+        warehouse mywh;
+        Graphics graphicsObj;
+        Bitmap myBitmap;
+        Pen mypen;
+        List<order> myorders = new List<order>();
+        List<sku> myskus = new List<sku>();
+        double[] CDF;
+        allocation al;
+        double avgTourLength = 1;
+        float m = 1;//Magnify factor
+        bool solving = false;//Used for aspect ratio warehouse width auto conversion on key change if it is set to false then only it works on key focus
+        string problemfolder = "";
+        List<string[]> lines;//Used for importing designs
+        svg mysvg;
 
         public MainForm()
         {
             InitializeComponent();
+            comboBoxDesignClass.SelectedIndex = 0;
             comboBoxComputing.SelectedIndex = 0;
             comboBoxGenerate.SelectedIndex = 0;
             comboBoxNetSchedule.SelectedIndex = 0;
-            comboBoxRouting.SelectedIndex = 0;
             options.processid = Process.GetCurrentProcess().Id;
         }
+
 
         /// <summary>
         /// Button that creates warehouse and draws warehouse on the form
@@ -54,530 +53,1106 @@ namespace GABAK
         /// <param name="e"></param>
         private void buttonCreate_Click(object sender, EventArgs e)
         {
-            DateTime start = DateTime.Now;
-            //Set mywh object to null
-            mywh = null;
-            //Set Magnify factor
-            m = (float)Convert.ToDouble(textBoxMagnify.Text);
-            //Reset IDs
-            edge.nextID = 0;
-            region.nextID = 0;
-            node.nextID = 0;
-            //Create a new warehouse object
-            mywh = new warehouse();
-            //Set warehouse aspectratio
-            mywh.aspectratio = Convert.ToDouble(textBoxAspectRatio.Text);
-            //Set warehouse area
-            mywh.setArea(Convert.ToDouble(textBoxArea.Text));
-            //Set warehouse cross aisle width
-            mywh.crossaislewidth = Convert.ToDouble(textBoxCrossAisleWidth.Text);
-            //Set warehouse picking aisle width
-            mywh.pickingaislewidth = Convert.ToDouble(textBoxPickingAisleWidth.Text);
-            //Set warehouse picking location width
-            mywh.pickinglocationwidth = Convert.ToDouble(textBoxLWidth.Text);
-            //Set warehouse picking location depth
-            mywh.pickinglocationdepth = Convert.ToDouble(textBoxLDepth.Text);
-            //Set size of picker used for visibility graph
-            mywh.pickersize = Convert.ToDouble(textBoxPickerSize.Text);
-            //Set which graph will be used Steiner or Visibility Graph
-            mywh.usevisibilitygraph = checkBoxVisibilityGraph.Checked;
-            //Set average pick list size (this is used for best location calculation
-            mywh.avgTourLength = Convert.ToDouble(textBoxAvgOrderSize.Text);
-
-            //Set number of colors
-            options.numbercolors = Convert.ToInt32(textBoxNumberColors.Text);
-            DateTime start1 = DateTime.Now;
-            //Create Warehouse in the background
-            //mywh.createSingleCrossAisleWarehouse(Convert.ToDouble(textBoxAngle1.Text), Convert.ToDouble(textBoxAngle2.Text), Convert.ToDouble(textBoxAdjuster1.Text), Convert.ToDouble(textBoxAdjuster2.Text), mywh.crossaislewidth, mywh.pickingaislewidth, mywh.pickinglocationwidth, mywh.pickinglocationdepth, Convert.ToDouble(textBoxE1.Text), Convert.ToDouble(textBoxE2.Text), Convert.ToDouble(textBoxpd.Text));
-            double[] angle = { Convert.ToDouble(textBoxAngle1.Text), Convert.ToDouble(textBoxAngle2.Text), Convert.ToDouble(textBoxAngle3.Text), Convert.ToDouble(textBoxAngle4.Text), Convert.ToDouble(textBoxAngle5.Text), Convert.ToDouble(textBoxAngle6.Text), Convert.ToDouble(textBoxAngle7.Text), Convert.ToDouble(textBoxAngle8.Text) };
-            double[] adjuster = { Convert.ToDouble(textBoxAdjuster1.Text), Convert.ToDouble(textBoxAdjuster2.Text), Convert.ToDouble(textBoxAdjuster3.Text), Convert.ToDouble(textBoxAdjuster4.Text), Convert.ToDouble(textBoxAdjuster5.Text), Convert.ToDouble(textBoxAdjuster6.Text), Convert.ToDouble(textBoxAdjuster7.Text), Convert.ToDouble(textBoxAdjuster8.Text) };
-            double[] pickadjuster = { Convert.ToDouble(textBoxPickAdjuster1.Text), Convert.ToDouble(textBoxPickAdjuster2.Text), Convert.ToDouble(textBoxPickAdjuster3.Text), Convert.ToDouble(textBoxPickAdjuster4.Text), Convert.ToDouble(textBoxPickAdjuster5.Text), Convert.ToDouble(textBoxPickAdjuster6.Text), Convert.ToDouble(textBoxPickAdjuster7.Text), Convert.ToDouble(textBoxPickAdjuster8.Text) };
-            double[] ext = { Convert.ToDouble(textBoxE1.Text), Convert.ToDouble(textBoxE2.Text), Convert.ToDouble(textBoxE3.Text), Convert.ToDouble(textBoxE4.Text) };
-            double[] intx = { Convert.ToDouble(textBoxI1X.Text) };
-            double[] inty = { Convert.ToDouble(textBoxI1Y.Text) };
-            double[] pd = { Convert.ToDouble(textBoxpd.Text) };
-            double aspectratio = Convert.ToDouble(textBoxAspectRatio.Text);
-
-            bool[] connections = new bool[10];
-
-            connections[0] = checkBoxC12.Checked;
-            connections[1] = checkBoxC13.Checked;
-            connections[2] = checkBoxC14.Checked;
-            connections[3] = checkBoxC15.Checked;
-            connections[4] = checkBoxC23.Checked;
-            connections[5] = checkBoxC24.Checked;
-            connections[6] = checkBoxC25.Checked;
-            connections[7] = checkBoxC34.Checked;
-            connections[8] = checkBoxC35.Checked;
-            connections[9] = checkBoxC45.Checked;
-
-            //Adjust warehouse area until warehouse is fit
-            int increased = 0;
-            int decreased = 0;
-            bool warehousefit = false;
-            bool finalize = false;
-            bool resize = checkBoxResize.Checked;
-            if (resize) mywh.setArea(40000);//Set to a fixed point so it can find the best area from the same starting point
-            do
+            if (comboBoxDesignClass.SelectedItem.ToString() != "All")
             {
-                mywh.resetNetwork();
-                mywh.setSKUs(myskus);
-                if (!mywh.createWarehouse(angle, adjuster, pickadjuster, ext, intx, inty, pd, aspectratio, mywh.crossaislewidth, mywh.pickingaislewidth, mywh.pickinglocationwidth, mywh.pickinglocationdepth, connections))
+                DateTime start = DateTime.Now;
+                //Set mywh object to null
+                mywh = null;
+                //Set Magnify factor
+                m = (float)Convert.ToDouble(textBoxMagnify.Text);
+                //Reset IDs
+                edge.nextID = 0;
+                region.nextID = 0;
+                node.nextID = 0;
+                //Create a new warehouse object
+                mywh = new warehouse();
+                //Set warehouse aspectratio
+                mywh.aspectratio = Convert.ToDouble(textBoxAspectRatio.Text);
+                //Set warehouse area
+                mywh.setArea(Convert.ToDouble(textBoxArea.Text));
+                //Set warehouse cross aisle width
+                mywh.crossaislewidth = Convert.ToDouble(textBoxCrossAisleWidth.Text);
+                //Set warehouse picking aisle width
+                mywh.pickingaislewidth = Convert.ToDouble(textBoxPickingAisleWidth.Text);
+                //Set warehouse picking location width
+                mywh.pickinglocationwidth = Convert.ToDouble(textBoxLWidth.Text);
+                //Set warehouse picking location depth
+                mywh.pickinglocationdepth = Convert.ToDouble(textBoxLDepth.Text);
+                //Set size of picker used for visibility graph
+                mywh.pickersize = Convert.ToDouble(textBoxPickerSize.Text);
+                //Set which graph will be used Steiner or Visibility Graph
+                mywh.usevisibilitygraph = checkBoxVisibilityGraph.Checked;
+                //Set number of colors
+                options.numbercolors = Convert.ToInt32(textBoxNumberColors.Text);
+
+                DateTime start1 = DateTime.Now;
+                //Create Warehouse in the background
+                //mywh.createSingleCrossAisleWarehouse(Convert.ToDouble(textBoxAngle1.Text), Convert.ToDouble(textBoxAngle2.Text), Convert.ToDouble(textBoxAdjuster1.Text), Convert.ToDouble(textBoxAdjuster2.Text), mywh.crossaislewidth, mywh.pickingaislewidth, mywh.pickinglocationwidth, mywh.pickinglocationdepth, Convert.ToDouble(textBoxE1.Text), Convert.ToDouble(textBoxE2.Text), Convert.ToDouble(textBoxpd.Text));
+                double[] angle = { Convert.ToDouble(textBoxAngle1.Text), Convert.ToDouble(textBoxAngle2.Text), Convert.ToDouble(textBoxAngle3.Text), Convert.ToDouble(textBoxAngle4.Text), Convert.ToDouble(textBoxAngle5.Text), Convert.ToDouble(textBoxAngle6.Text), Convert.ToDouble(textBoxAngle7.Text), Convert.ToDouble(textBoxAngle8.Text) };
+                double[] adjuster = { Convert.ToDouble(textBoxAdjuster1.Text), Convert.ToDouble(textBoxAdjuster2.Text), Convert.ToDouble(textBoxAdjuster3.Text), Convert.ToDouble(textBoxAdjuster4.Text), Convert.ToDouble(textBoxAdjuster5.Text), Convert.ToDouble(textBoxAdjuster6.Text), Convert.ToDouble(textBoxAdjuster7.Text), Convert.ToDouble(textBoxAdjuster8.Text) };
+                double[] pickadjuster = { Convert.ToDouble(textBoxPickAdjuster1.Text), Convert.ToDouble(textBoxPickAdjuster2.Text), Convert.ToDouble(textBoxPickAdjuster3.Text), Convert.ToDouble(textBoxPickAdjuster4.Text), Convert.ToDouble(textBoxPickAdjuster5.Text), Convert.ToDouble(textBoxPickAdjuster6.Text), Convert.ToDouble(textBoxPickAdjuster7.Text), Convert.ToDouble(textBoxPickAdjuster8.Text) };
+                double[] ext = { Convert.ToDouble(textBoxE1.Text), Convert.ToDouble(textBoxE2.Text), Convert.ToDouble(textBoxE3.Text), Convert.ToDouble(textBoxE4.Text) };
+                double[] intx = { Convert.ToDouble(textBoxI1X.Text) };
+                double[] inty = { Convert.ToDouble(textBoxI1Y.Text) };
+                double[] pd = { Convert.ToDouble(textBoxpd.Text) };
+                double aspectratio = Convert.ToDouble(textBoxAspectRatio.Text);
+
+                //Adjust warehouse area until warehouse is fit
+                int increased = 0;
+                int decreased = 0;
+                bool warehousefit = false;
+                bool finalize = false;
+                bool resize = checkBoxResize.Checked;
+                if (resize) mywh.setArea(40000);//Set to a fixed point so it can find the best area from the same starting point
+                do
                 {
-                    textBoxNeighbors.AppendText("Invalid design parameters\n");
-                    for (int i = 0; i < mywh.problematicconnections.Count(); i++)
+                    mywh.resetNetwork();
+                    mywh.setSKUs(myskus);
+                    switch (comboBoxDesignClass.SelectedItem.ToString())
                     {
-                        textBoxNeighbors.AppendText(mywh.problematicconnections[i].ToString() + " ");
+                        case "0-0-0":
+                            if (!mywh.create000Warehouse(angle, adjuster, pickadjuster, ext, pd, aspectratio, mywh.crossaislewidth, mywh.pickingaislewidth, mywh.pickinglocationwidth, mywh.pickinglocationdepth))
+                            {
+                                textBoxNeighbors.AppendText("Invalid design parameters\n");
+                                return;
+                            }
+                            break;
+                        case "2-0-1":
+                            if (!mywh.create201Warehouse(angle, adjuster, pickadjuster, ext, pd, aspectratio, mywh.crossaislewidth, mywh.pickingaislewidth, mywh.pickinglocationwidth, mywh.pickinglocationdepth))
+                            {
+                                textBoxNeighbors.AppendText("Invalid design parameters\n");
+                                return;
+                            }
+                            break;
+                        case "3-0-2":
+                            if (!mywh.create302Warehouse(angle, adjuster, pickadjuster, ext, pd, aspectratio, mywh.crossaislewidth, mywh.pickingaislewidth, mywh.pickinglocationwidth, mywh.pickinglocationdepth))
+                            {
+                                textBoxNeighbors.AppendText("Invalid design parameters\n");
+                                return;
+                            }
+                            break;
+                        case "3-0-3":
+                            if (!mywh.create303Warehouse(angle, adjuster, pickadjuster, ext, pd, aspectratio, mywh.crossaislewidth, mywh.pickingaislewidth, mywh.pickinglocationwidth, mywh.pickinglocationdepth))
+                            {
+                                textBoxNeighbors.AppendText("Invalid design parameters\n");
+                                return;
+                            }
+                            break;
+                        case "3-1-3":
+                            if (!mywh.create313Warehouse(angle, adjuster, pickadjuster, ext, intx, inty, pd, aspectratio, mywh.crossaislewidth, mywh.pickingaislewidth, mywh.pickinglocationwidth, mywh.pickinglocationdepth))
+                            {
+                                textBoxNeighbors.AppendText("Invalid design parameters\n");
+                                return;
+                            }
+                            break;
+                        case "4-0-2":
+                            if (!mywh.create402Warehouse(angle, adjuster, pickadjuster, ext, pd, aspectratio, mywh.crossaislewidth, mywh.pickingaislewidth, mywh.pickinglocationwidth, mywh.pickinglocationdepth))
+                            {
+                                textBoxNeighbors.AppendText("Invalid design parameters\n");
+                                return;
+                            }
+                            break;
+                        case "4-0-4":
+                            if (!mywh.create404Warehouse(angle, adjuster, pickadjuster, ext, pd, aspectratio, mywh.crossaislewidth, mywh.pickingaislewidth, mywh.pickinglocationwidth, mywh.pickinglocationdepth))
+                            {
+                                textBoxNeighbors.AppendText("Invalid design parameters\n");
+                                return;
+                            }
+                            break;
+                        case "4-0-5":
+                            if (!mywh.create405Warehouse(angle, adjuster, pickadjuster, ext, pd, aspectratio, mywh.crossaislewidth, mywh.pickingaislewidth, mywh.pickinglocationwidth, mywh.pickinglocationdepth))
+                            {
+                                textBoxNeighbors.AppendText("Invalid design parameters\n");
+                                return;
+                            }
+                            break;
+                        case "4-1-4":
+                            if (!mywh.create414Warehouse(angle, adjuster, pickadjuster, ext, intx, inty, pd, aspectratio, mywh.crossaislewidth, mywh.pickingaislewidth, mywh.pickinglocationwidth, mywh.pickinglocationdepth))
+                            {
+                                textBoxNeighbors.AppendText("Invalid design parameters\n");
+                                return;
+                            }
+                            break;
+                        case "4-2-5":
+                            if (!mywh.create425Warehouse(angle, adjuster, pickadjuster, ext, intx, inty, pd, aspectratio, mywh.crossaislewidth, mywh.pickingaislewidth, mywh.pickinglocationwidth, mywh.pickinglocationdepth))
+                            {
+                                textBoxNeighbors.AppendText("Invalid design parameters\n");
+                                return;
+                            }
+                            break;
+                        case "6-0-3":
+                            if (!mywh.create603Warehouse(angle, adjuster, pickadjuster, ext, pd, aspectratio, mywh.crossaislewidth, mywh.pickingaislewidth, mywh.pickinglocationwidth, mywh.pickinglocationdepth))
+                            {
+                                textBoxNeighbors.AppendText("Invalid design parameters\n");
+                                return;
+                            }
+                            break;
                     }
-                    textBoxNeighbors.AppendText("\n");
-                    return;
-                }
-                if (!resize) break;
-                //Check warehouse size here before doing any other calculations and if size is not fit then adjust it approprately
-                int totalstoragelocations = mywh.totalNumberOfLocations();
-                if (increased > 0 && decreased > 0)//No exact number of locations but this is the smallest it can get then we stop
-                {
-                    if (mywh.getSKUs().Count > totalstoragelocations)//This check is necessary because last iteration it could have been decreased
+                    if (!resize) break;
+                    //Check warehouse size here before doing any other calculations and if size is not fit then adjust it approprately
+                    int totalstoragelocations = mywh.totalNumberOfLocations();
+                    if (increased > 0 && decreased > 0)//No exact number of locations but this is the smallest it can get then we stop
+                    {
+                        if (mywh.getSKUs().Count > totalstoragelocations)//This check is necessary because last iteration it could have been decreased
+                        {
+                            mywh.setArea(mywh.area / options.warehouseadjustmentfactor);//Increase area
+                            increased++;
+                            finalize = true;
+                        }
+                        else if (mywh.getSKUs().Count < totalstoragelocations || finalize == true)
+                        {
+                            warehousefit = true;
+                            break;
+                        }
+                    }
+                    if (mywh.getSKUs().Count > totalstoragelocations)
                     {
                         mywh.setArea(mywh.area / options.warehouseadjustmentfactor);//Increase area
                         increased++;
-                        finalize = true;
                     }
-                    else if (mywh.getSKUs().Count < totalstoragelocations || finalize == true)
+                    else if (mywh.getSKUs().Count < totalstoragelocations)
+                    {
+                        mywh.setArea(mywh.area * options.warehouseadjustmentfactor);//Decrease area
+                        decreased++;
+                    }
+                    else if (mywh.getSKUs().Count == totalstoragelocations)
                     {
                         warehousefit = true;
-                        break;
                     }
-                }
-                if (mywh.getSKUs().Count > totalstoragelocations)
+                } while (!warehousefit);
+
+                if (mywh.getSKUs().Count > mywh.totalNumberOfLocations())
                 {
-                    mywh.setArea(mywh.area / options.warehouseadjustmentfactor);//Increase area
-                    increased++;
+                    textBoxNeighbors.AppendText("Insufficient space\n");
+                    labelTotalLocations.Text = "Total Locations: " + mywh.totalNumberOfLocations().ToString();
+                    return;
                 }
-                else if (mywh.getSKUs().Count < totalstoragelocations)
+                //Set final area
+                textBoxArea.Text = mywh.area.ToString("R");
+                //Set width of the warehouse
+                textBoxWHWidth.Text = mywh.getWidth().ToString();
+                //Set depth of the warehouse
+                textBoxWHDepth.Text = mywh.getDepth().ToString();
+                //Set panel's width with consideration of margins of edge crossaisles
+                panelDrawing.Width = Convert.ToInt32(mywh.getWidth() * m);
+                //Set panel's height with consideration of margins of edge crossaisles
+                panelDrawing.Height = Convert.ToInt32(mywh.getDepth() * m);
+                myBitmap = new Bitmap(this.panelDrawing.Width, this.panelDrawing.Height, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+                //graphicsObj = this.panelDrawing.CreateGraphics();
+                //Create graphics object for drawing lines and shapes in panel
+                graphicsObj = Graphics.FromImage(myBitmap);
+                graphicsObj.Clear(Color.White);
+                //Create pen object for width and color of shapess
+                mypen = new Pen(System.Drawing.Color.Blue, 1);
+                //Set alignment to center so aisles are correctly aligned
+                mypen.Alignment = PenAlignment.Center;
+                //Clear SVG content
+                mysvg = new svg(panelDrawing.Width, panelDrawing.Height);
+
+                TimeSpan elapsed1 = DateTime.Now - start1;
+                DateTime start2 = DateTime.Now;
+                //Create importantnodes shortest distances
+                if (!mywh.usevisibilitygraph) mywh.createImportantNodeShortestDistances();
+                TimeSpan elapsed2 = DateTime.Now - start2;
+                DateTime start3 = DateTime.Now;
+                TimeSpan elapsed9 = DateTime.Now - start2;
+                TimeSpan elapsed10 = DateTime.Now - start2;
+                TimeSpan elapsed11 = DateTime.Now - start2;
+                //Calculate Shortest Path Distances for Locations
+                if (!mywh.usevisibilitygraph) mywh.locationShortestDistance();
+                else
                 {
-                    mywh.setArea(mywh.area * options.warehouseadjustmentfactor);//Decrease area
-                    decreased++;
+                    DateTime start9 = DateTime.Now;
+                    mywh.createPolygonsandGraphNodes();
+                    elapsed9 = DateTime.Now - start9;
+                    DateTime start10 = DateTime.Now;
+                    mywh.createVisibilityGraph();
+                    elapsed10 = DateTime.Now - start10;
+                    DateTime start11 = DateTime.Now;
+                    mywh.fillGraphNodeDistances();
+                    elapsed11 = DateTime.Now - start11;
                 }
-                else if (mywh.getSKUs().Count == totalstoragelocations)
-                {
-                    warehousefit = true;
-                }
-            } while (!warehousefit);
-            if (mywh.getSKUs().Count > mywh.totalNumberOfLocations())
-            {
-                textBoxNeighbors.AppendText("Insufficient space\n");
+                //Calculate Shortest Path Distances to PD
+                mywh.pdTotalDistances();
+                TimeSpan elapsed3 = DateTime.Now - start3;
+                DateTime start4 = DateTime.Now;
+                //Fulfill Total Distances to Each Locations
+                mywh.totalDistances();
+                TimeSpan elapsed4 = DateTime.Now - start4;
+                DateTime start5 = DateTime.Now;
+                //mywh.colorManytoMany();
+                //mywh.colorOnetoMany();
+                mywh.rankLocations(Convert.ToDouble(textBoxAvgOrderSize.Text));
+                mywh.colorOverall();
+                TimeSpan elapsed5 = DateTime.Now - start5;
+                DateTime start6 = DateTime.Now;
+                //Draw created warehouse to panel
+                drawWarehouse();
+                TimeSpan elapsed6 = DateTime.Now - start6;
                 labelTotalLocations.Text = "Total Locations: " + mywh.totalNumberOfLocations().ToString();
-                return;
-            }
-            //Set final area
-            textBoxArea.Text = mywh.area.ToString("R");//R is for making sure the double is converted to string exactly without losing precision
-            //Set width of the warehouse
-            textBoxWHWidth.Text = mywh.getWidth().ToString();
-            //Set depth of the warehouse
-            textBoxWHDepth.Text = mywh.getDepth().ToString();
-            //Set panel's width with consideration of margins of edge crossaisles
-            panelDrawing.Width = Convert.ToInt32(mywh.getWidth() * m);
-            //Set panel's height with consideration of margins of edge crossaisles
-            panelDrawing.Height = Convert.ToInt32(mywh.getDepth() * m);
-            myBitmap = new Bitmap(this.panelDrawing.Width, this.panelDrawing.Height, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
-            //graphicsObj = this.panelDrawing.CreateGraphics();
-            //Create graphics object for drawing lines and shapes in panel
-            graphicsObj = Graphics.FromImage(myBitmap);
-            graphicsObj.Clear(Color.White);
-            //Create pen object for width and color of shapess
-            mypen = new Pen(System.Drawing.Color.Blue, 1);
-            //Set alignment to center so aisles are correctly aligned
-            mypen.Alignment = PenAlignment.Center;
-            //Clear svg content
-            mysvg = new svg(panelDrawing.Width, panelDrawing.Height);
-            //Clear ARDesign content
-            myardesign = new ardesign(mywh.getWidth(), mywh.getDepth(), mywh.pickinglocationwidth, mywh.pickinglocationdepth);
+                labelTotalAisles.Text = "Total Aisles: " + mywh.totalNumberOfAisles().ToString();
+                DateTime start7 = DateTime.Now;
+                al = new allocation(Convert.ToInt32(textBoxAllocationSeed.Text));
+                int allocationmethod = 0;
+                if (checkBoxStraightAllocation.Checked) allocationmethod = 1;
+                int warehouseareafit = al.allocateSKUs(mywh.getSKUs(), mywh, allocationmethod);
+                TimeSpan elapsed7 = DateTime.Now - start7;
+                if (warehouseareafit < 0) { textBoxNeighbors.AppendText("Insufficient space\n"); return; }
+                else if (warehouseareafit > 0) { textBoxNeighbors.AppendText("Too many empty locations\n"); return; };
 
-            TimeSpan elapsed1 = DateTime.Now - start1;
-            DateTime start2 = DateTime.Now;
-            //Create importantnodes shortest distances
-            if (!mywh.usevisibilitygraph) mywh.createImportantNodeShortestDistances();
-            TimeSpan elapsed2 = DateTime.Now - start2;
-            DateTime start3 = DateTime.Now;
-            TimeSpan elapsed9 = DateTime.Now - start2;
-            TimeSpan elapsed10 = DateTime.Now - start2;
-            TimeSpan elapsed11 = DateTime.Now - start2;
-            //Calculate Shortest Path Distances for Locations
-            if (!mywh.usevisibilitygraph) mywh.locationShortestDistance();
-            else
-            {
-                DateTime start9 = DateTime.Now;
-                mywh.createPolygonsandGraphNodes();
-                elapsed9 = DateTime.Now - start9;
-                DateTime start10 = DateTime.Now;
-                mywh.createVisibilityGraph();
-                elapsed10 = DateTime.Now - start10;
-                DateTime start11 = DateTime.Now;
-                mywh.fillGraphNodeDistances();
-                elapsed11 = DateTime.Now - start11;
-            }
-            //Calculate Shortest Path Distances to PD
-            mywh.pdTotalDistances();
-            TimeSpan elapsed3 = DateTime.Now - start3;
-            DateTime start4 = DateTime.Now;
-            //Fulfill Total Distances to Each Locations
-            mywh.totalDistances();
-            TimeSpan elapsed4 = DateTime.Now - start4;
-            DateTime start5 = DateTime.Now;
-            //mywh.colorManytoMany();
-            //mywh.colorOnetoMany();
-            mywh.rankLocations(Convert.ToDouble(textBoxAvgOrderSize.Text));
-            mywh.colorOverall();
-            TimeSpan elapsed5 = DateTime.Now - start5;
-            DateTime start6 = DateTime.Now;
-            //Draw created warehouse to panel
-            this.drawWarehouse();
-            TimeSpan elapsed6 = DateTime.Now - start5;
-            labelTotalLocations.Text = "Total Locations: " + mywh.totalNumberOfLocations().ToString();
-            labelTotalAisles.Text = "Total Aisles: " + mywh.totalNumberOfAisles().ToString();
-            DateTime start7 = DateTime.Now;
-            int allocationmethod = 0;
-            if (checkBoxStraightAllocation.Checked) allocationmethod = 1;
-            al = new allocation(Convert.ToInt32(textBoxAllocationSeed.Text));
-            int warehouseareafit = al.allocateSKUs(mywh.getSKUs(), mywh, allocationmethod);
-            TimeSpan elapsed7 = DateTime.Now - start6;
-            if (warehouseareafit < 0) { textBoxNeighbors.AppendText("Insufficient space\n"); return; }
-            else if (warehouseareafit > 0) { textBoxNeighbors.AppendText("Too many empty locations\n"); return; };
-
-            //al.randomized(myskus);
-            mywh.setOrders(this.myorders);
-            //Add orders into ardesign
-            myardesign.addPickLists();
-            for (int i = 0; i < mywh.getOrders().Count; i++)
-            {
-                myardesign.addPickList(mywh.getOrders()[i].getOrderID());
-                for (int j = 0; j < mywh.getOrders()[i].getOrderSkus().Count; j++)
+                //al.randomized(myskus);
+                mywh.setOrders(this.myorders);
+                //mywh.randomizeOrders();
+                double totalcost = 0;
+                int samplesize = Convert.ToInt32(textBoxSampleSize.Text);
+                DateTime start8 = DateTime.Now;
+                //If you want to solve it with center aisles
+                if (!mywh.usevisibilitygraph)
                 {
-                    double x = mywh.getOrders()[i].getOrderSkus()[j].location.getX();
-                    double y = mywh.getOrders()[i].getOrderSkus()[j].location.getY();
-                    //We make pd point as the starting point in ardesign
-                    //So when we start the camera in AR it starts from PD instead of top left corner which is 0,0 for GUI
-                    //But we want PD to act like 0,0 for ardesign
-                    x = x - mywh.pdnodes[0].getX();
-                    y = y - mywh.pdnodes[0].getY();
-                    myardesign.addPickLocation(x, y);
-                }
-                myardesign.closePickList();
-            }
-            myardesign.closePickLists();
-            //mywh.randomizeOrders();
-            double totalcost = 0;
-            int samplesize = Convert.ToInt32(textBoxSampleSize.Text);
-            //If you want to solve it on this computer
-            DateTime start8 = DateTime.Now;
-            if (!mywh.usevisibilitygraph)
-            {
-                if (comboBoxComputing.SelectedIndex == 0)
-                {
-                    var sums = new ConcurrentBag<double>();
-                    var sums2 = new ConcurrentBag<int>();
-                    var sums3 = new ConcurrentBag<int>();
-                    string routingSolver = comboBoxRouting.GetItemText(comboBoxRouting.SelectedItem);
-
-                    Parallel.For(0, samplesize, k =>
-                    //for (int k = 0; k < samplesize; k++)
+                    //If you want to solve TSPs using parallel computing
+                    if (comboBoxComputing.SelectedIndex == 0)
                     {
-                        warehouse tmpwh = mywh;
-                        List<order> tmporders = mywh.getOrders();
-                        routing rt = new routing();
-                        //totalcost += rt.tsp(tmpwh, tmporders[k]);
-                        double tourcost = 0;
-                        bool LKHdoneonce = false;
-                        while (tourcost == 0)
+                        var sums = new ConcurrentBag<double>();
+                        var sums2 = new ConcurrentBag<int>();
+                        var sums3 = new ConcurrentBag<int>();
+                        var sums4 = new ConcurrentBag<string>();
+                        bool TSPConcorde = false;
+                        bool ExportCheck = false;
+                        if (checkBoxTSP.Checked) TSPConcorde = true;
+                        if (checkBoxExport.Checked) ExportCheck = true;
+                        Parallel.For(0, samplesize, k =>
+                        //for (int k = 0; k < samplesize; k++)
                         {
-                            if (routingSolver == "Concorde" || LKHdoneonce)
+                            warehouse tmpwh = mywh;
+                            List<order> tmporders = mywh.getOrders();
+                            routing rt = new routing();
+                            //totalcost += rt.tsp(tmpwh, tmporders[k]);
+                            double tourcost = 0;
+                            bool LKHDONEonce = false;//This is used when LKH sometimes stucks because of an error so we let Concorde to solve it
+                            DateTime start15 = DateTime.Now;
+                            while (tourcost == 0)
                             {
-                                tourcost = rt.tspOptSteiner(tmpwh, tmporders[k], k);
-                                if (tourcost == 0) break;//This means that tour cost is really zero
+                                if (TSPConcorde || LKHDONEonce)
+                                {
+                                    tourcost = rt.tspOptSteiner(tmpwh, tmporders[k], k);
+                                    if (tourcost == 0) break;//This means that tour cost is really zero
+                                }
+                                else
+                                {
+                                    tourcost = rt.tspLKHSteiner(tmpwh, tmporders[k], k);
+                                    LKHDONEonce = true;
+                                }
                             }
-                            else if (routingSolver == "LKH")
+                            sums.Add(tourcost);
+                            if (ExportCheck)
                             {
-                                tourcost = rt.tspLKHSteiner(tmpwh, tmporders[k], k);
-                                LKHdoneonce = true;
+                                sums2.Add(tmporders[k].getOrderSize());
+                                sums3.Add(tmporders[k].getOrderID());
+                                TimeSpan elapsed15 = DateTime.Now - start15;
+                                sums4.Add(elapsed15.TotalSeconds.ToString());
                             }
-                            else if (routingSolver == "2-Opt")
+                        });
+
+                        //Excel csv export (optional)
+                        if (checkBoxExport.Checked)
+                        {
+                            csvexport myexcel = new csvexport();
+                            for (int i = 0; i < sums.Count; i++)
                             {
-                                tourcost = rt.tsp2OPTSteiner(tmpwh, tmporders[k], k);
-                                if (tourcost == 0) break;//This means that tour cost is really zero
+                                myexcel.addRow();
+                                myexcel["tourcost"] = sums.ElementAt(i).ToString();
+                                myexcel["toursize"] = sums2.ElementAt(i).ToString();
+                                myexcel["orderid"] = sums3.ElementAt(i).ToString();
+                                myexcel["time"] = sums4.ElementAt(i).ToString();
+                            }
+                            myexcel.exportToFile("export.csv");
+                        }
+                        totalcost = sums.Sum() / samplesize;
+                    }
+                    //If you want to solve it using distributed computing
+                    else if (comboBoxComputing.SelectedIndex == 1)
+                    {
+                        bool TSPConcorde = false;
+                        if (checkBoxTSP.Checked) TSPConcorde = true;
+                        if (TSPConcorde)
+                        {
+                            socketservers mysocketservers = new socketservers();
+                            mysocketservers.checkAvailableConcordeServers();
+                            routing rt = new routing();
+                            totalcost = rt.tspOptNetSteiner(mywh, samplesize, mysocketservers, comboBoxNetSchedule.SelectedIndex);
+                        }
+                        else
+                        {
+                            socketservers mysocketservers = new socketservers();
+                            mysocketservers.checkAvailableConcordeServers();
+                            routing rt = new routing();
+                            totalcost = rt.tspLKHNetSteiner(mywh, samplesize, mysocketservers, comboBoxNetSchedule.SelectedIndex);
+                        }
+                    }
+                    // If you want to solve it using single thread computing
+                    else
+                    {
+                        List<double> sum = new List<double>();
+                        List<int> sum2 = new List<int>();
+                        List<int> sum3 = new List<int>();
+                        List<string> sum4 = new List<string>();
+                        bool TSPConcorde = false;
+                        bool ExportCheck = false;
+                        if (checkBoxTSP.Checked) TSPConcorde = true;
+                        if (checkBoxExport.Checked) ExportCheck = true;
+                        //Parallel.For(0, samplesize, k =>
+                        for (int k = 0; k < samplesize; k++)
+                        {
+                            warehouse tmpwh = mywh;
+                            List<order> tmporders = mywh.getOrders();
+                            routing rt = new routing();
+                            double tourcost = 0;
+                            bool LKHdoneonce = false;
+                            DateTime start15 = DateTime.Now;
+                            while (tourcost == 0)
+                            {
+                                if (TSPConcorde || LKHdoneonce)
+                                {
+                                    tourcost = rt.tspOptSteiner(tmpwh, tmporders[k], k);
+                                    if (tourcost == 0) break;//This means that tour cost is really zero
+                                }
+                                else
+                                {
+                                    tourcost = rt.tspLKHSteiner(tmpwh, tmporders[k], k);
+                                    LKHdoneonce = true;
+                                }
+                            }
+                            sum.Add(tourcost);
+                            if (ExportCheck)
+                            {
+                                sum2.Add(tmporders[k].getOrderSize());
+                                sum3.Add(tmporders[k].getOrderID());
+                                TimeSpan elapsed15 = DateTime.Now - start15;
+                                sum4.Add(elapsed15.TotalSeconds.ToString());
                             }
                         }
-                        sums.Add(tourcost);
-                        sums2.Add(tmporders[k].getOrderSize());
-                        sums3.Add(tmporders[k].getOrderID());
-                    });
 
-                    //Excel csv export (optional)
-                    if (checkBoxExport.Checked)
-                    {
-                        csvexport myexcel = new csvexport();
-                        for (int i = 0; i < sums.Count; i++)
+                        //Excel csv export (optional)
+                        if (checkBoxExport.Checked)
                         {
-                            myexcel.addRow();
-                            myexcel["tourcost"] = sums.ElementAt(i).ToString();
-                            myexcel["toursize"] = sums2.ElementAt(i).ToString();
-                            myexcel["orderid"] = sums3.ElementAt(i).ToString();
+                            csvexport myexcel = new csvexport();
+                            for (int i = 0; i < sum.Count; i++)
+                            {
+                                myexcel.addRow();
+                                myexcel["tourcost"] = sum.ElementAt(i).ToString();
+                                myexcel["toursize"] = sum2.ElementAt(i).ToString();
+                                myexcel["orderid"] = sum3.ElementAt(i).ToString();
+                                myexcel["time"] = sum4.ElementAt(i).ToString();
+                            }
+                            myexcel.exportToFile("export.csv");
                         }
-                        myexcel.exportToFile("export.csv");
+                        totalcost = sum.Sum() / samplesize;
                     }
-                    totalcost = sums.Sum() / samplesize;
                 }
-                //If you want to solve it using distributed computing
-                else if (comboBoxComputing.SelectedIndex == 1)
+                else//using visibility graph
                 {
-                    string routingSolver = comboBoxRouting.GetItemText(comboBoxRouting.SelectedItem);
-                    if (routingSolver == "Concorde")
+                    //If you want to solve TSPs using parallel computing
+                    if (comboBoxComputing.SelectedIndex == 0)
                     {
-                        socketservers mysocketservers = new socketservers();
-                        mysocketservers.checkAvailableConcordeServers();
-                        routing rt = new routing();
-                        totalcost = rt.tspOptNetSteiner(mywh, samplesize, mysocketservers, comboBoxNetSchedule.SelectedIndex);
+                        var sums = new ConcurrentBag<double>();
+                        var sums2 = new ConcurrentBag<int>();
+                        var sums3 = new ConcurrentBag<int>();
+                        var sums4 = new ConcurrentBag<string>();
+                        bool TSPConcorde = false;
+                        bool ExportCheck = false;
+                        if (checkBoxTSP.Checked) TSPConcorde = true;
+                        if (checkBoxExport.Checked) ExportCheck = true;
+                        Parallel.For(0, samplesize, k =>
+                        //for (int k = 0; k < samplesize; k++)
+                        {
+                            warehouse tmpwh = mywh;
+                            List<order> tmporders = mywh.getOrders();
+                            routing rt = new routing();
+                            //totalcost += rt.tsp(tmpwh, tmporders[k]);
+                            double tourcost = 0;
+                            bool LKHdoneonce = false;
+                            DateTime start15 = DateTime.Now;
+                            while (tourcost == 0)
+                            {
+                                if (TSPConcorde || LKHdoneonce)
+                                {
+                                    tourcost = rt.tspOptVisibility(tmpwh, tmporders[k], k);
+                                    if (tourcost == 0) break;//This means that tour cost is really zero
+                                }
+                                else
+                                {
+                                    tourcost = rt.tspLKHVisibility(tmpwh, tmporders[k], k);
+                                    LKHdoneonce = true;
+                                }
+                            }
+                            sums.Add(tourcost);
+                            if (ExportCheck)
+                            {
+                                sums2.Add(tmporders[k].getOrderSize());
+                                sums3.Add(tmporders[k].getOrderID());
+                                TimeSpan elapsed15 = DateTime.Now - start15;
+                                sums4.Add(elapsed15.TotalSeconds.ToString());
+                            }
+                        });
+
+                        //Excel csv export (optional)
+                        if (checkBoxExport.Checked)
+                        {
+                            csvexport myexcel = new csvexport();
+                            for (int i = 0; i < sums.Count; i++)
+                            {
+                                myexcel.addRow();
+                                myexcel["tourcost"] = sums.ElementAt(i).ToString();
+                                myexcel["toursize"] = sums2.ElementAt(i).ToString();
+                                myexcel["orderid"] = sums3.ElementAt(i).ToString();
+                                myexcel["time"] = sums4.ElementAt(i).ToString();
+                            }
+                            myexcel.exportToFile("export.csv");
+                        }
+                        totalcost = sums.Sum() / samplesize;
                     }
-                    else if (routingSolver == "LKH")
+                    //If you want to solve it using distributed computing
+                    else if(comboBoxComputing.SelectedIndex == 1)
                     {
-                        socketservers mysocketservers = new socketservers();
-                        mysocketservers.checkAvailableConcordeServers();
-                        routing rt = new routing();
-                        totalcost = rt.tspLKHNetSteiner(mywh, samplesize, mysocketservers, comboBoxNetSchedule.SelectedIndex);
+                        bool TSPConcorde = false;
+                        if (checkBoxTSP.Checked) TSPConcorde = true;
+                        if (TSPConcorde)
+                        {
+                            socketservers mysocketservers = new socketservers();
+                            mysocketservers.checkAvailableConcordeServers();
+                            routing rt = new routing();
+                            totalcost = rt.tspOptNetVisibility(mywh, samplesize, mysocketservers, comboBoxNetSchedule.SelectedIndex);
+                        }
+                        else
+                        {
+                            socketservers mysocketservers = new socketservers();
+                            mysocketservers.checkAvailableConcordeServers();
+                            routing rt = new routing();
+                            totalcost = rt.tspLKHNetVisibility(mywh, samplesize, mysocketservers, comboBoxNetSchedule.SelectedIndex);
+                        }
+                    }
+                    //If you want to solve TSPs using single thread
+                    else
+                    {
+                        var sums = new ConcurrentBag<double>();
+                        var sums2 = new ConcurrentBag<int>();
+                        var sums3 = new ConcurrentBag<int>();
+                        var sums4 = new ConcurrentBag<string>();
+                        bool TSPConcorde = false;
+                        bool ExportCheck = false;
+                        if (checkBoxTSP.Checked) TSPConcorde = true;
+                        if (checkBoxExport.Checked) ExportCheck = true;
+                        //Parallel.For(0, samplesize, k =>
+                        for (int k = 0; k < samplesize; k++)
+                        {
+                            warehouse tmpwh = mywh;
+                            List<order> tmporders = mywh.getOrders();
+                            routing rt = new routing();
+                            //totalcost += rt.tsp(tmpwh, tmporders[k]);
+                            double tourcost = 0;
+                            bool LKHdoneonce = false;
+                            DateTime start15 = DateTime.Now;
+                            while (tourcost == 0)
+                            {
+                                if (TSPConcorde || LKHdoneonce)
+                                {
+                                    tourcost = rt.tspOptVisibility(tmpwh, tmporders[k], k);
+                                    if (tourcost == 0) break;//This means that tour cost is really zero
+                                }
+                                else
+                                {
+                                    tourcost = rt.tspLKHVisibility(tmpwh, tmporders[k], k);
+                                    LKHdoneonce = true;
+                                }
+                            }
+                            sums.Add(tourcost);
+                            if (ExportCheck)
+                            {
+                                sums2.Add(tmporders[k].getOrderSize());
+                                sums3.Add(tmporders[k].getOrderID());
+                                TimeSpan elapsed15 = DateTime.Now - start15;
+                                sums4.Add(elapsed15.TotalSeconds.ToString());
+                            }
+                        };
+
+                        //Excel csv export (optional)
+                        if (checkBoxExport.Checked)
+                        {
+                            csvexport myexcel = new csvexport();
+                            for (int i = 0; i < sums.Count; i++)
+                            {
+                                myexcel.addRow();
+                                myexcel["tourcost"] = sums.ElementAt(i).ToString();
+                                myexcel["toursize"] = sums2.ElementAt(i).ToString();
+                                myexcel["orderid"] = sums3.ElementAt(i).ToString();
+                                myexcel["time"] = sums4.ElementAt(i).ToString();
+                            }
+                            myexcel.exportToFile("export.csv");
+                        }
+                        totalcost = sums.Sum() / samplesize;
+                    }
+                }
+                TimeSpan elapsed8 = DateTime.Now - start8;
+
+                labelDistanceOutput.Text = "Average Distance: " + totalcost.ToString("0.0");
+                //labelDistanceOutput.Text = "Average Distance: " + mywh.averageTotalDistancePerLocation().ToString();
+                //labelDistanceOutput.Text = "Average Distance: " + mywh.averageDistancetoPDPerLocation().ToString();
+                panelDrawing.BackgroundImage = myBitmap;
+                //Delete everything in the panel and refresh
+                panelDrawing.Refresh();
+                //graphicsObj.Dispose();
+                textBoxRegions.Text = "";
+                for (int i = 0; i < mywh.regionedges.Count; i++)
+                {
+                    textBoxRegions.AppendText(
+                        visualmath.calculateAngle(mywh.regionedges[i].getStart().getX(), mywh.regionedges[i].getStart().getY(), mywh.regionedges[i].getEnd().getX(), mywh.regionedges[i].getEnd().getY()).ToString() + "\t" +
+                        mywh.regionedges[i].id.ToString() + "\t" +
+                        mywh.regionedges[i].getStart().id.ToString() + "\t" +
+                        mywh.regionedges[i].getStart().getX().ToString() + "\t" +
+                        mywh.regionedges[i].getStart().getY().ToString() + "\t" +
+                        mywh.regionedges[i].getEnd().id.ToString() + "\t" +
+                        mywh.regionedges[i].getEnd().getX().ToString() + "\t" +
+                        mywh.regionedges[i].getEnd().getY().ToString() + "\n");
+                }
+                textBoxNeighbors.Text = "";
+                for (int i = 0; i < mywh.regions.Count; i++)
+                {
+                    textBoxNeighbors.AppendText("Region" + mywh.regions[i].getRegionID().ToString() + ":\t");
+                    for (int j = 0; j < mywh.regions[i].regionedges.Count; j++)
+                    {
+                        textBoxNeighbors.AppendText(mywh.regions[i].regionedges[j].id.ToString() + " ");
+                    }
+                    textBoxNeighbors.AppendText("\n");
+                }
+                TimeSpan elapsed = DateTime.Now - start;
+                textBoxNeighbors.AppendText("Create Single:" + elapsed1.ToString() + "\n");
+                textBoxNeighbors.AppendText("Important Node Shortest Dist:" + elapsed2.ToString() + "\n");
+                textBoxNeighbors.AppendText("Shortest Path Distances to Locations:" + elapsed3.ToString() + "\n");
+                textBoxNeighbors.AppendText("Shortest Path Distances Create:" + elapsed4.ToString() + "\n");
+                textBoxNeighbors.AppendText("Coloring:" + elapsed5.ToString() + "\n");
+                textBoxNeighbors.AppendText("Drawing:" + elapsed6.ToString() + "\n");
+                textBoxNeighbors.AppendText("Allocation:" + elapsed7.ToString() + "\n");
+                textBoxNeighbors.AppendText("TSP:" + elapsed8.ToString() + "\n");
+                textBoxNeighbors.AppendText("createPolygonsandGraphNodes" + elapsed9.ToString() + "\n");
+                if(mywh.usevisibilitygraph) textBoxNeighbors.AppendText("graphNodes: " + mywh.graphnodes.Count().ToString() + "\n");
+                textBoxNeighbors.AppendText("createVisibilityGraph:" + elapsed10.ToString() + "\n");
+                textBoxNeighbors.AppendText("fillGraphNodeDistances:" + elapsed11.ToString() + "\n");
+                textBoxNeighbors.AppendText("Total time:" + elapsed.ToString() + "\n");
+                textBoxNeighbors.AppendText("Total time (ms):" + elapsed.TotalMilliseconds.ToString() + "\n");
+
+                //csvexport myexcel1 = new csvexport();
+                //for (int i = 0; i < mywh.visibilitygraphdistances.GetLength(0); i++)
+                //{
+                //    for (int j = 0; j < mywh.visibilitygraphdistances.GetLength(1); j++)
+                //    {
+
+                //        myexcel1.addRow();
+                //        myexcel1["distance"] = mywh.visibilitygraphdistances[i, j].ToString();
+
+                //    }
+                //}
+                //myexcel1.exportToFile("visibilitygraphdistancescreate.csv");
+                //csvexport myexcel1 = new csvexport();
+                //for (int i = 0; i < mywh.graphnodes.Length; i++)
+                //{
+                //    myexcel1.addRow();
+                //    myexcel1["X"] = mywh.graphnodes[i].getX().ToString();
+                //    myexcel1["Y"] = mywh.graphnodes[i].getY().ToString();
+                //}
+                //myexcel1.exportToFile("XYGraphNodes-create.csv");
+            }
+            else//This is general warehouse
+            {
+                DateTime start = DateTime.Now;
+                //Set mywh object to null
+                mywh = null;
+                //Set Magnify factor
+                m = (float)Convert.ToDouble(textBoxMagnify.Text);
+                //Reset IDs
+                edge.nextID = 0;
+                region.nextID = 0;
+                node.nextID = 0;
+                //Create a new warehouse object
+                mywh = new warehouse();
+                //Set warehouse aspectratio
+                mywh.aspectratio = Convert.ToDouble(textBoxAspectRatio.Text);
+                //Set warehouse area
+                mywh.setArea(Convert.ToDouble(textBoxArea.Text));
+                //Set warehouse cross aisle width
+                mywh.crossaislewidth = Convert.ToDouble(textBoxCrossAisleWidth.Text);
+                //Set warehouse picking aisle width
+                mywh.pickingaislewidth = Convert.ToDouble(textBoxPickingAisleWidth.Text);
+                //Set warehouse picking location width
+                mywh.pickinglocationwidth = Convert.ToDouble(textBoxLWidth.Text);
+                //Set warehouse picking location depth
+                mywh.pickinglocationdepth = Convert.ToDouble(textBoxLDepth.Text);
+                //Set size of picker used for visibility graph
+                mywh.pickersize = Convert.ToDouble(textBoxPickerSize.Text);
+                //Set which graph will be used Steiner or Visibility Graph
+                mywh.usevisibilitygraph = checkBoxVisibilityGraph.Checked;
+                //Set average pick list size (this is used for best location calculation
+                mywh.avgTourLength = Convert.ToDouble(textBoxAvgOrderSize.Text);
+
+                //Set number of colors
+                options.numbercolors = Convert.ToInt32(textBoxNumberColors.Text);
+                DateTime start1 = DateTime.Now;
+                //Create Warehouse in the background
+                //mywh.createSingleCrossAisleWarehouse(Convert.ToDouble(textBoxAngle1.Text), Convert.ToDouble(textBoxAngle2.Text), Convert.ToDouble(textBoxAdjuster1.Text), Convert.ToDouble(textBoxAdjuster2.Text), mywh.crossaislewidth, mywh.pickingaislewidth, mywh.pickinglocationwidth, mywh.pickinglocationdepth, Convert.ToDouble(textBoxE1.Text), Convert.ToDouble(textBoxE2.Text), Convert.ToDouble(textBoxpd.Text));
+                double[] angle = { Convert.ToDouble(textBoxAngle1.Text), Convert.ToDouble(textBoxAngle2.Text), Convert.ToDouble(textBoxAngle3.Text), Convert.ToDouble(textBoxAngle4.Text), Convert.ToDouble(textBoxAngle5.Text), Convert.ToDouble(textBoxAngle6.Text), Convert.ToDouble(textBoxAngle7.Text), Convert.ToDouble(textBoxAngle8.Text) };
+                double[] adjuster = { Convert.ToDouble(textBoxAdjuster1.Text), Convert.ToDouble(textBoxAdjuster2.Text), Convert.ToDouble(textBoxAdjuster3.Text), Convert.ToDouble(textBoxAdjuster4.Text), Convert.ToDouble(textBoxAdjuster5.Text), Convert.ToDouble(textBoxAdjuster6.Text), Convert.ToDouble(textBoxAdjuster7.Text), Convert.ToDouble(textBoxAdjuster8.Text) };
+                double[] pickadjuster = { Convert.ToDouble(textBoxPickAdjuster1.Text), Convert.ToDouble(textBoxPickAdjuster2.Text), Convert.ToDouble(textBoxPickAdjuster3.Text), Convert.ToDouble(textBoxPickAdjuster4.Text), Convert.ToDouble(textBoxPickAdjuster5.Text), Convert.ToDouble(textBoxPickAdjuster6.Text), Convert.ToDouble(textBoxPickAdjuster7.Text), Convert.ToDouble(textBoxPickAdjuster8.Text) };
+                double[] ext = { Convert.ToDouble(textBoxE1.Text), Convert.ToDouble(textBoxE2.Text), Convert.ToDouble(textBoxE3.Text), Convert.ToDouble(textBoxE4.Text) };
+                double[] intx = { Convert.ToDouble(textBoxI1X.Text) };
+                double[] inty = { Convert.ToDouble(textBoxI1Y.Text) };
+                double[] pd = { Convert.ToDouble(textBoxpd.Text) };
+                double aspectratio = Convert.ToDouble(textBoxAspectRatio.Text);
+
+                bool[] connections = new bool[10];
+
+                connections[0] = checkBoxC12.Checked;
+                connections[1] = checkBoxC13.Checked;
+                connections[2] = checkBoxC14.Checked;
+                connections[3] = checkBoxC15.Checked;
+                connections[4] = checkBoxC23.Checked;
+                connections[5] = checkBoxC24.Checked;
+                connections[6] = checkBoxC25.Checked;
+                connections[7] = checkBoxC34.Checked;
+                connections[8] = checkBoxC35.Checked;
+                connections[9] = checkBoxC45.Checked;
+
+                //Adjust warehouse area until warehouse is fit
+                int increased = 0;
+                int decreased = 0;
+                bool warehousefit = false;
+                bool finalize = false;
+                bool resize = checkBoxResize.Checked;
+                if (resize) mywh.setArea(40000);//Set to a fixed point so it can find the best area from the same starting point
+                do
+                {
+                    mywh.resetNetwork();
+                    mywh.setSKUs(myskus);
+                    if (!mywh.createWarehouse(angle, adjuster, pickadjuster, ext, intx, inty, pd, aspectratio, mywh.crossaislewidth, mywh.pickingaislewidth, mywh.pickinglocationwidth, mywh.pickinglocationdepth, connections))
+                    {
+                        textBoxNeighbors.AppendText("Invalid design parameters\n");
+                        for (int i = 0; i < mywh.problematicconnections.Count(); i++)
+                        {
+                            textBoxNeighbors.AppendText(mywh.problematicconnections[i].ToString() + " ");
+                        }
+                        textBoxNeighbors.AppendText("\n");
+                        return;
+                    }
+                    if (!resize) break;
+                    //Check warehouse size here before doing any other calculations and if size is not fit then adjust it approprately
+                    int totalstoragelocations = mywh.totalNumberOfLocations();
+                    if (increased > 0 && decreased > 0)//No exact number of locations but this is the smallest it can get then we stop
+                    {
+                        if (mywh.getSKUs().Count > totalstoragelocations)//This check is necessary because last iteration it could have been decreased
+                        {
+                            mywh.setArea(mywh.area / options.warehouseadjustmentfactor);//Increase area
+                            increased++;
+                            finalize = true;
+                        }
+                        else if (mywh.getSKUs().Count < totalstoragelocations || finalize == true)
+                        {
+                            warehousefit = true;
+                            break;
+                        }
+                    }
+                    if (mywh.getSKUs().Count > totalstoragelocations)
+                    {
+                        mywh.setArea(mywh.area / options.warehouseadjustmentfactor);//Increase area
+                        increased++;
+                    }
+                    else if (mywh.getSKUs().Count < totalstoragelocations)
+                    {
+                        mywh.setArea(mywh.area * options.warehouseadjustmentfactor);//Decrease area
+                        decreased++;
+                    }
+                    else if (mywh.getSKUs().Count == totalstoragelocations)
+                    {
+                        warehousefit = true;
+                    }
+                } while (!warehousefit);
+                if(mywh.getSKUs().Count > mywh.totalNumberOfLocations())
+                {
+                    textBoxNeighbors.AppendText("Insufficient space\n");
+                    labelTotalLocations.Text = "Total Locations: " + mywh.totalNumberOfLocations().ToString();
+                    return;
+                }
+                //Set final area
+                textBoxArea.Text = mywh.area.ToString("R");//R is for making sure the double is converted to string exactly without losing precision
+                //Set width of the warehouse
+                textBoxWHWidth.Text = mywh.getWidth().ToString();
+                //Set depth of the warehouse
+                textBoxWHDepth.Text = mywh.getDepth().ToString();
+                //Set panel's width with consideration of margins of edge crossaisles
+                panelDrawing.Width = Convert.ToInt32(mywh.getWidth() * m);
+                //Set panel's height with consideration of margins of edge crossaisles
+                panelDrawing.Height = Convert.ToInt32(mywh.getDepth() * m);
+                myBitmap = new Bitmap(this.panelDrawing.Width, this.panelDrawing.Height, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+                //graphicsObj = this.panelDrawing.CreateGraphics();
+                //Create graphics object for drawing lines and shapes in panel
+                graphicsObj = Graphics.FromImage(myBitmap);
+                graphicsObj.Clear(Color.White);
+                //Create pen object for width and color of shapess
+                mypen = new Pen(System.Drawing.Color.Blue, 1);
+                //Set alignment to center so aisles are correctly aligned
+                mypen.Alignment = PenAlignment.Center;
+                //Clear svg content
+                mysvg = new svg(panelDrawing.Width, panelDrawing.Height);
+
+                TimeSpan elapsed1 = DateTime.Now - start1;
+                DateTime start2 = DateTime.Now;
+                //Create importantnodes shortest distances
+                if (!mywh.usevisibilitygraph) mywh.createImportantNodeShortestDistances();
+                TimeSpan elapsed2 = DateTime.Now - start2;
+                DateTime start3 = DateTime.Now;
+                TimeSpan elapsed9 = DateTime.Now - start2;
+                TimeSpan elapsed10 = DateTime.Now - start2;
+                TimeSpan elapsed11 = DateTime.Now - start2;
+                //Calculate Shortest Path Distances for Locations
+                if (!mywh.usevisibilitygraph) mywh.locationShortestDistance();
+                else
+                {
+                    DateTime start9 = DateTime.Now;
+                    mywh.createPolygonsandGraphNodes();
+                    elapsed9 = DateTime.Now - start9;
+                    DateTime start10 = DateTime.Now;
+                    mywh.createVisibilityGraph();
+                    elapsed10 = DateTime.Now - start10;
+                    DateTime start11 = DateTime.Now;
+                    mywh.fillGraphNodeDistances();
+                    elapsed11 = DateTime.Now - start11;
+                }
+                //Calculate Shortest Path Distances to PD
+                mywh.pdTotalDistances();
+                TimeSpan elapsed3 = DateTime.Now - start3;
+                DateTime start4 = DateTime.Now;
+                //Fulfill Total Distances to Each Locations
+                mywh.totalDistances();
+                TimeSpan elapsed4 = DateTime.Now - start4;
+                DateTime start5 = DateTime.Now;
+                //mywh.colorManytoMany();
+                //mywh.colorOnetoMany();
+                mywh.rankLocations(Convert.ToDouble(textBoxAvgOrderSize.Text));
+                mywh.colorOverall();
+                TimeSpan elapsed5 = DateTime.Now - start5;
+                DateTime start6 = DateTime.Now;
+                //Draw created warehouse to panel
+                this.drawWarehouse();
+                TimeSpan elapsed6 = DateTime.Now - start5;
+                labelTotalLocations.Text = "Total Locations: " + mywh.totalNumberOfLocations().ToString();
+                labelTotalAisles.Text = "Total Aisles: " + mywh.totalNumberOfAisles().ToString();
+                DateTime start7 = DateTime.Now;
+                int allocationmethod = 0;
+                if (checkBoxStraightAllocation.Checked) allocationmethod = 1;
+                al = new allocation(Convert.ToInt32(textBoxAllocationSeed.Text));
+                int warehouseareafit = al.allocateSKUs(mywh.getSKUs(), mywh, allocationmethod);
+                TimeSpan elapsed7 = DateTime.Now - start6;
+                if (warehouseareafit < 0) { textBoxNeighbors.AppendText("Insufficient space\n"); return; }
+                else if (warehouseareafit > 0) { textBoxNeighbors.AppendText("Too many empty locations\n"); return; };
+
+                //al.randomized(myskus);
+                mywh.setOrders(this.myorders);
+                //mywh.randomizeOrders();
+                double totalcost = 0;
+                int samplesize = Convert.ToInt32(textBoxSampleSize.Text);
+                //If you want to solve it on this computer
+                DateTime start8 = DateTime.Now;
+                if (!mywh.usevisibilitygraph)
+                {
+                    if (comboBoxComputing.SelectedIndex == 0)
+                    {
+                        var sums = new ConcurrentBag<double>();
+                        var sums2 = new ConcurrentBag<int>();
+                        var sums3 = new ConcurrentBag<int>();
+                        bool TSPConcorde = false;
+                        if (checkBoxTSP.Checked) TSPConcorde = true;
+
+                        Parallel.For(0, samplesize, k =>
+                        //for (int k = 0; k < samplesize; k++)
+                        {
+                            warehouse tmpwh = mywh;
+                            List<order> tmporders = mywh.getOrders();
+                            routing rt = new routing();
+                            //totalcost += rt.tsp(tmpwh, tmporders[k]);
+                            double tourcost = 0;
+                            bool LKHdoneonce = false;
+                            while (tourcost == 0)
+                            {
+                                if (TSPConcorde || LKHdoneonce)
+                                {
+                                    tourcost = rt.tspOptSteiner(tmpwh, tmporders[k], k);
+                                    if (tourcost == 0) break;//This means that tour cost is really zero
+                                }
+                                else
+                                {
+                                    tourcost = rt.tspLKHSteiner(tmpwh, tmporders[k], k);
+                                    LKHdoneonce = true;
+                                }
+                            }
+                            sums.Add(tourcost);
+                            sums2.Add(tmporders[k].getOrderSize());
+                            sums3.Add(tmporders[k].getOrderID());
+                        });
+
+                        //Excel csv export (optional)
+                        if (checkBoxExport.Checked)
+                        {
+                            csvexport myexcel = new csvexport();
+                            for (int i = 0; i < sums.Count; i++)
+                            {
+                                myexcel.addRow();
+                                myexcel["tourcost"] = sums.ElementAt(i).ToString();
+                                myexcel["toursize"] = sums2.ElementAt(i).ToString();
+                                myexcel["orderid"] = sums3.ElementAt(i).ToString();
+                            }
+                            myexcel.exportToFile("export.csv");
+                        }
+                        totalcost = sums.Sum() / samplesize;
+                    }
+                    //If you want to solve it using distributed computing
+                    else if (comboBoxComputing.SelectedIndex == 1)
+                    {
+                        bool TSPConcorde = false;
+                        if (checkBoxTSP.Checked) TSPConcorde = true;
+                        if (TSPConcorde)
+                        {
+                            socketservers mysocketservers = new socketservers();
+                            mysocketservers.checkAvailableConcordeServers();
+                            routing rt = new routing();
+                            totalcost = rt.tspOptNetSteiner(mywh, samplesize, mysocketservers, comboBoxNetSchedule.SelectedIndex);
+                        }
+                        else
+                        {
+                            socketservers mysocketservers = new socketservers();
+                            mysocketservers.checkAvailableConcordeServers();
+                            routing rt = new routing();
+                            totalcost = rt.tspLKHNetSteiner(mywh, samplesize, mysocketservers, comboBoxNetSchedule.SelectedIndex);
+                        }
+                    }
+                    else
+                    {
+                        var sums = new ConcurrentBag<double>();
+                        var sums2 = new ConcurrentBag<int>();
+                        var sums3 = new ConcurrentBag<int>();
+                        bool TSPConcorde = false;
+                        if (checkBoxTSP.Checked) TSPConcorde = true;
+
+                        //Parallel.For(0, samplesize, k =>
+                        for (int k = 0; k < samplesize; k++)
+                        {
+                            warehouse tmpwh = mywh;
+                            List<order> tmporders = mywh.getOrders();
+                            routing rt = new routing();
+                            //totalcost += rt.tsp(tmpwh, tmporders[k]);
+                            double tourcost = 0;
+                            bool LKHdoneonce = false;
+                            while (tourcost == 0)
+                            {
+                                if (TSPConcorde || LKHdoneonce)
+                                {
+                                    tourcost = rt.tspOptSteiner(tmpwh, tmporders[k], k);
+                                    if (tourcost == 0) break;//This means that tour cost is really zero
+                                }
+                                else
+                                {
+                                    tourcost = rt.tspLKHSteiner(tmpwh, tmporders[k], k);
+                                    LKHdoneonce = true;
+                                }
+                            }
+                            sums.Add(tourcost);
+                            sums2.Add(tmporders[k].getOrderSize());
+                            sums3.Add(tmporders[k].getOrderID());
+                        };
+
+                        //Excel csv export (optional)
+                        if (checkBoxExport.Checked)
+                        {
+                            csvexport myexcel = new csvexport();
+                            for (int i = 0; i < sums.Count; i++)
+                            {
+                                myexcel.addRow();
+                                myexcel["tourcost"] = sums.ElementAt(i).ToString();
+                                myexcel["toursize"] = sums2.ElementAt(i).ToString();
+                                myexcel["orderid"] = sums3.ElementAt(i).ToString();
+                            }
+                            myexcel.exportToFile("export.csv");
+                        }
+                        totalcost = sums.Sum() / samplesize;
                     }
                 }
                 else
                 {
-                    var sums = new ConcurrentBag<double>();
-                    var sums2 = new ConcurrentBag<int>();
-                    var sums3 = new ConcurrentBag<int>();
-                    string routingSolver = comboBoxRouting.GetItemText(comboBoxRouting.SelectedItem);
-
-                    //Parallel.For(0, samplesize, k =>
-                    for (int k = 0; k < samplesize; k++)
+                    if (comboBoxComputing.SelectedIndex == 0)
                     {
-                        warehouse tmpwh = mywh;
-                        List<order> tmporders = mywh.getOrders();
-                        routing rt = new routing();
-                        //totalcost += rt.tsp(tmpwh, tmporders[k]);
-                        double tourcost = 0;
-                        bool LKHdoneonce = false;
-                        while (tourcost == 0)
-                        {
-                            if (routingSolver == "Concorde" || LKHdoneonce)
-                            {
-                                tourcost = rt.tspOptSteiner(tmpwh, tmporders[k], k);
-                                if (tourcost == 0) break;//This means that tour cost is really zero
-                            }
-                            else if (routingSolver == "LKH")
-                            {
-                                tourcost = rt.tspLKHSteiner(tmpwh, tmporders[k], k);
-                                LKHdoneonce = true;
-                            }
-                            else if (routingSolver == "2-Opt")
-                            {
-                                tourcost = rt.tsp2OPTSteiner(tmpwh, tmporders[k], k);
-                                if (tourcost == 0) break;//This means that tour cost is really zero
-                            }
-                        }
-                        sums.Add(tourcost);
-                        sums2.Add(tmporders[k].getOrderSize());
-                        sums3.Add(tmporders[k].getOrderID());
-                    };
+                        var sums = new ConcurrentBag<double>();
+                        var sums2 = new ConcurrentBag<int>();
+                        var sums3 = new ConcurrentBag<int>();
+                        bool TSPConcorde = false;
+                        if (checkBoxTSP.Checked) TSPConcorde = true;
 
-                    //Excel csv export (optional)
-                    if (checkBoxExport.Checked)
-                    {
-                        csvexport myexcel = new csvexport();
-                        for (int i = 0; i < sums.Count; i++)
+                        Parallel.For(0, samplesize, k =>
+                        //for (int k = 0; k < samplesize; k++)
                         {
-                            myexcel.addRow();
-                            myexcel["tourcost"] = sums.ElementAt(i).ToString();
-                            myexcel["toursize"] = sums2.ElementAt(i).ToString();
-                            myexcel["orderid"] = sums3.ElementAt(i).ToString();
+                            warehouse tmpwh = mywh;
+                            List<order> tmporders = mywh.getOrders();
+                            routing rt = new routing();
+                            //totalcost += rt.tsp(tmpwh, tmporders[k]);
+                            double tourcost = 0;
+                            bool LKHdoneonce = false;
+                            while (tourcost == 0)
+                            {
+                                if (TSPConcorde || LKHdoneonce)
+                                {
+                                    tourcost = rt.tspOptVisibility(tmpwh, tmporders[k], k);
+                                    if (tourcost == 0) break;//This means that tour cost is really zero
+                                }
+                                else
+                                {
+                                    tourcost = rt.tspLKHVisibility(tmpwh, tmporders[k], k);
+                                    LKHdoneonce = true;
+                                }
+                            }
+                            sums.Add(tourcost);
+                            sums2.Add(tmporders[k].getOrderSize());
+                            sums3.Add(tmporders[k].getOrderID());
+                        });
+
+                        //Excel csv export (optional)
+                        if (checkBoxExport.Checked)
+                        {
+                            csvexport myexcel = new csvexport();
+                            for (int i = 0; i < sums.Count; i++)
+                            {
+                                myexcel.addRow();
+                                myexcel["tourcost"] = sums.ElementAt(i).ToString();
+                                myexcel["toursize"] = sums2.ElementAt(i).ToString();
+                                myexcel["orderid"] = sums3.ElementAt(i).ToString();
+                            }
+                            myexcel.exportToFile("export.csv");
                         }
-                        myexcel.exportToFile("export.csv");
+                        totalcost = sums.Sum() / samplesize;
                     }
-                    totalcost = sums.Sum() / samplesize;
+                    //If you want to solve it using distributed computing
+                    else if (comboBoxComputing.SelectedIndex == 1)
+                    {
+                        bool TSPConcorde = false;
+                        if (checkBoxTSP.Checked) TSPConcorde = true;
+                        if (TSPConcorde)
+                        {
+                            socketservers mysocketservers = new socketservers();
+                            mysocketservers.checkAvailableConcordeServers();
+                            routing rt = new routing();
+                            totalcost = rt.tspOptNetVisibility(mywh, samplesize, mysocketservers, comboBoxNetSchedule.SelectedIndex);
+                        }
+                        else
+                        {
+                            socketservers mysocketservers = new socketservers();
+                            mysocketservers.checkAvailableConcordeServers();
+                            routing rt = new routing();
+                            totalcost = rt.tspLKHNetVisibility(mywh, samplesize, mysocketservers, comboBoxNetSchedule.SelectedIndex);
+                        }
+                    }
+                    else
+                    {
+                        var sums = new ConcurrentBag<double>();
+                        var sums2 = new ConcurrentBag<int>();
+                        var sums3 = new ConcurrentBag<int>();
+                        bool TSPConcorde = false;
+                        if (checkBoxTSP.Checked) TSPConcorde = true;
+
+                        //Parallel.For(0, samplesize, k =>
+                        for (int k = 0; k < samplesize; k++)
+                        {
+                            warehouse tmpwh = mywh;
+                            List<order> tmporders = mywh.getOrders();
+                            routing rt = new routing();
+                            //totalcost += rt.tsp(tmpwh, tmporders[k]);
+                            double tourcost = 0;
+                            bool LKHdoneonce = false;
+                            while (tourcost == 0)
+                            {
+                                if (TSPConcorde || LKHdoneonce)
+                                {
+                                    tourcost = rt.tspOptVisibility(tmpwh, tmporders[k], k);
+                                    if (tourcost == 0) break;//This means that tour cost is really zero
+                                }
+                                else
+                                {
+                                    tourcost = rt.tspLKHVisibility(tmpwh, tmporders[k], k);
+                                    LKHdoneonce = true;
+                                }
+                            }
+                            sums.Add(tourcost);
+                            sums2.Add(tmporders[k].getOrderSize());
+                            sums3.Add(tmporders[k].getOrderID());
+                        };
+
+                        //Excel csv export (optional)
+                        if (checkBoxExport.Checked)
+                        {
+                            csvexport myexcel = new csvexport();
+                            for (int i = 0; i < sums.Count; i++)
+                            {
+                                myexcel.addRow();
+                                myexcel["tourcost"] = sums.ElementAt(i).ToString();
+                                myexcel["toursize"] = sums2.ElementAt(i).ToString();
+                                myexcel["orderid"] = sums3.ElementAt(i).ToString();
+                            }
+                            myexcel.exportToFile("export.csv");
+                        }
+                        totalcost = sums.Sum() / samplesize;
+                    }
                 }
-            }
-            else
-            {
-                if (comboBoxComputing.SelectedIndex == 0)
+                TimeSpan elapsed8 = DateTime.Now - start7;
+
+                labelDistanceOutput.Text = "Average Distance: " + totalcost.ToString("0.0");
+                //labelDistanceOutput.Text = "Average Distance: " + mywh.averageTotalDistancePerLocation().ToString();
+                //labelDistanceOutput.Text = "Average Distance: " + mywh.averageDistancetoPDPerLocation().ToString();
+                panelDrawing.BackgroundImage = myBitmap;
+                //Delete everything in the panel and refresh
+                panelDrawing.Refresh();
+                //graphicsObj.Dispose();
+                textBoxRegions.Text = "";
+                for (int i = 0; i < mywh.regionedges.Count; i++)
                 {
-                    var sums = new ConcurrentBag<double>();
-                    var sums2 = new ConcurrentBag<int>();
-                    var sums3 = new ConcurrentBag<int>();
-                    string routingSolver = comboBoxRouting.GetItemText(comboBoxRouting.SelectedItem);
-
-                    Parallel.For(0, samplesize, k =>
-                    //for (int k = 0; k < samplesize; k++)
-                    {
-                        warehouse tmpwh = mywh;
-                        List<order> tmporders = mywh.getOrders();
-                        routing rt = new routing();
-                        //totalcost += rt.tsp(tmpwh, tmporders[k]);
-                        double tourcost = 0;
-                        bool LKHdoneonce = false;
-                        while (tourcost == 0)
-                        {
-                            if (routingSolver == "Concorde" || LKHdoneonce)
-                            {
-                                tourcost = rt.tspOptVisibility(tmpwh, tmporders[k], k);
-                                if (tourcost == 0) break;//This means that tour cost is really zero
-                            }
-                            else if (routingSolver == "LKH")
-                            {
-                                tourcost = rt.tspLKHVisibility(tmpwh, tmporders[k], k);
-                                LKHdoneonce = true;
-                            }
-                            else if (routingSolver == "2-Opt")
-                            {
-                                tourcost = rt.tsp2OPTVisibility(tmpwh, tmporders[k], k);
-                                if (tourcost == 0) break;//This means that tour cost is really zero
-                            }
-                        }
-                        sums.Add(tourcost);
-                        sums2.Add(tmporders[k].getOrderSize());
-                        sums3.Add(tmporders[k].getOrderID());
-                    });
-
-                    //Excel csv export (optional)
-                    if (checkBoxExport.Checked)
-                    {
-                        csvexport myexcel = new csvexport();
-                        for (int i = 0; i < sums.Count; i++)
-                        {
-                            myexcel.addRow();
-                            myexcel["tourcost"] = sums.ElementAt(i).ToString();
-                            myexcel["toursize"] = sums2.ElementAt(i).ToString();
-                            myexcel["orderid"] = sums3.ElementAt(i).ToString();
-                        }
-                        myexcel.exportToFile("export.csv");
-                    }
-                    totalcost = sums.Sum() / samplesize;
+                    textBoxRegions.AppendText(
+                        visualmath.calculateAngle(mywh.regionedges[i].getStart().getX(), mywh.regionedges[i].getStart().getY(), mywh.regionedges[i].getEnd().getX(), mywh.regionedges[i].getEnd().getY()).ToString() + "\t" +
+                        mywh.regionedges[i].id.ToString() + "\t" +
+                        mywh.regionedges[i].getStart().id.ToString() + "\t" +
+                        mywh.regionedges[i].getStart().getX().ToString() + "\t" +
+                        mywh.regionedges[i].getStart().getY().ToString() + "\t" +
+                        mywh.regionedges[i].getEnd().id.ToString() + "\t" +
+                        mywh.regionedges[i].getEnd().getX().ToString() + "\t" +
+                        mywh.regionedges[i].getEnd().getY().ToString() + "\n");
                 }
-                //If you want to solve it using distributed computing
-                else if (comboBoxComputing.SelectedIndex == 1)
+                textBoxNeighbors.Text = "";
+                for (int i = 0; i < mywh.regions.Count; i++)
                 {
-                    string routingSolver = comboBoxRouting.GetItemText(comboBoxRouting.SelectedItem);
-                    if (routingSolver == "Concorde")
+                    textBoxNeighbors.AppendText("Region" + mywh.regions[i].getRegionID().ToString() + ":\t");
+                    for (int j = 0; j < mywh.regions[i].regionedges.Count; j++)
                     {
-                        socketservers mysocketservers = new socketservers();
-                        mysocketservers.checkAvailableConcordeServers();
-                        routing rt = new routing();
-                        totalcost = rt.tspOptNetVisibility(mywh, samplesize, mysocketservers, comboBoxNetSchedule.SelectedIndex);
+                        textBoxNeighbors.AppendText(mywh.regions[i].regionedges[j].id.ToString() + " ");
                     }
-                    else if (routingSolver == "LKH")
-                    {
-                        socketservers mysocketservers = new socketservers();
-                        mysocketservers.checkAvailableConcordeServers();
-                        routing rt = new routing();
-                        totalcost = rt.tspLKHNetVisibility(mywh, samplesize, mysocketservers, comboBoxNetSchedule.SelectedIndex);
-                    }
+                    textBoxNeighbors.AppendText("\n");
                 }
-                else
-                {
-                    var sums = new ConcurrentBag<double>();
-                    var sums2 = new ConcurrentBag<int>();
-                    var sums3 = new ConcurrentBag<int>();
-                    string routingSolver = comboBoxRouting.GetItemText(comboBoxRouting.SelectedItem);
-
-                    //Parallel.For(0, samplesize, k =>
-                    for (int k = 0; k < samplesize; k++)
-                    {
-                        warehouse tmpwh = mywh;
-                        List<order> tmporders = mywh.getOrders();
-                        routing rt = new routing();
-                        //totalcost += rt.tsp(tmpwh, tmporders[k]);
-                        double tourcost = 0;
-                        bool LKHdoneonce = false;
-                        while (tourcost == 0)
-                        {
-                            if (routingSolver == "Concorde" || LKHdoneonce)
-                            {
-                                tourcost = rt.tspOptVisibility(tmpwh, tmporders[k], k);
-                                if (tourcost == 0) break;//This means that tour cost is really zero
-                            }
-                            else if (routingSolver == "LKH")
-                            {
-                                tourcost = rt.tspLKHVisibility(tmpwh, tmporders[k], k);
-                                LKHdoneonce = true;
-                            }
-                            else if (routingSolver == "2-Opt")
-                            {
-                                tourcost = rt.tsp2OPTVisibility(tmpwh, tmporders[k], k);
-                                if (tourcost == 0) break;//This means that tour cost is really zero
-                            }
-                        }
-                        sums.Add(tourcost);
-                        sums2.Add(tmporders[k].getOrderSize());
-                        sums3.Add(tmporders[k].getOrderID());
-                    };
-
-                    //Excel csv export (optional)
-                    if (checkBoxExport.Checked)
-                    {
-                        csvexport myexcel = new csvexport();
-                        for (int i = 0; i < sums.Count; i++)
-                        {
-                            myexcel.addRow();
-                            myexcel["tourcost"] = sums.ElementAt(i).ToString();
-                            myexcel["toursize"] = sums2.ElementAt(i).ToString();
-                            myexcel["orderid"] = sums3.ElementAt(i).ToString();
-                        }
-                        myexcel.exportToFile("export.csv");
-                    }
-                    totalcost = sums.Sum() / samplesize;
-                }
+                TimeSpan elapsed = DateTime.Now - start;
+                textBoxNeighbors.AppendText("Create Single:" + elapsed1.ToString() + "\n");
+                textBoxNeighbors.AppendText("Important Node Shortest Dist:" + elapsed2.ToString() + "\n");
+                textBoxNeighbors.AppendText("Shortest Path Distances to Locations:" + elapsed3.ToString() + "\n");
+                textBoxNeighbors.AppendText("Shortest Path Distances Create:" + elapsed4.ToString() + "\n");
+                textBoxNeighbors.AppendText("Coloring:" + elapsed5.ToString() + "\n");
+                textBoxNeighbors.AppendText("Drawing:" + elapsed6.ToString() + "\n");
+                textBoxNeighbors.AppendText("Allocation:" + elapsed7.ToString() + "\n");
+                textBoxNeighbors.AppendText("TSP:" + elapsed8.ToString() + "\n");
+                textBoxNeighbors.AppendText("createPolygonsandGraphNodes" + elapsed9.ToString() + "\n");
+                if(mywh.usevisibilitygraph) textBoxNeighbors.AppendText("graphNodes: " + mywh.graphnodes.Count().ToString() + "\n");
+                textBoxNeighbors.AppendText("createVisibilityGraph:" + elapsed10.ToString() + "\n");
+                textBoxNeighbors.AppendText("fillGraphNodeDistances:" + elapsed11.ToString() + "\n");
+                textBoxNeighbors.AppendText("Total time:" + elapsed.ToString() + "\n");
+                textBoxNeighbors.AppendText("Total time (ms):" + elapsed.TotalMilliseconds.ToString() + "\n");
             }
-            TimeSpan elapsed8 = DateTime.Now - start7;
-
-            labelDistanceOutput.Text = "Average Distance: " + totalcost.ToString("0.0");
-            //labelDistanceOutput.Text = "Average Distance: " + mywh.averageTotalDistancePerLocation().ToString();
-            //labelDistanceOutput.Text = "Average Distance: " + mywh.averageDistancetoPDPerLocation().ToString();
-            panelDrawing.BackgroundImage = myBitmap;
-            //Delete everything in the panel and refresh
-            panelDrawing.Refresh();
-            //graphicsObj.Dispose();
-            textBoxRegions.Text = "";
-            for (int i = 0; i < mywh.regionedges.Count; i++)
-            {
-                textBoxRegions.AppendText(
-                    visualmath.calculateAngle(mywh.regionedges[i].getStart().getX(), mywh.regionedges[i].getStart().getY(), mywh.regionedges[i].getEnd().getX(), mywh.regionedges[i].getEnd().getY()).ToString() + "\t" +
-                    mywh.regionedges[i].id.ToString() + "\t" +
-                    mywh.regionedges[i].getStart().id.ToString() + "\t" +
-                    mywh.regionedges[i].getStart().getX().ToString() + "\t" +
-                    mywh.regionedges[i].getStart().getY().ToString() + "\t" +
-                    mywh.regionedges[i].getEnd().id.ToString() + "\t" +
-                    mywh.regionedges[i].getEnd().getX().ToString() + "\t" +
-                    mywh.regionedges[i].getEnd().getY().ToString() + "\n");
-            }
-            textBoxNeighbors.Text = "";
-            for (int i = 0; i < mywh.regions.Count; i++)
-            {
-                textBoxNeighbors.AppendText("Region" + mywh.regions[i].getRegionID().ToString() + ":\t");
-                for (int j = 0; j < mywh.regions[i].regionedges.Count; j++)
-                {
-                    textBoxNeighbors.AppendText(mywh.regions[i].regionedges[j].id.ToString() + " ");
-                }
-                textBoxNeighbors.AppendText("\n");
-            }
-            TimeSpan elapsed = DateTime.Now - start;
-            textBoxNeighbors.AppendText("Create Single:" + elapsed1.ToString() + "\n");
-            textBoxNeighbors.AppendText("Important Node Shortest Dist:" + elapsed2.ToString() + "\n");
-            textBoxNeighbors.AppendText("Shortest Path Distances to Locations:" + elapsed3.ToString() + "\n");
-            textBoxNeighbors.AppendText("Shortest Path Distances Create:" + elapsed4.ToString() + "\n");
-            textBoxNeighbors.AppendText("Coloring:" + elapsed5.ToString() + "\n");
-            textBoxNeighbors.AppendText("Drawing:" + elapsed6.ToString() + "\n");
-            textBoxNeighbors.AppendText("Allocation:" + elapsed7.ToString() + "\n");
-            textBoxNeighbors.AppendText("TSP:" + elapsed8.ToString() + "\n");
-            textBoxNeighbors.AppendText("createPolygonsandGraphNodes" + elapsed9.ToString() + "\n");
-            if (mywh.usevisibilitygraph) textBoxNeighbors.AppendText("graphNodes: " + mywh.graphnodes.Count().ToString() + "\n");
-            textBoxNeighbors.AppendText("createVisibilityGraph:" + elapsed10.ToString() + "\n");
-            textBoxNeighbors.AppendText("fillGraphNodeDistances:" + elapsed11.ToString() + "\n");
-            textBoxNeighbors.AppendText("Total time:" + elapsed.ToString() + "\n");
-            textBoxNeighbors.AppendText("Total time (ms):" + elapsed.TotalMilliseconds.ToString() + "\n");
         }
 
         /// <summary>
@@ -600,11 +1175,11 @@ namespace GABAK
             for (int i = 0; i < mywh.regionedges.Count; i++)
             {
                 mypen.Color = System.Drawing.Color.Black;
-                mypen.Width = 1 * m;
-                graphicsObj.DrawEllipse(mypen, (float)mywh.regionedges[i].getStart().getX() * m - m / 2, (float)mywh.regionedges[i].getStart().getY() * m - m / 2, m, m);
-                mysvg.addCircle((float)mywh.regionedges[i].getStart().getX() * m, (float)mywh.regionedges[i].getStart().getY() * m, m, mypen.Width, mypen.Color);
-                graphicsObj.DrawEllipse(mypen, (float)mywh.regionedges[i].getEnd().getX() * m - m / 2, (float)mywh.regionedges[i].getEnd().getY() * m - m / 2, m, m);
-                mysvg.addCircle((float)mywh.regionedges[i].getEnd().getX() * m, (float)mywh.regionedges[i].getEnd().getY() * m, m, mypen.Width, mypen.Color);
+                mypen.Width = 2 * m;
+                graphicsObj.DrawEllipse(mypen, ((float)mywh.regionedges[i].getStart().getX() - 1) * m, ((float)mywh.regionedges[i].getStart().getY() - 1) * m, m, m);
+                mysvg.addCircle(((float)mywh.regionedges[i].getStart().getX() - 1) * m, ((float)mywh.regionedges[i].getStart().getY() - 1) * m, m, mypen.Width, mypen.Color);
+                graphicsObj.DrawEllipse(mypen, ((float)mywh.regionedges[i].getEnd().getX() - 1) * m, ((float)mywh.regionedges[i].getEnd().getY() - 1) * m, m, m);
+                mysvg.addCircle(((float)mywh.regionedges[i].getEnd().getX() - 1) * m, ((float)mywh.regionedges[i].getEnd().getY() - 1) * m, m, mypen.Width, mypen.Color);
                 //mypen.Color = Color.Gray;
                 //mypen.Width = (float)mywh.regionedges[i].width * m;
                 //graphicsObj.DrawLine(mypen, (float)mywh.regionedges[i].getStart().getX() * m, (float)mywh.regionedges[i].getStart().getY() * m, (float)mywh.regionedges[i].getEnd().getX() * m, (float)mywh.regionedges[i].getEnd().getY() * m);
@@ -621,9 +1196,9 @@ namespace GABAK
             for (int i = 0; i < mywh.pdnodes.Count; i++)
             {
                 mypen.Color = Color.Black;
-                mypen.Width = 1 * m;
-                graphicsObj.DrawEllipse(mypen, (float)mywh.pdnodes[i].getX() * m - m / 2, (float)mywh.pdnodes[i].getY() * m - m / 2, m, m);
-                mysvg.addCircle((float)mywh.pdnodes[i].getX() * m, (float)mywh.pdnodes[i].getY() * m, m, mypen.Width, mypen.Color);
+                mypen.Width = 2 * m;
+                graphicsObj.DrawEllipse(mypen, ((float)mywh.pdnodes[i].getX() - 1) * m, ((float)mywh.pdnodes[i].getY() - 1) * m, m, m);
+                mysvg.addCircle(((float)mywh.pdnodes[i].getX() - 1) * m, ((float)mywh.pdnodes[i].getY() - 1) * m, m, mypen.Width, mypen.Color);
             }
         }
 
@@ -638,7 +1213,7 @@ namespace GABAK
                     if (mywh.connectivity[i, j])
                     {
                         mypen.Color = Color.Black;
-                        mypen.Width = (float)m / 10;
+                        mypen.Width = (float)m/10;
                         graphicsObj.DrawLine(mypen, (float)mywh.graphnodes[i].getX() * m, (float)mywh.graphnodes[i].getY() * m, (float)mywh.graphnodes[j].getX() * m, (float)mywh.graphnodes[j].getY() * m);
                         mycounter++;
                     }
@@ -654,28 +1229,20 @@ namespace GABAK
         {
             for (int i = 0; i < mywh.regions.Count; i++)
             {
-                //Add region to Ardesign
-                //Clear ARDesign content
-                myardesign.addRegion(mywh.regions[i].angle);
                 for (int j = 0; j < mywh.regions[i].pickingaisleedges.Count; j++)
                 {
                     //mypen.Color = System.Drawing.Color.LightGray;
                     //mypen.Width = (float)mywh.regions[i].pickingaisleedges[j].width * m;
                     //graphicsObj.DrawLine(mypen, (float)mywh.regions[i].pickingaisleedges[j].getStart().getX() * m, (float)mywh.regions[i].pickingaisleedges[j].getStart().getY() * m, (float)mywh.regions[i].pickingaisleedges[j].getEnd().getX() * m, (float)mywh.regions[i].pickingaisleedges[j].getEnd().getY() * m);
                     //mypen.Color = System.Drawing.Color.Black;
-                    //mypen.Width = 1 * m;
-                    //graphicsObj.DrawEllipse(mypen, (float)mywh.regions[i].pickingaisleedges[j].getStart().getX() * m - m / 2, (float)mywh.regions[i].pickingaisleedges[j].getStart().getY() * m - m / 2, m, m);
-                    //mysvg.addCircle((float)mywh.regions[i].pickingaisleedges[j].getStart().getX() * m, (float)mywh.regions[i].pickingaisleedges[j].getStart().getY() * m, m, mypen.Width, mypen.Color);
-                    //graphicsObj.DrawEllipse(mypen, (float)mywh.regions[i].pickingaisleedges[j].getEnd().getX() * m - m / 2, (float)mywh.regions[i].pickingaisleedges[j].getEnd().getY() * m - m / 2 , m, m);
-                    //mysvg.addCircle((float)mywh.regions[i].pickingaisleedges[j].getEnd().getX() * m, (float)mywh.regions[i].pickingaisleedges[j].getEnd().getY() * m, m, mypen.Width, mypen.Color);
+                    //mypen.Width = 2 * m;
+                    //graphicsObj.DrawEllipse(mypen, ((float)mywh.regions[i].pickingaisleedges[j].getStart().getX() - 1) * m, ((float)mywh.regions[i].pickingaisleedges[j].getStart().getY() - 1) * m, m, m);
+                    //graphicsObj.DrawEllipse(mypen, ((float)mywh.regions[i].pickingaisleedges[j].getEnd().getX() - 1) * m, ((float)mywh.regions[i].pickingaisleedges[j].getEnd().getY() - 1) * m, m, m);
                     //mypen.Color = System.Drawing.Color.Black;
                     //mypen.Width = m;
                     //graphicsObj.DrawLine(mypen, (float)mywh.regions[i].pickingaisleedges[j].getStart().getX() * m, (float)mywh.regions[i].pickingaisleedges[j].getStart().getY() * m, (float)mywh.regions[i].pickingaisleedges[j].getEnd().getX() * m, (float)mywh.regions[i].pickingaisleedges[j].getEnd().getY() * m);
-                    //mysvg.addLine((float)mywh.regions[i].pickingaisleedges[j].getStart().getX() * m, (float)mywh.regions[i].pickingaisleedges[j].getStart().getY() * m, (float)mywh.regions[i].pickingaisleedges[j].getEnd().getX() * m, (float)mywh.regions[i].pickingaisleedges[j].getEnd().getY() * m, mypen.Width, mypen.Color);
                     drawPickingAisleLocations(mywh.regions[i].pickingaisleedges[j]);
                 }
-                //Close region tag in ardesign
-                myardesign.closeRegion();
             }
         }
 
@@ -684,16 +1251,16 @@ namespace GABAK
         /// </summary>
         /// <param name="p_pickingaisle">Picking Aisle</param>
         private void drawPickingAisleLocations(edge p_pickingaisleedge)
-        {
+        {   
             for (int i = 0; i < p_pickingaisleedge.getOnEdgeNodes().Count; i++)
             {
                 int wavelength = 700 - Convert.ToInt32((Convert.ToDouble(p_pickingaisleedge.getOnEdgeNodes()[i].color + 1) / Convert.ToDouble(options.numbercolors)) * 320);
                 mypen.Color = getColorFromWaveLength(wavelength);
                 //Set to black
                 if (options.numbercolors == 1) mypen.Color = Color.Black;
-                //mypen.Width = 1 * m;
+                mypen.Width = 2 * m;
                 //mypen.Alignment = PenAlignment.Center;
-                //graphicsObj.DrawEllipse(mypen, ((float)p_pickingaisleedge.getOnEdgeNodes()[i].getX()) * m - m / 2, (float)p_pickingaisleedge.getOnEdgeNodes()[i].getY() * m - m / 2, m, m);
+                //graphicsObj.DrawEllipse(mypen, (float)p_pickingaisleedge.getOnEdgeNodes()[i].getX() * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].getY() * m, m, m);
                 //mysvg.addCircle((float)p_pickingaisleedge.getOnEdgeNodes()[i].getX() * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].getY() * m, m, mypen.Width, mypen.Color);
                 //pickingaislecoordinates.Add(p_pickingaisleedge.getOnEdgeNodes()[i].getX().ToString() + "\t" + p_pickingaisleedge.getOnEdgeNodes()[i].getY().ToString());
                 //using (System.IO.StreamWriter file =
@@ -714,18 +1281,6 @@ namespace GABAK
                     mysvg.addLine((float)p_pickingaisleedge.getOnEdgeNodes()[i].s1.X2 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s1.Y2, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s1.X4 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s1.Y4 * m, mypen.Width, mypen.Color);
                     mysvg.addLine((float)p_pickingaisleedge.getOnEdgeNodes()[i].s1.X4 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s1.Y4, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s1.X3 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s1.Y3 * m, mypen.Width, mypen.Color);
                     mysvg.addLine((float)p_pickingaisleedge.getOnEdgeNodes()[i].s1.X3 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s1.Y3, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s1.X1 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s1.Y1 * m, mypen.Width, mypen.Color);
-                    //ARDesign writing
-                    //We calculate x and y coordinates using 4 X and 4 Y averages these X and Ys are the box edges so taking X and Y average will give us the box center
-                    double x = p_pickingaisleedge.getOnEdgeNodes()[i].s1.X1 + p_pickingaisleedge.getOnEdgeNodes()[i].s1.X2 + p_pickingaisleedge.getOnEdgeNodes()[i].s1.X3 + p_pickingaisleedge.getOnEdgeNodes()[i].s1.X4;
-                    x = x / 4 * m;
-                    double y = p_pickingaisleedge.getOnEdgeNodes()[i].s1.Y1 + p_pickingaisleedge.getOnEdgeNodes()[i].s1.Y2 + p_pickingaisleedge.getOnEdgeNodes()[i].s1.Y3 + p_pickingaisleedge.getOnEdgeNodes()[i].s1.Y4;
-                    y = y / 4 * m;
-                    //We make pd point as the starting point in ardesign
-                    //So when we start the camera in AR it starts from PD instead of top left corner which is 0,0 for GUI
-                    //But we want PD to act like 0,0 for ardesign
-                    x = x - mywh.pdnodes[0].getX();
-                    y = y - mywh.pdnodes[0].getY();
-                    myardesign.addStorageLocation(x, y, true);
                 }
                 if (p_pickingaisleedge.getOnEdgeNodes()[i].s2 != null)
                 {
@@ -738,18 +1293,6 @@ namespace GABAK
                     mysvg.addLine((float)p_pickingaisleedge.getOnEdgeNodes()[i].s2.X2 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s2.Y2, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s2.X4 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s2.Y4 * m, mypen.Width, mypen.Color);
                     mysvg.addLine((float)p_pickingaisleedge.getOnEdgeNodes()[i].s2.X4 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s2.Y4, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s2.X3 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s2.Y3 * m, mypen.Width, mypen.Color);
                     mysvg.addLine((float)p_pickingaisleedge.getOnEdgeNodes()[i].s2.X3 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s2.Y3, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s2.X1 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s2.Y1 * m, mypen.Width, mypen.Color);
-                    //ARDesign writing
-                    //We calculate x and y coordinates using 4 X and 4 Y averages these X and Ys are the box edges so taking X and Y average will give us the box center
-                    double x = p_pickingaisleedge.getOnEdgeNodes()[i].s2.X1 + p_pickingaisleedge.getOnEdgeNodes()[i].s2.X2 + p_pickingaisleedge.getOnEdgeNodes()[i].s2.X3 + p_pickingaisleedge.getOnEdgeNodes()[i].s2.X4;
-                    x = x / 4 * m;
-                    double y = p_pickingaisleedge.getOnEdgeNodes()[i].s2.Y1 + p_pickingaisleedge.getOnEdgeNodes()[i].s2.Y2 + p_pickingaisleedge.getOnEdgeNodes()[i].s2.Y3 + p_pickingaisleedge.getOnEdgeNodes()[i].s2.Y4;
-                    y = y / 4 * m;
-                    //We make pd point as the starting point in ardesign
-                    //So when we start the camera in AR it starts from PD instead of top left corner which is 0,0 for GUI
-                    //But we want PD to act like 0,0 for ardesign
-                    x = x - mywh.pdnodes[0].getX();
-                    y = y - mywh.pdnodes[0].getY();
-                    myardesign.addStorageLocation(x, y, false);
                 }
             }
         }
@@ -759,7 +1302,7 @@ namespace GABAK
             //List<string> polygoncoordinates = new List<string>();
             if (mywh.connectivity == null) return;
             //Do dash pattern for polygons
-            float[] dashValues = { 5, 2 };
+            float[] dashValues = { 5, 2};
             mypen.DashPattern = dashValues;
             mypen.Color = Color.Black;
             mypen.Width = m;
@@ -896,7 +1439,6 @@ namespace GABAK
                 case DialogResult.No:
                     e.Cancel = true;
                     break;
-
                 default:
                     break;
             }
@@ -922,7 +1464,7 @@ namespace GABAK
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
-            saveFileDialog1.Filter = "Png Image|*.png|Jpeg Image|*.jpg|Bitmap Image|*.bmp|Gif Image|*.gif|SVG Image|*.svg|AR Design File|*.ard";
+            saveFileDialog1.Filter = "Png Image (.png)|*.png|Jpeg Image|*.jpg|Bitmap Image|*.bmp|Gif Image|*.gif|SVG Image|*.svg";
             saveFileDialog1.Title = "Save an Image File";
             saveFileDialog1.ShowDialog();
             // If the file name is not an empty string open it for saving.
@@ -949,23 +1491,18 @@ namespace GABAK
                         myBitmap.Save(fs,
                            System.Drawing.Imaging.ImageFormat.Bmp);
                         break;
-
                     case 4:
                         myBitmap.Save(fs,
                            System.Drawing.Imaging.ImageFormat.Gif);
                         break;
-
                     case 5:
                         mysvg.save(fs);
-                        break;
-
-                    case 6:
-                        myardesign.save(fs);
                         break;
                 }
 
                 fs.Close();
             }
+            
         }
 
         public void saveBitmap(string fname)
@@ -1018,161 +1555,124 @@ namespace GABAK
             mypen.Alignment = PenAlignment.Center;
             //Clear SVG content
             mysvg = new svg(panelDrawing.Width, panelDrawing.Height);
-            //Clear ARDesign content
-            myardesign = new ardesign(mywh.getWidth(), mywh.getDepth(), mywh.pickinglocationwidth, mywh.pickinglocationdepth);
             //Draw created warehouse to panel
             this.drawWarehouse();
-            myardesign.closeWarehouse();
             panelDrawing.BackgroundImage = myBitmap;
             //Delete everything in the panel and refresh
             panelDrawing.Refresh();
             graphicsObj.Dispose();
         }
 
-        private async void buttonSolveES_Click(object sender, EventArgs e)
+        private void buttonSolveES_Click(object sender, EventArgs e)
         {
-            await Task.Run(() => solveES());
-            //solveES();
+            solveES();
         }
 
         private void solveES()
         {
-            //This try catch is used for thread safety so when you click SolveES button it does not throw cross-thread exception
-            try
+            //Used for auto conversion part if set to true then autoconversion works different way if set to false then it needs focus on text
+            solving = true;
+            //Set mywh object to null
+            mywh = null;
+            //Set Magnify factor
+            m = (float)Convert.ToDouble(textBoxMagnify.Text);
+            //Reset IDs
+            edge.nextID = 0;
+            region.nextID = 0;
+            node.nextID = 0;
+            //Create a new warehouse object
+            mywh = new warehouse();
+            //Set warehouse area
+            mywh.area = 60000.0;//We set it this way so it will always produce the same result with the same seed number in ES
+            //Set warehouse cross aisle width
+            mywh.crossaislewidth = Convert.ToDouble(textBoxCrossAisleWidth.Text);
+            //Set warehouse picking aisle width
+            mywh.pickingaislewidth = Convert.ToDouble(textBoxPickingAisleWidth.Text);
+            //Set warehouse picking location width
+            mywh.pickinglocationwidth = Convert.ToDouble(textBoxLWidth.Text);
+            //Set warehouse picking location depth
+            mywh.pickinglocationdepth = Convert.ToDouble(textBoxLDepth.Text);
+            //Set size of picker used for visibility graph
+            mywh.pickersize = Convert.ToDouble(textBoxPickerSize.Text);
+            //Set which graph will be used Steiner or Visibility Graph
+            mywh.usevisibilitygraph = checkBoxVisibilityGraph.Checked;
+            mywh.setSKUs(myskus);
+            mywh.setOrders(myorders);
+            mywh.avgTourLength = Convert.ToDouble(textBoxAvgOrderSize.Text);
+            //mywh.randomizeOrders();
+            //Set number of colors
+            options.numbercolors = Convert.ToInt32(textBoxNumberColors.Text);
+
+            int M, lambda, seed, iteration, counter;
+            double sigma, successrule;
+            M = Convert.ToInt32(textBoxMu.Text);
+            lambda = Convert.ToInt32(textBoxLambda.Text);
+            seed = Convert.ToInt32(textBoxESSeed.Text);
+            iteration = Convert.ToInt32(textBoxESIteration.Text);
+            sigma = Convert.ToDouble(textBoxSigma.Text);
+            counter = Convert.ToInt32(textBoxESCounter.Text);
+            successrule = Convert.ToDouble(textBoxESSuccessRule.Text);
+
+            options.lowerattempts = 0;
+            options.upperattempts = 0;
+            options.totalattempts = 0;
+
+            if (comboBoxDesignClass.SelectedItem.ToString() != "All")
             {
-                //Used for auto conversion part if set to true then autoconversion works different way if set to false then it needs focus on text
-                solving = true;
-                //Set mywh object to null
-                mywh = null;
-                //Set Magnify factor
-                m = (float)Convert.ToDouble(textBoxMagnify.Text);
-                //Reset IDs
-                edge.nextID = 0;
-                region.nextID = 0;
-                node.nextID = 0;
-                //Create a new warehouse object
-                mywh = new warehouse();
-                //Set warehouse area
-                mywh.area = 60000.0;//We set it this way so it will always produce the same result with the same seed number in ES
-                                    //Set warehouse cross aisle width
-                mywh.crossaislewidth = Convert.ToDouble(textBoxCrossAisleWidth.Text);
-                //Set warehouse picking aisle width
-                mywh.pickingaislewidth = Convert.ToDouble(textBoxPickingAisleWidth.Text);
-                //Set warehouse picking location width
-                mywh.pickinglocationwidth = Convert.ToDouble(textBoxLWidth.Text);
-                //Set warehouse picking location depth
-                mywh.pickinglocationdepth = Convert.ToDouble(textBoxLDepth.Text);
-                //Set size of picker used for visibility graph
-                mywh.pickersize = Convert.ToDouble(textBoxPickerSize.Text);
-                //Set which graph will be used Steiner or Visibility Graph
-                mywh.usevisibilitygraph = checkBoxVisibilityGraph.Checked;
-                mywh.setSKUs(myskus);
-                mywh.setOrders(myorders);
-                mywh.avgTourLength = Convert.ToDouble(textBoxAvgOrderSize.Text);
-                //mywh.randomizeOrders();
-                //Set number of colors
-                options.numbercolors = Convert.ToInt32(textBoxNumberColors.Text);
-
-                int M, lambda, seed, iteration, counter;
-                double sigma, successrule;
-                M = Convert.ToInt32(textBoxMu.Text);
-                lambda = Convert.ToInt32(textBoxLambda.Text);
-                seed = Convert.ToInt32(textBoxESSeed.Text);
-                iteration = Convert.ToInt32(textBoxESIteration.Text);
-                sigma = Convert.ToDouble(textBoxSigma.Text);
-                counter = Convert.ToInt32(textBoxESCounter.Text);
-                successrule = Convert.ToDouble(textBoxESSuccessRule.Text);
-
-                options.lowerattempts = 0;
-                options.upperattempts = 0;
-                options.totalattempts = 0;
-
                 double[] l = {   Convert.ToDouble(textBoxAspectRatioL.Text),
-                            Convert.ToDouble(textBoxE1L.Text),
-                            Convert.ToDouble(textBoxE2L.Text),
-                            Convert.ToDouble(textBoxE3L.Text),
-                            Convert.ToDouble(textBoxE4L.Text),
-                            Convert.ToDouble(textBoxI1XL.Text),
-                            Convert.ToDouble(textBoxI1YL.Text),
-                            Convert.ToDouble(textBoxPDL.Text),
-                            Convert.ToDouble(textBoxAngle1L.Text),
-                            Convert.ToDouble(textBoxAngle2L.Text),
-                            Convert.ToDouble(textBoxAngle3L.Text),
-                            Convert.ToDouble(textBoxAngle4L.Text),
-                            Convert.ToDouble(textBoxAngle5L.Text),
-                            Convert.ToDouble(textBoxAngle6L.Text),
-                            Convert.ToDouble(textBoxAngle7L.Text),
-                            Convert.ToDouble(textBoxAngle8L.Text),
-                            Convert.ToDouble(textBoxAdjuster1L.Text),
-                            Convert.ToDouble(textBoxAdjuster2L.Text),
-                            Convert.ToDouble(textBoxAdjuster3L.Text),
-                            Convert.ToDouble(textBoxAdjuster4L.Text),
-                            Convert.ToDouble(textBoxAdjuster5L.Text),
-                            Convert.ToDouble(textBoxAdjuster6L.Text),
-                            Convert.ToDouble(textBoxAdjuster7L.Text),
-                            Convert.ToDouble(textBoxAdjuster8L.Text),
-                            Convert.ToDouble(textBoxPickAdjuster1L.Text),
-                            Convert.ToDouble(textBoxPickAdjuster2L.Text),
-                            Convert.ToDouble(textBoxPickAdjuster3L.Text),
-                            Convert.ToDouble(textBoxPickAdjuster4L.Text),
-                            Convert.ToDouble(textBoxPickAdjuster5L.Text),
-                            Convert.ToDouble(textBoxPickAdjuster6L.Text),
-                            Convert.ToDouble(textBoxPickAdjuster7L.Text),
-                            Convert.ToDouble(textBoxPickAdjuster8L.Text),
-                            Convert.ToDouble(textBoxC12L.Text),
-                            Convert.ToDouble(textBoxC13L.Text),
-                            Convert.ToDouble(textBoxC14L.Text),
-                            Convert.ToDouble(textBoxC15L.Text),
-                            Convert.ToDouble(textBoxC23L.Text),
-                            Convert.ToDouble(textBoxC24L.Text),
-                            Convert.ToDouble(textBoxC25L.Text),
-                            Convert.ToDouble(textBoxC34L.Text),
-                            Convert.ToDouble(textBoxC35L.Text),
-                            Convert.ToDouble(textBoxC45L.Text)
-                        };
+                             Convert.ToDouble(textBoxE1L.Text),
+                             Convert.ToDouble(textBoxE2L.Text),
+                             Convert.ToDouble(textBoxE3L.Text),
+                             Convert.ToDouble(textBoxE4L.Text),
+                             Convert.ToDouble(textBoxI1XL.Text),
+                             Convert.ToDouble(textBoxI1YL.Text),
+                             Convert.ToDouble(textBoxPDL.Text),
+                             Convert.ToDouble(textBoxAngle1L.Text),
+                             Convert.ToDouble(textBoxAngle2L.Text),
+                             Convert.ToDouble(textBoxAngle3L.Text),
+                             Convert.ToDouble(textBoxAngle4L.Text),
+                             Convert.ToDouble(textBoxAngle5L.Text),
+                             Convert.ToDouble(textBoxAngle6L.Text),
+                             Convert.ToDouble(textBoxAdjuster1L.Text),
+                             Convert.ToDouble(textBoxAdjuster2L.Text),
+                             Convert.ToDouble(textBoxAdjuster3L.Text),
+                             Convert.ToDouble(textBoxAdjuster4L.Text),
+                             Convert.ToDouble(textBoxAdjuster5L.Text),
+                             Convert.ToDouble(textBoxAdjuster6L.Text),
+                             Convert.ToDouble(textBoxPickAdjuster1L.Text),
+                             Convert.ToDouble(textBoxPickAdjuster2L.Text),
+                             Convert.ToDouble(textBoxPickAdjuster3L.Text),
+                             Convert.ToDouble(textBoxPickAdjuster4L.Text),
+                             Convert.ToDouble(textBoxPickAdjuster5L.Text),
+                             Convert.ToDouble(textBoxPickAdjuster6L.Text)
+                         };
                 double[] u = {   Convert.ToDouble(textBoxAspectRatioU.Text),
-                            Convert.ToDouble(textBoxE1U.Text),
-                            Convert.ToDouble(textBoxE2U.Text),
-                            Convert.ToDouble(textBoxE3U.Text),
-                            Convert.ToDouble(textBoxE4U.Text),
-                            Convert.ToDouble(textBoxI1XU.Text),
-                            Convert.ToDouble(textBoxI1YU.Text),
-                            Convert.ToDouble(textBoxPDU.Text),
-                            Convert.ToDouble(textBoxAngle1U.Text),
-                            Convert.ToDouble(textBoxAngle2U.Text),
-                            Convert.ToDouble(textBoxAngle3U.Text),
-                            Convert.ToDouble(textBoxAngle4U.Text),
-                            Convert.ToDouble(textBoxAngle5U.Text),
-                            Convert.ToDouble(textBoxAngle6U.Text),
-                            Convert.ToDouble(textBoxAngle7U.Text),
-                            Convert.ToDouble(textBoxAngle8U.Text),
-                            Convert.ToDouble(textBoxAdjuster1U.Text),
-                            Convert.ToDouble(textBoxAdjuster2U.Text),
-                            Convert.ToDouble(textBoxAdjuster3U.Text),
-                            Convert.ToDouble(textBoxAdjuster4U.Text),
-                            Convert.ToDouble(textBoxAdjuster5U.Text),
-                            Convert.ToDouble(textBoxAdjuster6U.Text),
-                            Convert.ToDouble(textBoxAdjuster7U.Text),
-                            Convert.ToDouble(textBoxAdjuster8U.Text),
-                            Convert.ToDouble(textBoxPickAdjuster1U.Text),
-                            Convert.ToDouble(textBoxPickAdjuster2U.Text),
-                            Convert.ToDouble(textBoxPickAdjuster3U.Text),
-                            Convert.ToDouble(textBoxPickAdjuster4U.Text),
-                            Convert.ToDouble(textBoxPickAdjuster5U.Text),
-                            Convert.ToDouble(textBoxPickAdjuster6U.Text),
-                            Convert.ToDouble(textBoxPickAdjuster7U.Text),
-                            Convert.ToDouble(textBoxPickAdjuster8U.Text),
-                            Convert.ToDouble(textBoxC12U.Text),
-                            Convert.ToDouble(textBoxC13U.Text),
-                            Convert.ToDouble(textBoxC14U.Text),
-                            Convert.ToDouble(textBoxC15U.Text),
-                            Convert.ToDouble(textBoxC23U.Text),
-                            Convert.ToDouble(textBoxC24U.Text),
-                            Convert.ToDouble(textBoxC25U.Text),
-                            Convert.ToDouble(textBoxC34U.Text),
-                            Convert.ToDouble(textBoxC35U.Text),
-                            Convert.ToDouble(textBoxC45U.Text)
-                        };
+                             Convert.ToDouble(textBoxE1U.Text),
+                             Convert.ToDouble(textBoxE2U.Text),
+                             Convert.ToDouble(textBoxE3U.Text),
+                             Convert.ToDouble(textBoxE4U.Text),
+                             Convert.ToDouble(textBoxI1XU.Text),
+                             Convert.ToDouble(textBoxI1YU.Text),
+                             Convert.ToDouble(textBoxPDU.Text),
+                             Convert.ToDouble(textBoxAngle1U.Text),
+                             Convert.ToDouble(textBoxAngle2U.Text),
+                             Convert.ToDouble(textBoxAngle3U.Text),
+                             Convert.ToDouble(textBoxAngle4U.Text),
+                             Convert.ToDouble(textBoxAngle5U.Text),
+                             Convert.ToDouble(textBoxAngle6U.Text),
+                             Convert.ToDouble(textBoxAdjuster1U.Text),
+                             Convert.ToDouble(textBoxAdjuster2U.Text),
+                             Convert.ToDouble(textBoxAdjuster3U.Text),
+                             Convert.ToDouble(textBoxAdjuster4U.Text),
+                             Convert.ToDouble(textBoxAdjuster5U.Text),
+                             Convert.ToDouble(textBoxAdjuster6U.Text),
+                             Convert.ToDouble(textBoxPickAdjuster1U.Text),
+                             Convert.ToDouble(textBoxPickAdjuster2U.Text),
+                             Convert.ToDouble(textBoxPickAdjuster3U.Text),
+                             Convert.ToDouble(textBoxPickAdjuster4U.Text),
+                             Convert.ToDouble(textBoxPickAdjuster5U.Text),
+                             Convert.ToDouble(textBoxPickAdjuster6U.Text)
+                         };
 
                 DateTime start = DateTime.Now;
                 bool allsearch = false;
@@ -1182,20 +1682,21 @@ namespace GABAK
                 }
                 int distcomp = comboBoxComputing.SelectedIndex;
 
-                string routingSolver = comboBoxRouting.GetItemText(comboBoxRouting.SelectedItem);
-
-                int numberencparams = 52;//Total number of encoding variables in new encoding
-
+                bool optimal = false;
+                if (checkBoxTSP.Checked)
+                {
+                    optimal = true;
+                }
                 evolutionarystrategy es;
                 if (!checkBoxNFT.Checked)
                 {
-                    es = new evolutionarystrategy(seed, M, lambda, numberencparams, iteration, sigma, counter, successrule, l, u, mywh, allsearch, distcomp, routingSolver);
+                    es = new evolutionarystrategy(seed, M, lambda, u.Count(), iteration, sigma, counter, successrule, l, u, mywh, comboBoxDesignClass.SelectedItem.ToString(), allsearch, distcomp, optimal);
                 }
                 else
                 {
                     double nft0 = Convert.ToDouble(textBoxNFT0.Text);
                     double nftlambda = Convert.ToDouble(textBoxNFTLambda.Text);
-                    es = new evolutionarystrategy(seed, M, lambda, numberencparams, iteration, sigma, counter, successrule, l, u, mywh, allsearch, distcomp, routingSolver, nft0, nftlambda);
+                    es = new evolutionarystrategy(seed, M, lambda, u.Count(), iteration, sigma, counter, successrule, l, u, mywh, comboBoxDesignClass.SelectedItem.ToString(), allsearch, distcomp, optimal, nft0, nftlambda);
                 }
                 es.createInitialParentPopulation();
                 es.Solve(this.progressBarAlg, this.textBoxNeighbors, this, this.mywh, this.problemfolder);
@@ -1207,6 +1708,348 @@ namespace GABAK
                 //{
                 //    for(int j = 0; j < es.getBestWarehouse().visibilitygraphdistances.GetLength(1); j++)
                 //    {
+
+                //            myexcel.addRow();
+                //            myexcel["distance"] = es.getBestWarehouse().visibilitygraphdistances[i,j].ToString();
+
+                //    }
+                //}
+                //myexcel.exportToFile("visibilitygraphdistances.csv");
+                //csvexport myexcel = new csvexport();
+                //for (int i = 0; i < es.getBestWarehouse().graphnodes.Length; i++)
+                //{
+                //    myexcel.addRow();
+                //    myexcel["X"] = es.getBestWarehouse().graphnodes[i].getX().ToString();
+                //    myexcel["Y"] = es.getBestWarehouse().graphnodes[i].getY().ToString();
+                //}
+                //myexcel.exportToFile("XYGraphNodes.csv");
+                mywh.resetNetwork();
+                //Reset IDs
+                edge.nextID = 0;
+                region.nextID = 0;
+                node.nextID = 0;
+                double[] angle = { 180 * x[8], 180 * x[9], 180 * x[10], 180 * x[11], 180 * x[12], 180 * x[13] };
+                double[] adjuster = { x[14], x[15], x[16], x[17], x[18], x[19] };
+                double[] pickadjuster = { x[20], x[21], x[22], x[23], x[24], x[25] };
+                double[] ext = { x[1], x[2], x[3], x[4] };
+                double[] intx = { x[5] };
+                double[] inty = { x[6] };
+                double[] pd = { x[7] };
+                double aspectratio = x[0];
+                mywh.aspectratio = x[0];
+                mywh.setArea(es.getBestWarehouse().area);
+
+                switch (comboBoxDesignClass.SelectedItem.ToString())
+                {
+                    case "0-0-0":
+                        if (!mywh.create000Warehouse(angle, adjuster, pickadjuster, ext, pd, aspectratio, mywh.crossaislewidth, mywh.pickingaislewidth, mywh.pickinglocationwidth, mywh.pickinglocationdepth))
+                        {
+                            textBoxNeighbors.AppendText("Invalid design parameters\n");
+                            return;
+                        }
+                        break;
+                    case "2-0-1":
+                        if (!mywh.create201Warehouse(angle, adjuster, pickadjuster, ext, pd, aspectratio, mywh.crossaislewidth, mywh.pickingaislewidth, mywh.pickinglocationwidth, mywh.pickinglocationdepth))
+                        {
+                            textBoxNeighbors.AppendText("Invalid design parameters\n");
+                            return;
+                        }
+                        break;
+                    case "3-0-2":
+                        if (!mywh.create302Warehouse(angle, adjuster, pickadjuster, ext, pd, aspectratio, mywh.crossaislewidth, mywh.pickingaislewidth, mywh.pickinglocationwidth, mywh.pickinglocationdepth))
+                        {
+                            textBoxNeighbors.AppendText("Invalid design parameters\n");
+                            return;
+                        }
+                        break;
+                    case "3-0-3":
+                        if (!mywh.create303Warehouse(angle, adjuster, pickadjuster, ext, pd, aspectratio, mywh.crossaislewidth, mywh.pickingaislewidth, mywh.pickinglocationwidth, mywh.pickinglocationdepth))
+                        {
+                            textBoxNeighbors.AppendText("Invalid design parameters\n");
+                            return;
+                        }
+                        break;
+                    case "3-1-3":
+                        if (!mywh.create313Warehouse(angle, adjuster, pickadjuster, ext, intx, inty, pd, aspectratio, mywh.crossaislewidth, mywh.pickingaislewidth, mywh.pickinglocationwidth, mywh.pickinglocationdepth))
+                        {
+                            textBoxNeighbors.AppendText("Invalid design parameters\n");
+                            return;
+                        }
+                        break;
+                    case "4-0-2":
+                        if (!mywh.create402Warehouse(angle, adjuster, pickadjuster, ext, pd, aspectratio, mywh.crossaislewidth, mywh.pickingaislewidth, mywh.pickinglocationwidth, mywh.pickinglocationdepth))
+                        {
+                            textBoxNeighbors.AppendText("Invalid design parameters\n");
+                            return;
+                        }
+                        break;
+                    case "4-0-4":
+                        if (!mywh.create404Warehouse(angle, adjuster, pickadjuster, ext, pd, aspectratio, mywh.crossaislewidth, mywh.pickingaislewidth, mywh.pickinglocationwidth, mywh.pickinglocationdepth))
+                        {
+                            textBoxNeighbors.AppendText("Invalid design parameters\n");
+                            return;
+                        }
+                        break;
+                    case "4-0-5":
+                        if (!mywh.create405Warehouse(angle, adjuster, pickadjuster, ext, pd, aspectratio, mywh.crossaislewidth, mywh.pickingaislewidth, mywh.pickinglocationwidth, mywh.pickinglocationdepth))
+                        {
+                            textBoxNeighbors.AppendText("Invalid design parameters\n");
+                            return;
+                        }
+                        break;
+                    case "4-1-4":
+                        if (!mywh.create414Warehouse(angle, adjuster, pickadjuster, ext, intx, inty, pd, aspectratio, mywh.crossaislewidth, mywh.pickingaislewidth, mywh.pickinglocationwidth, mywh.pickinglocationdepth))
+                        {
+                            textBoxNeighbors.AppendText("Invalid design parameters\n");
+                            return;
+                        }
+                        break;
+                    case "4-2-5":
+                        if (!mywh.create425Warehouse(angle, adjuster, pickadjuster, ext, intx, inty, pd, aspectratio, mywh.crossaislewidth, mywh.pickingaislewidth, mywh.pickinglocationwidth, mywh.pickinglocationdepth))
+                        {
+                            textBoxNeighbors.AppendText("Invalid design parameters\n");
+                            return;
+                        }
+                        break;
+                    case "6-0-3":
+                        if (!mywh.create603Warehouse(angle, adjuster, pickadjuster, ext, pd, aspectratio, mywh.crossaislewidth, mywh.pickingaislewidth, mywh.pickinglocationwidth, mywh.pickinglocationdepth))
+                        {
+                            textBoxNeighbors.AppendText("Invalid design parameters\n");
+                            return;
+                        }
+                        break;
+                }
+
+                if (!mywh.usevisibilitygraph) mywh.createImportantNodeShortestDistances();
+                //Calculate Shortest Path Distances for Locations
+                if (!mywh.usevisibilitygraph) mywh.locationShortestDistance();
+                else
+                {
+                    mywh.createPolygonsandGraphNodes();
+                    mywh.createVisibilityGraph();
+                    mywh.fillGraphNodeDistances();
+                }
+                //Calculate Shortest Path Distances to PD
+                mywh.pdTotalDistances();
+                mywh.totalDistances();
+                //mywh.colorManytoMany();
+                //mywh.colorOnetoMany();
+                mywh.rankLocations(Convert.ToDouble(textBoxAvgOrderSize.Text));
+                mywh.colorOverall();
+
+                textBoxArea.Text = mywh.area.ToString("R");
+                textBoxAspectRatio.Text = (x[0]).ToString("R");
+                textBoxE1.Text = (x[1]).ToString("R");
+                textBoxE2.Text = (x[2]).ToString("R");
+                textBoxE3.Text = (x[3]).ToString("R");
+                textBoxE4.Text = (x[4]).ToString("R");
+                textBoxI1X.Text = (x[5]).ToString("R");
+                textBoxI1Y.Text = (x[6]).ToString("R");
+                textBoxpd.Text = (x[7]).ToString();
+                textBoxAngle1.Text = (x[8] * 180).ToString("R");
+                textBoxAngle2.Text = (x[9] * 180).ToString("R");
+                textBoxAngle3.Text = (x[10] * 180).ToString("R");
+                textBoxAngle4.Text = (x[11] * 180).ToString("R");
+                textBoxAngle5.Text = (x[12] * 180).ToString("R");
+                textBoxAngle6.Text = (x[13] * 180).ToString("R");
+                textBoxAdjuster1.Text = (x[14]).ToString("R");
+                textBoxAdjuster2.Text = (x[15]).ToString("R");
+                textBoxAdjuster3.Text = (x[16]).ToString("R");
+                textBoxAdjuster4.Text = (x[17]).ToString("R");
+                textBoxAdjuster5.Text = (x[18]).ToString("R");
+                textBoxAdjuster6.Text = (x[19]).ToString("R");
+                textBoxPickAdjuster1.Text = (x[20]).ToString("R");
+                textBoxPickAdjuster2.Text = (x[21]).ToString("R");
+                textBoxPickAdjuster3.Text = (x[22]).ToString("R");
+                textBoxPickAdjuster4.Text = (x[23]).ToString("R");
+                textBoxPickAdjuster5.Text = (x[24]).ToString("R");
+                textBoxPickAdjuster6.Text = (x[25]).ToString("R");
+
+                myBitmap = new Bitmap(Convert.ToInt32(mywh.getWidth() * m), Convert.ToInt32(mywh.getDepth() * m), System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+                //graphicsObj = this.panelDrawing.CreateGraphics();
+                //Create graphics object for drawing lines and shapes in panel
+                //
+                graphicsObj = Graphics.FromImage(myBitmap);
+                graphicsObj.Clear(Color.White);
+                //Create pen object for width and color of shapess
+                mypen = new Pen(System.Drawing.Color.Blue, m);
+                //Set alignment to center so aisles are correctly aligned
+                mypen.Alignment = PenAlignment.Center;
+                //Clear SVG content
+                mysvg = new svg(panelDrawing.Width, panelDrawing.Height);
+                //Draw created warehouse to panel
+                this.drawWarehouse();
+                labelTotalLocations.Text = "Total Locations: " + mywh.totalNumberOfLocations().ToString();
+                labelTotalAisles.Text = "Total Aisles: " + mywh.totalNumberOfAisles().ToString();
+                //labelDistanceOutput.Text = "Average Distance: " + mywh.averageTotalDistancePerLocation().ToString();
+                labelDistanceOutput.Text = "Average Distance: " + es.getCost().ToString("0.0");
+                //labelDistanceOutput.Text = "Average Distance: " + mywh.averageDistancetoPDPerLocation().ToString();
+                panelDrawing.BackgroundImage = myBitmap;
+                //Set panel's width with consideration of margins of edge crossaisles
+                panelDrawing.Width = Convert.ToInt32(mywh.getWidth() * m);
+                //Set panel's height with consideration of margins of edge crossaisles
+                panelDrawing.Height = Convert.ToInt32(mywh.getDepth() * m);
+                //Delete everything in the panel and refresh
+                panelDrawing.Refresh();
+                graphicsObj.Dispose();
+                textBoxRegions.Text = "";
+                for (int i = 0; i < mywh.regionedges.Count; i++)
+                {
+                    textBoxRegions.AppendText(
+                        mywh.regionedges[i].id.ToString() + "\t" +
+                        mywh.regionedges[i].getStart().id.ToString() + "\t" +
+                        mywh.regionedges[i].getStart().getX().ToString() + "\t" +
+                        mywh.regionedges[i].getStart().getY().ToString() + "\t" +
+                        mywh.regionedges[i].getEnd().id.ToString() + "\t" +
+                        mywh.regionedges[i].getEnd().getX().ToString() + "\t" +
+                        mywh.regionedges[i].getEnd().getY().ToString() + "\n");
+                }
+                //textBoxNeighbors.Text = "";
+                for (int i = 0; i < mywh.regions.Count; i++)
+                {
+                    textBoxNeighbors.AppendText("Region" + mywh.regions[i].getRegionID().ToString() + ":\t");
+                    for (int j = 0; j < mywh.regions[i].regionedges.Count; j++)
+                    {
+                        textBoxNeighbors.AppendText(mywh.regions[i].regionedges[j].id.ToString() + " ");
+                    }
+                    textBoxNeighbors.AppendText("\n");
+                }
+                textBoxNeighbors.AppendText("Sigma:" + es.getSigma().ToString() + "\n");
+                textBoxNeighbors.AppendText("Success:" + es.getGeneralSuccess().ToString() + "\n");
+                textBoxNeighbors.AppendText("Fail:" + es.getGeneralFail().ToString() + "\n");
+                textBoxNeighbors.AppendText("Total time:" + elapsed.ToString() + "\n");
+                textBoxNeighbors.AppendText("Lower Attempts:" + options.lowerattempts + "\n");
+                textBoxNeighbors.AppendText("Upper Attempts:" + options.upperattempts + "\n");
+                textBoxNeighbors.AppendText("Total Attempts:" + options.totalattempts + "\n");
+                SystemSounds.Asterisk.Play();
+            }
+            else//New encoding
+            {
+                double[] l = {   Convert.ToDouble(textBoxAspectRatioL.Text),
+                             Convert.ToDouble(textBoxE1L.Text),
+                             Convert.ToDouble(textBoxE2L.Text),
+                             Convert.ToDouble(textBoxE3L.Text),
+                             Convert.ToDouble(textBoxE4L.Text),
+                             Convert.ToDouble(textBoxI1XL.Text),
+                             Convert.ToDouble(textBoxI1YL.Text),
+                             Convert.ToDouble(textBoxPDL.Text),
+                             Convert.ToDouble(textBoxAngle1L.Text),
+                             Convert.ToDouble(textBoxAngle2L.Text),
+                             Convert.ToDouble(textBoxAngle3L.Text),
+                             Convert.ToDouble(textBoxAngle4L.Text),
+                             Convert.ToDouble(textBoxAngle5L.Text),
+                             Convert.ToDouble(textBoxAngle6L.Text),
+                             Convert.ToDouble(textBoxAngle7L.Text),
+                             Convert.ToDouble(textBoxAngle8L.Text),
+                             Convert.ToDouble(textBoxAdjuster1L.Text),
+                             Convert.ToDouble(textBoxAdjuster2L.Text),
+                             Convert.ToDouble(textBoxAdjuster3L.Text),
+                             Convert.ToDouble(textBoxAdjuster4L.Text),
+                             Convert.ToDouble(textBoxAdjuster5L.Text),
+                             Convert.ToDouble(textBoxAdjuster6L.Text),
+                             Convert.ToDouble(textBoxAdjuster7L.Text),
+                             Convert.ToDouble(textBoxAdjuster8L.Text),
+                             Convert.ToDouble(textBoxPickAdjuster1L.Text),
+                             Convert.ToDouble(textBoxPickAdjuster2L.Text),
+                             Convert.ToDouble(textBoxPickAdjuster3L.Text),
+                             Convert.ToDouble(textBoxPickAdjuster4L.Text),
+                             Convert.ToDouble(textBoxPickAdjuster5L.Text),
+                             Convert.ToDouble(textBoxPickAdjuster6L.Text),
+                             Convert.ToDouble(textBoxPickAdjuster7L.Text),
+                             Convert.ToDouble(textBoxPickAdjuster8L.Text),
+                             Convert.ToDouble(textBoxC12L.Text),
+                             Convert.ToDouble(textBoxC13L.Text),
+                             Convert.ToDouble(textBoxC14L.Text),
+                             Convert.ToDouble(textBoxC15L.Text),
+                             Convert.ToDouble(textBoxC23L.Text),
+                             Convert.ToDouble(textBoxC24L.Text),
+                             Convert.ToDouble(textBoxC25L.Text),
+                             Convert.ToDouble(textBoxC34L.Text),
+                             Convert.ToDouble(textBoxC35L.Text),
+                             Convert.ToDouble(textBoxC45L.Text)
+                         };
+                double[] u = {   Convert.ToDouble(textBoxAspectRatioU.Text),
+                             Convert.ToDouble(textBoxE1U.Text),
+                             Convert.ToDouble(textBoxE2U.Text),
+                             Convert.ToDouble(textBoxE3U.Text),
+                             Convert.ToDouble(textBoxE4U.Text),
+                             Convert.ToDouble(textBoxI1XU.Text),
+                             Convert.ToDouble(textBoxI1YU.Text),
+                             Convert.ToDouble(textBoxPDU.Text),
+                             Convert.ToDouble(textBoxAngle1U.Text),
+                             Convert.ToDouble(textBoxAngle2U.Text),
+                             Convert.ToDouble(textBoxAngle3U.Text),
+                             Convert.ToDouble(textBoxAngle4U.Text),
+                             Convert.ToDouble(textBoxAngle5U.Text),
+                             Convert.ToDouble(textBoxAngle6U.Text),
+                             Convert.ToDouble(textBoxAngle7U.Text),
+                             Convert.ToDouble(textBoxAngle8U.Text),
+                             Convert.ToDouble(textBoxAdjuster1U.Text),
+                             Convert.ToDouble(textBoxAdjuster2U.Text),
+                             Convert.ToDouble(textBoxAdjuster3U.Text),
+                             Convert.ToDouble(textBoxAdjuster4U.Text),
+                             Convert.ToDouble(textBoxAdjuster5U.Text),
+                             Convert.ToDouble(textBoxAdjuster6U.Text),
+                             Convert.ToDouble(textBoxAdjuster7U.Text),
+                             Convert.ToDouble(textBoxAdjuster8U.Text),
+                             Convert.ToDouble(textBoxPickAdjuster1U.Text),
+                             Convert.ToDouble(textBoxPickAdjuster2U.Text),
+                             Convert.ToDouble(textBoxPickAdjuster3U.Text),
+                             Convert.ToDouble(textBoxPickAdjuster4U.Text),
+                             Convert.ToDouble(textBoxPickAdjuster5U.Text),
+                             Convert.ToDouble(textBoxPickAdjuster6U.Text),
+                             Convert.ToDouble(textBoxPickAdjuster7U.Text),
+                             Convert.ToDouble(textBoxPickAdjuster8U.Text),
+                             Convert.ToDouble(textBoxC12U.Text),
+                             Convert.ToDouble(textBoxC13U.Text),
+                             Convert.ToDouble(textBoxC14U.Text),
+                             Convert.ToDouble(textBoxC15U.Text),
+                             Convert.ToDouble(textBoxC23U.Text),
+                             Convert.ToDouble(textBoxC24U.Text),
+                             Convert.ToDouble(textBoxC25U.Text),
+                             Convert.ToDouble(textBoxC34U.Text),
+                             Convert.ToDouble(textBoxC35U.Text),
+                             Convert.ToDouble(textBoxC45U.Text)
+                         };
+
+                DateTime start = DateTime.Now;
+                bool allsearch = false;
+                if (checkBoxAllSearch.Checked)
+                {
+                    allsearch = true;
+                }
+                int distcomp = comboBoxComputing.SelectedIndex;
+
+                bool optimal = false;
+                if (checkBoxTSP.Checked)
+                {
+                    optimal = true;
+                }
+
+                int numberencparams = 52;//Total number of encoding variables in new encoding
+
+                evolutionarystrategy es;
+                if (!checkBoxNFT.Checked)
+                {
+                    es = new evolutionarystrategy(seed, M, lambda, numberencparams, iteration, sigma, counter, successrule, l, u, mywh, comboBoxDesignClass.SelectedItem.ToString(), allsearch, distcomp, optimal);
+                }
+                else
+                {
+                    double nft0 = Convert.ToDouble(textBoxNFT0.Text);
+                    double nftlambda = Convert.ToDouble(textBoxNFTLambda.Text);
+                    es = new evolutionarystrategy(seed, M, lambda, numberencparams, iteration, sigma, counter, successrule, l, u, mywh, comboBoxDesignClass.SelectedItem.ToString(), allsearch, distcomp, optimal, nft0, nftlambda);
+                }
+                es.createInitialParentPopulation();
+                es.Solve(this.progressBarAlg, this.textBoxNeighbors, this, this.mywh, this.problemfolder);
+                TimeSpan elapsed = DateTime.Now - start;
+                double[] x = new double[u.Count()];
+                x = es.getBest().getx();
+                //csvexport myexcel = new csvexport();
+                //for (int i = 0; i < es.getBestWarehouse().visibilitygraphdistances.GetLength(0); i++)
+                //{
+                //    for(int j = 0; j < es.getBestWarehouse().visibilitygraphdistances.GetLength(1); j++)
+                //    {
+
                 //            myexcel.addRow();
                 //            myexcel["distance"] = es.getBestWarehouse().visibilitygraphdistances[i,j].ToString();
 
@@ -1339,8 +2182,6 @@ namespace GABAK
                 mypen.Alignment = PenAlignment.Center;
                 //Clear SVG content
                 mysvg = new svg(panelDrawing.Width, panelDrawing.Height);
-                //Clear ARDesign content
-                myardesign = new ardesign(mywh.getWidth(), mywh.getDepth(), mywh.pickinglocationwidth, mywh.pickinglocationdepth);
                 //Draw created warehouse to panel
                 this.drawWarehouse();
                 labelTotalLocations.Text = "Total Locations: " + mywh.totalNumberOfLocations().ToString();
@@ -1387,10 +2228,6 @@ namespace GABAK
                 textBoxNeighbors.AppendText("Total Attempts:" + options.totalattempts + "\n");
                 SystemSounds.Asterisk.Play();
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
         }
 
         private void colorToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1408,8 +2245,6 @@ namespace GABAK
                 mywh.colorOverall();
                 //Clear SVG content
                 mysvg = new svg(panelDrawing.Width, panelDrawing.Height);
-                //Clear ARDesign content
-                myardesign = new ardesign(mywh.getWidth(), mywh.getDepth(), mywh.pickinglocationwidth, mywh.pickinglocationdepth);
                 this.drawWarehouse();
                 panelDrawing.BackgroundImage = myBitmap;
                 panelDrawing.Refresh();
@@ -1440,7 +2275,7 @@ namespace GABAK
                 colorNode(mywh.getOrders()[orderindex].getOrderSkus()[i].location);
             }
 
-            if (checkBoxExport.Checked)
+            if(checkBoxExport.Checked)
             {
                 List<node> tourlocations = new List<node>();
                 tourlocations.Add(mywh.pdnodes[0]);
@@ -1457,9 +2292,9 @@ namespace GABAK
 
                 for (int i = 0; i < dimension; i++)
                 {
-                    for (int j = 0; j < dimension; j++)
+                    for(int j = 0; j < dimension; j++)
                     {
-                        cost[i, j] = Convert.ToInt32(10 * mywh.shortestPathDistanceTwoLocations(tourlocations[i], tourlocations[j]));
+                        cost[i, j] = Convert.ToInt32(10*mywh.shortestPathDistanceTwoLocations(tourlocations[i], tourlocations[j]));
                     }
                 }
 
@@ -1494,11 +2329,10 @@ namespace GABAK
         private void colorNode(node p_location)
         {
             mypen.Color = System.Drawing.Color.Black;
-            mypen.Width = 1 * m;
-            mypen.Alignment = PenAlignment.Center;
-            graphicsObj.DrawEllipse(mypen, ((float)p_location.getX()) * m - m, ((float)p_location.getY()) * m - m, 2 * m, 2 * m);
+            mypen.Width = 3;
+            graphicsObj.DrawEllipse(mypen, (float)p_location.getX() * m, (float)p_location.getY() * m, 2 * m, 2 * m);
         }
-
+                            
         /// <summary>
         /// This button imports all orders as well as SKUs from a single csv file
         /// </summary>
@@ -1523,7 +2357,7 @@ namespace GABAK
             //Only show .csv files
             ofd.Filter = "Microsoft Office Excel Comma Separated Values File|*.csv";
             DialogResult result = ofd.ShowDialog();
-            //If the user selects a valid file
+            //If the user selects a valid file 
             if (result == DialogResult.OK)
             {
                 string fileName = ofd.FileName;
@@ -1558,12 +2392,12 @@ namespace GABAK
                         tmpsku.addFrequency();
                     }
                     //Then create a new order and add the sku to the new order
-                    else if (orderid != previousorderid)
+                    else if(orderid != previousorderid)
                     {
                         //Order finished so check the size
                         if (previousorderid != 0)
                         {
-                            if (maxordersize < myorders[myorders.Count() - 1].getOrderSize())
+                            if (maxordersize < myorders[myorders.Count()-1].getOrderSize())
                             {
                                 maxorderid = myorders.Count() - 1;
                                 maxordersize = myorders[myorders.Count() - 1].getOrderSize();
@@ -1674,7 +2508,7 @@ namespace GABAK
                 //Only show .csv files
                 ofd.Filter = "Microsoft Office Excel Comma Separated Values File|*.csv";
                 DialogResult result = ofd.ShowDialog();
-                //If the user selects a valid file
+                //If the user selects a valid file 
                 if (result == DialogResult.OK)
                 {
                     string fileName = ofd.FileName;
@@ -1697,11 +2531,8 @@ namespace GABAK
                 }
                 labelTotalSKUS.Text = "# SKU: " + myskus.Count().ToString();
             }
-            var anonTypeArr = myskus.Select(
-                x => new { x.ID, x.pickprobability, x.frequency }).ToArray();
-            dataGridViewSKUs.DataSource = anonTypeArr;
         }
-
+        
         private void importOptimizationRuns()
         {
             //Reset Progress Bar Batch
@@ -1817,7 +2648,7 @@ namespace GABAK
                             }
 
                             string foldernamesize = "Size " + lines[b][21];
-                            if (!System.IO.Directory.Exists(rootfolder + "\\" + foldernamesize))
+                            if(!System.IO.Directory.Exists(rootfolder + "\\" + foldernamesize))
                             {
                                 System.IO.Directory.CreateDirectory(rootfolder + "\\" + foldernamesize);
                             }
@@ -1854,7 +2685,7 @@ namespace GABAK
                             textBoxLWidth.Text = lines[b][25];
                             textBoxLDepth.Text = lines[b][26];
                             textBoxPickerSize.Text = lines[b][18];
-                            if (lines[b][17] == "1")
+                            if(lines[b][17] == "1")
                             {
                                 checkBoxVisibilityGraph.Checked = true;
                             }
@@ -1870,8 +2701,7 @@ namespace GABAK
                             textBoxSigma.Text = lines[b][8];
                             textBoxESCounter.Text = lines[b][9];
                             textBoxESSuccessRule.Text = lines[b][10];
-                            //Fix this part in the CSV files as well
-                            //comboBoxDesignClass.SelectedIndex = comboBoxDesignClass.FindString(lines[b][3]);
+                            comboBoxDesignClass.SelectedIndex = comboBoxDesignClass.FindString(lines[b][3]);
                             //Lower Bounds
                             textBoxE1L.Text = lines[b][34];
                             textBoxE2L.Text = lines[b][36];
@@ -1957,7 +2787,7 @@ namespace GABAK
                             textBoxC35U.Text = lines[b][113];
                             textBoxC45U.Text = lines[b][115];
 
-                            if (lines[b][15] == "1")
+                            if(lines[b][15] == "1")
                             {
                                 checkBoxAllSearch.Checked = true;
                             }
@@ -1968,19 +2798,13 @@ namespace GABAK
 
                             comboBoxComputing.SelectedIndex = Convert.ToInt32(lines[b][11]);
 
-                            switch (lines[b][16])
+                            if (lines[b][16] == "1")
                             {
-                                case "0":
-                                    comboBoxRouting.SelectedIndex = 0;
-                                    break;
-
-                                case "1":
-                                    comboBoxRouting.SelectedIndex = 1;
-                                    break;
-
-                                case "2":
-                                    comboBoxRouting.SelectedIndex = 2;
-                                    break;
+                                checkBoxTSP.Checked = true;
+                            }
+                            else
+                            {
+                                checkBoxTSP.Checked = false;
                             }
 
                             if (lines[b][12] == "1")
@@ -2004,6 +2828,7 @@ namespace GABAK
                     }
                     textBoxNeighbors.AppendText("Run: " + b.ToString() + "/" + (lines.Count() - 1).ToString() + "\n");
                     progressBarBatch.Value = Convert.ToInt32(Convert.ToDouble(b) / Convert.ToDouble(lines.Count() - 1) * 100);
+
                 }
             }
         }
@@ -2042,6 +2867,7 @@ namespace GABAK
                     textBoxNeighbors.AppendText("File is Already Open, Close File\n"); return;
                 }
 
+                
                 string[] lineIn;//Do not read the first line (skip for header)
                 while (!reader.EndOfStream)
                 {
@@ -2222,7 +3048,7 @@ namespace GABAK
                                 {
                                     if (increased > 0 && decreased > 0)//No exact number of locations but this is closest it can get to the desired number of locations
                                     {
-                                        if (desloc > totalstoragelocations)//This check is necessary because last iteration it could have been decreased
+                                        if(desloc > totalstoragelocations)//This check is necessary because last iteration it could have been decreased
                                         {
                                             mylocalwh.setArea(mylocalwh.area / options.warehouseadjustmentfactor);//Increase area
                                             increased++;
@@ -2244,13 +3070,13 @@ namespace GABAK
                                         mylocalwh.setArea(mylocalwh.area * options.warehouseadjustmentfactor);//Decrease area
                                         decreased++;
                                     }
-                                    else if (desloc == totalstoragelocations)
+                                    else if(desloc == totalstoragelocations)
                                     {
                                         warehousefit = true;
                                     }
                                 }
                             } while (!warehousefit);
-
+                            
                             if (mylocalwh.totalNumberOfLocations() >= mylocalskus.Count())
                             {
                                 mylocalwh.setSKUs(mylocalskus);
@@ -2485,12 +3311,12 @@ namespace GABAK
                             }
                         }
                     }
-                    catch (Exception e)
+                    catch(Exception e)
                     {
                         exceptions.Enqueue(e);
                     }
-                    textBoxNeighbors.AppendText("Run: " + m.ToString() + "/" + (lines.Count() - 1).ToString() + "\n");
-                    this.progressBarAlg.Value = Convert.ToInt32(Convert.ToDouble(m) / Convert.ToDouble(lines.Count() - 1) * 100);
+                    textBoxNeighbors.AppendText("Run: " + m.ToString() + "/" + (lines.Count()-1).ToString() + "\n");
+                    this.progressBarAlg.Value = Convert.ToInt32(Convert.ToDouble(m) / Convert.ToDouble(lines.Count()-1) * 100);
                 };//End of parallel for
 
                 TimeSpan elapsed1 = DateTime.Now - start1;
@@ -2528,6 +3354,7 @@ namespace GABAK
                             myexcel[lines[0][j]] = lines[i][j];
                         }
                     }
+                    
                 }
                 myexcel.exportToFile(fileName);
             }
@@ -2551,10 +3378,10 @@ namespace GABAK
                 int numberoforderlists = Convert.ToInt32(textBoxNumberOrders.Text);
                 int ordersize = Convert.ToInt32(textBoxOrderSize.Text);
                 Random myrand = new Random(Convert.ToInt32(textBoxOrderGenRandSeed.Text));
-                for (int i = 0; i < numberoforderlists; i++)
+                for(int i = 0; i < numberoforderlists; i++)
                 {
                     order tmporder = new order(i);
-                    for (int j = 0; j < ordersize; j++)
+                    for(int j = 0; j < ordersize; j++)
                     {
                         double myprob = uniformrandom(0, 1, myrand);
                         for (int k = 0; k < myskus.Count; k++)
@@ -2590,7 +3417,7 @@ namespace GABAK
                 order tmporder;
                 for (int i = 0; i < numberofSKUs; i++)
                 {
-                    for (int j = i + 1; j < numberofSKUs; j++)
+                    for(int j = i + 1; j < numberofSKUs; j++)
                     {
                         tmporder = new order(orderNumberCounter);
                         tmporder.addSKU(myskus[i]);//First item
@@ -2614,7 +3441,7 @@ namespace GABAK
                 //Only show .csv files
                 ofd.Filter = "Microsoft Office Excel Comma Separated Values File|*.csv";
                 DialogResult result = ofd.ShowDialog();
-                //If the user selects a valid file
+                //If the user selects a valid file 
                 if (result == DialogResult.OK)
                 {
                     string fileName = ofd.FileName;
@@ -2706,7 +3533,6 @@ namespace GABAK
                 }
             }
         }
-
         //Start of Textboxchanged parts
         private void textBoxWHWidth_TextChanged(object sender, EventArgs e)
         {
@@ -2802,7 +3628,6 @@ namespace GABAK
                 solving = false;
             }
         }
-
         //End of textboxchanged parts
         private void checkNumeric(object sender, KeyPressEventArgs e)
         {
@@ -2823,6 +3648,346 @@ namespace GABAK
         {
             AboutForm aboutform = new AboutForm();
             aboutform.ShowDialog();
+        }
+
+        private void comboBoxDesignClass_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (comboBoxDesignClass.SelectedItem.ToString())
+            {
+                case "0-0-0":
+                    textBoxE1.ReadOnly = true;
+                    textBoxE2.ReadOnly = true;
+                    textBoxE3.ReadOnly = true;
+                    textBoxE4.ReadOnly = true;
+
+                    textBoxAngle2.ReadOnly = true;
+                    textBoxAngle3.ReadOnly = true;
+                    textBoxAngle4.ReadOnly = true;
+                    textBoxAngle5.ReadOnly = true;
+                    textBoxAngle6.ReadOnly = true;
+                    textBoxAngle7.ReadOnly = true;
+                    textBoxAngle8.ReadOnly = true;
+
+                    textBoxAdjuster2.ReadOnly = true;
+                    textBoxAdjuster3.ReadOnly = true;
+                    textBoxAdjuster4.ReadOnly = true;
+                    textBoxAdjuster5.ReadOnly = true;
+                    textBoxAdjuster6.ReadOnly = true;
+                    textBoxAdjuster7.ReadOnly = true;
+                    textBoxAdjuster8.ReadOnly = true;
+
+                    textBoxPickAdjuster2.ReadOnly = true;
+                    textBoxPickAdjuster3.ReadOnly = true;
+                    textBoxPickAdjuster4.ReadOnly = true;
+                    textBoxPickAdjuster5.ReadOnly = true;
+                    textBoxPickAdjuster6.ReadOnly = true;
+                    textBoxPickAdjuster7.ReadOnly = true;
+                    textBoxPickAdjuster8.ReadOnly = true;
+
+                    textBoxI1X.ReadOnly = true;
+                    textBoxI1Y.ReadOnly = true;
+                    break;
+                case "2-0-1":
+                    textBoxE1.ReadOnly = false;
+                    textBoxE2.ReadOnly = false;
+                    textBoxE3.ReadOnly = true;
+                    textBoxE4.ReadOnly = true;
+
+                    textBoxAngle2.ReadOnly = false;
+                    textBoxAngle3.ReadOnly = true;
+                    textBoxAngle4.ReadOnly = true;
+                    textBoxAngle5.ReadOnly = true;
+                    textBoxAngle6.ReadOnly = true;
+                    textBoxAngle7.ReadOnly = true;
+                    textBoxAngle8.ReadOnly = true;
+
+                    textBoxAdjuster2.ReadOnly = false;
+                    textBoxAdjuster3.ReadOnly = true;
+                    textBoxAdjuster4.ReadOnly = true;
+                    textBoxAdjuster5.ReadOnly = true;
+                    textBoxAdjuster6.ReadOnly = true;
+                    textBoxAdjuster7.ReadOnly = true;
+                    textBoxAdjuster8.ReadOnly = true;
+
+                    textBoxPickAdjuster2.ReadOnly = false;
+                    textBoxPickAdjuster3.ReadOnly = true;
+                    textBoxPickAdjuster4.ReadOnly = true;
+                    textBoxPickAdjuster5.ReadOnly = true;
+                    textBoxPickAdjuster6.ReadOnly = true;
+                    textBoxPickAdjuster7.ReadOnly = true;
+                    textBoxPickAdjuster8.ReadOnly = true;
+
+                    textBoxI1X.ReadOnly = true;
+                    textBoxI1Y.ReadOnly = true;
+                    break;
+                case "3-0-2":
+                    textBoxE1.ReadOnly = false;
+                    textBoxE2.ReadOnly = false;
+                    textBoxE3.ReadOnly = false;
+                    textBoxE4.ReadOnly = true;
+
+                    textBoxAngle2.ReadOnly = false;
+                    textBoxAngle3.ReadOnly = false;
+                    textBoxAngle4.ReadOnly = true;
+                    textBoxAngle5.ReadOnly = true;
+                    textBoxAngle6.ReadOnly = true;
+                    textBoxAngle7.ReadOnly = true;
+                    textBoxAngle8.ReadOnly = true;
+
+                    textBoxAdjuster2.ReadOnly = false;
+                    textBoxAdjuster3.ReadOnly = false;
+                    textBoxAdjuster4.ReadOnly = true;
+                    textBoxAdjuster5.ReadOnly = true;
+                    textBoxAdjuster6.ReadOnly = true;
+                    textBoxAdjuster7.ReadOnly = true;
+                    textBoxAdjuster8.ReadOnly = true;
+
+                    textBoxPickAdjuster2.ReadOnly = false;
+                    textBoxPickAdjuster3.ReadOnly = false;
+                    textBoxPickAdjuster4.ReadOnly = true;
+                    textBoxPickAdjuster5.ReadOnly = true;
+                    textBoxPickAdjuster6.ReadOnly = true;
+                    textBoxPickAdjuster7.ReadOnly = true;
+                    textBoxPickAdjuster8.ReadOnly = true;
+
+                    textBoxI1X.ReadOnly = true;
+                    textBoxI1Y.ReadOnly = true;
+                    break;
+                case "3-0-3":
+                    textBoxE1.ReadOnly = false;
+                    textBoxE2.ReadOnly = false;
+                    textBoxE3.ReadOnly = false;
+                    textBoxE4.ReadOnly = true;
+
+                    textBoxAngle2.ReadOnly = false;
+                    textBoxAngle3.ReadOnly = false;
+                    textBoxAngle4.ReadOnly = false;
+                    textBoxAngle5.ReadOnly = true;
+                    textBoxAngle6.ReadOnly = true;
+                    textBoxAngle7.ReadOnly = true;
+                    textBoxAngle8.ReadOnly = true;
+
+                    textBoxAdjuster2.ReadOnly = false;
+                    textBoxAdjuster3.ReadOnly = false;
+                    textBoxAdjuster4.ReadOnly = false;
+                    textBoxAdjuster5.ReadOnly = true;
+                    textBoxAdjuster6.ReadOnly = true;
+                    textBoxAdjuster7.ReadOnly = true;
+                    textBoxAdjuster8.ReadOnly = true;
+
+                    textBoxPickAdjuster2.ReadOnly = false;
+                    textBoxPickAdjuster3.ReadOnly = false;
+                    textBoxPickAdjuster4.ReadOnly = false;
+                    textBoxPickAdjuster5.ReadOnly = true;
+                    textBoxPickAdjuster6.ReadOnly = true;
+                    textBoxPickAdjuster7.ReadOnly = true;
+                    textBoxPickAdjuster8.ReadOnly = true;
+
+                    textBoxI1X.ReadOnly = true;
+                    textBoxI1Y.ReadOnly = true;
+                    break;
+                case "3-1-3":
+                    textBoxE1.ReadOnly = false;
+                    textBoxE2.ReadOnly = false;
+                    textBoxE3.ReadOnly = false;
+                    textBoxE4.ReadOnly = true;
+
+                    textBoxAngle2.ReadOnly = false;
+                    textBoxAngle3.ReadOnly = false;
+                    textBoxAngle4.ReadOnly = true;
+                    textBoxAngle5.ReadOnly = true;
+                    textBoxAngle6.ReadOnly = true;
+                    textBoxAngle7.ReadOnly = true;
+                    textBoxAngle8.ReadOnly = true;
+
+                    textBoxAdjuster2.ReadOnly = false;
+                    textBoxAdjuster3.ReadOnly = false;
+                    textBoxAdjuster4.ReadOnly = true;
+                    textBoxAdjuster5.ReadOnly = true;
+                    textBoxAdjuster6.ReadOnly = true;
+                    textBoxAdjuster7.ReadOnly = true;
+                    textBoxAdjuster8.ReadOnly = true;
+
+                    textBoxPickAdjuster2.ReadOnly = false;
+                    textBoxPickAdjuster3.ReadOnly = false;
+                    textBoxPickAdjuster4.ReadOnly = true;
+                    textBoxPickAdjuster5.ReadOnly = true;
+                    textBoxPickAdjuster6.ReadOnly = true;
+                    textBoxPickAdjuster7.ReadOnly = true;
+                    textBoxPickAdjuster8.ReadOnly = true;
+
+                    textBoxI1X.ReadOnly = false;
+                    textBoxI1Y.ReadOnly = false;
+                    break;
+                case "4-0-2":
+                    textBoxE1.ReadOnly = false;
+                    textBoxE2.ReadOnly = false;
+                    textBoxE3.ReadOnly = false;
+                    textBoxE4.ReadOnly = false;
+
+                    textBoxAngle2.ReadOnly = false;
+                    textBoxAngle3.ReadOnly = false;
+                    textBoxAngle4.ReadOnly = true;
+                    textBoxAngle5.ReadOnly = true;
+                    textBoxAngle6.ReadOnly = true;
+                    textBoxAngle7.ReadOnly = true;
+                    textBoxAngle8.ReadOnly = true;
+
+                    textBoxAdjuster2.ReadOnly = false;
+                    textBoxAdjuster3.ReadOnly = false;
+                    textBoxAdjuster4.ReadOnly = true;
+                    textBoxAdjuster5.ReadOnly = true;
+                    textBoxAdjuster6.ReadOnly = true;
+                    textBoxAdjuster7.ReadOnly = true;
+                    textBoxAdjuster8.ReadOnly = true;
+
+                    textBoxPickAdjuster2.ReadOnly = false;
+                    textBoxPickAdjuster3.ReadOnly = false;
+                    textBoxPickAdjuster4.ReadOnly = true;
+                    textBoxPickAdjuster5.ReadOnly = true;
+                    textBoxPickAdjuster6.ReadOnly = true;
+                    textBoxPickAdjuster7.ReadOnly = true;
+                    textBoxPickAdjuster8.ReadOnly = true;
+
+                    textBoxI1X.ReadOnly = true;
+                    textBoxI1Y.ReadOnly = true;
+                    break;
+                case "4-0-4":
+                    textBoxE1.ReadOnly = false;
+                    textBoxE2.ReadOnly = false;
+                    textBoxE3.ReadOnly = false;
+                    textBoxE4.ReadOnly = false;
+
+                    textBoxAngle2.ReadOnly = false;
+                    textBoxAngle3.ReadOnly = false;
+                    textBoxAngle4.ReadOnly = false;
+                    textBoxAngle5.ReadOnly = false;
+                    textBoxAngle6.ReadOnly = true;
+                    textBoxAngle7.ReadOnly = true;
+                    textBoxAngle8.ReadOnly = true;
+
+                    textBoxAdjuster2.ReadOnly = false;
+                    textBoxAdjuster3.ReadOnly = false;
+                    textBoxAdjuster4.ReadOnly = false;
+                    textBoxAdjuster5.ReadOnly = false;
+                    textBoxAdjuster6.ReadOnly = true;
+                    textBoxAdjuster7.ReadOnly = true;
+                    textBoxAdjuster8.ReadOnly = true;
+
+                    textBoxPickAdjuster2.ReadOnly = false;
+                    textBoxPickAdjuster3.ReadOnly = false;
+                    textBoxPickAdjuster4.ReadOnly = false;
+                    textBoxPickAdjuster5.ReadOnly = false;
+                    textBoxPickAdjuster6.ReadOnly = true;
+                    textBoxPickAdjuster7.ReadOnly = true;
+                    textBoxPickAdjuster8.ReadOnly = true;
+
+                    textBoxI1X.ReadOnly = true;
+                    textBoxI1Y.ReadOnly = true;
+                    break;
+                case "4-0-5":
+                    textBoxE1.ReadOnly = false;
+                    textBoxE2.ReadOnly = false;
+                    textBoxE3.ReadOnly = false;
+                    textBoxE4.ReadOnly = false;
+
+                    textBoxAngle2.ReadOnly = false;
+                    textBoxAngle3.ReadOnly = false;
+                    textBoxAngle4.ReadOnly = false;
+                    textBoxAngle5.ReadOnly = false;
+                    textBoxAngle6.ReadOnly = false;
+                    textBoxAngle7.ReadOnly = true;
+                    textBoxAngle8.ReadOnly = true;
+
+                    textBoxAdjuster2.ReadOnly = false;
+                    textBoxAdjuster3.ReadOnly = false;
+                    textBoxAdjuster4.ReadOnly = false;
+                    textBoxAdjuster5.ReadOnly = false;
+                    textBoxAdjuster6.ReadOnly = false;
+                    textBoxAdjuster7.ReadOnly = true;
+                    textBoxAdjuster8.ReadOnly = true;
+
+                    textBoxPickAdjuster2.ReadOnly = false;
+                    textBoxPickAdjuster3.ReadOnly = false;
+                    textBoxPickAdjuster4.ReadOnly = false;
+                    textBoxPickAdjuster5.ReadOnly = false;
+                    textBoxPickAdjuster6.ReadOnly = false;
+                    textBoxPickAdjuster7.ReadOnly = true;
+                    textBoxPickAdjuster8.ReadOnly = true;
+
+                    textBoxI1X.ReadOnly = true;
+                    textBoxI1Y.ReadOnly = true;
+                    break;
+                case "4-1-4":
+                    textBoxE1.ReadOnly = false;
+                    textBoxE2.ReadOnly = false;
+                    textBoxE3.ReadOnly = false;
+                    textBoxE4.ReadOnly = false;
+
+                    textBoxAngle2.ReadOnly = false;
+                    textBoxAngle3.ReadOnly = false;
+                    textBoxAngle4.ReadOnly = false;
+                    textBoxAngle5.ReadOnly = true;
+                    textBoxAngle6.ReadOnly = true;
+                    textBoxAngle7.ReadOnly = true;
+                    textBoxAngle8.ReadOnly = true;
+
+                    textBoxAdjuster2.ReadOnly = false;
+                    textBoxAdjuster3.ReadOnly = false;
+                    textBoxAdjuster4.ReadOnly = false;
+                    textBoxAdjuster5.ReadOnly = true;
+                    textBoxAdjuster6.ReadOnly = true;
+                    textBoxAdjuster7.ReadOnly = true;
+                    textBoxAdjuster8.ReadOnly = true;
+
+                    textBoxPickAdjuster2.ReadOnly = false;
+                    textBoxPickAdjuster3.ReadOnly = false;
+                    textBoxPickAdjuster4.ReadOnly = false;
+                    textBoxPickAdjuster5.ReadOnly = true;
+                    textBoxPickAdjuster6.ReadOnly = true;
+                    textBoxPickAdjuster7.ReadOnly = true;
+                    textBoxPickAdjuster8.ReadOnly = true;
+
+                    textBoxI1X.ReadOnly = false;
+                    textBoxI1Y.ReadOnly = false;
+                    break;
+                case "All":
+                    textBoxE1.ReadOnly = false;
+                    textBoxE2.ReadOnly = false;
+                    textBoxE3.ReadOnly = false;
+                    textBoxE4.ReadOnly = false;
+
+                    textBoxAngle1.ReadOnly = false;
+                    textBoxAngle2.ReadOnly = false;
+                    textBoxAngle3.ReadOnly = false;
+                    textBoxAngle4.ReadOnly = false;
+                    textBoxAngle5.ReadOnly = false;
+                    textBoxAngle6.ReadOnly = false;
+                    textBoxAngle7.ReadOnly = false;
+                    textBoxAngle8.ReadOnly = false;
+
+                    textBoxAdjuster1.ReadOnly = false;
+                    textBoxAdjuster2.ReadOnly = false;
+                    textBoxAdjuster3.ReadOnly = false;
+                    textBoxAdjuster4.ReadOnly = false;
+                    textBoxAdjuster5.ReadOnly = false;
+                    textBoxAdjuster6.ReadOnly = false;
+                    textBoxAdjuster7.ReadOnly = false;
+                    textBoxAdjuster8.ReadOnly = false;
+
+                    textBoxPickAdjuster1.ReadOnly = false;
+                    textBoxPickAdjuster2.ReadOnly = false;
+                    textBoxPickAdjuster3.ReadOnly = false;
+                    textBoxPickAdjuster4.ReadOnly = false;
+                    textBoxPickAdjuster5.ReadOnly = false;
+                    textBoxPickAdjuster6.ReadOnly = false;
+                    textBoxPickAdjuster7.ReadOnly = false;
+                    textBoxPickAdjuster8.ReadOnly = false;
+
+                    textBoxI1X.ReadOnly = false;
+                    textBoxI1Y.ReadOnly = false;
+                    break;
+            }
         }
 
         private void buttonTwoLocationDistance_Click(object sender, EventArgs e)
@@ -2893,7 +4058,9 @@ namespace GABAK
             }
             catch
             {
+
             }
+          
         }
 
         private void textBoxCrossAisleWidth_Leave(object sender, EventArgs e)
@@ -2906,7 +4073,7 @@ namespace GABAK
 
         private void buttonGetDesign_Click(object sender, EventArgs e)
         {
-            if (lines != null)
+            if(lines != null)
             {
                 if (lines[0].Length == 65)
                 {
@@ -3061,7 +4228,7 @@ namespace GABAK
 
         private void checkBoxNFT_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBoxNFT.Checked)
+            if(checkBoxNFT.Checked)
             {
                 textBoxNFT0.ReadOnly = false;
                 textBoxNFTLambda.ReadOnly = false;
@@ -3075,7 +4242,7 @@ namespace GABAK
 
         private void checkBoxVisibilityGraph_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBoxVisibilityGraph.Checked)
+            if(checkBoxVisibilityGraph.Checked)
             {
                 textBoxPickerSize.ReadOnly = false;
             }
@@ -3085,38 +4252,9 @@ namespace GABAK
             }
         }
 
-        private void ComboBoxGenerate_SelectedIndexChanged(object sender, EventArgs e)
+        private void saveSVG()
         {
-            switch (comboBoxGenerate.SelectedIndex)
-            {
-                case 1:
-                    buttonImport.Enabled = false;
-                    buttonImportSKUs.Enabled = true;
-                    buttonImportOrders.Enabled = true;
-                    groupBoxBenderParameters.Visible = true;
-                    break;
-
-                case 2:
-                    buttonImport.Enabled = false;
-                    buttonImportSKUs.Enabled = true;
-                    buttonImportOrders.Enabled = true;
-                    groupBoxBenderParameters.Visible = false;
-                    break;
-
-                case 3:
-                    buttonImport.Enabled = false;
-                    buttonImportSKUs.Enabled = true;
-                    buttonImportOrders.Enabled = true;
-                    groupBoxBenderParameters.Visible = false;
-                    break;
-
-                default:
-                    buttonImport.Enabled = true;
-                    buttonImportSKUs.Enabled = false;
-                    buttonImportOrders.Enabled = false;
-                    groupBoxBenderParameters.Visible = false;
-                    break;
-            }
+            
         }
     }
 }

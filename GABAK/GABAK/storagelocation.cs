@@ -1,6 +1,9 @@
 ﻿//MIT License
 //Copyright(c) 2018 Sabahattin Gokhan Ozden
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
 namespace GABAK
 {
@@ -17,7 +20,6 @@ namespace GABAK
         public double Y4;//Bottom right
         private List<sku> skus;//List of skus stored in this storage location
         private int capacity;
-
         public storagelocation(node p_picklocation, double p_X1, double p_Y1, double p_X2, double p_Y2, double p_X3, double p_Y3, double p_X4, double p_Y4, int p_capacity)
         {
             picklocation = p_picklocation;

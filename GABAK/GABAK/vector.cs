@@ -1,12 +1,18 @@
-﻿namespace GABAK
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace GABAK
 {
-    internal class vector
+    class vector
     {
         public double X;
         public double Y;
-
         public vector()
         {
+
         }
     }
 }

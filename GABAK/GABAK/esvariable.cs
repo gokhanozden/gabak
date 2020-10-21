@@ -1,10 +1,11 @@
 ﻿//MIT License
 //Copyright(c) 2018 Sabahattin Gokhan Ozden
 using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
+using System.Collections.Concurrent;
 
 namespace GABAK
 {
@@ -12,7 +13,7 @@ namespace GABAK
     /// Esvariable class holds the solution
     /// It has set and get methods to set and get variables for a solution
     /// </summary>
-    internal class esvariable
+    class esvariable
     {
         private int numberofparameters;
         private double[] x;//x vector records the current position of variables
@@ -20,8 +21,9 @@ namespace GABAK
         private double[] u;//upper limit for each variable
         private double[] l;//lower limit for each variable
         private warehouse wh;//warehouse object used for calculation of the cost
+        private string designclass;//design class for a warehouse
         private bool infeasibledesign;//true if the design/solution is infeasible
-
+        
         /// <summary>
         /// Constructor for a solution it automatically calculates the feasibility of the solution
         /// If it is feasible, it calculates the cost, if it is infeasible it sets the infeasibledesign variable to true
@@ -33,11 +35,13 @@ namespace GABAK
         /// <param name="p_wh">Warehouse object that is used for compututation for solution variables</param>
         /// <param name="p_o">Number of orders being calculated, this number can be lower than total number of orders (this is used for sampling)</param>
         /// <param name="p_computing">0 is Parallel, 1 is Distributed, 2 is Single Thread Computing</param>
-        /// <param name="p_routingsolver">Routing Solver Type, Concorde, LKH, 2-Opt</param>
+        /// <param name="p_optimal">True use Concorde, False use LKH</param>
         /// <param name="p_socketservers">List of servers for distributed computing</param>
-        public esvariable(int p_numberofparameters, double[] p_x, double[] p_l, double[] p_u, warehouse p_wh, int p_o, int p_computing, string p_routingsolver, socketservers p_socketservers)
+        /// <param name="p_designclass">Search All design classes or a specific design class</param>
+        public esvariable(int p_numberofparameters, double[] p_x, double[] p_l, double[] p_u, warehouse p_wh, int p_o, int p_computing, bool p_optimal, socketservers p_socketservers, string p_designclass)
         {
             numberofparameters = p_numberofparameters;
+            designclass = p_designclass;
             x = new double[numberofparameters];
             u = new double[p_u.Count()];
             l = new double[p_l.Count()];
@@ -52,7 +56,7 @@ namespace GABAK
             wh.setArea(p_wh.area);
             wh.usevisibilitygraph = p_wh.usevisibilitygraph;
             wh.pickersize = p_wh.pickersize;
-
+            
             //Adjust warehouse area until warehouse is fit (minimum number of empty locations with given aspect ratio)
             int increased = 0;
             int decreased = 0;
@@ -73,39 +77,145 @@ namespace GABAK
                 wh.setSKUs(p_wh.getSKUs());
                 //Set average number of picks per pick tour
                 wh.avgTourLength = p_wh.avgTourLength;
-
-                double[] angle = { 180 * x[8], 180 * x[9], 180 * x[10], 180 * x[11], 180 * x[12], 180 * x[13], 180 * x[14], 180 * x[15] };
-                double[] adjuster = { x[16], x[17], x[18], x[19], x[20], x[21], x[22], x[23] };
-                double[] pickadjuster = { x[24], x[25], x[26], x[27], x[28], x[29], x[30], x[31] };
-                double[] ext = { x[1], x[2], x[3], x[4] };
-                double[] intx = { x[5] };
-                double[] inty = { x[6] };
-                double[] pd = { x[7] };
-                double aspectratio = x[0];
-
-                bool[] connections = new bool[this.numberofparameters - l.Count()];
-                int m = 0;
-                for (int j = l.Count(); j < this.numberofparameters; j++)
+                
+                if (designclass != "All")//Perform search on a specific design class
                 {
-                    int indexencodingprobability = j - (this.numberofparameters - l.Count());
-                    if (x[j] == 0)//If that cross aisle exists then select that connection correct
+                    double[] angle = { 180 * x[8], 180 * x[9], 180 * x[10], 180 * x[11], 180 * x[12], 180 * x[13] };
+                    double[] adjuster = { x[14], x[15], x[16], x[17], x[18], x[19] };
+                    double[] pickadjuster = { x[20], x[21], x[22], x[23], x[24], x[25] };
+                    double[] ext = { x[1], x[2], x[3], x[4], x[5], x[6] };
+                    double[] intx = { x[5] };
+                    double[] inty = { x[6] };
+                    double[] pd = { x[7] };
+                    double aspectratio = x[0];
+                    
+                    switch (designclass)
                     {
-                        connections[m] = false;
+                        case "0-0-0":
+                            if (!wh.create000Warehouse(angle, adjuster, pickadjuster, ext, pd, aspectratio, wh.crossaislewidth, wh.pickingaislewidth, wh.pickinglocationwidth, wh.pickinglocationdepth))
+                            {
+                                cost = Double.MaxValue;//This means infeasible design
+                                infeasibledesign = true;
+                                return;
+                            }
+                            break;
+                        case "2-0-1":
+                            if (!wh.create201Warehouse(angle, adjuster, pickadjuster, ext, pd, aspectratio, wh.crossaislewidth, wh.pickingaislewidth, wh.pickinglocationwidth, wh.pickinglocationdepth))
+                            {
+                                cost = Double.MaxValue;
+                                infeasibledesign = true;
+                                return;
+                            }
+                            break;
+                        case "3-0-2":
+                            if (!wh.create302Warehouse(angle, adjuster, pickadjuster, ext, pd, aspectratio, wh.crossaislewidth, wh.pickingaislewidth, wh.pickinglocationwidth, wh.pickinglocationdepth))
+                            {
+                                cost = Double.MaxValue;
+                                infeasibledesign = true;
+                                return;
+                            }
+                            break;
+                        case "3-0-3":
+                            if (!wh.create303Warehouse(angle, adjuster, pickadjuster, ext, pd, aspectratio, wh.crossaislewidth, wh.pickingaislewidth, wh.pickinglocationwidth, wh.pickinglocationdepth))
+                            {
+                                cost = Double.MaxValue;
+                                infeasibledesign = true;
+                                return;
+                            }
+                            break;
+                        case "3-1-3":
+                            if (!wh.create313Warehouse(angle, adjuster, pickadjuster, ext, intx, inty, pd, aspectratio, wh.crossaislewidth, wh.pickingaislewidth, wh.pickinglocationwidth, wh.pickinglocationdepth))
+                            {
+                                cost = Double.MaxValue;
+                                infeasibledesign = true;
+                                return;
+                            }
+                            break;
+                        case "4-0-2":
+                            if (!wh.create402Warehouse(angle, adjuster, pickadjuster, ext, pd, aspectratio, wh.crossaislewidth, wh.pickingaislewidth, wh.pickinglocationwidth, wh.pickinglocationdepth))
+                            {
+                                cost = Double.MaxValue;
+                                infeasibledesign = true;
+                                return;
+                            }
+                            break;
+                        case "4-0-4":
+                            if (!wh.create404Warehouse(angle, adjuster, pickadjuster, ext, pd, aspectratio, wh.crossaislewidth, wh.pickingaislewidth, wh.pickinglocationwidth, wh.pickinglocationdepth))
+                            {
+                                cost = Double.MaxValue;
+                                infeasibledesign = true;
+                                return;
+                            }
+                            break;
+                        case "4-0-5":
+                            if (!wh.create405Warehouse(angle, adjuster, pickadjuster, ext, pd, aspectratio, wh.crossaislewidth, wh.pickingaislewidth, wh.pickinglocationwidth, wh.pickinglocationdepth))
+                            {
+                                cost = Double.MaxValue;
+                                infeasibledesign = true;
+                                return;
+                            }
+                            break;
+                        case "4-1-4":
+                            if (!wh.create414Warehouse(angle, adjuster, pickadjuster, ext, intx, inty, pd, aspectratio, wh.crossaislewidth, wh.pickingaislewidth, wh.pickinglocationwidth, wh.pickinglocationdepth))
+                            {
+                                cost = Double.MaxValue;
+                                infeasibledesign = true;
+                                return;
+                            }
+                            break;
+                        case "4-2-5":
+                            if (!wh.create425Warehouse(angle, adjuster, pickadjuster, ext, intx, inty, pd, aspectratio, wh.crossaislewidth, wh.pickingaislewidth, wh.pickinglocationwidth, wh.pickinglocationdepth))
+                            {
+                                cost = Double.MaxValue;
+                                infeasibledesign = true;
+                                return;
+                            }
+                            break;
+                        case "6-0-3":
+                            if (!wh.create603Warehouse(angle, adjuster, pickadjuster, ext, pd, aspectratio, wh.crossaislewidth, wh.pickingaislewidth, wh.pickinglocationwidth, wh.pickinglocationdepth))
+                            {
+                                cost = Double.MaxValue;
+                                infeasibledesign = true;
+                                return;
+                            }
+                            break;
                     }
-                    else
-                    {
-                        connections[m] = true;
-                    }
-                    m++;
                 }
-
-                if (!wh.createWarehouse(angle, adjuster, pickadjuster, ext, intx, inty, pd, aspectratio, wh.crossaislewidth, wh.pickingaislewidth, wh.pickinglocationwidth, wh.pickinglocationdepth, connections))
+                else//Perform search on all design classes
                 {
-                    cost = Double.MaxValue;
-                    infeasibledesign = true;
-                    return;
-                }
+                    double[] angle = { 180 * x[8], 180 * x[9], 180 * x[10], 180 * x[11], 180 * x[12], 180 * x[13], 180 * x[14], 180 * x[15] };
+                    double[] adjuster = { x[16], x[17], x[18], x[19], x[20], x[21], x[22], x[23] };
+                    double[] pickadjuster = { x[24], x[25], x[26], x[27], x[28], x[29], x[30], x[31] };
+                    double[] ext = { x[1], x[2], x[3], x[4] };
+                    double[] intx = { x[5] };
+                    double[] inty = { x[6] };
+                    double[] pd = { x[7] };
+                    double aspectratio = x[0];
 
+                    bool[] connections = new bool[this.numberofparameters - l.Count()];
+                    int m = 0;
+                    for (int j = l.Count(); j < this.numberofparameters; j++)
+                    {
+                        int indexencodingprobability = j - (this.numberofparameters - l.Count());
+                        if (x[j] == 0)//If that cross aisle exists then select that connection correct
+                        {
+                            connections[m] = false;
+                        }
+                        else
+                        {
+                            connections[m] = true;
+                        }
+                        m++;
+                    }
+                    
+                    if (!wh.createWarehouse(angle, adjuster, pickadjuster, ext, intx, inty, pd, aspectratio, wh.crossaislewidth, wh.pickingaislewidth, wh.pickinglocationwidth, wh.pickinglocationdepth, connections))
+                    {
+                        cost = Double.MaxValue;
+                        infeasibledesign = true;
+                        return;
+                    }
+                }
+                
                 //Check warehouse size here before doing any other calculations and if size is not fit then adjust it approprately
                 int totalstoragelocations = wh.totalNumberOfLocations();
                 if (increased > 0 && decreased > 0)//No exact number of locations but this is the smallest it can get then we stop
@@ -137,7 +247,7 @@ namespace GABAK
                     warehousefit = true;
                 }
             } while (!warehousefit);
-
+            
             if (!wh.usevisibilitygraph)//aisle centers method
             {
                 wh.createImportantNodeShortestDistances();
@@ -173,12 +283,12 @@ namespace GABAK
                         bool LKHdoneonce = false;
                         while (tourcost == 0)
                         {
-                            if (p_routingsolver == "Concorde" || LKHdoneonce)
+                            if (p_optimal || LKHdoneonce)
                             {
                                 tourcost = rt.tspOptSteiner(tmpwh, tmporders[k], k);
                                 if (tourcost == 0) break;//This means that tour cost is really zero (sometimes LKH returns 0 even though it should not)
                             }
-                            else if (p_routingsolver == "LKH")
+                            else
                             {
                                 tourcost = rt.tspLKHSteiner(tmpwh, tmporders[k], k);
                                 LKHdoneonce = true;
@@ -188,7 +298,7 @@ namespace GABAK
                     });
                     cost = sums.Sum() / p_o;
                 }
-                else if (p_computing == 1)//Distributed computing
+                else if(p_computing == 1)//Distributed computing
                 {
                     warehouse tmpwh = wh;
                     routing rt = new routing();
@@ -209,12 +319,12 @@ namespace GABAK
                         bool LKHdoneonce = false;
                         while (tourcost == 0)
                         {
-                            if (p_routingsolver == "Concorde" || LKHdoneonce)
+                            if (p_optimal || LKHdoneonce)
                             {
                                 tourcost = rt.tspOptVisibility(tmpwh, tmporders[k], k);
                                 if (tourcost == 0) break;//This means that tour cost is really zero (sometimes LKH returns 0 even though it should not)
                             }
-                            else if (p_routingsolver == "LKH")
+                            else
                             {
                                 tourcost = rt.tspLKHVisibility(tmpwh, tmporders[k], k);
                                 LKHdoneonce = true;
@@ -224,7 +334,7 @@ namespace GABAK
                     });
                     cost = sums.Sum() / p_o;
                 }
-                else if (p_computing == 1)
+                else if(p_computing == 1)
                 {
                     warehouse tmpwh = wh;
                     routing rt = new routing();

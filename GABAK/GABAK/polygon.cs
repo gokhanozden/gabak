@@ -1,24 +1,26 @@
 ﻿//MIT License
 //Copyright(c) 2018 Sabahattin Gokhan Ozden
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace GABAK
 {
     /// <summary>
     /// Polygon class is used to create polygons that are used in visibility graph
     /// </summary>
-    internal class polygon
+    class polygon
     {
         /// <summary>
         /// Each polygon has vectors
         /// </summary>
         public List<vector> vectors;
-
         public polygon()
         {
             vectors = new List<vector>();
         }
-
         /// <summary>
         /// Method to add a vector to a polygon object
         /// </summary>

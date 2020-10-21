@@ -1,14 +1,16 @@
 ﻿//MIT License
 //Copyright(c) 2018 Sabahattin Gokhan Ozden
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace GABAK
 {
     /// <summary>
     /// Holds orders as an object
     /// </summary>
-    internal class order
+    class order
     {
         private int orderID;
         private List<sku> skus;

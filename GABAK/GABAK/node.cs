@@ -2,6 +2,8 @@
 //Copyright(c) 2018 Sabahattin Gokhan Ozden
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
 namespace GABAK
 {
@@ -11,14 +13,13 @@ namespace GABAK
         /// Id used for unique identification of nodes
         /// </summary>
         public static int nextID;
-
         public int id { get; private set; }
 
         /// <summary>
         /// X coordinate
         /// </summary>
         private double x;
-
+        
         /// <summary>
         /// Y coordinate
         /// </summary>
@@ -28,9 +29,9 @@ namespace GABAK
 
         private double locationX;//these are for interior nodes
         private double locationY;//these are for interior nodes
-
+        
         /// <summary>
-        ///Type of the node corner node, exterior node, etc.
+        ///Type of the node corner node, exterior node, etc. 
         /// </summary>
         public int type;
 
@@ -57,13 +58,10 @@ namespace GABAK
         public double pddistance;//Used for storing travel distance to P&D point
 
         public int color;//Used for coloring storage and pick locations
-
         //One to Many Total Distance Normalized
         public double onetomanynormalizeddist;
-
         //Many to Many Total Distance Normalized
         public double manytomanynormalizeddist;
-
         public double overallranking;//Used for new turnover based storage
 
         public storagelocation s1;//Used for first storage location for pick location nodes
@@ -274,7 +272,7 @@ namespace GABAK
         public edge connectvisibilitygraph(node p_node)
         {
             edge temp = isconnectedVisibilityGraph(p_node);
-            if (temp == null)
+            if(temp == null)
             {
                 temp = new edge(this, p_node, options.visibilitygraphedge);
                 this.graphedges.Add(temp);
