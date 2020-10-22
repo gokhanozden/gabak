@@ -1,13 +1,10 @@
 ﻿//MIT License
 //Copyright(c) 2018 Sabahattin Gokhan Ozden
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace GABAK
 {
-    static class visualmath
+    internal static class visualmath
     {
         /// <summary>
         /// Rotates source coordinate around the base coordinate with an angle
@@ -68,7 +65,7 @@ namespace GABAK
 
         public static int Choose(int n, int r)
         {
-            return (int)((double)Factorial(n)/(double)(Factorial(n-r) * (Factorial(r))));
+            return (int)((double)Factorial(n) / (double)(Factorial(n - r) * (Factorial(r))));
         }
 
         public static double calculateAngle(double px1, double py1, double px2, double py2)
@@ -76,6 +73,11 @@ namespace GABAK
             double angle = 0;
             angle = Math.Atan2(px1 - px2, py1 - py2) * (180 / Math.PI);
             return angle;
+        }
+
+        public static int mod(int x, int m)
+        {
+            return (x % m + m) % m;
         }
 
         public static double distance(double px1, double py1, double px2, double py2)
@@ -113,7 +115,7 @@ namespace GABAK
             double y3 = p_Y3;
             double y4 = p_Y4;
 
-            if((x1 == x3 && y1 == y3) || (x1 == x4 && y1 == y4) || (x2 == x3 && y2 == y3) || (x2 == x4 && y2 == y4))//This is a special case which needs to be checked (there was a bug before this with visibility graph
+            if ((x1 == x3 && y1 == y3) || (x1 == x4 && y1 == y4) || (x2 == x3 && y2 == y3) || (x2 == x4 && y2 == y4))//This is a special case which needs to be checked (there was a bug before this with visibility graph
             {
                 return false;
             }

@@ -34,6 +34,7 @@ namespace GABAK
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.textBoxAngle1 = new System.Windows.Forms.TextBox();
             this.labelAngle1 = new System.Windows.Forms.Label();
@@ -44,9 +45,7 @@ namespace GABAK
             this.textBoxWHDepth = new System.Windows.Forms.TextBox();
             this.labelWHWidth = new System.Windows.Forms.Label();
             this.labelWHDepth = new System.Windows.Forms.Label();
-            this.labelTotalLocations = new System.Windows.Forms.Label();
             this.buttonImportOrders = new System.Windows.Forms.Button();
-            this.labelDistanceOutput = new System.Windows.Forms.Label();
             this.labelE1 = new System.Windows.Forms.Label();
             this.textBoxE1 = new System.Windows.Forms.TextBox();
             this.labelE2 = new System.Windows.Forms.Label();
@@ -70,8 +69,6 @@ namespace GABAK
             this.printDialog1 = new System.Windows.Forms.PrintDialog();
             this.textBoxRegions = new System.Windows.Forms.TextBox();
             this.textBoxNeighbors = new System.Windows.Forms.TextBox();
-            this.textBoxNumberColors = new System.Windows.Forms.TextBox();
-            this.labelNumberColor = new System.Windows.Forms.Label();
             this.textBoxpd = new System.Windows.Forms.TextBox();
             this.labelPd = new System.Windows.Forms.Label();
             this.textBoxAdjuster1 = new System.Windows.Forms.TextBox();
@@ -115,17 +112,12 @@ namespace GABAK
             this.textBoxOrderIndex = new System.Windows.Forms.TextBox();
             this.textBoxTSP = new System.Windows.Forms.TextBox();
             this.buttonImport = new System.Windows.Forms.Button();
-            this.ButtonImportSKUs = new System.Windows.Forms.Button();
+            this.buttonImportSKUs = new System.Windows.Forms.Button();
             this.textBoxAllocationSeed = new System.Windows.Forms.TextBox();
-            this.labelTotalSKUS = new System.Windows.Forms.Label();
-            this.labelTotalOrders = new System.Windows.Forms.Label();
-            this.labelMaxOrder = new System.Windows.Forms.Label();
-            this.labelMaxOrderSize = new System.Windows.Forms.Label();
             this.buttonDoE = new System.Windows.Forms.Button();
             this.textBoxAvgOrderSize = new System.Windows.Forms.TextBox();
             this.progressBarAlg = new System.Windows.Forms.ProgressBar();
             this.checkBoxAllSearch = new System.Windows.Forms.CheckBox();
-            this.textBoxSampleSize = new System.Windows.Forms.TextBox();
             this.textBoxMagnify = new System.Windows.Forms.TextBox();
             this.labelMagnify = new System.Windows.Forms.Label();
             this.textBoxPickAdjuster1 = new System.Windows.Forms.TextBox();
@@ -140,9 +132,7 @@ namespace GABAK
             this.textBoxPickAdjuster1U = new System.Windows.Forms.TextBox();
             this.textBoxPickAdjuster2U = new System.Windows.Forms.TextBox();
             this.textBoxPickAdjuster3U = new System.Windows.Forms.TextBox();
-            this.checkBoxTSP = new System.Windows.Forms.CheckBox();
             this.labelAvgOrderSize = new System.Windows.Forms.Label();
-            this.labelSampleSize = new System.Windows.Forms.Label();
             this.textBoxArea = new System.Windows.Forms.TextBox();
             this.labelArea = new System.Windows.Forms.Label();
             this.textBoxAspectRatio = new System.Windows.Forms.TextBox();
@@ -205,7 +195,6 @@ namespace GABAK
             this.labelLWidth = new System.Windows.Forms.Label();
             this.textBoxLDepth = new System.Windows.Forms.TextBox();
             this.textBoxLWidth = new System.Windows.Forms.TextBox();
-            this.comboBoxDesignClass = new System.Windows.Forms.ComboBox();
             this.checkBoxExport = new System.Windows.Forms.CheckBox();
             this.checkBoxVisibilityGraph = new System.Windows.Forms.CheckBox();
             this.buttonTwoLocationDistance = new System.Windows.Forms.Button();
@@ -298,7 +287,6 @@ namespace GABAK
             this.labelInitialSigma = new System.Windows.Forms.Label();
             this.labelSigmaChangeFrequency = new System.Windows.Forms.Label();
             this.labelSuccessRule = new System.Windows.Forms.Label();
-            this.labelDesignClass = new System.Windows.Forms.Label();
             this.labelNETSchedule = new System.Windows.Forms.Label();
             this.labelSkewness20 = new System.Windows.Forms.Label();
             this.labelSkewness40 = new System.Windows.Forms.Label();
@@ -307,13 +295,112 @@ namespace GABAK
             this.labelPickListSize = new System.Windows.Forms.Label();
             this.labelOrderGenSeed = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.comboBoxRouting = new System.Windows.Forms.ComboBox();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.groupBoxBenderParameters = new System.Windows.Forms.GroupBox();
+            this.dataGridViewPickLists = new System.Windows.Forms.DataGridView();
+            this.dataGridViewSKUs = new System.Windows.Forms.DataGridView();
+            this.label45 = new System.Windows.Forms.Label();
+            this.textBoxSampleSize = new System.Windows.Forms.TextBox();
+            this.labelSampleSize = new System.Windows.Forms.Label();
+            this.labelMaxOrderSize = new System.Windows.Forms.Label();
+            this.labelMaxOrder = new System.Windows.Forms.Label();
+            this.labelTotalOrders = new System.Windows.Forms.Label();
+            this.labelTotalSKUS = new System.Windows.Forms.Label();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.labelNumberColor = new System.Windows.Forms.Label();
+            this.textBoxNumberColors = new System.Windows.Forms.TextBox();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.labelTotalAisles = new System.Windows.Forms.Label();
+            this.labelDistanceOutput = new System.Windows.Forms.Label();
+            this.labelTotalLocations = new System.Windows.Forms.Label();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.groupBoxLowerUpperBounds3 = new System.Windows.Forms.GroupBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label35 = new System.Windows.Forms.Label();
+            this.label44 = new System.Windows.Forms.Label();
+            this.label36 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label37 = new System.Windows.Forms.Label();
+            this.label38 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label39 = new System.Windows.Forms.Label();
+            this.label40 = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label41 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label42 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label43 = new System.Windows.Forms.Label();
+            this.groupBoxExcessLocations = new System.Windows.Forms.GroupBox();
+            this.groupBoxPickListSampling = new System.Windows.Forms.GroupBox();
+            this.groupBoxLowerUpperBounds2 = new System.Windows.Forms.GroupBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.label24 = new System.Windows.Forms.Label();
+            this.label25 = new System.Windows.Forms.Label();
+            this.label26 = new System.Windows.Forms.Label();
+            this.label27 = new System.Windows.Forms.Label();
+            this.label28 = new System.Windows.Forms.Label();
+            this.label29 = new System.Windows.Forms.Label();
+            this.label30 = new System.Windows.Forms.Label();
+            this.label31 = new System.Windows.Forms.Label();
+            this.label32 = new System.Windows.Forms.Label();
+            this.label33 = new System.Windows.Forms.Label();
+            this.label34 = new System.Windows.Forms.Label();
+            this.groupBoxESParameters = new System.Windows.Forms.GroupBox();
+            this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.tabPage8 = new System.Windows.Forms.TabPage();
+            this.tabPage9 = new System.Windows.Forms.TabPage();
+            this.tabPage10 = new System.Windows.Forms.TabPage();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.menuStripTop.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.groupBoxBenderParameters.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPickLists)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSKUs)).BeginInit();
+            this.tabPage2.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            this.tabPage4.SuspendLayout();
+            this.groupBox4.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.tabPage5.SuspendLayout();
+            this.groupBoxLowerUpperBounds3.SuspendLayout();
+            this.groupBoxExcessLocations.SuspendLayout();
+            this.groupBoxPickListSampling.SuspendLayout();
+            this.groupBoxLowerUpperBounds2.SuspendLayout();
+            this.groupBoxESParameters.SuspendLayout();
+            this.tabPage6.SuspendLayout();
+            this.tabPage7.SuspendLayout();
+            this.tabPage8.SuspendLayout();
+            this.tabPage9.SuspendLayout();
+            this.tabPage10.SuspendLayout();
             this.SuspendLayout();
             // 
             // textBoxAngle1
             // 
-            this.textBoxAngle1.Location = new System.Drawing.Point(102, 282);
+            this.textBoxAngle1.Location = new System.Drawing.Point(83, 17);
             this.textBoxAngle1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAngle1.Name = "textBoxAngle1";
             this.textBoxAngle1.Size = new System.Drawing.Size(40, 18);
@@ -324,7 +411,7 @@ namespace GABAK
             // labelAngle1
             // 
             this.labelAngle1.AutoSize = true;
-            this.labelAngle1.Location = new System.Drawing.Point(57, 285);
+            this.labelAngle1.Location = new System.Drawing.Point(38, 20);
             this.labelAngle1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelAngle1.Name = "labelAngle1";
             this.labelAngle1.Size = new System.Drawing.Size(43, 13);
@@ -333,7 +420,7 @@ namespace GABAK
             // 
             // buttonCreate
             // 
-            this.buttonCreate.Location = new System.Drawing.Point(6, 713);
+            this.buttonCreate.Location = new System.Drawing.Point(41, 184);
             this.buttonCreate.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.buttonCreate.Name = "buttonCreate";
             this.buttonCreate.Size = new System.Drawing.Size(74, 21);
@@ -347,7 +434,7 @@ namespace GABAK
             this.panelDrawing.AllowDrop = true;
             this.panelDrawing.AutoScroll = true;
             this.panelDrawing.BackColor = System.Drawing.Color.White;
-            this.panelDrawing.Location = new System.Drawing.Point(383, 30);
+            this.panelDrawing.Location = new System.Drawing.Point(623, 49);
             this.panelDrawing.Margin = new System.Windows.Forms.Padding(0);
             this.panelDrawing.Name = "panelDrawing";
             this.panelDrawing.Size = new System.Drawing.Size(396, 366);
@@ -356,7 +443,7 @@ namespace GABAK
             // 
             // buttonReset
             // 
-            this.buttonReset.Location = new System.Drawing.Point(79, 713);
+            this.buttonReset.Location = new System.Drawing.Point(119, 184);
             this.buttonReset.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.buttonReset.Name = "buttonReset";
             this.buttonReset.Size = new System.Drawing.Size(74, 21);
@@ -367,7 +454,7 @@ namespace GABAK
             // 
             // textBoxWHWidth
             // 
-            this.textBoxWHWidth.Location = new System.Drawing.Point(102, 95);
+            this.textBoxWHWidth.Location = new System.Drawing.Point(110, 82);
             this.textBoxWHWidth.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxWHWidth.Name = "textBoxWHWidth";
             this.textBoxWHWidth.Size = new System.Drawing.Size(40, 18);
@@ -378,7 +465,7 @@ namespace GABAK
             // 
             // textBoxWHDepth
             // 
-            this.textBoxWHDepth.Location = new System.Drawing.Point(102, 112);
+            this.textBoxWHDepth.Location = new System.Drawing.Point(110, 99);
             this.textBoxWHDepth.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxWHDepth.Name = "textBoxWHDepth";
             this.textBoxWHDepth.Size = new System.Drawing.Size(40, 18);
@@ -390,7 +477,7 @@ namespace GABAK
             // labelWHWidth
             // 
             this.labelWHWidth.AutoSize = true;
-            this.labelWHWidth.Location = new System.Drawing.Point(11, 98);
+            this.labelWHWidth.Location = new System.Drawing.Point(19, 85);
             this.labelWHWidth.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelWHWidth.Name = "labelWHWidth";
             this.labelWHWidth.Size = new System.Drawing.Size(89, 13);
@@ -400,48 +487,28 @@ namespace GABAK
             // labelWHDepth
             // 
             this.labelWHDepth.AutoSize = true;
-            this.labelWHDepth.Location = new System.Drawing.Point(8, 115);
+            this.labelWHDepth.Location = new System.Drawing.Point(16, 102);
             this.labelWHDepth.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelWHDepth.Name = "labelWHDepth";
             this.labelWHDepth.Size = new System.Drawing.Size(92, 13);
             this.labelWHDepth.TabIndex = 10;
             this.labelWHDepth.Text = "Warehouse Depth";
             // 
-            // labelTotalLocations
-            // 
-            this.labelTotalLocations.AutoSize = true;
-            this.labelTotalLocations.Location = new System.Drawing.Point(20, 757);
-            this.labelTotalLocations.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.labelTotalLocations.Name = "labelTotalLocations";
-            this.labelTotalLocations.Size = new System.Drawing.Size(80, 13);
-            this.labelTotalLocations.TabIndex = 19;
-            this.labelTotalLocations.Text = "Total Locations:";
-            // 
             // buttonImportOrders
             // 
-            this.buttonImportOrders.Location = new System.Drawing.Point(303, 376);
+            this.buttonImportOrders.Location = new System.Drawing.Point(174, 89);
             this.buttonImportOrders.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.buttonImportOrders.Name = "buttonImportOrders";
-            this.buttonImportOrders.Size = new System.Drawing.Size(74, 21);
+            this.buttonImportOrders.Size = new System.Drawing.Size(187, 21);
             this.buttonImportOrders.TabIndex = 64;
-            this.buttonImportOrders.Text = "ImportOrders";
+            this.buttonImportOrders.Text = "Import or Generate Pick Lists";
             this.buttonImportOrders.UseVisualStyleBackColor = true;
             this.buttonImportOrders.Click += new System.EventHandler(this.buttonImportOrders_Click);
-            // 
-            // labelDistanceOutput
-            // 
-            this.labelDistanceOutput.AutoSize = true;
-            this.labelDistanceOutput.Location = new System.Drawing.Point(8, 775);
-            this.labelDistanceOutput.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.labelDistanceOutput.Name = "labelDistanceOutput";
-            this.labelDistanceOutput.Size = new System.Drawing.Size(94, 13);
-            this.labelDistanceOutput.TabIndex = 25;
-            this.labelDistanceOutput.Text = "Average Distance:";
             // 
             // labelE1
             // 
             this.labelE1.AutoSize = true;
-            this.labelE1.Location = new System.Drawing.Point(80, 166);
+            this.labelE1.Location = new System.Drawing.Point(51, 204);
             this.labelE1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelE1.Name = "labelE1";
             this.labelE1.Size = new System.Drawing.Size(20, 13);
@@ -450,7 +517,7 @@ namespace GABAK
             // 
             // textBoxE1
             // 
-            this.textBoxE1.Location = new System.Drawing.Point(102, 163);
+            this.textBoxE1.Location = new System.Drawing.Point(73, 201);
             this.textBoxE1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxE1.Name = "textBoxE1";
             this.textBoxE1.Size = new System.Drawing.Size(40, 18);
@@ -461,7 +528,7 @@ namespace GABAK
             // labelE2
             // 
             this.labelE2.AutoSize = true;
-            this.labelE2.Location = new System.Drawing.Point(80, 183);
+            this.labelE2.Location = new System.Drawing.Point(51, 221);
             this.labelE2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelE2.Name = "labelE2";
             this.labelE2.Size = new System.Drawing.Size(20, 13);
@@ -470,7 +537,7 @@ namespace GABAK
             // 
             // textBoxE2
             // 
-            this.textBoxE2.Location = new System.Drawing.Point(102, 180);
+            this.textBoxE2.Location = new System.Drawing.Point(73, 218);
             this.textBoxE2.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxE2.Name = "textBoxE2";
             this.textBoxE2.Size = new System.Drawing.Size(40, 18);
@@ -489,7 +556,7 @@ namespace GABAK
             this.menuStripTop.Location = new System.Drawing.Point(0, 0);
             this.menuStripTop.Name = "menuStripTop";
             this.menuStripTop.Padding = new System.Windows.Forms.Padding(6, 3, 0, 3);
-            this.menuStripTop.Size = new System.Drawing.Size(784, 25);
+            this.menuStripTop.Size = new System.Drawing.Size(1189, 25);
             this.menuStripTop.TabIndex = 29;
             this.menuStripTop.Text = "menuStrip1";
             // 
@@ -508,34 +575,34 @@ namespace GABAK
             // resetToolStripMenuItem
             // 
             this.resetToolStripMenuItem.Name = "resetToolStripMenuItem";
-            this.resetToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.resetToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.resetToolStripMenuItem.Text = "Reset";
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.saveAsToolStripMenuItem.Text = "Save As...";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
             // printToolStripMenuItem
             // 
             this.printToolStripMenuItem.Name = "printToolStripMenuItem";
-            this.printToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.printToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.printToolStripMenuItem.Text = "Print";
             this.printToolStripMenuItem.Click += new System.EventHandler(this.printToolStripMenuItem_Click);
             // 
             // exportToolStripMenuItem
             // 
             this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
-            this.exportToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exportToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.exportToolStripMenuItem.Text = "Export";
             this.exportToolStripMenuItem.Click += new System.EventHandler(this.exportToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -586,7 +653,7 @@ namespace GABAK
             // 
             // textBoxAngle2
             // 
-            this.textBoxAngle2.Location = new System.Drawing.Point(102, 299);
+            this.textBoxAngle2.Location = new System.Drawing.Point(83, 34);
             this.textBoxAngle2.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAngle2.Name = "textBoxAngle2";
             this.textBoxAngle2.Size = new System.Drawing.Size(40, 18);
@@ -597,7 +664,7 @@ namespace GABAK
             // labelAngle2
             // 
             this.labelAngle2.AutoSize = true;
-            this.labelAngle2.Location = new System.Drawing.Point(57, 302);
+            this.labelAngle2.Location = new System.Drawing.Point(38, 37);
             this.labelAngle2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelAngle2.Name = "labelAngle2";
             this.labelAngle2.Size = new System.Drawing.Size(43, 13);
@@ -614,7 +681,7 @@ namespace GABAK
             // 
             // textBoxRegions
             // 
-            this.textBoxRegions.Location = new System.Drawing.Point(2, 791);
+            this.textBoxRegions.Location = new System.Drawing.Point(11, 83);
             this.textBoxRegions.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxRegions.Multiline = true;
             this.textBoxRegions.Name = "textBoxRegions";
@@ -623,36 +690,16 @@ namespace GABAK
             // 
             // textBoxNeighbors
             // 
-            this.textBoxNeighbors.Location = new System.Drawing.Point(369, 791);
+            this.textBoxNeighbors.Location = new System.Drawing.Point(11, 161);
             this.textBoxNeighbors.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxNeighbors.Multiline = true;
             this.textBoxNeighbors.Name = "textBoxNeighbors";
-            this.textBoxNeighbors.Size = new System.Drawing.Size(392, 72);
+            this.textBoxNeighbors.Size = new System.Drawing.Size(363, 72);
             this.textBoxNeighbors.TabIndex = 71;
-            // 
-            // textBoxNumberColors
-            // 
-            this.textBoxNumberColors.Location = new System.Drawing.Point(102, 690);
-            this.textBoxNumberColors.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.textBoxNumberColors.Name = "textBoxNumberColors";
-            this.textBoxNumberColors.Size = new System.Drawing.Size(40, 18);
-            this.textBoxNumberColors.TabIndex = 66;
-            this.textBoxNumberColors.Text = "5";
-            this.textBoxNumberColors.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkNumeric);
-            // 
-            // labelNumberColor
-            // 
-            this.labelNumberColor.AutoSize = true;
-            this.labelNumberColor.Location = new System.Drawing.Point(13, 693);
-            this.labelNumberColor.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.labelNumberColor.Name = "labelNumberColor";
-            this.labelNumberColor.Size = new System.Drawing.Size(87, 13);
-            this.labelNumberColor.TabIndex = 40;
-            this.labelNumberColor.Text = "Number of Colors";
             // 
             // textBoxpd
             // 
-            this.textBoxpd.Location = new System.Drawing.Point(102, 265);
+            this.textBoxpd.Location = new System.Drawing.Point(73, 303);
             this.textBoxpd.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxpd.Name = "textBoxpd";
             this.textBoxpd.Size = new System.Drawing.Size(40, 18);
@@ -663,7 +710,7 @@ namespace GABAK
             // labelPd
             // 
             this.labelPd.AutoSize = true;
-            this.labelPd.Location = new System.Drawing.Point(72, 268);
+            this.labelPd.Location = new System.Drawing.Point(43, 306);
             this.labelPd.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelPd.Name = "labelPd";
             this.labelPd.Size = new System.Drawing.Size(28, 13);
@@ -672,7 +719,7 @@ namespace GABAK
             // 
             // textBoxAdjuster1
             // 
-            this.textBoxAdjuster1.Location = new System.Drawing.Point(102, 418);
+            this.textBoxAdjuster1.Location = new System.Drawing.Point(83, 153);
             this.textBoxAdjuster1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAdjuster1.Name = "textBoxAdjuster1";
             this.textBoxAdjuster1.Size = new System.Drawing.Size(40, 18);
@@ -682,7 +729,7 @@ namespace GABAK
             // 
             // textBoxAdjuster2
             // 
-            this.textBoxAdjuster2.Location = new System.Drawing.Point(102, 435);
+            this.textBoxAdjuster2.Location = new System.Drawing.Point(83, 170);
             this.textBoxAdjuster2.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAdjuster2.Name = "textBoxAdjuster2";
             this.textBoxAdjuster2.Size = new System.Drawing.Size(40, 18);
@@ -693,7 +740,7 @@ namespace GABAK
             // labelAdjuster1
             // 
             this.labelAdjuster1.AutoSize = true;
-            this.labelAdjuster1.Location = new System.Drawing.Point(46, 421);
+            this.labelAdjuster1.Location = new System.Drawing.Point(27, 156);
             this.labelAdjuster1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelAdjuster1.Name = "labelAdjuster1";
             this.labelAdjuster1.Size = new System.Drawing.Size(54, 13);
@@ -703,7 +750,7 @@ namespace GABAK
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(46, 438);
+            this.label2.Location = new System.Drawing.Point(27, 173);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(54, 13);
@@ -712,18 +759,18 @@ namespace GABAK
             // 
             // buttonSolveES
             // 
-            this.buttonSolveES.Location = new System.Drawing.Point(152, 713);
+            this.buttonSolveES.Location = new System.Drawing.Point(8, 163);
             this.buttonSolveES.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.buttonSolveES.Name = "buttonSolveES";
             this.buttonSolveES.Size = new System.Drawing.Size(74, 21);
             this.buttonSolveES.TabIndex = 63;
-            this.buttonSolveES.Text = "Solve ES";
+            this.buttonSolveES.Text = "Optimize";
             this.buttonSolveES.UseVisualStyleBackColor = true;
             this.buttonSolveES.Click += new System.EventHandler(this.buttonSolveES_Click);
             // 
             // textBoxMu
             // 
-            this.textBoxMu.Location = new System.Drawing.Point(303, 27);
+            this.textBoxMu.Location = new System.Drawing.Point(112, 19);
             this.textBoxMu.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxMu.Name = "textBoxMu";
             this.textBoxMu.Size = new System.Drawing.Size(50, 18);
@@ -732,7 +779,7 @@ namespace GABAK
             // 
             // textBoxLambda
             // 
-            this.textBoxLambda.Location = new System.Drawing.Point(303, 44);
+            this.textBoxLambda.Location = new System.Drawing.Point(112, 36);
             this.textBoxLambda.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxLambda.Name = "textBoxLambda";
             this.textBoxLambda.Size = new System.Drawing.Size(50, 18);
@@ -741,7 +788,7 @@ namespace GABAK
             // 
             // textBoxESSeed
             // 
-            this.textBoxESSeed.Location = new System.Drawing.Point(303, 61);
+            this.textBoxESSeed.Location = new System.Drawing.Point(112, 53);
             this.textBoxESSeed.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxESSeed.Name = "textBoxESSeed";
             this.textBoxESSeed.Size = new System.Drawing.Size(50, 18);
@@ -750,7 +797,7 @@ namespace GABAK
             // 
             // textBoxESIteration
             // 
-            this.textBoxESIteration.Location = new System.Drawing.Point(303, 78);
+            this.textBoxESIteration.Location = new System.Drawing.Point(112, 70);
             this.textBoxESIteration.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxESIteration.Name = "textBoxESIteration";
             this.textBoxESIteration.Size = new System.Drawing.Size(50, 18);
@@ -759,7 +806,7 @@ namespace GABAK
             // 
             // textBoxSigma
             // 
-            this.textBoxSigma.Location = new System.Drawing.Point(303, 95);
+            this.textBoxSigma.Location = new System.Drawing.Point(112, 87);
             this.textBoxSigma.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxSigma.Name = "textBoxSigma";
             this.textBoxSigma.Size = new System.Drawing.Size(50, 18);
@@ -768,7 +815,7 @@ namespace GABAK
             // 
             // textBoxESCounter
             // 
-            this.textBoxESCounter.Location = new System.Drawing.Point(303, 112);
+            this.textBoxESCounter.Location = new System.Drawing.Point(112, 104);
             this.textBoxESCounter.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxESCounter.Name = "textBoxESCounter";
             this.textBoxESCounter.Size = new System.Drawing.Size(50, 18);
@@ -777,7 +824,7 @@ namespace GABAK
             // 
             // textBoxAngle3
             // 
-            this.textBoxAngle3.Location = new System.Drawing.Point(102, 316);
+            this.textBoxAngle3.Location = new System.Drawing.Point(83, 51);
             this.textBoxAngle3.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAngle3.Name = "textBoxAngle3";
             this.textBoxAngle3.Size = new System.Drawing.Size(40, 18);
@@ -787,7 +834,7 @@ namespace GABAK
             // 
             // textBoxAdjuster3
             // 
-            this.textBoxAdjuster3.Location = new System.Drawing.Point(102, 452);
+            this.textBoxAdjuster3.Location = new System.Drawing.Point(83, 187);
             this.textBoxAdjuster3.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAdjuster3.Name = "textBoxAdjuster3";
             this.textBoxAdjuster3.Size = new System.Drawing.Size(40, 18);
@@ -798,7 +845,7 @@ namespace GABAK
             // labelAdjuster3
             // 
             this.labelAdjuster3.AutoSize = true;
-            this.labelAdjuster3.Location = new System.Drawing.Point(46, 455);
+            this.labelAdjuster3.Location = new System.Drawing.Point(27, 190);
             this.labelAdjuster3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelAdjuster3.Name = "labelAdjuster3";
             this.labelAdjuster3.Size = new System.Drawing.Size(54, 13);
@@ -808,7 +855,7 @@ namespace GABAK
             // labelAngle3
             // 
             this.labelAngle3.AutoSize = true;
-            this.labelAngle3.Location = new System.Drawing.Point(57, 319);
+            this.labelAngle3.Location = new System.Drawing.Point(38, 54);
             this.labelAngle3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelAngle3.Name = "labelAngle3";
             this.labelAngle3.Size = new System.Drawing.Size(43, 13);
@@ -817,7 +864,7 @@ namespace GABAK
             // 
             // textBoxE3
             // 
-            this.textBoxE3.Location = new System.Drawing.Point(102, 197);
+            this.textBoxE3.Location = new System.Drawing.Point(73, 235);
             this.textBoxE3.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxE3.Name = "textBoxE3";
             this.textBoxE3.Size = new System.Drawing.Size(40, 18);
@@ -828,7 +875,7 @@ namespace GABAK
             // labelE3
             // 
             this.labelE3.AutoSize = true;
-            this.labelE3.Location = new System.Drawing.Point(80, 200);
+            this.labelE3.Location = new System.Drawing.Point(51, 238);
             this.labelE3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelE3.Name = "labelE3";
             this.labelE3.Size = new System.Drawing.Size(20, 13);
@@ -837,7 +884,7 @@ namespace GABAK
             // 
             // textBoxAngle1L
             // 
-            this.textBoxAngle1L.Location = new System.Drawing.Point(147, 282);
+            this.textBoxAngle1L.Location = new System.Drawing.Point(85, 17);
             this.textBoxAngle1L.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAngle1L.Name = "textBoxAngle1L";
             this.textBoxAngle1L.Size = new System.Drawing.Size(33, 18);
@@ -846,7 +893,7 @@ namespace GABAK
             // 
             // textBoxAngle2L
             // 
-            this.textBoxAngle2L.Location = new System.Drawing.Point(147, 299);
+            this.textBoxAngle2L.Location = new System.Drawing.Point(85, 34);
             this.textBoxAngle2L.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAngle2L.Name = "textBoxAngle2L";
             this.textBoxAngle2L.Size = new System.Drawing.Size(33, 18);
@@ -855,7 +902,7 @@ namespace GABAK
             // 
             // textBoxAngle3L
             // 
-            this.textBoxAngle3L.Location = new System.Drawing.Point(147, 316);
+            this.textBoxAngle3L.Location = new System.Drawing.Point(85, 51);
             this.textBoxAngle3L.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAngle3L.Name = "textBoxAngle3L";
             this.textBoxAngle3L.Size = new System.Drawing.Size(33, 18);
@@ -864,7 +911,7 @@ namespace GABAK
             // 
             // textBoxAdjuster1L
             // 
-            this.textBoxAdjuster1L.Location = new System.Drawing.Point(147, 418);
+            this.textBoxAdjuster1L.Location = new System.Drawing.Point(85, 153);
             this.textBoxAdjuster1L.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAdjuster1L.Name = "textBoxAdjuster1L";
             this.textBoxAdjuster1L.Size = new System.Drawing.Size(33, 18);
@@ -873,7 +920,7 @@ namespace GABAK
             // 
             // textBoxAdjuster2L
             // 
-            this.textBoxAdjuster2L.Location = new System.Drawing.Point(147, 435);
+            this.textBoxAdjuster2L.Location = new System.Drawing.Point(85, 170);
             this.textBoxAdjuster2L.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAdjuster2L.Name = "textBoxAdjuster2L";
             this.textBoxAdjuster2L.Size = new System.Drawing.Size(33, 18);
@@ -882,7 +929,7 @@ namespace GABAK
             // 
             // textBoxAdjuster3L
             // 
-            this.textBoxAdjuster3L.Location = new System.Drawing.Point(147, 452);
+            this.textBoxAdjuster3L.Location = new System.Drawing.Point(85, 187);
             this.textBoxAdjuster3L.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAdjuster3L.Name = "textBoxAdjuster3L";
             this.textBoxAdjuster3L.Size = new System.Drawing.Size(33, 18);
@@ -891,7 +938,7 @@ namespace GABAK
             // 
             // textBoxE1L
             // 
-            this.textBoxE1L.Location = new System.Drawing.Point(147, 163);
+            this.textBoxE1L.Location = new System.Drawing.Point(73, 203);
             this.textBoxE1L.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxE1L.Name = "textBoxE1L";
             this.textBoxE1L.Size = new System.Drawing.Size(33, 18);
@@ -900,7 +947,7 @@ namespace GABAK
             // 
             // textBoxE2L
             // 
-            this.textBoxE2L.Location = new System.Drawing.Point(147, 180);
+            this.textBoxE2L.Location = new System.Drawing.Point(73, 220);
             this.textBoxE2L.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxE2L.Name = "textBoxE2L";
             this.textBoxE2L.Size = new System.Drawing.Size(33, 18);
@@ -909,7 +956,7 @@ namespace GABAK
             // 
             // textBoxE3L
             // 
-            this.textBoxE3L.Location = new System.Drawing.Point(147, 197);
+            this.textBoxE3L.Location = new System.Drawing.Point(73, 237);
             this.textBoxE3L.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxE3L.Name = "textBoxE3L";
             this.textBoxE3L.Size = new System.Drawing.Size(33, 18);
@@ -918,7 +965,7 @@ namespace GABAK
             // 
             // textBoxPDL
             // 
-            this.textBoxPDL.Location = new System.Drawing.Point(147, 265);
+            this.textBoxPDL.Location = new System.Drawing.Point(73, 305);
             this.textBoxPDL.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxPDL.Name = "textBoxPDL";
             this.textBoxPDL.Size = new System.Drawing.Size(33, 18);
@@ -927,7 +974,7 @@ namespace GABAK
             // 
             // textBoxPDU
             // 
-            this.textBoxPDU.Location = new System.Drawing.Point(187, 265);
+            this.textBoxPDU.Location = new System.Drawing.Point(110, 305);
             this.textBoxPDU.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxPDU.Name = "textBoxPDU";
             this.textBoxPDU.Size = new System.Drawing.Size(33, 18);
@@ -936,7 +983,7 @@ namespace GABAK
             // 
             // textBoxE3U
             // 
-            this.textBoxE3U.Location = new System.Drawing.Point(187, 197);
+            this.textBoxE3U.Location = new System.Drawing.Point(110, 237);
             this.textBoxE3U.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxE3U.Name = "textBoxE3U";
             this.textBoxE3U.Size = new System.Drawing.Size(33, 18);
@@ -945,7 +992,7 @@ namespace GABAK
             // 
             // textBoxE2U
             // 
-            this.textBoxE2U.Location = new System.Drawing.Point(187, 180);
+            this.textBoxE2U.Location = new System.Drawing.Point(110, 220);
             this.textBoxE2U.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxE2U.Name = "textBoxE2U";
             this.textBoxE2U.Size = new System.Drawing.Size(33, 18);
@@ -954,7 +1001,7 @@ namespace GABAK
             // 
             // textBoxE1U
             // 
-            this.textBoxE1U.Location = new System.Drawing.Point(187, 163);
+            this.textBoxE1U.Location = new System.Drawing.Point(110, 203);
             this.textBoxE1U.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxE1U.Name = "textBoxE1U";
             this.textBoxE1U.Size = new System.Drawing.Size(33, 18);
@@ -963,7 +1010,7 @@ namespace GABAK
             // 
             // textBoxAdjuster3U
             // 
-            this.textBoxAdjuster3U.Location = new System.Drawing.Point(187, 452);
+            this.textBoxAdjuster3U.Location = new System.Drawing.Point(122, 187);
             this.textBoxAdjuster3U.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAdjuster3U.Name = "textBoxAdjuster3U";
             this.textBoxAdjuster3U.Size = new System.Drawing.Size(33, 18);
@@ -972,7 +1019,7 @@ namespace GABAK
             // 
             // textBoxAdjuster2U
             // 
-            this.textBoxAdjuster2U.Location = new System.Drawing.Point(187, 435);
+            this.textBoxAdjuster2U.Location = new System.Drawing.Point(122, 170);
             this.textBoxAdjuster2U.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAdjuster2U.Name = "textBoxAdjuster2U";
             this.textBoxAdjuster2U.Size = new System.Drawing.Size(33, 18);
@@ -981,7 +1028,7 @@ namespace GABAK
             // 
             // textBoxAdjuster1U
             // 
-            this.textBoxAdjuster1U.Location = new System.Drawing.Point(187, 418);
+            this.textBoxAdjuster1U.Location = new System.Drawing.Point(122, 153);
             this.textBoxAdjuster1U.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAdjuster1U.Name = "textBoxAdjuster1U";
             this.textBoxAdjuster1U.Size = new System.Drawing.Size(33, 18);
@@ -990,7 +1037,7 @@ namespace GABAK
             // 
             // textBoxAngle3U
             // 
-            this.textBoxAngle3U.Location = new System.Drawing.Point(187, 316);
+            this.textBoxAngle3U.Location = new System.Drawing.Point(122, 51);
             this.textBoxAngle3U.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAngle3U.Name = "textBoxAngle3U";
             this.textBoxAngle3U.Size = new System.Drawing.Size(33, 18);
@@ -999,7 +1046,7 @@ namespace GABAK
             // 
             // textBoxAngle2U
             // 
-            this.textBoxAngle2U.Location = new System.Drawing.Point(187, 299);
+            this.textBoxAngle2U.Location = new System.Drawing.Point(122, 34);
             this.textBoxAngle2U.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAngle2U.Name = "textBoxAngle2U";
             this.textBoxAngle2U.Size = new System.Drawing.Size(33, 18);
@@ -1008,7 +1055,7 @@ namespace GABAK
             // 
             // textBoxAngle1U
             // 
-            this.textBoxAngle1U.Location = new System.Drawing.Point(187, 282);
+            this.textBoxAngle1U.Location = new System.Drawing.Point(122, 17);
             this.textBoxAngle1U.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAngle1U.Name = "textBoxAngle1U";
             this.textBoxAngle1U.Size = new System.Drawing.Size(33, 18);
@@ -1017,7 +1064,7 @@ namespace GABAK
             // 
             // buttonFindLocation
             // 
-            this.buttonFindLocation.Location = new System.Drawing.Point(6, 889);
+            this.buttonFindLocation.Location = new System.Drawing.Point(6, 56);
             this.buttonFindLocation.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.buttonFindLocation.Name = "buttonFindLocation";
             this.buttonFindLocation.Size = new System.Drawing.Size(74, 21);
@@ -1028,7 +1075,7 @@ namespace GABAK
             // 
             // textBoxOrderIndex
             // 
-            this.textBoxOrderIndex.Location = new System.Drawing.Point(83, 890);
+            this.textBoxOrderIndex.Location = new System.Drawing.Point(83, 57);
             this.textBoxOrderIndex.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxOrderIndex.Name = "textBoxOrderIndex";
             this.textBoxOrderIndex.Size = new System.Drawing.Size(34, 18);
@@ -1037,7 +1084,7 @@ namespace GABAK
             // 
             // textBoxTSP
             // 
-            this.textBoxTSP.Location = new System.Drawing.Point(117, 869);
+            this.textBoxTSP.Location = new System.Drawing.Point(117, 32);
             this.textBoxTSP.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxTSP.Name = "textBoxTSP";
             this.textBoxTSP.Size = new System.Drawing.Size(44, 18);
@@ -1045,78 +1092,38 @@ namespace GABAK
             // 
             // buttonImport
             // 
-            this.buttonImport.Location = new System.Drawing.Point(227, 354);
+            this.buttonImport.Location = new System.Drawing.Point(174, 35);
             this.buttonImport.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.buttonImport.Name = "buttonImport";
-            this.buttonImport.Size = new System.Drawing.Size(74, 21);
+            this.buttonImport.Size = new System.Drawing.Size(187, 21);
             this.buttonImport.TabIndex = 347;
-            this.buttonImport.Text = "Import RD";
+            this.buttonImport.Text = "Import Data in Single Excel File";
             this.buttonImport.UseVisualStyleBackColor = true;
             this.buttonImport.Click += new System.EventHandler(this.buttonImport_Click);
             // 
-            // ButtonImportSKUs
+            // buttonImportSKUs
             // 
-            this.ButtonImportSKUs.Location = new System.Drawing.Point(227, 376);
-            this.ButtonImportSKUs.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.ButtonImportSKUs.Name = "ButtonImportSKUs";
-            this.ButtonImportSKUs.Size = new System.Drawing.Size(74, 21);
-            this.ButtonImportSKUs.TabIndex = 348;
-            this.ButtonImportSKUs.Text = "Import SKUs";
-            this.ButtonImportSKUs.UseVisualStyleBackColor = true;
-            this.ButtonImportSKUs.Click += new System.EventHandler(this.ButtonImportSKUs_Click);
+            this.buttonImportSKUs.Location = new System.Drawing.Point(174, 62);
+            this.buttonImportSKUs.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.buttonImportSKUs.Name = "buttonImportSKUs";
+            this.buttonImportSKUs.Size = new System.Drawing.Size(187, 21);
+            this.buttonImportSKUs.TabIndex = 348;
+            this.buttonImportSKUs.Text = "Import or Generate SKUs";
+            this.buttonImportSKUs.UseVisualStyleBackColor = true;
+            this.buttonImportSKUs.Click += new System.EventHandler(this.ButtonImportSKUs_Click);
             // 
             // textBoxAllocationSeed
             // 
-            this.textBoxAllocationSeed.Location = new System.Drawing.Point(303, 472);
+            this.textBoxAllocationSeed.Location = new System.Drawing.Point(94, 50);
             this.textBoxAllocationSeed.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAllocationSeed.Name = "textBoxAllocationSeed";
-            this.textBoxAllocationSeed.Size = new System.Drawing.Size(52, 18);
+            this.textBoxAllocationSeed.Size = new System.Drawing.Size(40, 18);
             this.textBoxAllocationSeed.TabIndex = 349;
             this.textBoxAllocationSeed.Text = "0";
             // 
-            // labelTotalSKUS
-            // 
-            this.labelTotalSKUS.AutoSize = true;
-            this.labelTotalSKUS.Location = new System.Drawing.Point(416, 863);
-            this.labelTotalSKUS.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.labelTotalSKUS.Name = "labelTotalSKUS";
-            this.labelTotalSKUS.Size = new System.Drawing.Size(40, 13);
-            this.labelTotalSKUS.TabIndex = 350;
-            this.labelTotalSKUS.Text = "# SKU:";
-            // 
-            // labelTotalOrders
-            // 
-            this.labelTotalOrders.AutoSize = true;
-            this.labelTotalOrders.Location = new System.Drawing.Point(407, 875);
-            this.labelTotalOrders.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.labelTotalOrders.Name = "labelTotalOrders";
-            this.labelTotalOrders.Size = new System.Drawing.Size(50, 13);
-            this.labelTotalOrders.TabIndex = 351;
-            this.labelTotalOrders.Text = "# Orders:";
-            // 
-            // labelMaxOrder
-            // 
-            this.labelMaxOrder.AutoSize = true;
-            this.labelMaxOrder.Location = new System.Drawing.Point(552, 863);
-            this.labelMaxOrder.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.labelMaxOrder.Name = "labelMaxOrder";
-            this.labelMaxOrder.Size = new System.Drawing.Size(67, 13);
-            this.labelMaxOrder.TabIndex = 352;
-            this.labelMaxOrder.Text = "MaxOrderID:";
-            // 
-            // labelMaxOrderSize
-            // 
-            this.labelMaxOrderSize.AutoSize = true;
-            this.labelMaxOrderSize.Location = new System.Drawing.Point(550, 875);
-            this.labelMaxOrderSize.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.labelMaxOrderSize.Name = "labelMaxOrderSize";
-            this.labelMaxOrderSize.Size = new System.Drawing.Size(68, 13);
-            this.labelMaxOrderSize.TabIndex = 353;
-            this.labelMaxOrderSize.Text = "Max Order #:";
-            // 
             // buttonDoE
             // 
-            this.buttonDoE.Location = new System.Drawing.Point(303, 398);
+            this.buttonDoE.Location = new System.Drawing.Point(5, 7);
             this.buttonDoE.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.buttonDoE.Name = "buttonDoE";
             this.buttonDoE.Size = new System.Drawing.Size(74, 21);
@@ -1127,16 +1134,16 @@ namespace GABAK
             // 
             // textBoxAvgOrderSize
             // 
-            this.textBoxAvgOrderSize.Location = new System.Drawing.Point(303, 488);
+            this.textBoxAvgOrderSize.Location = new System.Drawing.Point(94, 32);
             this.textBoxAvgOrderSize.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAvgOrderSize.Name = "textBoxAvgOrderSize";
-            this.textBoxAvgOrderSize.Size = new System.Drawing.Size(52, 18);
+            this.textBoxAvgOrderSize.Size = new System.Drawing.Size(40, 18);
             this.textBoxAvgOrderSize.TabIndex = 356;
             this.textBoxAvgOrderSize.Text = "1";
             // 
             // progressBarAlg
             // 
-            this.progressBarAlg.Location = new System.Drawing.Point(679, 867);
+            this.progressBarAlg.Location = new System.Drawing.Point(100, 163);
             this.progressBarAlg.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.progressBarAlg.Name = "progressBarAlg";
             this.progressBarAlg.Size = new System.Drawing.Size(100, 16);
@@ -1147,26 +1154,17 @@ namespace GABAK
             this.checkBoxAllSearch.AutoSize = true;
             this.checkBoxAllSearch.Checked = true;
             this.checkBoxAllSearch.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxAllSearch.Location = new System.Drawing.Point(117, 737);
+            this.checkBoxAllSearch.Location = new System.Drawing.Point(10, 17);
             this.checkBoxAllSearch.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.checkBoxAllSearch.Name = "checkBoxAllSearch";
-            this.checkBoxAllSearch.Size = new System.Drawing.Size(117, 17);
+            this.checkBoxAllSearch.Size = new System.Drawing.Size(129, 17);
             this.checkBoxAllSearch.TabIndex = 358;
-            this.checkBoxAllSearch.Text = "Full Order Sampling";
+            this.checkBoxAllSearch.Text = "Full Pick List Sampling";
             this.checkBoxAllSearch.UseVisualStyleBackColor = true;
-            // 
-            // textBoxSampleSize
-            // 
-            this.textBoxSampleSize.Location = new System.Drawing.Point(303, 455);
-            this.textBoxSampleSize.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.textBoxSampleSize.Name = "textBoxSampleSize";
-            this.textBoxSampleSize.Size = new System.Drawing.Size(52, 18);
-            this.textBoxSampleSize.TabIndex = 359;
-            this.textBoxSampleSize.Text = "0";
             // 
             // textBoxMagnify
             // 
-            this.textBoxMagnify.Location = new System.Drawing.Point(187, 690);
+            this.textBoxMagnify.Location = new System.Drawing.Point(109, 150);
             this.textBoxMagnify.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxMagnify.Name = "textBoxMagnify";
             this.textBoxMagnify.Size = new System.Drawing.Size(33, 18);
@@ -1176,7 +1174,7 @@ namespace GABAK
             // labelMagnify
             // 
             this.labelMagnify.AutoSize = true;
-            this.labelMagnify.Location = new System.Drawing.Point(142, 693);
+            this.labelMagnify.Location = new System.Drawing.Point(64, 153);
             this.labelMagnify.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelMagnify.Name = "labelMagnify";
             this.labelMagnify.Size = new System.Drawing.Size(44, 13);
@@ -1185,7 +1183,7 @@ namespace GABAK
             // 
             // textBoxPickAdjuster1
             // 
-            this.textBoxPickAdjuster1.Location = new System.Drawing.Point(102, 554);
+            this.textBoxPickAdjuster1.Location = new System.Drawing.Point(83, 289);
             this.textBoxPickAdjuster1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxPickAdjuster1.Name = "textBoxPickAdjuster1";
             this.textBoxPickAdjuster1.Size = new System.Drawing.Size(40, 18);
@@ -1195,7 +1193,7 @@ namespace GABAK
             // 
             // textBoxPickAdjuster2
             // 
-            this.textBoxPickAdjuster2.Location = new System.Drawing.Point(102, 571);
+            this.textBoxPickAdjuster2.Location = new System.Drawing.Point(83, 306);
             this.textBoxPickAdjuster2.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxPickAdjuster2.Name = "textBoxPickAdjuster2";
             this.textBoxPickAdjuster2.Size = new System.Drawing.Size(40, 18);
@@ -1205,7 +1203,7 @@ namespace GABAK
             // 
             // textBoxPickAdjuster3
             // 
-            this.textBoxPickAdjuster3.Location = new System.Drawing.Point(102, 588);
+            this.textBoxPickAdjuster3.Location = new System.Drawing.Point(83, 323);
             this.textBoxPickAdjuster3.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxPickAdjuster3.Name = "textBoxPickAdjuster3";
             this.textBoxPickAdjuster3.Size = new System.Drawing.Size(40, 18);
@@ -1216,7 +1214,7 @@ namespace GABAK
             // labelPickAdjuster1
             // 
             this.labelPickAdjuster1.AutoSize = true;
-            this.labelPickAdjuster1.Location = new System.Drawing.Point(24, 557);
+            this.labelPickAdjuster1.Location = new System.Drawing.Point(5, 292);
             this.labelPickAdjuster1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelPickAdjuster1.Name = "labelPickAdjuster1";
             this.labelPickAdjuster1.Size = new System.Drawing.Size(76, 13);
@@ -1226,7 +1224,7 @@ namespace GABAK
             // labelPickAdjuster2
             // 
             this.labelPickAdjuster2.AutoSize = true;
-            this.labelPickAdjuster2.Location = new System.Drawing.Point(24, 574);
+            this.labelPickAdjuster2.Location = new System.Drawing.Point(5, 309);
             this.labelPickAdjuster2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelPickAdjuster2.Name = "labelPickAdjuster2";
             this.labelPickAdjuster2.Size = new System.Drawing.Size(76, 13);
@@ -1236,7 +1234,7 @@ namespace GABAK
             // labelPickAdjuster3
             // 
             this.labelPickAdjuster3.AutoSize = true;
-            this.labelPickAdjuster3.Location = new System.Drawing.Point(24, 591);
+            this.labelPickAdjuster3.Location = new System.Drawing.Point(5, 326);
             this.labelPickAdjuster3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelPickAdjuster3.Name = "labelPickAdjuster3";
             this.labelPickAdjuster3.Size = new System.Drawing.Size(76, 13);
@@ -1245,7 +1243,7 @@ namespace GABAK
             // 
             // textBoxPickAdjuster1L
             // 
-            this.textBoxPickAdjuster1L.Location = new System.Drawing.Point(147, 554);
+            this.textBoxPickAdjuster1L.Location = new System.Drawing.Point(85, 289);
             this.textBoxPickAdjuster1L.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxPickAdjuster1L.Name = "textBoxPickAdjuster1L";
             this.textBoxPickAdjuster1L.Size = new System.Drawing.Size(33, 18);
@@ -1254,7 +1252,7 @@ namespace GABAK
             // 
             // textBoxPickAdjuster2L
             // 
-            this.textBoxPickAdjuster2L.Location = new System.Drawing.Point(147, 571);
+            this.textBoxPickAdjuster2L.Location = new System.Drawing.Point(85, 306);
             this.textBoxPickAdjuster2L.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxPickAdjuster2L.Name = "textBoxPickAdjuster2L";
             this.textBoxPickAdjuster2L.Size = new System.Drawing.Size(33, 18);
@@ -1263,7 +1261,7 @@ namespace GABAK
             // 
             // textBoxPickAdjuster3L
             // 
-            this.textBoxPickAdjuster3L.Location = new System.Drawing.Point(147, 588);
+            this.textBoxPickAdjuster3L.Location = new System.Drawing.Point(85, 323);
             this.textBoxPickAdjuster3L.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxPickAdjuster3L.Name = "textBoxPickAdjuster3L";
             this.textBoxPickAdjuster3L.Size = new System.Drawing.Size(33, 18);
@@ -1272,7 +1270,7 @@ namespace GABAK
             // 
             // textBoxPickAdjuster1U
             // 
-            this.textBoxPickAdjuster1U.Location = new System.Drawing.Point(187, 554);
+            this.textBoxPickAdjuster1U.Location = new System.Drawing.Point(122, 289);
             this.textBoxPickAdjuster1U.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxPickAdjuster1U.Name = "textBoxPickAdjuster1U";
             this.textBoxPickAdjuster1U.Size = new System.Drawing.Size(33, 18);
@@ -1281,7 +1279,7 @@ namespace GABAK
             // 
             // textBoxPickAdjuster2U
             // 
-            this.textBoxPickAdjuster2U.Location = new System.Drawing.Point(187, 571);
+            this.textBoxPickAdjuster2U.Location = new System.Drawing.Point(122, 306);
             this.textBoxPickAdjuster2U.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxPickAdjuster2U.Name = "textBoxPickAdjuster2U";
             this.textBoxPickAdjuster2U.Size = new System.Drawing.Size(33, 18);
@@ -1290,47 +1288,26 @@ namespace GABAK
             // 
             // textBoxPickAdjuster3U
             // 
-            this.textBoxPickAdjuster3U.Location = new System.Drawing.Point(187, 588);
+            this.textBoxPickAdjuster3U.Location = new System.Drawing.Point(122, 323);
             this.textBoxPickAdjuster3U.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxPickAdjuster3U.Name = "textBoxPickAdjuster3U";
             this.textBoxPickAdjuster3U.Size = new System.Drawing.Size(33, 18);
             this.textBoxPickAdjuster3U.TabIndex = 373;
             this.textBoxPickAdjuster3U.Text = "1";
             // 
-            // checkBoxTSP
-            // 
-            this.checkBoxTSP.AutoSize = true;
-            this.checkBoxTSP.Location = new System.Drawing.Point(145, 63);
-            this.checkBoxTSP.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.checkBoxTSP.Name = "checkBoxTSP";
-            this.checkBoxTSP.Size = new System.Drawing.Size(92, 17);
-            this.checkBoxTSP.TabIndex = 374;
-            this.checkBoxTSP.Text = "Use Concorde";
-            this.checkBoxTSP.UseVisualStyleBackColor = true;
-            // 
             // labelAvgOrderSize
             // 
             this.labelAvgOrderSize.AutoSize = true;
-            this.labelAvgOrderSize.Location = new System.Drawing.Point(229, 491);
+            this.labelAvgOrderSize.Location = new System.Drawing.Point(21, 35);
             this.labelAvgOrderSize.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelAvgOrderSize.Name = "labelAvgOrderSize";
             this.labelAvgOrderSize.Size = new System.Drawing.Size(69, 13);
             this.labelAvgOrderSize.TabIndex = 375;
             this.labelAvgOrderSize.Text = "Avg Ord Size";
             // 
-            // labelSampleSize
-            // 
-            this.labelSampleSize.AutoSize = true;
-            this.labelSampleSize.Location = new System.Drawing.Point(237, 458);
-            this.labelSampleSize.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.labelSampleSize.Name = "labelSampleSize";
-            this.labelSampleSize.Size = new System.Drawing.Size(62, 13);
-            this.labelSampleSize.TabIndex = 376;
-            this.labelSampleSize.Text = "SampleSize";
-            // 
             // textBoxArea
             // 
-            this.textBoxArea.Location = new System.Drawing.Point(102, 129);
+            this.textBoxArea.Location = new System.Drawing.Point(110, 116);
             this.textBoxArea.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxArea.Name = "textBoxArea";
             this.textBoxArea.Size = new System.Drawing.Size(40, 18);
@@ -1342,7 +1319,7 @@ namespace GABAK
             // labelArea
             // 
             this.labelArea.AutoSize = true;
-            this.labelArea.Location = new System.Drawing.Point(15, 132);
+            this.labelArea.Location = new System.Drawing.Point(23, 119);
             this.labelArea.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelArea.Name = "labelArea";
             this.labelArea.Size = new System.Drawing.Size(85, 13);
@@ -1351,7 +1328,7 @@ namespace GABAK
             // 
             // textBoxAspectRatio
             // 
-            this.textBoxAspectRatio.Location = new System.Drawing.Point(102, 146);
+            this.textBoxAspectRatio.Location = new System.Drawing.Point(73, 184);
             this.textBoxAspectRatio.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAspectRatio.Name = "textBoxAspectRatio";
             this.textBoxAspectRatio.Size = new System.Drawing.Size(40, 18);
@@ -1363,7 +1340,7 @@ namespace GABAK
             // labelAspectRatio
             // 
             this.labelAspectRatio.AutoSize = true;
-            this.labelAspectRatio.Location = new System.Drawing.Point(34, 149);
+            this.labelAspectRatio.Location = new System.Drawing.Point(5, 187);
             this.labelAspectRatio.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelAspectRatio.Name = "labelAspectRatio";
             this.labelAspectRatio.Size = new System.Drawing.Size(66, 13);
@@ -1372,7 +1349,7 @@ namespace GABAK
             // 
             // textBoxAspectRatioL
             // 
-            this.textBoxAspectRatioL.Location = new System.Drawing.Point(147, 146);
+            this.textBoxAspectRatioL.Location = new System.Drawing.Point(73, 186);
             this.textBoxAspectRatioL.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAspectRatioL.Name = "textBoxAspectRatioL";
             this.textBoxAspectRatioL.Size = new System.Drawing.Size(33, 18);
@@ -1381,7 +1358,7 @@ namespace GABAK
             // 
             // textBoxAspectRatioU
             // 
-            this.textBoxAspectRatioU.Location = new System.Drawing.Point(187, 146);
+            this.textBoxAspectRatioU.Location = new System.Drawing.Point(110, 186);
             this.textBoxAspectRatioU.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAspectRatioU.Name = "textBoxAspectRatioU";
             this.textBoxAspectRatioU.Size = new System.Drawing.Size(33, 18);
@@ -1390,7 +1367,7 @@ namespace GABAK
             // 
             // textBoxAngle4
             // 
-            this.textBoxAngle4.Location = new System.Drawing.Point(102, 333);
+            this.textBoxAngle4.Location = new System.Drawing.Point(83, 68);
             this.textBoxAngle4.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAngle4.Name = "textBoxAngle4";
             this.textBoxAngle4.Size = new System.Drawing.Size(40, 18);
@@ -1399,7 +1376,7 @@ namespace GABAK
             // 
             // textBoxAngle4L
             // 
-            this.textBoxAngle4L.Location = new System.Drawing.Point(147, 333);
+            this.textBoxAngle4L.Location = new System.Drawing.Point(85, 68);
             this.textBoxAngle4L.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAngle4L.Name = "textBoxAngle4L";
             this.textBoxAngle4L.Size = new System.Drawing.Size(33, 18);
@@ -1408,7 +1385,7 @@ namespace GABAK
             // 
             // textBoxAngle4U
             // 
-            this.textBoxAngle4U.Location = new System.Drawing.Point(187, 333);
+            this.textBoxAngle4U.Location = new System.Drawing.Point(122, 68);
             this.textBoxAngle4U.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAngle4U.Name = "textBoxAngle4U";
             this.textBoxAngle4U.Size = new System.Drawing.Size(33, 18);
@@ -1418,7 +1395,7 @@ namespace GABAK
             // labelAngle4
             // 
             this.labelAngle4.AutoSize = true;
-            this.labelAngle4.Location = new System.Drawing.Point(57, 336);
+            this.labelAngle4.Location = new System.Drawing.Point(38, 71);
             this.labelAngle4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelAngle4.Name = "labelAngle4";
             this.labelAngle4.Size = new System.Drawing.Size(43, 13);
@@ -1427,7 +1404,7 @@ namespace GABAK
             // 
             // textBoxAdjuster4
             // 
-            this.textBoxAdjuster4.Location = new System.Drawing.Point(102, 469);
+            this.textBoxAdjuster4.Location = new System.Drawing.Point(83, 204);
             this.textBoxAdjuster4.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAdjuster4.Name = "textBoxAdjuster4";
             this.textBoxAdjuster4.Size = new System.Drawing.Size(40, 18);
@@ -1437,7 +1414,7 @@ namespace GABAK
             // labelAdjuster4
             // 
             this.labelAdjuster4.AutoSize = true;
-            this.labelAdjuster4.Location = new System.Drawing.Point(46, 472);
+            this.labelAdjuster4.Location = new System.Drawing.Point(27, 207);
             this.labelAdjuster4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelAdjuster4.Name = "labelAdjuster4";
             this.labelAdjuster4.Size = new System.Drawing.Size(54, 13);
@@ -1446,7 +1423,7 @@ namespace GABAK
             // 
             // textBoxAdjuster4L
             // 
-            this.textBoxAdjuster4L.Location = new System.Drawing.Point(147, 469);
+            this.textBoxAdjuster4L.Location = new System.Drawing.Point(85, 204);
             this.textBoxAdjuster4L.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAdjuster4L.Name = "textBoxAdjuster4L";
             this.textBoxAdjuster4L.Size = new System.Drawing.Size(33, 18);
@@ -1455,7 +1432,7 @@ namespace GABAK
             // 
             // textBoxAdjuster4U
             // 
-            this.textBoxAdjuster4U.Location = new System.Drawing.Point(187, 469);
+            this.textBoxAdjuster4U.Location = new System.Drawing.Point(122, 204);
             this.textBoxAdjuster4U.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAdjuster4U.Name = "textBoxAdjuster4U";
             this.textBoxAdjuster4U.Size = new System.Drawing.Size(33, 18);
@@ -1464,7 +1441,7 @@ namespace GABAK
             // 
             // textBoxPickAdjuster4
             // 
-            this.textBoxPickAdjuster4.Location = new System.Drawing.Point(102, 605);
+            this.textBoxPickAdjuster4.Location = new System.Drawing.Point(83, 340);
             this.textBoxPickAdjuster4.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxPickAdjuster4.Name = "textBoxPickAdjuster4";
             this.textBoxPickAdjuster4.Size = new System.Drawing.Size(40, 18);
@@ -1474,7 +1451,7 @@ namespace GABAK
             // labelPickAdjuster4
             // 
             this.labelPickAdjuster4.AutoSize = true;
-            this.labelPickAdjuster4.Location = new System.Drawing.Point(24, 608);
+            this.labelPickAdjuster4.Location = new System.Drawing.Point(5, 343);
             this.labelPickAdjuster4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelPickAdjuster4.Name = "labelPickAdjuster4";
             this.labelPickAdjuster4.Size = new System.Drawing.Size(76, 13);
@@ -1483,7 +1460,7 @@ namespace GABAK
             // 
             // textBoxPickAdjuster4L
             // 
-            this.textBoxPickAdjuster4L.Location = new System.Drawing.Point(147, 605);
+            this.textBoxPickAdjuster4L.Location = new System.Drawing.Point(85, 340);
             this.textBoxPickAdjuster4L.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxPickAdjuster4L.Name = "textBoxPickAdjuster4L";
             this.textBoxPickAdjuster4L.Size = new System.Drawing.Size(33, 18);
@@ -1492,7 +1469,7 @@ namespace GABAK
             // 
             // textBoxPickAdjuster4U
             // 
-            this.textBoxPickAdjuster4U.Location = new System.Drawing.Point(187, 605);
+            this.textBoxPickAdjuster4U.Location = new System.Drawing.Point(122, 340);
             this.textBoxPickAdjuster4U.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxPickAdjuster4U.Name = "textBoxPickAdjuster4U";
             this.textBoxPickAdjuster4U.Size = new System.Drawing.Size(33, 18);
@@ -1501,7 +1478,7 @@ namespace GABAK
             // 
             // textBoxE4
             // 
-            this.textBoxE4.Location = new System.Drawing.Point(102, 214);
+            this.textBoxE4.Location = new System.Drawing.Point(73, 252);
             this.textBoxE4.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxE4.Name = "textBoxE4";
             this.textBoxE4.Size = new System.Drawing.Size(40, 18);
@@ -1511,7 +1488,7 @@ namespace GABAK
             // labelE4
             // 
             this.labelE4.AutoSize = true;
-            this.labelE4.Location = new System.Drawing.Point(80, 217);
+            this.labelE4.Location = new System.Drawing.Point(51, 255);
             this.labelE4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelE4.Name = "labelE4";
             this.labelE4.Size = new System.Drawing.Size(20, 13);
@@ -1520,7 +1497,7 @@ namespace GABAK
             // 
             // textBoxE4L
             // 
-            this.textBoxE4L.Location = new System.Drawing.Point(147, 214);
+            this.textBoxE4L.Location = new System.Drawing.Point(73, 254);
             this.textBoxE4L.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxE4L.Name = "textBoxE4L";
             this.textBoxE4L.Size = new System.Drawing.Size(33, 18);
@@ -1529,7 +1506,7 @@ namespace GABAK
             // 
             // textBoxE4U
             // 
-            this.textBoxE4U.Location = new System.Drawing.Point(187, 214);
+            this.textBoxE4U.Location = new System.Drawing.Point(110, 254);
             this.textBoxE4U.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxE4U.Name = "textBoxE4U";
             this.textBoxE4U.Size = new System.Drawing.Size(33, 18);
@@ -1538,7 +1515,7 @@ namespace GABAK
             // 
             // textBoxI1X
             // 
-            this.textBoxI1X.Location = new System.Drawing.Point(102, 231);
+            this.textBoxI1X.Location = new System.Drawing.Point(73, 269);
             this.textBoxI1X.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxI1X.Name = "textBoxI1X";
             this.textBoxI1X.Size = new System.Drawing.Size(40, 18);
@@ -1548,7 +1525,7 @@ namespace GABAK
             // labelI1X
             // 
             this.labelI1X.AutoSize = true;
-            this.labelI1X.Location = new System.Drawing.Point(77, 234);
+            this.labelI1X.Location = new System.Drawing.Point(48, 272);
             this.labelI1X.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelI1X.Name = "labelI1X";
             this.labelI1X.Size = new System.Drawing.Size(23, 13);
@@ -1557,7 +1534,7 @@ namespace GABAK
             // 
             // textBoxI1Y
             // 
-            this.textBoxI1Y.Location = new System.Drawing.Point(102, 248);
+            this.textBoxI1Y.Location = new System.Drawing.Point(73, 286);
             this.textBoxI1Y.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxI1Y.Name = "textBoxI1Y";
             this.textBoxI1Y.Size = new System.Drawing.Size(40, 18);
@@ -1567,7 +1544,7 @@ namespace GABAK
             // labelI1Y
             // 
             this.labelI1Y.AutoSize = true;
-            this.labelI1Y.Location = new System.Drawing.Point(77, 251);
+            this.labelI1Y.Location = new System.Drawing.Point(48, 289);
             this.labelI1Y.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelI1Y.Name = "labelI1Y";
             this.labelI1Y.Size = new System.Drawing.Size(23, 13);
@@ -1576,7 +1553,7 @@ namespace GABAK
             // 
             // textBoxI1XL
             // 
-            this.textBoxI1XL.Location = new System.Drawing.Point(147, 231);
+            this.textBoxI1XL.Location = new System.Drawing.Point(73, 271);
             this.textBoxI1XL.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxI1XL.Name = "textBoxI1XL";
             this.textBoxI1XL.Size = new System.Drawing.Size(33, 18);
@@ -1585,7 +1562,7 @@ namespace GABAK
             // 
             // textBoxI1XU
             // 
-            this.textBoxI1XU.Location = new System.Drawing.Point(187, 231);
+            this.textBoxI1XU.Location = new System.Drawing.Point(110, 271);
             this.textBoxI1XU.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxI1XU.Name = "textBoxI1XU";
             this.textBoxI1XU.Size = new System.Drawing.Size(33, 18);
@@ -1594,7 +1571,7 @@ namespace GABAK
             // 
             // textBoxI1YL
             // 
-            this.textBoxI1YL.Location = new System.Drawing.Point(147, 248);
+            this.textBoxI1YL.Location = new System.Drawing.Point(73, 288);
             this.textBoxI1YL.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxI1YL.Name = "textBoxI1YL";
             this.textBoxI1YL.Size = new System.Drawing.Size(33, 18);
@@ -1603,7 +1580,7 @@ namespace GABAK
             // 
             // textBoxI1YU
             // 
-            this.textBoxI1YU.Location = new System.Drawing.Point(187, 248);
+            this.textBoxI1YU.Location = new System.Drawing.Point(110, 288);
             this.textBoxI1YU.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxI1YU.Name = "textBoxI1YU";
             this.textBoxI1YU.Size = new System.Drawing.Size(33, 18);
@@ -1612,7 +1589,7 @@ namespace GABAK
             // 
             // textBoxAngle5
             // 
-            this.textBoxAngle5.Location = new System.Drawing.Point(102, 350);
+            this.textBoxAngle5.Location = new System.Drawing.Point(83, 85);
             this.textBoxAngle5.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAngle5.Name = "textBoxAngle5";
             this.textBoxAngle5.Size = new System.Drawing.Size(40, 18);
@@ -1622,7 +1599,7 @@ namespace GABAK
             // labelAngle5
             // 
             this.labelAngle5.AutoSize = true;
-            this.labelAngle5.Location = new System.Drawing.Point(57, 353);
+            this.labelAngle5.Location = new System.Drawing.Point(38, 88);
             this.labelAngle5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelAngle5.Name = "labelAngle5";
             this.labelAngle5.Size = new System.Drawing.Size(43, 13);
@@ -1631,7 +1608,7 @@ namespace GABAK
             // 
             // textBoxAngle5L
             // 
-            this.textBoxAngle5L.Location = new System.Drawing.Point(147, 350);
+            this.textBoxAngle5L.Location = new System.Drawing.Point(85, 85);
             this.textBoxAngle5L.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAngle5L.Name = "textBoxAngle5L";
             this.textBoxAngle5L.Size = new System.Drawing.Size(33, 18);
@@ -1640,7 +1617,7 @@ namespace GABAK
             // 
             // textBoxAngle5U
             // 
-            this.textBoxAngle5U.Location = new System.Drawing.Point(187, 350);
+            this.textBoxAngle5U.Location = new System.Drawing.Point(122, 85);
             this.textBoxAngle5U.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAngle5U.Name = "textBoxAngle5U";
             this.textBoxAngle5U.Size = new System.Drawing.Size(33, 18);
@@ -1650,7 +1627,7 @@ namespace GABAK
             // labelAngle6
             // 
             this.labelAngle6.AutoSize = true;
-            this.labelAngle6.Location = new System.Drawing.Point(57, 370);
+            this.labelAngle6.Location = new System.Drawing.Point(38, 105);
             this.labelAngle6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelAngle6.Name = "labelAngle6";
             this.labelAngle6.Size = new System.Drawing.Size(43, 13);
@@ -1659,7 +1636,7 @@ namespace GABAK
             // 
             // textBoxAngle6
             // 
-            this.textBoxAngle6.Location = new System.Drawing.Point(102, 367);
+            this.textBoxAngle6.Location = new System.Drawing.Point(83, 102);
             this.textBoxAngle6.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAngle6.Name = "textBoxAngle6";
             this.textBoxAngle6.Size = new System.Drawing.Size(40, 18);
@@ -1668,7 +1645,7 @@ namespace GABAK
             // 
             // textBoxAngle6L
             // 
-            this.textBoxAngle6L.Location = new System.Drawing.Point(147, 367);
+            this.textBoxAngle6L.Location = new System.Drawing.Point(85, 102);
             this.textBoxAngle6L.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAngle6L.Name = "textBoxAngle6L";
             this.textBoxAngle6L.Size = new System.Drawing.Size(33, 18);
@@ -1677,7 +1654,7 @@ namespace GABAK
             // 
             // textBoxAngle6U
             // 
-            this.textBoxAngle6U.Location = new System.Drawing.Point(187, 367);
+            this.textBoxAngle6U.Location = new System.Drawing.Point(122, 102);
             this.textBoxAngle6U.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAngle6U.Name = "textBoxAngle6U";
             this.textBoxAngle6U.Size = new System.Drawing.Size(33, 18);
@@ -1686,7 +1663,7 @@ namespace GABAK
             // 
             // textBoxAdjuster5
             // 
-            this.textBoxAdjuster5.Location = new System.Drawing.Point(102, 486);
+            this.textBoxAdjuster5.Location = new System.Drawing.Point(83, 221);
             this.textBoxAdjuster5.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAdjuster5.Name = "textBoxAdjuster5";
             this.textBoxAdjuster5.Size = new System.Drawing.Size(40, 18);
@@ -1695,7 +1672,7 @@ namespace GABAK
             // 
             // textBoxAdjuster5L
             // 
-            this.textBoxAdjuster5L.Location = new System.Drawing.Point(147, 486);
+            this.textBoxAdjuster5L.Location = new System.Drawing.Point(85, 221);
             this.textBoxAdjuster5L.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAdjuster5L.Name = "textBoxAdjuster5L";
             this.textBoxAdjuster5L.Size = new System.Drawing.Size(33, 18);
@@ -1704,7 +1681,7 @@ namespace GABAK
             // 
             // textBoxAdjuster5U
             // 
-            this.textBoxAdjuster5U.Location = new System.Drawing.Point(187, 486);
+            this.textBoxAdjuster5U.Location = new System.Drawing.Point(122, 221);
             this.textBoxAdjuster5U.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAdjuster5U.Name = "textBoxAdjuster5U";
             this.textBoxAdjuster5U.Size = new System.Drawing.Size(33, 18);
@@ -1714,7 +1691,7 @@ namespace GABAK
             // labelAdjuster5
             // 
             this.labelAdjuster5.AutoSize = true;
-            this.labelAdjuster5.Location = new System.Drawing.Point(46, 489);
+            this.labelAdjuster5.Location = new System.Drawing.Point(27, 224);
             this.labelAdjuster5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelAdjuster5.Name = "labelAdjuster5";
             this.labelAdjuster5.Size = new System.Drawing.Size(54, 13);
@@ -1723,7 +1700,7 @@ namespace GABAK
             // 
             // textBoxAdjuster6
             // 
-            this.textBoxAdjuster6.Location = new System.Drawing.Point(102, 503);
+            this.textBoxAdjuster6.Location = new System.Drawing.Point(83, 238);
             this.textBoxAdjuster6.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAdjuster6.Name = "textBoxAdjuster6";
             this.textBoxAdjuster6.Size = new System.Drawing.Size(40, 18);
@@ -1733,7 +1710,7 @@ namespace GABAK
             // labelAdjuster6
             // 
             this.labelAdjuster6.AutoSize = true;
-            this.labelAdjuster6.Location = new System.Drawing.Point(46, 506);
+            this.labelAdjuster6.Location = new System.Drawing.Point(27, 241);
             this.labelAdjuster6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelAdjuster6.Name = "labelAdjuster6";
             this.labelAdjuster6.Size = new System.Drawing.Size(54, 13);
@@ -1742,7 +1719,7 @@ namespace GABAK
             // 
             // textBoxAdjuster6L
             // 
-            this.textBoxAdjuster6L.Location = new System.Drawing.Point(147, 503);
+            this.textBoxAdjuster6L.Location = new System.Drawing.Point(85, 238);
             this.textBoxAdjuster6L.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAdjuster6L.Name = "textBoxAdjuster6L";
             this.textBoxAdjuster6L.Size = new System.Drawing.Size(33, 18);
@@ -1751,7 +1728,7 @@ namespace GABAK
             // 
             // textBoxAdjuster6U
             // 
-            this.textBoxAdjuster6U.Location = new System.Drawing.Point(187, 503);
+            this.textBoxAdjuster6U.Location = new System.Drawing.Point(122, 238);
             this.textBoxAdjuster6U.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAdjuster6U.Name = "textBoxAdjuster6U";
             this.textBoxAdjuster6U.Size = new System.Drawing.Size(33, 18);
@@ -1760,7 +1737,7 @@ namespace GABAK
             // 
             // textBoxPickAdjuster5
             // 
-            this.textBoxPickAdjuster5.Location = new System.Drawing.Point(102, 622);
+            this.textBoxPickAdjuster5.Location = new System.Drawing.Point(83, 357);
             this.textBoxPickAdjuster5.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxPickAdjuster5.Name = "textBoxPickAdjuster5";
             this.textBoxPickAdjuster5.Size = new System.Drawing.Size(40, 18);
@@ -1770,7 +1747,7 @@ namespace GABAK
             // labelPickAdjuster5
             // 
             this.labelPickAdjuster5.AutoSize = true;
-            this.labelPickAdjuster5.Location = new System.Drawing.Point(24, 625);
+            this.labelPickAdjuster5.Location = new System.Drawing.Point(5, 360);
             this.labelPickAdjuster5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelPickAdjuster5.Name = "labelPickAdjuster5";
             this.labelPickAdjuster5.Size = new System.Drawing.Size(76, 13);
@@ -1779,7 +1756,7 @@ namespace GABAK
             // 
             // textBoxPickAdjuster5L
             // 
-            this.textBoxPickAdjuster5L.Location = new System.Drawing.Point(147, 622);
+            this.textBoxPickAdjuster5L.Location = new System.Drawing.Point(85, 357);
             this.textBoxPickAdjuster5L.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxPickAdjuster5L.Name = "textBoxPickAdjuster5L";
             this.textBoxPickAdjuster5L.Size = new System.Drawing.Size(33, 18);
@@ -1788,7 +1765,7 @@ namespace GABAK
             // 
             // textBoxPickAdjuster5U
             // 
-            this.textBoxPickAdjuster5U.Location = new System.Drawing.Point(187, 622);
+            this.textBoxPickAdjuster5U.Location = new System.Drawing.Point(122, 357);
             this.textBoxPickAdjuster5U.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxPickAdjuster5U.Name = "textBoxPickAdjuster5U";
             this.textBoxPickAdjuster5U.Size = new System.Drawing.Size(33, 18);
@@ -1797,7 +1774,7 @@ namespace GABAK
             // 
             // textBoxPickAdjuster6
             // 
-            this.textBoxPickAdjuster6.Location = new System.Drawing.Point(102, 639);
+            this.textBoxPickAdjuster6.Location = new System.Drawing.Point(83, 374);
             this.textBoxPickAdjuster6.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxPickAdjuster6.Name = "textBoxPickAdjuster6";
             this.textBoxPickAdjuster6.Size = new System.Drawing.Size(40, 18);
@@ -1807,7 +1784,7 @@ namespace GABAK
             // labelPickAdjuster6
             // 
             this.labelPickAdjuster6.AutoSize = true;
-            this.labelPickAdjuster6.Location = new System.Drawing.Point(24, 642);
+            this.labelPickAdjuster6.Location = new System.Drawing.Point(5, 377);
             this.labelPickAdjuster6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelPickAdjuster6.Name = "labelPickAdjuster6";
             this.labelPickAdjuster6.Size = new System.Drawing.Size(76, 13);
@@ -1816,7 +1793,7 @@ namespace GABAK
             // 
             // textBoxPickAdjuster6L
             // 
-            this.textBoxPickAdjuster6L.Location = new System.Drawing.Point(147, 639);
+            this.textBoxPickAdjuster6L.Location = new System.Drawing.Point(85, 374);
             this.textBoxPickAdjuster6L.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxPickAdjuster6L.Name = "textBoxPickAdjuster6L";
             this.textBoxPickAdjuster6L.Size = new System.Drawing.Size(33, 18);
@@ -1825,7 +1802,7 @@ namespace GABAK
             // 
             // textBoxPickAdjuster6U
             // 
-            this.textBoxPickAdjuster6U.Location = new System.Drawing.Point(187, 639);
+            this.textBoxPickAdjuster6U.Location = new System.Drawing.Point(122, 374);
             this.textBoxPickAdjuster6U.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxPickAdjuster6U.Name = "textBoxPickAdjuster6U";
             this.textBoxPickAdjuster6U.Size = new System.Drawing.Size(33, 18);
@@ -1835,7 +1812,7 @@ namespace GABAK
             // labelPickingAisleWidth
             // 
             this.labelPickingAisleWidth.AutoSize = true;
-            this.labelPickingAisleWidth.Location = new System.Drawing.Point(6, 81);
+            this.labelPickingAisleWidth.Location = new System.Drawing.Point(14, 68);
             this.labelPickingAisleWidth.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelPickingAisleWidth.Name = "labelPickingAisleWidth";
             this.labelPickingAisleWidth.Size = new System.Drawing.Size(94, 13);
@@ -1845,7 +1822,7 @@ namespace GABAK
             // labelCrossAisleWidth
             // 
             this.labelCrossAisleWidth.AutoSize = true;
-            this.labelCrossAisleWidth.Location = new System.Drawing.Point(13, 64);
+            this.labelCrossAisleWidth.Location = new System.Drawing.Point(21, 51);
             this.labelCrossAisleWidth.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelCrossAisleWidth.Name = "labelCrossAisleWidth";
             this.labelCrossAisleWidth.Size = new System.Drawing.Size(87, 13);
@@ -1854,7 +1831,7 @@ namespace GABAK
             // 
             // textBoxPickingAisleWidth
             // 
-            this.textBoxPickingAisleWidth.Location = new System.Drawing.Point(102, 78);
+            this.textBoxPickingAisleWidth.Location = new System.Drawing.Point(110, 65);
             this.textBoxPickingAisleWidth.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxPickingAisleWidth.Name = "textBoxPickingAisleWidth";
             this.textBoxPickingAisleWidth.Size = new System.Drawing.Size(40, 18);
@@ -1863,7 +1840,7 @@ namespace GABAK
             // 
             // textBoxCrossAisleWidth
             // 
-            this.textBoxCrossAisleWidth.Location = new System.Drawing.Point(102, 61);
+            this.textBoxCrossAisleWidth.Location = new System.Drawing.Point(110, 48);
             this.textBoxCrossAisleWidth.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxCrossAisleWidth.Name = "textBoxCrossAisleWidth";
             this.textBoxCrossAisleWidth.Size = new System.Drawing.Size(40, 18);
@@ -1874,7 +1851,7 @@ namespace GABAK
             // labelLDepth
             // 
             this.labelLDepth.AutoSize = true;
-            this.labelLDepth.Location = new System.Drawing.Point(21, 47);
+            this.labelLDepth.Location = new System.Drawing.Point(29, 34);
             this.labelLDepth.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelLDepth.Name = "labelLDepth";
             this.labelLDepth.Size = new System.Drawing.Size(79, 13);
@@ -1884,7 +1861,7 @@ namespace GABAK
             // labelLWidth
             // 
             this.labelLWidth.AutoSize = true;
-            this.labelLWidth.Location = new System.Drawing.Point(24, 30);
+            this.labelLWidth.Location = new System.Drawing.Point(32, 17);
             this.labelLWidth.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelLWidth.Name = "labelLWidth";
             this.labelLWidth.Size = new System.Drawing.Size(76, 13);
@@ -1893,7 +1870,7 @@ namespace GABAK
             // 
             // textBoxLDepth
             // 
-            this.textBoxLDepth.Location = new System.Drawing.Point(102, 44);
+            this.textBoxLDepth.Location = new System.Drawing.Point(110, 31);
             this.textBoxLDepth.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxLDepth.Name = "textBoxLDepth";
             this.textBoxLDepth.Size = new System.Drawing.Size(40, 18);
@@ -1902,38 +1879,17 @@ namespace GABAK
             // 
             // textBoxLWidth
             // 
-            this.textBoxLWidth.Location = new System.Drawing.Point(102, 27);
+            this.textBoxLWidth.Location = new System.Drawing.Point(110, 14);
             this.textBoxLWidth.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxLWidth.Name = "textBoxLWidth";
             this.textBoxLWidth.Size = new System.Drawing.Size(40, 18);
             this.textBoxLWidth.TabIndex = 16;
             this.textBoxLWidth.Text = "4";
             // 
-            // comboBoxDesignClass
-            // 
-            this.comboBoxDesignClass.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxDesignClass.FormattingEnabled = true;
-            this.comboBoxDesignClass.Items.AddRange(new object[] {
-            "All",
-            "0-0-0",
-            "2-0-1",
-            "3-0-2",
-            "3-0-3",
-            "3-1-3",
-            "4-0-2",
-            "4-0-4",
-            "4-0-5",
-            "4-1-4"});
-            this.comboBoxDesignClass.Location = new System.Drawing.Point(303, 148);
-            this.comboBoxDesignClass.Name = "comboBoxDesignClass";
-            this.comboBoxDesignClass.Size = new System.Drawing.Size(73, 20);
-            this.comboBoxDesignClass.TabIndex = 447;
-            this.comboBoxDesignClass.SelectedIndexChanged += new System.EventHandler(this.comboBoxDesignClass_SelectedIndexChanged);
-            // 
             // checkBoxExport
             // 
             this.checkBoxExport.AutoSize = true;
-            this.checkBoxExport.Location = new System.Drawing.Point(7, 737);
+            this.checkBoxExport.Location = new System.Drawing.Point(6, 6);
             this.checkBoxExport.Name = "checkBoxExport";
             this.checkBoxExport.Size = new System.Drawing.Size(107, 17);
             this.checkBoxExport.TabIndex = 456;
@@ -1945,17 +1901,17 @@ namespace GABAK
             this.checkBoxVisibilityGraph.AutoSize = true;
             this.checkBoxVisibilityGraph.Checked = true;
             this.checkBoxVisibilityGraph.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxVisibilityGraph.Location = new System.Drawing.Point(145, 47);
+            this.checkBoxVisibilityGraph.Location = new System.Drawing.Point(9, 10);
             this.checkBoxVisibilityGraph.Name = "checkBoxVisibilityGraph";
-            this.checkBoxVisibilityGraph.Size = new System.Drawing.Size(75, 17);
+            this.checkBoxVisibilityGraph.Size = new System.Drawing.Size(115, 17);
             this.checkBoxVisibilityGraph.TabIndex = 457;
-            this.checkBoxVisibilityGraph.Text = "Vis. Graph";
+            this.checkBoxVisibilityGraph.Text = "Use Visibility Graph";
             this.checkBoxVisibilityGraph.UseVisualStyleBackColor = true;
             this.checkBoxVisibilityGraph.CheckedChanged += new System.EventHandler(this.checkBoxVisibilityGraph_CheckedChanged);
             // 
             // buttonTwoLocationDistance
             // 
-            this.buttonTwoLocationDistance.Location = new System.Drawing.Point(6, 866);
+            this.buttonTwoLocationDistance.Location = new System.Drawing.Point(6, 29);
             this.buttonTwoLocationDistance.Name = "buttonTwoLocationDistance";
             this.buttonTwoLocationDistance.Size = new System.Drawing.Size(57, 23);
             this.buttonTwoLocationDistance.TabIndex = 458;
@@ -1965,21 +1921,21 @@ namespace GABAK
             // 
             // textBoxLoc1
             // 
-            this.textBoxLoc1.Location = new System.Drawing.Point(65, 869);
+            this.textBoxLoc1.Location = new System.Drawing.Point(65, 32);
             this.textBoxLoc1.Name = "textBoxLoc1";
             this.textBoxLoc1.Size = new System.Drawing.Size(22, 18);
             this.textBoxLoc1.TabIndex = 459;
             // 
             // textBoxLoc2
             // 
-            this.textBoxLoc2.Location = new System.Drawing.Point(90, 869);
+            this.textBoxLoc2.Location = new System.Drawing.Point(90, 32);
             this.textBoxLoc2.Name = "textBoxLoc2";
             this.textBoxLoc2.Size = new System.Drawing.Size(22, 18);
             this.textBoxLoc2.TabIndex = 460;
             // 
             // textBoxDemandSkewness20
             // 
-            this.textBoxDemandSkewness20.Location = new System.Drawing.Point(305, 246);
+            this.textBoxDemandSkewness20.Location = new System.Drawing.Point(95, 19);
             this.textBoxDemandSkewness20.Name = "textBoxDemandSkewness20";
             this.textBoxDemandSkewness20.Size = new System.Drawing.Size(50, 18);
             this.textBoxDemandSkewness20.TabIndex = 462;
@@ -1987,7 +1943,7 @@ namespace GABAK
             // 
             // textBoxDemandSkewness80
             // 
-            this.textBoxDemandSkewness80.Location = new System.Drawing.Point(305, 263);
+            this.textBoxDemandSkewness80.Location = new System.Drawing.Point(95, 36);
             this.textBoxDemandSkewness80.Name = "textBoxDemandSkewness80";
             this.textBoxDemandSkewness80.Size = new System.Drawing.Size(50, 18);
             this.textBoxDemandSkewness80.TabIndex = 463;
@@ -1995,7 +1951,7 @@ namespace GABAK
             // 
             // textBoxNumberSKUs
             // 
-            this.textBoxNumberSKUs.Location = new System.Drawing.Point(305, 280);
+            this.textBoxNumberSKUs.Location = new System.Drawing.Point(95, 53);
             this.textBoxNumberSKUs.Name = "textBoxNumberSKUs";
             this.textBoxNumberSKUs.Size = new System.Drawing.Size(50, 18);
             this.textBoxNumberSKUs.TabIndex = 464;
@@ -2003,7 +1959,7 @@ namespace GABAK
             // 
             // textBoxNumberOrders
             // 
-            this.textBoxNumberOrders.Location = new System.Drawing.Point(305, 297);
+            this.textBoxNumberOrders.Location = new System.Drawing.Point(95, 70);
             this.textBoxNumberOrders.Name = "textBoxNumberOrders";
             this.textBoxNumberOrders.Size = new System.Drawing.Size(50, 18);
             this.textBoxNumberOrders.TabIndex = 465;
@@ -2011,7 +1967,7 @@ namespace GABAK
             // 
             // textBoxOrderSize
             // 
-            this.textBoxOrderSize.Location = new System.Drawing.Point(305, 314);
+            this.textBoxOrderSize.Location = new System.Drawing.Point(95, 87);
             this.textBoxOrderSize.Name = "textBoxOrderSize";
             this.textBoxOrderSize.Size = new System.Drawing.Size(50, 18);
             this.textBoxOrderSize.TabIndex = 466;
@@ -2019,7 +1975,7 @@ namespace GABAK
             // 
             // textBoxOrderGenRandSeed
             // 
-            this.textBoxOrderGenRandSeed.Location = new System.Drawing.Point(305, 331);
+            this.textBoxOrderGenRandSeed.Location = new System.Drawing.Point(95, 104);
             this.textBoxOrderGenRandSeed.Name = "textBoxOrderGenRandSeed";
             this.textBoxOrderGenRandSeed.Size = new System.Drawing.Size(50, 18);
             this.textBoxOrderGenRandSeed.TabIndex = 467;
@@ -2028,7 +1984,7 @@ namespace GABAK
             // checkBoxC12
             // 
             this.checkBoxC12.AutoSize = true;
-            this.checkBoxC12.Location = new System.Drawing.Point(226, 538);
+            this.checkBoxC12.Location = new System.Drawing.Point(13, 19);
             this.checkBoxC12.Name = "checkBoxC12";
             this.checkBoxC12.Size = new System.Drawing.Size(45, 17);
             this.checkBoxC12.TabIndex = 468;
@@ -2038,7 +1994,7 @@ namespace GABAK
             // checkBoxC13
             // 
             this.checkBoxC13.AutoSize = true;
-            this.checkBoxC13.Location = new System.Drawing.Point(226, 555);
+            this.checkBoxC13.Location = new System.Drawing.Point(13, 36);
             this.checkBoxC13.Name = "checkBoxC13";
             this.checkBoxC13.Size = new System.Drawing.Size(45, 17);
             this.checkBoxC13.TabIndex = 469;
@@ -2048,7 +2004,7 @@ namespace GABAK
             // checkBoxC14
             // 
             this.checkBoxC14.AutoSize = true;
-            this.checkBoxC14.Location = new System.Drawing.Point(226, 572);
+            this.checkBoxC14.Location = new System.Drawing.Point(13, 53);
             this.checkBoxC14.Name = "checkBoxC14";
             this.checkBoxC14.Size = new System.Drawing.Size(45, 17);
             this.checkBoxC14.TabIndex = 470;
@@ -2058,7 +2014,7 @@ namespace GABAK
             // checkBoxC15
             // 
             this.checkBoxC15.AutoSize = true;
-            this.checkBoxC15.Location = new System.Drawing.Point(226, 589);
+            this.checkBoxC15.Location = new System.Drawing.Point(13, 70);
             this.checkBoxC15.Name = "checkBoxC15";
             this.checkBoxC15.Size = new System.Drawing.Size(45, 17);
             this.checkBoxC15.TabIndex = 471;
@@ -2068,7 +2024,7 @@ namespace GABAK
             // checkBoxC23
             // 
             this.checkBoxC23.AutoSize = true;
-            this.checkBoxC23.Location = new System.Drawing.Point(226, 606);
+            this.checkBoxC23.Location = new System.Drawing.Point(13, 87);
             this.checkBoxC23.Name = "checkBoxC23";
             this.checkBoxC23.Size = new System.Drawing.Size(45, 17);
             this.checkBoxC23.TabIndex = 472;
@@ -2078,7 +2034,7 @@ namespace GABAK
             // checkBoxC24
             // 
             this.checkBoxC24.AutoSize = true;
-            this.checkBoxC24.Location = new System.Drawing.Point(226, 623);
+            this.checkBoxC24.Location = new System.Drawing.Point(13, 104);
             this.checkBoxC24.Name = "checkBoxC24";
             this.checkBoxC24.Size = new System.Drawing.Size(45, 17);
             this.checkBoxC24.TabIndex = 473;
@@ -2088,7 +2044,7 @@ namespace GABAK
             // checkBoxC25
             // 
             this.checkBoxC25.AutoSize = true;
-            this.checkBoxC25.Location = new System.Drawing.Point(226, 640);
+            this.checkBoxC25.Location = new System.Drawing.Point(13, 121);
             this.checkBoxC25.Name = "checkBoxC25";
             this.checkBoxC25.Size = new System.Drawing.Size(45, 17);
             this.checkBoxC25.TabIndex = 474;
@@ -2098,7 +2054,7 @@ namespace GABAK
             // checkBoxC34
             // 
             this.checkBoxC34.AutoSize = true;
-            this.checkBoxC34.Location = new System.Drawing.Point(226, 657);
+            this.checkBoxC34.Location = new System.Drawing.Point(13, 138);
             this.checkBoxC34.Name = "checkBoxC34";
             this.checkBoxC34.Size = new System.Drawing.Size(45, 17);
             this.checkBoxC34.TabIndex = 475;
@@ -2108,7 +2064,7 @@ namespace GABAK
             // checkBoxC35
             // 
             this.checkBoxC35.AutoSize = true;
-            this.checkBoxC35.Location = new System.Drawing.Point(226, 674);
+            this.checkBoxC35.Location = new System.Drawing.Point(13, 155);
             this.checkBoxC35.Name = "checkBoxC35";
             this.checkBoxC35.Size = new System.Drawing.Size(45, 17);
             this.checkBoxC35.TabIndex = 476;
@@ -2118,7 +2074,7 @@ namespace GABAK
             // checkBoxC45
             // 
             this.checkBoxC45.AutoSize = true;
-            this.checkBoxC45.Location = new System.Drawing.Point(226, 691);
+            this.checkBoxC45.Location = new System.Drawing.Point(13, 172);
             this.checkBoxC45.Name = "checkBoxC45";
             this.checkBoxC45.Size = new System.Drawing.Size(45, 17);
             this.checkBoxC45.TabIndex = 477;
@@ -2133,14 +2089,14 @@ namespace GABAK
             "Parallel",
             "Cloud",
             "Single"});
-            this.comboBoxComputing.Location = new System.Drawing.Point(303, 713);
+            this.comboBoxComputing.Location = new System.Drawing.Point(74, 6);
             this.comboBoxComputing.Name = "comboBoxComputing";
             this.comboBoxComputing.Size = new System.Drawing.Size(67, 20);
             this.comboBoxComputing.TabIndex = 479;
             // 
             // textBoxPickerSize
             // 
-            this.textBoxPickerSize.Location = new System.Drawing.Point(202, 27);
+            this.textBoxPickerSize.Location = new System.Drawing.Point(66, 27);
             this.textBoxPickerSize.Name = "textBoxPickerSize";
             this.textBoxPickerSize.Size = new System.Drawing.Size(20, 18);
             this.textBoxPickerSize.TabIndex = 480;
@@ -2150,7 +2106,7 @@ namespace GABAK
             // labelPickerSize
             // 
             this.labelPickerSize.AutoSize = true;
-            this.labelPickerSize.Location = new System.Drawing.Point(144, 30);
+            this.labelPickerSize.Location = new System.Drawing.Point(8, 30);
             this.labelPickerSize.Name = "labelPickerSize";
             this.labelPickerSize.Size = new System.Drawing.Size(58, 13);
             this.labelPickerSize.TabIndex = 481;
@@ -2158,7 +2114,7 @@ namespace GABAK
             // 
             // textBoxAngle7
             // 
-            this.textBoxAngle7.Location = new System.Drawing.Point(102, 384);
+            this.textBoxAngle7.Location = new System.Drawing.Point(83, 119);
             this.textBoxAngle7.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAngle7.Name = "textBoxAngle7";
             this.textBoxAngle7.Size = new System.Drawing.Size(40, 18);
@@ -2168,7 +2124,7 @@ namespace GABAK
             // labelAngle7
             // 
             this.labelAngle7.AutoSize = true;
-            this.labelAngle7.Location = new System.Drawing.Point(57, 387);
+            this.labelAngle7.Location = new System.Drawing.Point(38, 122);
             this.labelAngle7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelAngle7.Name = "labelAngle7";
             this.labelAngle7.Size = new System.Drawing.Size(43, 13);
@@ -2177,7 +2133,7 @@ namespace GABAK
             // 
             // textBoxAngle7L
             // 
-            this.textBoxAngle7L.Location = new System.Drawing.Point(147, 384);
+            this.textBoxAngle7L.Location = new System.Drawing.Point(85, 119);
             this.textBoxAngle7L.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAngle7L.Name = "textBoxAngle7L";
             this.textBoxAngle7L.Size = new System.Drawing.Size(33, 18);
@@ -2186,7 +2142,7 @@ namespace GABAK
             // 
             // textBoxAngle7U
             // 
-            this.textBoxAngle7U.Location = new System.Drawing.Point(187, 384);
+            this.textBoxAngle7U.Location = new System.Drawing.Point(122, 119);
             this.textBoxAngle7U.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAngle7U.Name = "textBoxAngle7U";
             this.textBoxAngle7U.Size = new System.Drawing.Size(33, 18);
@@ -2195,7 +2151,7 @@ namespace GABAK
             // 
             // textBoxAngle8U
             // 
-            this.textBoxAngle8U.Location = new System.Drawing.Point(187, 401);
+            this.textBoxAngle8U.Location = new System.Drawing.Point(122, 136);
             this.textBoxAngle8U.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAngle8U.Name = "textBoxAngle8U";
             this.textBoxAngle8U.Size = new System.Drawing.Size(33, 18);
@@ -2204,7 +2160,7 @@ namespace GABAK
             // 
             // textBoxAngle8L
             // 
-            this.textBoxAngle8L.Location = new System.Drawing.Point(147, 401);
+            this.textBoxAngle8L.Location = new System.Drawing.Point(85, 136);
             this.textBoxAngle8L.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAngle8L.Name = "textBoxAngle8L";
             this.textBoxAngle8L.Size = new System.Drawing.Size(33, 18);
@@ -2214,7 +2170,7 @@ namespace GABAK
             // labelAngle8
             // 
             this.labelAngle8.AutoSize = true;
-            this.labelAngle8.Location = new System.Drawing.Point(57, 404);
+            this.labelAngle8.Location = new System.Drawing.Point(38, 139);
             this.labelAngle8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelAngle8.Name = "labelAngle8";
             this.labelAngle8.Size = new System.Drawing.Size(43, 13);
@@ -2223,7 +2179,7 @@ namespace GABAK
             // 
             // textBoxAngle8
             // 
-            this.textBoxAngle8.Location = new System.Drawing.Point(102, 401);
+            this.textBoxAngle8.Location = new System.Drawing.Point(83, 136);
             this.textBoxAngle8.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAngle8.Name = "textBoxAngle8";
             this.textBoxAngle8.Size = new System.Drawing.Size(40, 18);
@@ -2232,7 +2188,7 @@ namespace GABAK
             // 
             // textBoxAdjuster7U
             // 
-            this.textBoxAdjuster7U.Location = new System.Drawing.Point(187, 520);
+            this.textBoxAdjuster7U.Location = new System.Drawing.Point(122, 255);
             this.textBoxAdjuster7U.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAdjuster7U.Name = "textBoxAdjuster7U";
             this.textBoxAdjuster7U.Size = new System.Drawing.Size(33, 18);
@@ -2241,7 +2197,7 @@ namespace GABAK
             // 
             // textBoxAdjuster7L
             // 
-            this.textBoxAdjuster7L.Location = new System.Drawing.Point(147, 520);
+            this.textBoxAdjuster7L.Location = new System.Drawing.Point(85, 255);
             this.textBoxAdjuster7L.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAdjuster7L.Name = "textBoxAdjuster7L";
             this.textBoxAdjuster7L.Size = new System.Drawing.Size(33, 18);
@@ -2251,7 +2207,7 @@ namespace GABAK
             // labelAdjuster7
             // 
             this.labelAdjuster7.AutoSize = true;
-            this.labelAdjuster7.Location = new System.Drawing.Point(46, 523);
+            this.labelAdjuster7.Location = new System.Drawing.Point(27, 258);
             this.labelAdjuster7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelAdjuster7.Name = "labelAdjuster7";
             this.labelAdjuster7.Size = new System.Drawing.Size(54, 13);
@@ -2260,7 +2216,7 @@ namespace GABAK
             // 
             // textBoxAdjuster7
             // 
-            this.textBoxAdjuster7.Location = new System.Drawing.Point(102, 520);
+            this.textBoxAdjuster7.Location = new System.Drawing.Point(83, 255);
             this.textBoxAdjuster7.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAdjuster7.Name = "textBoxAdjuster7";
             this.textBoxAdjuster7.Size = new System.Drawing.Size(40, 18);
@@ -2269,7 +2225,7 @@ namespace GABAK
             // 
             // textBoxAdjuster8U
             // 
-            this.textBoxAdjuster8U.Location = new System.Drawing.Point(187, 537);
+            this.textBoxAdjuster8U.Location = new System.Drawing.Point(122, 272);
             this.textBoxAdjuster8U.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAdjuster8U.Name = "textBoxAdjuster8U";
             this.textBoxAdjuster8U.Size = new System.Drawing.Size(33, 18);
@@ -2278,7 +2234,7 @@ namespace GABAK
             // 
             // textBoxAdjuster8L
             // 
-            this.textBoxAdjuster8L.Location = new System.Drawing.Point(147, 537);
+            this.textBoxAdjuster8L.Location = new System.Drawing.Point(85, 272);
             this.textBoxAdjuster8L.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAdjuster8L.Name = "textBoxAdjuster8L";
             this.textBoxAdjuster8L.Size = new System.Drawing.Size(33, 18);
@@ -2288,7 +2244,7 @@ namespace GABAK
             // labelAdjuster8
             // 
             this.labelAdjuster8.AutoSize = true;
-            this.labelAdjuster8.Location = new System.Drawing.Point(46, 540);
+            this.labelAdjuster8.Location = new System.Drawing.Point(27, 275);
             this.labelAdjuster8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelAdjuster8.Name = "labelAdjuster8";
             this.labelAdjuster8.Size = new System.Drawing.Size(54, 13);
@@ -2297,7 +2253,7 @@ namespace GABAK
             // 
             // textBoxAdjuster8
             // 
-            this.textBoxAdjuster8.Location = new System.Drawing.Point(102, 537);
+            this.textBoxAdjuster8.Location = new System.Drawing.Point(83, 272);
             this.textBoxAdjuster8.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAdjuster8.Name = "textBoxAdjuster8";
             this.textBoxAdjuster8.Size = new System.Drawing.Size(40, 18);
@@ -2306,7 +2262,7 @@ namespace GABAK
             // 
             // textBoxPickAdjuster7U
             // 
-            this.textBoxPickAdjuster7U.Location = new System.Drawing.Point(187, 656);
+            this.textBoxPickAdjuster7U.Location = new System.Drawing.Point(122, 391);
             this.textBoxPickAdjuster7U.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxPickAdjuster7U.Name = "textBoxPickAdjuster7U";
             this.textBoxPickAdjuster7U.Size = new System.Drawing.Size(33, 18);
@@ -2315,7 +2271,7 @@ namespace GABAK
             // 
             // textBoxPickAdjuster7L
             // 
-            this.textBoxPickAdjuster7L.Location = new System.Drawing.Point(147, 656);
+            this.textBoxPickAdjuster7L.Location = new System.Drawing.Point(85, 391);
             this.textBoxPickAdjuster7L.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxPickAdjuster7L.Name = "textBoxPickAdjuster7L";
             this.textBoxPickAdjuster7L.Size = new System.Drawing.Size(33, 18);
@@ -2325,7 +2281,7 @@ namespace GABAK
             // labelPickAdjuster7
             // 
             this.labelPickAdjuster7.AutoSize = true;
-            this.labelPickAdjuster7.Location = new System.Drawing.Point(24, 659);
+            this.labelPickAdjuster7.Location = new System.Drawing.Point(5, 394);
             this.labelPickAdjuster7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelPickAdjuster7.Name = "labelPickAdjuster7";
             this.labelPickAdjuster7.Size = new System.Drawing.Size(76, 13);
@@ -2334,7 +2290,7 @@ namespace GABAK
             // 
             // textBoxPickAdjuster7
             // 
-            this.textBoxPickAdjuster7.Location = new System.Drawing.Point(102, 656);
+            this.textBoxPickAdjuster7.Location = new System.Drawing.Point(83, 391);
             this.textBoxPickAdjuster7.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxPickAdjuster7.Name = "textBoxPickAdjuster7";
             this.textBoxPickAdjuster7.Size = new System.Drawing.Size(40, 18);
@@ -2343,7 +2299,7 @@ namespace GABAK
             // 
             // textBoxPickAdjuster8U
             // 
-            this.textBoxPickAdjuster8U.Location = new System.Drawing.Point(187, 673);
+            this.textBoxPickAdjuster8U.Location = new System.Drawing.Point(122, 408);
             this.textBoxPickAdjuster8U.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxPickAdjuster8U.Name = "textBoxPickAdjuster8U";
             this.textBoxPickAdjuster8U.Size = new System.Drawing.Size(33, 18);
@@ -2352,7 +2308,7 @@ namespace GABAK
             // 
             // textBoxPickAdjuster8L
             // 
-            this.textBoxPickAdjuster8L.Location = new System.Drawing.Point(147, 673);
+            this.textBoxPickAdjuster8L.Location = new System.Drawing.Point(85, 408);
             this.textBoxPickAdjuster8L.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxPickAdjuster8L.Name = "textBoxPickAdjuster8L";
             this.textBoxPickAdjuster8L.Size = new System.Drawing.Size(33, 18);
@@ -2362,7 +2318,7 @@ namespace GABAK
             // labelPickAdjuster8
             // 
             this.labelPickAdjuster8.AutoSize = true;
-            this.labelPickAdjuster8.Location = new System.Drawing.Point(24, 676);
+            this.labelPickAdjuster8.Location = new System.Drawing.Point(5, 411);
             this.labelPickAdjuster8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelPickAdjuster8.Name = "labelPickAdjuster8";
             this.labelPickAdjuster8.Size = new System.Drawing.Size(76, 13);
@@ -2371,7 +2327,7 @@ namespace GABAK
             // 
             // textBoxPickAdjuster8
             // 
-            this.textBoxPickAdjuster8.Location = new System.Drawing.Point(102, 673);
+            this.textBoxPickAdjuster8.Location = new System.Drawing.Point(83, 408);
             this.textBoxPickAdjuster8.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxPickAdjuster8.Name = "textBoxPickAdjuster8";
             this.textBoxPickAdjuster8.Size = new System.Drawing.Size(40, 18);
@@ -2380,7 +2336,7 @@ namespace GABAK
             // 
             // textBoxC34U
             // 
-            this.textBoxC34U.Location = new System.Drawing.Point(316, 655);
+            this.textBoxC34U.Location = new System.Drawing.Point(110, 135);
             this.textBoxC34U.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxC34U.Name = "textBoxC34U";
             this.textBoxC34U.Size = new System.Drawing.Size(33, 18);
@@ -2389,7 +2345,7 @@ namespace GABAK
             // 
             // textBoxC34L
             // 
-            this.textBoxC34L.Location = new System.Drawing.Point(276, 655);
+            this.textBoxC34L.Location = new System.Drawing.Point(73, 135);
             this.textBoxC34L.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxC34L.Name = "textBoxC34L";
             this.textBoxC34L.Size = new System.Drawing.Size(33, 18);
@@ -2398,7 +2354,7 @@ namespace GABAK
             // 
             // textBoxC25U
             // 
-            this.textBoxC25U.Location = new System.Drawing.Point(316, 638);
+            this.textBoxC25U.Location = new System.Drawing.Point(110, 118);
             this.textBoxC25U.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxC25U.Name = "textBoxC25U";
             this.textBoxC25U.Size = new System.Drawing.Size(33, 18);
@@ -2407,7 +2363,7 @@ namespace GABAK
             // 
             // textBoxC25L
             // 
-            this.textBoxC25L.Location = new System.Drawing.Point(276, 638);
+            this.textBoxC25L.Location = new System.Drawing.Point(73, 118);
             this.textBoxC25L.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxC25L.Name = "textBoxC25L";
             this.textBoxC25L.Size = new System.Drawing.Size(33, 18);
@@ -2416,7 +2372,7 @@ namespace GABAK
             // 
             // textBoxC24U
             // 
-            this.textBoxC24U.Location = new System.Drawing.Point(316, 621);
+            this.textBoxC24U.Location = new System.Drawing.Point(110, 101);
             this.textBoxC24U.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxC24U.Name = "textBoxC24U";
             this.textBoxC24U.Size = new System.Drawing.Size(33, 18);
@@ -2425,7 +2381,7 @@ namespace GABAK
             // 
             // textBoxC24L
             // 
-            this.textBoxC24L.Location = new System.Drawing.Point(276, 621);
+            this.textBoxC24L.Location = new System.Drawing.Point(73, 101);
             this.textBoxC24L.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxC24L.Name = "textBoxC24L";
             this.textBoxC24L.Size = new System.Drawing.Size(33, 18);
@@ -2434,7 +2390,7 @@ namespace GABAK
             // 
             // textBoxC23U
             // 
-            this.textBoxC23U.Location = new System.Drawing.Point(316, 604);
+            this.textBoxC23U.Location = new System.Drawing.Point(110, 84);
             this.textBoxC23U.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxC23U.Name = "textBoxC23U";
             this.textBoxC23U.Size = new System.Drawing.Size(33, 18);
@@ -2443,7 +2399,7 @@ namespace GABAK
             // 
             // textBoxC23L
             // 
-            this.textBoxC23L.Location = new System.Drawing.Point(276, 604);
+            this.textBoxC23L.Location = new System.Drawing.Point(73, 84);
             this.textBoxC23L.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxC23L.Name = "textBoxC23L";
             this.textBoxC23L.Size = new System.Drawing.Size(33, 18);
@@ -2452,7 +2408,7 @@ namespace GABAK
             // 
             // textBoxC15U
             // 
-            this.textBoxC15U.Location = new System.Drawing.Point(316, 587);
+            this.textBoxC15U.Location = new System.Drawing.Point(110, 67);
             this.textBoxC15U.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxC15U.Name = "textBoxC15U";
             this.textBoxC15U.Size = new System.Drawing.Size(33, 18);
@@ -2461,7 +2417,7 @@ namespace GABAK
             // 
             // textBoxC15L
             // 
-            this.textBoxC15L.Location = new System.Drawing.Point(276, 587);
+            this.textBoxC15L.Location = new System.Drawing.Point(73, 67);
             this.textBoxC15L.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxC15L.Name = "textBoxC15L";
             this.textBoxC15L.Size = new System.Drawing.Size(33, 18);
@@ -2470,7 +2426,7 @@ namespace GABAK
             // 
             // textBoxC45U
             // 
-            this.textBoxC45U.Location = new System.Drawing.Point(316, 689);
+            this.textBoxC45U.Location = new System.Drawing.Point(110, 169);
             this.textBoxC45U.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxC45U.Name = "textBoxC45U";
             this.textBoxC45U.Size = new System.Drawing.Size(33, 18);
@@ -2479,7 +2435,7 @@ namespace GABAK
             // 
             // textBoxC35U
             // 
-            this.textBoxC35U.Location = new System.Drawing.Point(316, 672);
+            this.textBoxC35U.Location = new System.Drawing.Point(110, 152);
             this.textBoxC35U.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxC35U.Name = "textBoxC35U";
             this.textBoxC35U.Size = new System.Drawing.Size(33, 18);
@@ -2488,7 +2444,7 @@ namespace GABAK
             // 
             // textBoxC14U
             // 
-            this.textBoxC14U.Location = new System.Drawing.Point(316, 570);
+            this.textBoxC14U.Location = new System.Drawing.Point(110, 50);
             this.textBoxC14U.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxC14U.Name = "textBoxC14U";
             this.textBoxC14U.Size = new System.Drawing.Size(33, 18);
@@ -2497,7 +2453,7 @@ namespace GABAK
             // 
             // textBoxC13U
             // 
-            this.textBoxC13U.Location = new System.Drawing.Point(316, 553);
+            this.textBoxC13U.Location = new System.Drawing.Point(110, 33);
             this.textBoxC13U.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxC13U.Name = "textBoxC13U";
             this.textBoxC13U.Size = new System.Drawing.Size(33, 18);
@@ -2506,7 +2462,7 @@ namespace GABAK
             // 
             // textBoxC12U
             // 
-            this.textBoxC12U.Location = new System.Drawing.Point(316, 536);
+            this.textBoxC12U.Location = new System.Drawing.Point(110, 16);
             this.textBoxC12U.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxC12U.Name = "textBoxC12U";
             this.textBoxC12U.Size = new System.Drawing.Size(33, 18);
@@ -2515,7 +2471,7 @@ namespace GABAK
             // 
             // textBoxC45L
             // 
-            this.textBoxC45L.Location = new System.Drawing.Point(276, 689);
+            this.textBoxC45L.Location = new System.Drawing.Point(73, 169);
             this.textBoxC45L.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxC45L.Name = "textBoxC45L";
             this.textBoxC45L.Size = new System.Drawing.Size(33, 18);
@@ -2524,7 +2480,7 @@ namespace GABAK
             // 
             // textBoxC35L
             // 
-            this.textBoxC35L.Location = new System.Drawing.Point(276, 672);
+            this.textBoxC35L.Location = new System.Drawing.Point(73, 152);
             this.textBoxC35L.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxC35L.Name = "textBoxC35L";
             this.textBoxC35L.Size = new System.Drawing.Size(33, 18);
@@ -2533,7 +2489,7 @@ namespace GABAK
             // 
             // textBoxC14L
             // 
-            this.textBoxC14L.Location = new System.Drawing.Point(276, 570);
+            this.textBoxC14L.Location = new System.Drawing.Point(73, 50);
             this.textBoxC14L.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxC14L.Name = "textBoxC14L";
             this.textBoxC14L.Size = new System.Drawing.Size(33, 18);
@@ -2542,7 +2498,7 @@ namespace GABAK
             // 
             // textBoxC13L
             // 
-            this.textBoxC13L.Location = new System.Drawing.Point(276, 553);
+            this.textBoxC13L.Location = new System.Drawing.Point(73, 33);
             this.textBoxC13L.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxC13L.Name = "textBoxC13L";
             this.textBoxC13L.Size = new System.Drawing.Size(33, 18);
@@ -2551,7 +2507,7 @@ namespace GABAK
             // 
             // textBoxC12L
             // 
-            this.textBoxC12L.Location = new System.Drawing.Point(276, 536);
+            this.textBoxC12L.Location = new System.Drawing.Point(73, 16);
             this.textBoxC12L.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxC12L.Name = "textBoxC12L";
             this.textBoxC12L.Size = new System.Drawing.Size(33, 18);
@@ -2560,7 +2516,7 @@ namespace GABAK
             // 
             // textBoxESSuccessRule
             // 
-            this.textBoxESSuccessRule.Location = new System.Drawing.Point(303, 129);
+            this.textBoxESSuccessRule.Location = new System.Drawing.Point(112, 121);
             this.textBoxESSuccessRule.Name = "textBoxESSuccessRule";
             this.textBoxESSuccessRule.Size = new System.Drawing.Size(50, 18);
             this.textBoxESSuccessRule.TabIndex = 526;
@@ -2568,7 +2524,7 @@ namespace GABAK
             // 
             // buttonGetDesign
             // 
-            this.buttonGetDesign.Location = new System.Drawing.Point(299, 215);
+            this.buttonGetDesign.Location = new System.Drawing.Point(145, 27);
             this.buttonGetDesign.Name = "buttonGetDesign";
             this.buttonGetDesign.Size = new System.Drawing.Size(75, 23);
             this.buttonGetDesign.TabIndex = 527;
@@ -2578,17 +2534,17 @@ namespace GABAK
             // 
             // buttonImportDesign
             // 
-            this.buttonImportDesign.Location = new System.Drawing.Point(224, 215);
+            this.buttonImportDesign.Location = new System.Drawing.Point(6, 6);
             this.buttonImportDesign.Name = "buttonImportDesign";
-            this.buttonImportDesign.Size = new System.Drawing.Size(75, 23);
+            this.buttonImportDesign.Size = new System.Drawing.Size(89, 23);
             this.buttonImportDesign.TabIndex = 528;
-            this.buttonImportDesign.Text = "Import Dsgn";
+            this.buttonImportDesign.Text = "Import Design";
             this.buttonImportDesign.UseVisualStyleBackColor = true;
             this.buttonImportDesign.Click += new System.EventHandler(this.buttonImportDesign_Click);
             // 
             // textBoxDesignNumber
             // 
-            this.textBoxDesignNumber.Location = new System.Drawing.Point(303, 195);
+            this.textBoxDesignNumber.Location = new System.Drawing.Point(87, 29);
             this.textBoxDesignNumber.Name = "textBoxDesignNumber";
             this.textBoxDesignNumber.Size = new System.Drawing.Size(52, 18);
             this.textBoxDesignNumber.TabIndex = 529;
@@ -2597,7 +2553,7 @@ namespace GABAK
             // checkBoxResize
             // 
             this.checkBoxResize.AutoSize = true;
-            this.checkBoxResize.Location = new System.Drawing.Point(145, 79);
+            this.checkBoxResize.Location = new System.Drawing.Point(110, 135);
             this.checkBoxResize.Name = "checkBoxResize";
             this.checkBoxResize.Size = new System.Drawing.Size(83, 17);
             this.checkBoxResize.TabIndex = 530;
@@ -2609,17 +2565,17 @@ namespace GABAK
             this.checkBoxNFT.AutoSize = true;
             this.checkBoxNFT.Checked = true;
             this.checkBoxNFT.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxNFT.Location = new System.Drawing.Point(227, 423);
+            this.checkBoxNFT.Location = new System.Drawing.Point(6, 19);
             this.checkBoxNFT.Name = "checkBoxNFT";
-            this.checkBoxNFT.Size = new System.Drawing.Size(44, 17);
+            this.checkBoxNFT.Size = new System.Drawing.Size(150, 17);
             this.checkBoxNFT.TabIndex = 531;
-            this.checkBoxNFT.Text = "NFT";
+            this.checkBoxNFT.Text = "Penalize Excess Locations";
             this.checkBoxNFT.UseVisualStyleBackColor = true;
             this.checkBoxNFT.CheckedChanged += new System.EventHandler(this.checkBoxNFT_CheckedChanged);
             // 
             // textBoxNFT0
             // 
-            this.textBoxNFT0.Location = new System.Drawing.Point(303, 421);
+            this.textBoxNFT0.Location = new System.Drawing.Point(43, 42);
             this.textBoxNFT0.Name = "textBoxNFT0";
             this.textBoxNFT0.Size = new System.Drawing.Size(52, 18);
             this.textBoxNFT0.TabIndex = 532;
@@ -2627,7 +2583,7 @@ namespace GABAK
             // 
             // textBoxNFTLambda
             // 
-            this.textBoxNFTLambda.Location = new System.Drawing.Point(303, 438);
+            this.textBoxNFTLambda.Location = new System.Drawing.Point(43, 59);
             this.textBoxNFTLambda.Name = "textBoxNFTLambda";
             this.textBoxNFTLambda.Size = new System.Drawing.Size(52, 18);
             this.textBoxNFTLambda.TabIndex = 533;
@@ -2636,7 +2592,7 @@ namespace GABAK
             // labelNFT
             // 
             this.labelNFT.AutoSize = true;
-            this.labelNFT.Location = new System.Drawing.Point(268, 423);
+            this.labelNFT.Location = new System.Drawing.Point(8, 44);
             this.labelNFT.Name = "labelNFT";
             this.labelNFT.Size = new System.Drawing.Size(31, 13);
             this.labelNFT.TabIndex = 534;
@@ -2645,7 +2601,7 @@ namespace GABAK
             // labelNFTLambda
             // 
             this.labelNFTLambda.AutoSize = true;
-            this.labelNFTLambda.Location = new System.Drawing.Point(268, 440);
+            this.labelNFTLambda.Location = new System.Drawing.Point(8, 61);
             this.labelNFTLambda.Name = "labelNFTLambda";
             this.labelNFTLambda.Size = new System.Drawing.Size(34, 13);
             this.labelNFTLambda.TabIndex = 535;
@@ -2654,7 +2610,7 @@ namespace GABAK
             // labelDesignNumber
             // 
             this.labelDesignNumber.AutoSize = true;
-            this.labelDesignNumber.Location = new System.Drawing.Point(222, 198);
+            this.labelDesignNumber.Location = new System.Drawing.Point(6, 32);
             this.labelDesignNumber.Name = "labelDesignNumber";
             this.labelDesignNumber.Size = new System.Drawing.Size(79, 13);
             this.labelDesignNumber.TabIndex = 536;
@@ -2662,7 +2618,7 @@ namespace GABAK
             // 
             // buttonBatchSearch
             // 
-            this.buttonBatchSearch.Location = new System.Drawing.Point(227, 398);
+            this.buttonBatchSearch.Location = new System.Drawing.Point(6, 7);
             this.buttonBatchSearch.Name = "buttonBatchSearch";
             this.buttonBatchSearch.Size = new System.Drawing.Size(75, 21);
             this.buttonBatchSearch.TabIndex = 537;
@@ -2672,7 +2628,7 @@ namespace GABAK
             // 
             // progressBarBatch
             // 
-            this.progressBarBatch.Location = new System.Drawing.Point(679, 889);
+            this.progressBarBatch.Location = new System.Drawing.Point(6, 34);
             this.progressBarBatch.Name = "progressBarBatch";
             this.progressBarBatch.Size = new System.Drawing.Size(100, 16);
             this.progressBarBatch.TabIndex = 538;
@@ -2684,7 +2640,7 @@ namespace GABAK
             this.comboBoxNetSchedule.Items.AddRange(new object[] {
             "Order",
             "LPT"});
-            this.comboBoxNetSchedule.Location = new System.Drawing.Point(303, 169);
+            this.comboBoxNetSchedule.Location = new System.Drawing.Point(81, 35);
             this.comboBoxNetSchedule.Name = "comboBoxNetSchedule";
             this.comboBoxNetSchedule.Size = new System.Drawing.Size(74, 20);
             this.comboBoxNetSchedule.TabIndex = 539;
@@ -2692,7 +2648,7 @@ namespace GABAK
             // checkBoxStraightAllocation
             // 
             this.checkBoxStraightAllocation.AutoSize = true;
-            this.checkBoxStraightAllocation.Location = new System.Drawing.Point(239, 507);
+            this.checkBoxStraightAllocation.Location = new System.Drawing.Point(15, 15);
             this.checkBoxStraightAllocation.Name = "checkBoxStraightAllocation";
             this.checkBoxStraightAllocation.Size = new System.Drawing.Size(122, 17);
             this.checkBoxStraightAllocation.TabIndex = 540;
@@ -2705,18 +2661,19 @@ namespace GABAK
             this.comboBoxGenerate.FormattingEnabled = true;
             this.comboBoxGenerate.Items.AddRange(new object[] {
             "Import",
-            "Generate",
-            "All Single",
-            "All Dual"});
-            this.comboBoxGenerate.Location = new System.Drawing.Point(304, 354);
+            "Generate Using Bender\'s Model",
+            "Generate All Possible Single Item Picks",
+            "Generate All Possible Two Item Picks"});
+            this.comboBoxGenerate.Location = new System.Drawing.Point(174, 9);
             this.comboBoxGenerate.Name = "comboBoxGenerate";
-            this.comboBoxGenerate.Size = new System.Drawing.Size(76, 20);
+            this.comboBoxGenerate.Size = new System.Drawing.Size(187, 20);
             this.comboBoxGenerate.TabIndex = 541;
+            this.comboBoxGenerate.SelectedIndexChanged += new System.EventHandler(this.ComboBoxGenerate_SelectedIndexChanged);
             // 
             // labelAllocationSeed
             // 
             this.labelAllocationSeed.AutoSize = true;
-            this.labelAllocationSeed.Location = new System.Drawing.Point(220, 473);
+            this.labelAllocationSeed.Location = new System.Drawing.Point(12, 53);
             this.labelAllocationSeed.Name = "labelAllocationSeed";
             this.labelAllocationSeed.Size = new System.Drawing.Size(80, 13);
             this.labelAllocationSeed.TabIndex = 542;
@@ -2725,7 +2682,7 @@ namespace GABAK
             // labelMu
             // 
             this.labelMu.AutoSize = true;
-            this.labelMu.Location = new System.Drawing.Point(263, 30);
+            this.labelMu.Location = new System.Drawing.Point(72, 22);
             this.labelMu.Name = "labelMu";
             this.labelMu.Size = new System.Drawing.Size(36, 13);
             this.labelMu.TabIndex = 543;
@@ -2734,7 +2691,7 @@ namespace GABAK
             // labelLambda
             // 
             this.labelLambda.AutoSize = true;
-            this.labelLambda.Location = new System.Drawing.Point(240, 47);
+            this.labelLambda.Location = new System.Drawing.Point(49, 39);
             this.labelLambda.Name = "labelLambda";
             this.labelLambda.Size = new System.Drawing.Size(59, 13);
             this.labelLambda.TabIndex = 544;
@@ -2743,7 +2700,7 @@ namespace GABAK
             // labelESSeed
             // 
             this.labelESSeed.AutoSize = true;
-            this.labelESSeed.Location = new System.Drawing.Point(250, 65);
+            this.labelESSeed.Location = new System.Drawing.Point(59, 57);
             this.labelESSeed.Name = "labelESSeed";
             this.labelESSeed.Size = new System.Drawing.Size(49, 13);
             this.labelESSeed.TabIndex = 545;
@@ -2752,7 +2709,7 @@ namespace GABAK
             // labelMaxIteration
             // 
             this.labelMaxIteration.AutoSize = true;
-            this.labelMaxIteration.Location = new System.Drawing.Point(231, 81);
+            this.labelMaxIteration.Location = new System.Drawing.Point(40, 73);
             this.labelMaxIteration.Name = "labelMaxIteration";
             this.labelMaxIteration.Size = new System.Drawing.Size(68, 13);
             this.labelMaxIteration.TabIndex = 546;
@@ -2761,7 +2718,7 @@ namespace GABAK
             // labelInitialSigma
             // 
             this.labelInitialSigma.AutoSize = true;
-            this.labelInitialSigma.Location = new System.Drawing.Point(220, 98);
+            this.labelInitialSigma.Location = new System.Drawing.Point(29, 90);
             this.labelInitialSigma.Name = "labelInitialSigma";
             this.labelInitialSigma.Size = new System.Drawing.Size(78, 13);
             this.labelInitialSigma.TabIndex = 547;
@@ -2770,7 +2727,7 @@ namespace GABAK
             // labelSigmaChangeFrequency
             // 
             this.labelSigmaChangeFrequency.AutoSize = true;
-            this.labelSigmaChangeFrequency.Location = new System.Drawing.Point(196, 115);
+            this.labelSigmaChangeFrequency.Location = new System.Drawing.Point(5, 107);
             this.labelSigmaChangeFrequency.Name = "labelSigmaChangeFrequency";
             this.labelSigmaChangeFrequency.Size = new System.Drawing.Size(102, 13);
             this.labelSigmaChangeFrequency.TabIndex = 548;
@@ -2779,25 +2736,16 @@ namespace GABAK
             // labelSuccessRule
             // 
             this.labelSuccessRule.AutoSize = true;
-            this.labelSuccessRule.Location = new System.Drawing.Point(202, 132);
+            this.labelSuccessRule.Location = new System.Drawing.Point(11, 124);
             this.labelSuccessRule.Name = "labelSuccessRule";
             this.labelSuccessRule.Size = new System.Drawing.Size(97, 13);
             this.labelSuccessRule.TabIndex = 549;
             this.labelSuccessRule.Text = "Success Rule Ratio";
             // 
-            // labelDesignClass
-            // 
-            this.labelDesignClass.AutoSize = true;
-            this.labelDesignClass.Location = new System.Drawing.Point(231, 151);
-            this.labelDesignClass.Name = "labelDesignClass";
-            this.labelDesignClass.Size = new System.Drawing.Size(68, 13);
-            this.labelDesignClass.TabIndex = 550;
-            this.labelDesignClass.Text = "Design Class";
-            // 
             // labelNETSchedule
             // 
             this.labelNETSchedule.AutoSize = true;
-            this.labelNETSchedule.Location = new System.Drawing.Point(229, 173);
+            this.labelNETSchedule.Location = new System.Drawing.Point(7, 39);
             this.labelNETSchedule.Name = "labelNETSchedule";
             this.labelNETSchedule.Size = new System.Drawing.Size(69, 13);
             this.labelNETSchedule.TabIndex = 551;
@@ -2806,7 +2754,7 @@ namespace GABAK
             // labelSkewness20
             // 
             this.labelSkewness20.AutoSize = true;
-            this.labelSkewness20.Location = new System.Drawing.Point(231, 249);
+            this.labelSkewness20.Location = new System.Drawing.Point(21, 22);
             this.labelSkewness20.Name = "labelSkewness20";
             this.labelSkewness20.Size = new System.Drawing.Size(74, 13);
             this.labelSkewness20.TabIndex = 552;
@@ -2815,7 +2763,7 @@ namespace GABAK
             // labelSkewness40
             // 
             this.labelSkewness40.AutoSize = true;
-            this.labelSkewness40.Location = new System.Drawing.Point(231, 266);
+            this.labelSkewness40.Location = new System.Drawing.Point(21, 39);
             this.labelSkewness40.Name = "labelSkewness40";
             this.labelSkewness40.Size = new System.Drawing.Size(74, 13);
             this.labelSkewness40.TabIndex = 553;
@@ -2824,7 +2772,7 @@ namespace GABAK
             // labelNumberSKUs
             // 
             this.labelNumberSKUs.AutoSize = true;
-            this.labelNumberSKUs.Location = new System.Drawing.Point(251, 283);
+            this.labelNumberSKUs.Location = new System.Drawing.Point(41, 56);
             this.labelNumberSKUs.Name = "labelNumberSKUs";
             this.labelNumberSKUs.Size = new System.Drawing.Size(54, 13);
             this.labelNumberSKUs.TabIndex = 554;
@@ -2833,7 +2781,7 @@ namespace GABAK
             // labelNumberOrders
             // 
             this.labelNumberOrders.AutoSize = true;
-            this.labelNumberOrders.Location = new System.Drawing.Point(246, 299);
+            this.labelNumberOrders.Location = new System.Drawing.Point(36, 72);
             this.labelNumberOrders.Name = "labelNumberOrders";
             this.labelNumberOrders.Size = new System.Drawing.Size(59, 13);
             this.labelNumberOrders.TabIndex = 555;
@@ -2842,7 +2790,7 @@ namespace GABAK
             // labelPickListSize
             // 
             this.labelPickListSize.AutoSize = true;
-            this.labelPickListSize.Location = new System.Drawing.Point(237, 316);
+            this.labelPickListSize.Location = new System.Drawing.Point(27, 89);
             this.labelPickListSize.Name = "labelPickListSize";
             this.labelPickListSize.Size = new System.Drawing.Size(68, 13);
             this.labelPickListSize.TabIndex = 556;
@@ -2851,7 +2799,7 @@ namespace GABAK
             // labelOrderGenSeed
             // 
             this.labelOrderGenSeed.AutoSize = true;
-            this.labelOrderGenSeed.Location = new System.Drawing.Point(220, 333);
+            this.labelOrderGenSeed.Location = new System.Drawing.Point(10, 106);
             this.labelOrderGenSeed.Name = "labelOrderGenSeed";
             this.labelOrderGenSeed.Size = new System.Drawing.Size(84, 13);
             this.labelOrderGenSeed.TabIndex = 557;
@@ -2860,285 +2808,1096 @@ namespace GABAK
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(236, 717);
+            this.label1.Location = new System.Drawing.Point(7, 10);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(65, 13);
             this.label1.TabIndex = 558;
             this.label1.Text = "Concurrency";
             // 
+            // comboBoxRouting
+            // 
+            this.comboBoxRouting.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxRouting.FormattingEnabled = true;
+            this.comboBoxRouting.Items.AddRange(new object[] {
+            "LKH",
+            "Concorde",
+            "2-Opt"});
+            this.comboBoxRouting.Location = new System.Drawing.Point(11, 51);
+            this.comboBoxRouting.Name = "comboBoxRouting";
+            this.comboBoxRouting.Size = new System.Drawing.Size(89, 20);
+            this.comboBoxRouting.TabIndex = 560;
+            // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Controls.Add(this.tabPage4);
+            this.tabControl1.Controls.Add(this.tabPage5);
+            this.tabControl1.Controls.Add(this.tabPage6);
+            this.tabControl1.Controls.Add(this.tabPage7);
+            this.tabControl1.Controls.Add(this.tabPage8);
+            this.tabControl1.Controls.Add(this.tabPage9);
+            this.tabControl1.Controls.Add(this.tabPage10);
+            this.tabControl1.Location = new System.Drawing.Point(0, 28);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(620, 770);
+            this.tabControl1.TabIndex = 561;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.groupBoxBenderParameters);
+            this.tabPage1.Controls.Add(this.dataGridViewPickLists);
+            this.tabPage1.Controls.Add(this.dataGridViewSKUs);
+            this.tabPage1.Controls.Add(this.label45);
+            this.tabPage1.Controls.Add(this.textBoxSampleSize);
+            this.tabPage1.Controls.Add(this.labelSampleSize);
+            this.tabPage1.Controls.Add(this.labelMaxOrderSize);
+            this.tabPage1.Controls.Add(this.labelMaxOrder);
+            this.tabPage1.Controls.Add(this.labelTotalOrders);
+            this.tabPage1.Controls.Add(this.labelTotalSKUS);
+            this.tabPage1.Controls.Add(this.comboBoxGenerate);
+            this.tabPage1.Controls.Add(this.buttonImport);
+            this.tabPage1.Controls.Add(this.buttonImportSKUs);
+            this.tabPage1.Controls.Add(this.buttonImportOrders);
+            this.tabPage1.Location = new System.Drawing.Point(4, 21);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(612, 745);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Input Data";
+            // 
+            // groupBoxBenderParameters
+            // 
+            this.groupBoxBenderParameters.Controls.Add(this.textBoxOrderGenRandSeed);
+            this.groupBoxBenderParameters.Controls.Add(this.labelSkewness40);
+            this.groupBoxBenderParameters.Controls.Add(this.labelNumberSKUs);
+            this.groupBoxBenderParameters.Controls.Add(this.labelNumberOrders);
+            this.groupBoxBenderParameters.Controls.Add(this.textBoxOrderSize);
+            this.groupBoxBenderParameters.Controls.Add(this.labelPickListSize);
+            this.groupBoxBenderParameters.Controls.Add(this.textBoxNumberOrders);
+            this.groupBoxBenderParameters.Controls.Add(this.labelOrderGenSeed);
+            this.groupBoxBenderParameters.Controls.Add(this.textBoxNumberSKUs);
+            this.groupBoxBenderParameters.Controls.Add(this.textBoxDemandSkewness80);
+            this.groupBoxBenderParameters.Controls.Add(this.labelSkewness20);
+            this.groupBoxBenderParameters.Controls.Add(this.textBoxDemandSkewness20);
+            this.groupBoxBenderParameters.Location = new System.Drawing.Point(390, 12);
+            this.groupBoxBenderParameters.Name = "groupBoxBenderParameters";
+            this.groupBoxBenderParameters.Size = new System.Drawing.Size(200, 130);
+            this.groupBoxBenderParameters.TabIndex = 567;
+            this.groupBoxBenderParameters.TabStop = false;
+            this.groupBoxBenderParameters.Text = "Bender\'s Model Parameters";
+            // 
+            // dataGridViewPickLists
+            // 
+            this.dataGridViewPickLists.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewPickLists.Location = new System.Drawing.Point(350, 482);
+            this.dataGridViewPickLists.Name = "dataGridViewPickLists";
+            this.dataGridViewPickLists.Size = new System.Drawing.Size(240, 150);
+            this.dataGridViewPickLists.TabIndex = 566;
+            // 
+            // dataGridViewSKUs
+            // 
+            this.dataGridViewSKUs.AllowUserToAddRows = false;
+            this.dataGridViewSKUs.AllowUserToDeleteRows = false;
+            this.dataGridViewSKUs.AllowUserToOrderColumns = true;
+            this.dataGridViewSKUs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewSKUs.Location = new System.Drawing.Point(69, 482);
+            this.dataGridViewSKUs.Name = "dataGridViewSKUs";
+            this.dataGridViewSKUs.ReadOnly = true;
+            this.dataGridViewSKUs.Size = new System.Drawing.Size(240, 150);
+            this.dataGridViewSKUs.TabIndex = 565;
+            // 
+            // label45
+            // 
+            this.label45.AutoSize = true;
+            this.label45.Location = new System.Drawing.Point(21, 12);
+            this.label45.Name = "label45";
+            this.label45.Size = new System.Drawing.Size(147, 13);
+            this.label45.TabIndex = 564;
+            this.label45.Text = "Import or Generate Pick Lists: ";
+            // 
+            // textBoxSampleSize
+            // 
+            this.textBoxSampleSize.Location = new System.Drawing.Point(103, 257);
+            this.textBoxSampleSize.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.textBoxSampleSize.Name = "textBoxSampleSize";
+            this.textBoxSampleSize.Size = new System.Drawing.Size(52, 18);
+            this.textBoxSampleSize.TabIndex = 562;
+            this.textBoxSampleSize.Text = "0";
+            // 
+            // labelSampleSize
+            // 
+            this.labelSampleSize.AutoSize = true;
+            this.labelSampleSize.Location = new System.Drawing.Point(37, 260);
+            this.labelSampleSize.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelSampleSize.Name = "labelSampleSize";
+            this.labelSampleSize.Size = new System.Drawing.Size(62, 13);
+            this.labelSampleSize.TabIndex = 563;
+            this.labelSampleSize.Text = "SampleSize";
+            // 
+            // labelMaxOrderSize
+            // 
+            this.labelMaxOrderSize.AutoSize = true;
+            this.labelMaxOrderSize.Location = new System.Drawing.Point(152, 241);
+            this.labelMaxOrderSize.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelMaxOrderSize.Name = "labelMaxOrderSize";
+            this.labelMaxOrderSize.Size = new System.Drawing.Size(68, 13);
+            this.labelMaxOrderSize.TabIndex = 561;
+            this.labelMaxOrderSize.Text = "Max Order #:";
+            // 
+            // labelMaxOrder
+            // 
+            this.labelMaxOrder.AutoSize = true;
+            this.labelMaxOrder.Location = new System.Drawing.Point(154, 229);
+            this.labelMaxOrder.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelMaxOrder.Name = "labelMaxOrder";
+            this.labelMaxOrder.Size = new System.Drawing.Size(67, 13);
+            this.labelMaxOrder.TabIndex = 560;
+            this.labelMaxOrder.Text = "MaxOrderID:";
+            // 
+            // labelTotalOrders
+            // 
+            this.labelTotalOrders.AutoSize = true;
+            this.labelTotalOrders.Location = new System.Drawing.Point(9, 241);
+            this.labelTotalOrders.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelTotalOrders.Name = "labelTotalOrders";
+            this.labelTotalOrders.Size = new System.Drawing.Size(50, 13);
+            this.labelTotalOrders.TabIndex = 559;
+            this.labelTotalOrders.Text = "# Orders:";
+            // 
+            // labelTotalSKUS
+            // 
+            this.labelTotalSKUS.AutoSize = true;
+            this.labelTotalSKUS.Location = new System.Drawing.Point(18, 229);
+            this.labelTotalSKUS.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelTotalSKUS.Name = "labelTotalSKUS";
+            this.labelTotalSKUS.Size = new System.Drawing.Size(40, 13);
+            this.labelTotalSKUS.TabIndex = 558;
+            this.labelTotalSKUS.Text = "# SKU:";
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.labelNumberColor);
+            this.tabPage2.Controls.Add(this.textBoxNumberColors);
+            this.tabPage2.Controls.Add(this.checkBoxStraightAllocation);
+            this.tabPage2.Controls.Add(this.labelAvgOrderSize);
+            this.tabPage2.Controls.Add(this.textBoxAvgOrderSize);
+            this.tabPage2.Controls.Add(this.labelAllocationSeed);
+            this.tabPage2.Controls.Add(this.textBoxAllocationSeed);
+            this.tabPage2.Location = new System.Drawing.Point(4, 21);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(612, 745);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Storage";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // labelNumberColor
+            // 
+            this.labelNumberColor.AutoSize = true;
+            this.labelNumberColor.Location = new System.Drawing.Point(5, 70);
+            this.labelNumberColor.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelNumberColor.Name = "labelNumberColor";
+            this.labelNumberColor.Size = new System.Drawing.Size(87, 13);
+            this.labelNumberColor.TabIndex = 543;
+            this.labelNumberColor.Text = "Number of Colors";
+            // 
+            // textBoxNumberColors
+            // 
+            this.textBoxNumberColors.Location = new System.Drawing.Point(94, 67);
+            this.textBoxNumberColors.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.textBoxNumberColors.Name = "textBoxNumberColors";
+            this.textBoxNumberColors.Size = new System.Drawing.Size(40, 18);
+            this.textBoxNumberColors.TabIndex = 544;
+            this.textBoxNumberColors.Text = "5";
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.comboBoxRouting);
+            this.tabPage3.Controls.Add(this.labelPickerSize);
+            this.tabPage3.Controls.Add(this.checkBoxVisibilityGraph);
+            this.tabPage3.Controls.Add(this.textBoxPickerSize);
+            this.tabPage3.Location = new System.Drawing.Point(4, 21);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(612, 745);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Routing";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // tabPage4
+            // 
+            this.tabPage4.Controls.Add(this.groupBox4);
+            this.tabPage4.Controls.Add(this.groupBox2);
+            this.tabPage4.Controls.Add(this.groupBox1);
+            this.tabPage4.Controls.Add(this.labelTotalAisles);
+            this.tabPage4.Controls.Add(this.labelDistanceOutput);
+            this.tabPage4.Controls.Add(this.labelTotalLocations);
+            this.tabPage4.Controls.Add(this.buttonReset);
+            this.tabPage4.Controls.Add(this.buttonCreate);
+            this.tabPage4.Location = new System.Drawing.Point(4, 21);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(612, 745);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "Design";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.textBoxAngle1);
+            this.groupBox4.Controls.Add(this.labelAngle7);
+            this.groupBox4.Controls.Add(this.textBoxAngle7);
+            this.groupBox4.Controls.Add(this.textBoxAngle8);
+            this.groupBox4.Controls.Add(this.labelAngle8);
+            this.groupBox4.Controls.Add(this.textBoxAdjuster7);
+            this.groupBox4.Controls.Add(this.labelAdjuster7);
+            this.groupBox4.Controls.Add(this.labelPickAdjuster6);
+            this.groupBox4.Controls.Add(this.labelAngle1);
+            this.groupBox4.Controls.Add(this.textBoxPickAdjuster6);
+            this.groupBox4.Controls.Add(this.textBoxAdjuster8);
+            this.groupBox4.Controls.Add(this.textBoxAngle2);
+            this.groupBox4.Controls.Add(this.labelPickAdjuster5);
+            this.groupBox4.Controls.Add(this.labelAngle2);
+            this.groupBox4.Controls.Add(this.labelAdjuster8);
+            this.groupBox4.Controls.Add(this.textBoxPickAdjuster5);
+            this.groupBox4.Controls.Add(this.labelAdjuster6);
+            this.groupBox4.Controls.Add(this.textBoxAdjuster1);
+            this.groupBox4.Controls.Add(this.textBoxAdjuster6);
+            this.groupBox4.Controls.Add(this.textBoxPickAdjuster7);
+            this.groupBox4.Controls.Add(this.labelAdjuster5);
+            this.groupBox4.Controls.Add(this.textBoxAdjuster2);
+            this.groupBox4.Controls.Add(this.labelPickAdjuster7);
+            this.groupBox4.Controls.Add(this.textBoxAdjuster5);
+            this.groupBox4.Controls.Add(this.textBoxAngle6);
+            this.groupBox4.Controls.Add(this.labelAdjuster1);
+            this.groupBox4.Controls.Add(this.labelAngle6);
+            this.groupBox4.Controls.Add(this.label2);
+            this.groupBox4.Controls.Add(this.textBoxPickAdjuster8);
+            this.groupBox4.Controls.Add(this.textBoxAngle3);
+            this.groupBox4.Controls.Add(this.labelAngle5);
+            this.groupBox4.Controls.Add(this.textBoxAdjuster3);
+            this.groupBox4.Controls.Add(this.labelPickAdjuster8);
+            this.groupBox4.Controls.Add(this.labelAdjuster3);
+            this.groupBox4.Controls.Add(this.textBoxAngle5);
+            this.groupBox4.Controls.Add(this.labelAngle3);
+            this.groupBox4.Controls.Add(this.labelPickAdjuster4);
+            this.groupBox4.Controls.Add(this.textBoxPickAdjuster1);
+            this.groupBox4.Controls.Add(this.textBoxPickAdjuster4);
+            this.groupBox4.Controls.Add(this.textBoxPickAdjuster2);
+            this.groupBox4.Controls.Add(this.labelAdjuster4);
+            this.groupBox4.Controls.Add(this.textBoxPickAdjuster3);
+            this.groupBox4.Controls.Add(this.textBoxAdjuster4);
+            this.groupBox4.Controls.Add(this.labelPickAdjuster1);
+            this.groupBox4.Controls.Add(this.labelAngle4);
+            this.groupBox4.Controls.Add(this.labelPickAdjuster2);
+            this.groupBox4.Controls.Add(this.textBoxAngle4);
+            this.groupBox4.Controls.Add(this.labelPickAdjuster3);
+            this.groupBox4.Location = new System.Drawing.Point(418, 6);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(190, 430);
+            this.groupBox4.TabIndex = 566;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Warehouse Region Variables";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.labelAspectRatio);
+            this.groupBox2.Controls.Add(this.labelI1Y);
+            this.groupBox2.Controls.Add(this.checkBoxC12);
+            this.groupBox2.Controls.Add(this.textBoxI1Y);
+            this.groupBox2.Controls.Add(this.checkBoxC13);
+            this.groupBox2.Controls.Add(this.labelI1X);
+            this.groupBox2.Controls.Add(this.checkBoxC14);
+            this.groupBox2.Controls.Add(this.textBoxI1X);
+            this.groupBox2.Controls.Add(this.checkBoxC15);
+            this.groupBox2.Controls.Add(this.labelE4);
+            this.groupBox2.Controls.Add(this.checkBoxC23);
+            this.groupBox2.Controls.Add(this.textBoxE4);
+            this.groupBox2.Controls.Add(this.checkBoxC24);
+            this.groupBox2.Controls.Add(this.textBoxAspectRatio);
+            this.groupBox2.Controls.Add(this.checkBoxC25);
+            this.groupBox2.Controls.Add(this.labelE3);
+            this.groupBox2.Controls.Add(this.checkBoxC34);
+            this.groupBox2.Controls.Add(this.textBoxE3);
+            this.groupBox2.Controls.Add(this.labelE1);
+            this.groupBox2.Controls.Add(this.checkBoxC35);
+            this.groupBox2.Controls.Add(this.labelPd);
+            this.groupBox2.Controls.Add(this.checkBoxC45);
+            this.groupBox2.Controls.Add(this.textBoxE1);
+            this.groupBox2.Controls.Add(this.textBoxpd);
+            this.groupBox2.Controls.Add(this.textBoxE2);
+            this.groupBox2.Controls.Add(this.labelE2);
+            this.groupBox2.Location = new System.Drawing.Point(212, 6);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(200, 325);
+            this.groupBox2.TabIndex = 564;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Design Class Variables";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.labelLWidth);
+            this.groupBox1.Controls.Add(this.labelPickingAisleWidth);
+            this.groupBox1.Controls.Add(this.labelCrossAisleWidth);
+            this.groupBox1.Controls.Add(this.textBoxPickingAisleWidth);
+            this.groupBox1.Controls.Add(this.textBoxCrossAisleWidth);
+            this.groupBox1.Controls.Add(this.labelLDepth);
+            this.groupBox1.Controls.Add(this.labelMagnify);
+            this.groupBox1.Controls.Add(this.textBoxMagnify);
+            this.groupBox1.Controls.Add(this.checkBoxResize);
+            this.groupBox1.Controls.Add(this.textBoxLDepth);
+            this.groupBox1.Controls.Add(this.textBoxWHWidth);
+            this.groupBox1.Controls.Add(this.textBoxLWidth);
+            this.groupBox1.Controls.Add(this.labelArea);
+            this.groupBox1.Controls.Add(this.textBoxWHDepth);
+            this.groupBox1.Controls.Add(this.textBoxArea);
+            this.groupBox1.Controls.Add(this.labelWHWidth);
+            this.groupBox1.Controls.Add(this.labelWHDepth);
+            this.groupBox1.Location = new System.Drawing.Point(6, 6);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(200, 172);
+            this.groupBox1.TabIndex = 563;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Control Parameters";
+            // 
             // labelTotalAisles
             // 
             this.labelTotalAisles.AutoSize = true;
-            this.labelTotalAisles.Location = new System.Drawing.Point(150, 756);
+            this.labelTotalAisles.Location = new System.Drawing.Point(52, 212);
             this.labelTotalAisles.Name = "labelTotalAisles";
             this.labelTotalAisles.Size = new System.Drawing.Size(62, 13);
-            this.labelTotalAisles.TabIndex = 559;
+            this.labelTotalAisles.TabIndex = 562;
             this.labelTotalAisles.Text = "Total Aisles:";
+            // 
+            // labelDistanceOutput
+            // 
+            this.labelDistanceOutput.AutoSize = true;
+            this.labelDistanceOutput.Location = new System.Drawing.Point(20, 241);
+            this.labelDistanceOutput.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelDistanceOutput.Name = "labelDistanceOutput";
+            this.labelDistanceOutput.Size = new System.Drawing.Size(94, 13);
+            this.labelDistanceOutput.TabIndex = 561;
+            this.labelDistanceOutput.Text = "Average Distance:";
+            // 
+            // labelTotalLocations
+            // 
+            this.labelTotalLocations.AutoSize = true;
+            this.labelTotalLocations.Location = new System.Drawing.Point(34, 226);
+            this.labelTotalLocations.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelTotalLocations.Name = "labelTotalLocations";
+            this.labelTotalLocations.Size = new System.Drawing.Size(80, 13);
+            this.labelTotalLocations.TabIndex = 560;
+            this.labelTotalLocations.Text = "Total Locations:";
+            // 
+            // tabPage5
+            // 
+            this.tabPage5.Controls.Add(this.groupBoxLowerUpperBounds3);
+            this.tabPage5.Controls.Add(this.groupBoxExcessLocations);
+            this.tabPage5.Controls.Add(this.groupBoxPickListSampling);
+            this.tabPage5.Controls.Add(this.groupBoxLowerUpperBounds2);
+            this.tabPage5.Controls.Add(this.groupBoxESParameters);
+            this.tabPage5.Controls.Add(this.progressBarAlg);
+            this.tabPage5.Controls.Add(this.buttonSolveES);
+            this.tabPage5.Location = new System.Drawing.Point(4, 21);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage5.Size = new System.Drawing.Size(612, 745);
+            this.tabPage5.TabIndex = 4;
+            this.tabPage5.Text = "Optimization";
+            this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // groupBoxLowerUpperBounds3
+            // 
+            this.groupBoxLowerUpperBounds3.Controls.Add(this.label16);
+            this.groupBoxLowerUpperBounds3.Controls.Add(this.textBoxE1L);
+            this.groupBoxLowerUpperBounds3.Controls.Add(this.label35);
+            this.groupBoxLowerUpperBounds3.Controls.Add(this.textBoxE2L);
+            this.groupBoxLowerUpperBounds3.Controls.Add(this.label44);
+            this.groupBoxLowerUpperBounds3.Controls.Add(this.textBoxE3L);
+            this.groupBoxLowerUpperBounds3.Controls.Add(this.textBoxC12L);
+            this.groupBoxLowerUpperBounds3.Controls.Add(this.textBoxPDL);
+            this.groupBoxLowerUpperBounds3.Controls.Add(this.label36);
+            this.groupBoxLowerUpperBounds3.Controls.Add(this.label4);
+            this.groupBoxLowerUpperBounds3.Controls.Add(this.textBoxC13L);
+            this.groupBoxLowerUpperBounds3.Controls.Add(this.textBoxAspectRatioL);
+            this.groupBoxLowerUpperBounds3.Controls.Add(this.textBoxC14L);
+            this.groupBoxLowerUpperBounds3.Controls.Add(this.textBoxI1YU);
+            this.groupBoxLowerUpperBounds3.Controls.Add(this.label37);
+            this.groupBoxLowerUpperBounds3.Controls.Add(this.textBoxI1XU);
+            this.groupBoxLowerUpperBounds3.Controls.Add(this.textBoxC35L);
+            this.groupBoxLowerUpperBounds3.Controls.Add(this.textBoxE4U);
+            this.groupBoxLowerUpperBounds3.Controls.Add(this.label38);
+            this.groupBoxLowerUpperBounds3.Controls.Add(this.label5);
+            this.groupBoxLowerUpperBounds3.Controls.Add(this.textBoxC45L);
+            this.groupBoxLowerUpperBounds3.Controls.Add(this.textBoxAspectRatioU);
+            this.groupBoxLowerUpperBounds3.Controls.Add(this.textBoxC15L);
+            this.groupBoxLowerUpperBounds3.Controls.Add(this.textBoxPDU);
+            this.groupBoxLowerUpperBounds3.Controls.Add(this.label39);
+            this.groupBoxLowerUpperBounds3.Controls.Add(this.textBoxE3U);
+            this.groupBoxLowerUpperBounds3.Controls.Add(this.textBoxC23L);
+            this.groupBoxLowerUpperBounds3.Controls.Add(this.textBoxE2U);
+            this.groupBoxLowerUpperBounds3.Controls.Add(this.label40);
+            this.groupBoxLowerUpperBounds3.Controls.Add(this.textBoxE1U);
+            this.groupBoxLowerUpperBounds3.Controls.Add(this.textBoxC12U);
+            this.groupBoxLowerUpperBounds3.Controls.Add(this.textBoxE4L);
+            this.groupBoxLowerUpperBounds3.Controls.Add(this.textBoxC13U);
+            this.groupBoxLowerUpperBounds3.Controls.Add(this.label22);
+            this.groupBoxLowerUpperBounds3.Controls.Add(this.label41);
+            this.groupBoxLowerUpperBounds3.Controls.Add(this.label21);
+            this.groupBoxLowerUpperBounds3.Controls.Add(this.textBoxC24L);
+            this.groupBoxLowerUpperBounds3.Controls.Add(this.label7);
+            this.groupBoxLowerUpperBounds3.Controls.Add(this.textBoxC14U);
+            this.groupBoxLowerUpperBounds3.Controls.Add(this.label20);
+            this.groupBoxLowerUpperBounds3.Controls.Add(this.label42);
+            this.groupBoxLowerUpperBounds3.Controls.Add(this.textBoxI1XL);
+            this.groupBoxLowerUpperBounds3.Controls.Add(this.textBoxC35U);
+            this.groupBoxLowerUpperBounds3.Controls.Add(this.textBoxI1YL);
+            this.groupBoxLowerUpperBounds3.Controls.Add(this.textBoxC45U);
+            this.groupBoxLowerUpperBounds3.Controls.Add(this.label12);
+            this.groupBoxLowerUpperBounds3.Controls.Add(this.label43);
+            this.groupBoxLowerUpperBounds3.Controls.Add(this.textBoxC15U);
+            this.groupBoxLowerUpperBounds3.Controls.Add(this.textBoxC23U);
+            this.groupBoxLowerUpperBounds3.Controls.Add(this.textBoxC25L);
+            this.groupBoxLowerUpperBounds3.Controls.Add(this.textBoxC24U);
+            this.groupBoxLowerUpperBounds3.Controls.Add(this.textBoxC34U);
+            this.groupBoxLowerUpperBounds3.Controls.Add(this.textBoxC25U);
+            this.groupBoxLowerUpperBounds3.Controls.Add(this.textBoxC34L);
+            this.groupBoxLowerUpperBounds3.Location = new System.Drawing.Point(212, 6);
+            this.groupBoxLowerUpperBounds3.Name = "groupBoxLowerUpperBounds3";
+            this.groupBoxLowerUpperBounds3.Size = new System.Drawing.Size(200, 431);
+            this.groupBoxLowerUpperBounds3.TabIndex = 555;
+            this.groupBoxLowerUpperBounds3.TabStop = false;
+            this.groupBoxLowerUpperBounds3.Text = "Lower and Upper Bounds";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(3, 189);
+            this.label16.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(66, 13);
+            this.label16.TabIndex = 565;
+            this.label16.Text = "Aspect Ratio";
+            // 
+            // label35
+            // 
+            this.label35.AutoSize = true;
+            this.label35.Location = new System.Drawing.Point(5, 53);
+            this.label35.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(64, 13);
+            this.label35.TabIndex = 584;
+            this.label35.Text = "C14 (E1-E4)";
+            // 
+            // label44
+            // 
+            this.label44.AutoSize = true;
+            this.label44.Location = new System.Drawing.Point(5, 19);
+            this.label44.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label44.Name = "label44";
+            this.label44.Size = new System.Drawing.Size(64, 13);
+            this.label44.TabIndex = 590;
+            this.label44.Text = "C12 (E1-E2)";
+            // 
+            // label36
+            // 
+            this.label36.AutoSize = true;
+            this.label36.Location = new System.Drawing.Point(6, 70);
+            this.label36.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(63, 13);
+            this.label36.TabIndex = 585;
+            this.label36.Text = "C15  (E1-I1)";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(49, 206);
+            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(20, 13);
+            this.label4.TabIndex = 553;
+            this.label4.Text = "E1";
+            // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.Location = new System.Drawing.Point(6, 87);
+            this.label37.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(64, 13);
+            this.label37.TabIndex = 586;
+            this.label37.Text = "C23 (E2-E3)";
+            // 
+            // label38
+            // 
+            this.label38.AutoSize = true;
+            this.label38.Location = new System.Drawing.Point(5, 104);
+            this.label38.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(64, 13);
+            this.label38.TabIndex = 587;
+            this.label38.Text = "C24 (E2-E4)";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(49, 223);
+            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(20, 13);
+            this.label5.TabIndex = 554;
+            this.label5.Text = "E2";
+            // 
+            // label39
+            // 
+            this.label39.AutoSize = true;
+            this.label39.Location = new System.Drawing.Point(7, 172);
+            this.label39.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(63, 13);
+            this.label39.TabIndex = 593;
+            this.label39.Text = "C45  (E4-I1)";
+            // 
+            // label40
+            // 
+            this.label40.AutoSize = true;
+            this.label40.Location = new System.Drawing.Point(7, 155);
+            this.label40.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(63, 13);
+            this.label40.TabIndex = 592;
+            this.label40.Text = "C35  (E3-I1)";
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(46, 291);
+            this.label22.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(23, 13);
+            this.label22.TabIndex = 571;
+            this.label22.Text = "I1Y";
+            // 
+            // label41
+            // 
+            this.label41.AutoSize = true;
+            this.label41.Location = new System.Drawing.Point(5, 36);
+            this.label41.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label41.Name = "label41";
+            this.label41.Size = new System.Drawing.Size(64, 13);
+            this.label41.TabIndex = 591;
+            this.label41.Text = "C13 (E1-E3)";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(46, 274);
+            this.label21.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(23, 13);
+            this.label21.TabIndex = 570;
+            this.label21.Text = "I1X";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(41, 308);
+            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(28, 13);
+            this.label7.TabIndex = 556;
+            this.label7.Text = "PnD";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(49, 257);
+            this.label20.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(20, 13);
+            this.label20.TabIndex = 569;
+            this.label20.Text = "E4";
+            // 
+            // label42
+            // 
+            this.label42.AutoSize = true;
+            this.label42.Location = new System.Drawing.Point(5, 121);
+            this.label42.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label42.Name = "label42";
+            this.label42.Size = new System.Drawing.Size(63, 13);
+            this.label42.TabIndex = 588;
+            this.label42.Text = "C25  (E2-I1)";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(49, 240);
+            this.label12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(20, 13);
+            this.label12.TabIndex = 561;
+            this.label12.Text = "E3";
+            // 
+            // label43
+            // 
+            this.label43.AutoSize = true;
+            this.label43.Location = new System.Drawing.Point(6, 138);
+            this.label43.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label43.Name = "label43";
+            this.label43.Size = new System.Drawing.Size(64, 13);
+            this.label43.TabIndex = 589;
+            this.label43.Text = "C34 (E3-E4)";
+            // 
+            // groupBoxExcessLocations
+            // 
+            this.groupBoxExcessLocations.Controls.Add(this.textBoxNFTLambda);
+            this.groupBoxExcessLocations.Controls.Add(this.checkBoxNFT);
+            this.groupBoxExcessLocations.Controls.Add(this.textBoxNFT0);
+            this.groupBoxExcessLocations.Controls.Add(this.labelNFT);
+            this.groupBoxExcessLocations.Controls.Add(this.labelNFTLambda);
+            this.groupBoxExcessLocations.Location = new System.Drawing.Point(8, 230);
+            this.groupBoxExcessLocations.Name = "groupBoxExcessLocations";
+            this.groupBoxExcessLocations.Size = new System.Drawing.Size(200, 100);
+            this.groupBoxExcessLocations.TabIndex = 553;
+            this.groupBoxExcessLocations.TabStop = false;
+            this.groupBoxExcessLocations.Text = "Excess Locations";
+            // 
+            // groupBoxPickListSampling
+            // 
+            this.groupBoxPickListSampling.Controls.Add(this.checkBoxAllSearch);
+            this.groupBoxPickListSampling.Location = new System.Drawing.Point(8, 190);
+            this.groupBoxPickListSampling.Name = "groupBoxPickListSampling";
+            this.groupBoxPickListSampling.Size = new System.Drawing.Size(200, 35);
+            this.groupBoxPickListSampling.TabIndex = 552;
+            this.groupBoxPickListSampling.TabStop = false;
+            this.groupBoxPickListSampling.Text = "Pick List Sampling";
+            // 
+            // groupBoxLowerUpperBounds2
+            // 
+            this.groupBoxLowerUpperBounds2.Controls.Add(this.label3);
+            this.groupBoxLowerUpperBounds2.Controls.Add(this.textBoxPickAdjuster8L);
+            this.groupBoxLowerUpperBounds2.Controls.Add(this.textBoxAdjuster5L);
+            this.groupBoxLowerUpperBounds2.Controls.Add(this.textBoxAdjuster6L);
+            this.groupBoxLowerUpperBounds2.Controls.Add(this.label6);
+            this.groupBoxLowerUpperBounds2.Controls.Add(this.textBoxAngle6L);
+            this.groupBoxLowerUpperBounds2.Controls.Add(this.textBoxPickAdjuster5L);
+            this.groupBoxLowerUpperBounds2.Controls.Add(this.label8);
+            this.groupBoxLowerUpperBounds2.Controls.Add(this.label9);
+            this.groupBoxLowerUpperBounds2.Controls.Add(this.textBoxAngle5L);
+            this.groupBoxLowerUpperBounds2.Controls.Add(this.label10);
+            this.groupBoxLowerUpperBounds2.Controls.Add(this.textBoxPickAdjuster6L);
+            this.groupBoxLowerUpperBounds2.Controls.Add(this.label11);
+            this.groupBoxLowerUpperBounds2.Controls.Add(this.label13);
+            this.groupBoxLowerUpperBounds2.Controls.Add(this.textBoxPickAdjuster8U);
+            this.groupBoxLowerUpperBounds2.Controls.Add(this.label14);
+            this.groupBoxLowerUpperBounds2.Controls.Add(this.textBoxAngle1U);
+            this.groupBoxLowerUpperBounds2.Controls.Add(this.label15);
+            this.groupBoxLowerUpperBounds2.Controls.Add(this.label17);
+            this.groupBoxLowerUpperBounds2.Controls.Add(this.textBoxAngle2U);
+            this.groupBoxLowerUpperBounds2.Controls.Add(this.label18);
+            this.groupBoxLowerUpperBounds2.Controls.Add(this.label19);
+            this.groupBoxLowerUpperBounds2.Controls.Add(this.textBoxPickAdjuster7U);
+            this.groupBoxLowerUpperBounds2.Controls.Add(this.textBoxAngle3U);
+            this.groupBoxLowerUpperBounds2.Controls.Add(this.label23);
+            this.groupBoxLowerUpperBounds2.Controls.Add(this.textBoxAdjuster1U);
+            this.groupBoxLowerUpperBounds2.Controls.Add(this.label24);
+            this.groupBoxLowerUpperBounds2.Controls.Add(this.textBoxPickAdjuster4L);
+            this.groupBoxLowerUpperBounds2.Controls.Add(this.label25);
+            this.groupBoxLowerUpperBounds2.Controls.Add(this.textBoxAdjuster8U);
+            this.groupBoxLowerUpperBounds2.Controls.Add(this.label26);
+            this.groupBoxLowerUpperBounds2.Controls.Add(this.label27);
+            this.groupBoxLowerUpperBounds2.Controls.Add(this.textBoxAdjuster2U);
+            this.groupBoxLowerUpperBounds2.Controls.Add(this.label28);
+            this.groupBoxLowerUpperBounds2.Controls.Add(this.label29);
+            this.groupBoxLowerUpperBounds2.Controls.Add(this.textBoxAdjuster3U);
+            this.groupBoxLowerUpperBounds2.Controls.Add(this.label30);
+            this.groupBoxLowerUpperBounds2.Controls.Add(this.textBoxAdjuster4L);
+            this.groupBoxLowerUpperBounds2.Controls.Add(this.label31);
+            this.groupBoxLowerUpperBounds2.Controls.Add(this.textBoxAdjuster7U);
+            this.groupBoxLowerUpperBounds2.Controls.Add(this.label32);
+            this.groupBoxLowerUpperBounds2.Controls.Add(this.label33);
+            this.groupBoxLowerUpperBounds2.Controls.Add(this.label34);
+            this.groupBoxLowerUpperBounds2.Controls.Add(this.textBoxAngle4L);
+            this.groupBoxLowerUpperBounds2.Controls.Add(this.textBoxAngle8U);
+            this.groupBoxLowerUpperBounds2.Controls.Add(this.textBoxPickAdjuster3L);
+            this.groupBoxLowerUpperBounds2.Controls.Add(this.textBoxAngle7U);
+            this.groupBoxLowerUpperBounds2.Controls.Add(this.textBoxPickAdjuster1U);
+            this.groupBoxLowerUpperBounds2.Controls.Add(this.textBoxPickAdjuster2U);
+            this.groupBoxLowerUpperBounds2.Controls.Add(this.textBoxPickAdjuster2L);
+            this.groupBoxLowerUpperBounds2.Controls.Add(this.textBoxPickAdjuster3U);
+            this.groupBoxLowerUpperBounds2.Controls.Add(this.textBoxAngle7L);
+            this.groupBoxLowerUpperBounds2.Controls.Add(this.textBoxAngle4U);
+            this.groupBoxLowerUpperBounds2.Controls.Add(this.textBoxPickAdjuster1L);
+            this.groupBoxLowerUpperBounds2.Controls.Add(this.textBoxAdjuster4U);
+            this.groupBoxLowerUpperBounds2.Controls.Add(this.textBoxPickAdjuster4U);
+            this.groupBoxLowerUpperBounds2.Controls.Add(this.textBoxAngle8L);
+            this.groupBoxLowerUpperBounds2.Controls.Add(this.textBoxAdjuster7L);
+            this.groupBoxLowerUpperBounds2.Controls.Add(this.textBoxPickAdjuster6U);
+            this.groupBoxLowerUpperBounds2.Controls.Add(this.textBoxAdjuster8L);
+            this.groupBoxLowerUpperBounds2.Controls.Add(this.textBoxPickAdjuster5U);
+            this.groupBoxLowerUpperBounds2.Controls.Add(this.textBoxPickAdjuster7L);
+            this.groupBoxLowerUpperBounds2.Controls.Add(this.textBoxAngle5U);
+            this.groupBoxLowerUpperBounds2.Controls.Add(this.textBoxAdjuster6U);
+            this.groupBoxLowerUpperBounds2.Controls.Add(this.textBoxAngle1L);
+            this.groupBoxLowerUpperBounds2.Controls.Add(this.textBoxAngle6U);
+            this.groupBoxLowerUpperBounds2.Controls.Add(this.textBoxAdjuster5U);
+            this.groupBoxLowerUpperBounds2.Controls.Add(this.textBoxAngle2L);
+            this.groupBoxLowerUpperBounds2.Controls.Add(this.textBoxAdjuster3L);
+            this.groupBoxLowerUpperBounds2.Controls.Add(this.textBoxAngle3L);
+            this.groupBoxLowerUpperBounds2.Controls.Add(this.textBoxAdjuster2L);
+            this.groupBoxLowerUpperBounds2.Controls.Add(this.textBoxAdjuster1L);
+            this.groupBoxLowerUpperBounds2.Location = new System.Drawing.Point(418, 6);
+            this.groupBoxLowerUpperBounds2.Name = "groupBoxLowerUpperBounds2";
+            this.groupBoxLowerUpperBounds2.Size = new System.Drawing.Size(190, 431);
+            this.groupBoxLowerUpperBounds2.TabIndex = 551;
+            this.groupBoxLowerUpperBounds2.TabStop = false;
+            this.groupBoxLowerUpperBounds2.Text = "Lower and Upper Bounds";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(38, 20);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(43, 13);
+            this.label3.TabIndex = 552;
+            this.label3.Text = "Angle 1";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(38, 37);
+            this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(43, 13);
+            this.label6.TabIndex = 555;
+            this.label6.Text = "Angle 2";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(27, 156);
+            this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(54, 13);
+            this.label8.TabIndex = 557;
+            this.label8.Text = "Adjuster 1";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(27, 173);
+            this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(54, 13);
+            this.label9.TabIndex = 558;
+            this.label9.Text = "Adjuster 2";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(27, 190);
+            this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(54, 13);
+            this.label10.TabIndex = 559;
+            this.label10.Text = "Adjuster 3";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(38, 54);
+            this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(43, 13);
+            this.label11.TabIndex = 560;
+            this.label11.Text = "Angle 3";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(5, 292);
+            this.label13.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(76, 13);
+            this.label13.TabIndex = 562;
+            this.label13.Text = "Pick Adjuster 1";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(5, 309);
+            this.label14.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(76, 13);
+            this.label14.TabIndex = 563;
+            this.label14.Text = "Pick Adjuster 2";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(5, 326);
+            this.label15.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(76, 13);
+            this.label15.TabIndex = 564;
+            this.label15.Text = "Pick Adjuster 3";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(38, 71);
+            this.label17.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(43, 13);
+            this.label17.TabIndex = 566;
+            this.label17.Text = "Angle 4";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(27, 207);
+            this.label18.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(54, 13);
+            this.label18.TabIndex = 567;
+            this.label18.Text = "Adjuster 4";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(5, 343);
+            this.label19.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(76, 13);
+            this.label19.TabIndex = 568;
+            this.label19.Text = "Pick Adjuster 4";
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(5, 411);
+            this.label23.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(76, 13);
+            this.label23.TabIndex = 583;
+            this.label23.Text = "Pick Adjuster 8";
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(38, 88);
+            this.label24.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(43, 13);
+            this.label24.TabIndex = 572;
+            this.label24.Text = "Angle 5";
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(38, 105);
+            this.label25.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(43, 13);
+            this.label25.TabIndex = 573;
+            this.label25.Text = "Angle 6";
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Location = new System.Drawing.Point(5, 394);
+            this.label26.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(76, 13);
+            this.label26.TabIndex = 582;
+            this.label26.Text = "Pick Adjuster 7";
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Location = new System.Drawing.Point(27, 224);
+            this.label27.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(54, 13);
+            this.label27.TabIndex = 574;
+            this.label27.Text = "Adjuster 5";
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Location = new System.Drawing.Point(27, 241);
+            this.label28.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(54, 13);
+            this.label28.TabIndex = 575;
+            this.label28.Text = "Adjuster 6";
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Location = new System.Drawing.Point(27, 275);
+            this.label29.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(54, 13);
+            this.label29.TabIndex = 581;
+            this.label29.Text = "Adjuster 8";
+            // 
+            // label30
+            // 
+            this.label30.AutoSize = true;
+            this.label30.Location = new System.Drawing.Point(5, 360);
+            this.label30.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(76, 13);
+            this.label30.TabIndex = 576;
+            this.label30.Text = "Pick Adjuster 5";
+            // 
+            // label31
+            // 
+            this.label31.AutoSize = true;
+            this.label31.Location = new System.Drawing.Point(5, 377);
+            this.label31.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(76, 13);
+            this.label31.TabIndex = 577;
+            this.label31.Text = "Pick Adjuster 6";
+            // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.Location = new System.Drawing.Point(27, 258);
+            this.label32.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(54, 13);
+            this.label32.TabIndex = 580;
+            this.label32.Text = "Adjuster 7";
+            // 
+            // label33
+            // 
+            this.label33.AutoSize = true;
+            this.label33.Location = new System.Drawing.Point(38, 139);
+            this.label33.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(43, 13);
+            this.label33.TabIndex = 579;
+            this.label33.Text = "Angle 8";
+            // 
+            // label34
+            // 
+            this.label34.AutoSize = true;
+            this.label34.Location = new System.Drawing.Point(38, 122);
+            this.label34.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(43, 13);
+            this.label34.TabIndex = 578;
+            this.label34.Text = "Angle 7";
+            // 
+            // groupBoxESParameters
+            // 
+            this.groupBoxESParameters.Controls.Add(this.textBoxESSuccessRule);
+            this.groupBoxESParameters.Controls.Add(this.labelMu);
+            this.groupBoxESParameters.Controls.Add(this.labelESSeed);
+            this.groupBoxESParameters.Controls.Add(this.textBoxMu);
+            this.groupBoxESParameters.Controls.Add(this.labelLambda);
+            this.groupBoxESParameters.Controls.Add(this.textBoxLambda);
+            this.groupBoxESParameters.Controls.Add(this.labelMaxIteration);
+            this.groupBoxESParameters.Controls.Add(this.textBoxESSeed);
+            this.groupBoxESParameters.Controls.Add(this.labelInitialSigma);
+            this.groupBoxESParameters.Controls.Add(this.textBoxESIteration);
+            this.groupBoxESParameters.Controls.Add(this.textBoxESCounter);
+            this.groupBoxESParameters.Controls.Add(this.labelSuccessRule);
+            this.groupBoxESParameters.Controls.Add(this.labelSigmaChangeFrequency);
+            this.groupBoxESParameters.Controls.Add(this.textBoxSigma);
+            this.groupBoxESParameters.Location = new System.Drawing.Point(6, 6);
+            this.groupBoxESParameters.Name = "groupBoxESParameters";
+            this.groupBoxESParameters.Size = new System.Drawing.Size(200, 151);
+            this.groupBoxESParameters.TabIndex = 550;
+            this.groupBoxESParameters.TabStop = false;
+            this.groupBoxESParameters.Text = "Evolution Strategy Optimization Parameters";
+            // 
+            // tabPage6
+            // 
+            this.tabPage6.Controls.Add(this.buttonBatchSearch);
+            this.tabPage6.Controls.Add(this.progressBarBatch);
+            this.tabPage6.Location = new System.Drawing.Point(4, 21);
+            this.tabPage6.Name = "tabPage6";
+            this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage6.Size = new System.Drawing.Size(612, 745);
+            this.tabPage6.TabIndex = 5;
+            this.tabPage6.Text = "Batch Optimization";
+            this.tabPage6.UseVisualStyleBackColor = true;
+            // 
+            // tabPage7
+            // 
+            this.tabPage7.Controls.Add(this.buttonDoE);
+            this.tabPage7.Location = new System.Drawing.Point(4, 21);
+            this.tabPage7.Name = "tabPage7";
+            this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage7.Size = new System.Drawing.Size(612, 745);
+            this.tabPage7.TabIndex = 6;
+            this.tabPage7.Text = "Design of Experiments";
+            this.tabPage7.UseVisualStyleBackColor = true;
+            // 
+            // tabPage8
+            // 
+            this.tabPage8.Controls.Add(this.comboBoxComputing);
+            this.tabPage8.Controls.Add(this.labelNETSchedule);
+            this.tabPage8.Controls.Add(this.comboBoxNetSchedule);
+            this.tabPage8.Controls.Add(this.label1);
+            this.tabPage8.Location = new System.Drawing.Point(4, 21);
+            this.tabPage8.Name = "tabPage8";
+            this.tabPage8.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage8.Size = new System.Drawing.Size(612, 745);
+            this.tabPage8.TabIndex = 7;
+            this.tabPage8.Text = "Acceleration";
+            this.tabPage8.UseVisualStyleBackColor = true;
+            // 
+            // tabPage9
+            // 
+            this.tabPage9.Controls.Add(this.checkBoxExport);
+            this.tabPage9.Controls.Add(this.buttonTwoLocationDistance);
+            this.tabPage9.Controls.Add(this.textBoxTSP);
+            this.tabPage9.Controls.Add(this.textBoxLoc1);
+            this.tabPage9.Controls.Add(this.textBoxLoc2);
+            this.tabPage9.Controls.Add(this.buttonFindLocation);
+            this.tabPage9.Controls.Add(this.textBoxOrderIndex);
+            this.tabPage9.Controls.Add(this.textBoxNeighbors);
+            this.tabPage9.Controls.Add(this.textBoxRegions);
+            this.tabPage9.Location = new System.Drawing.Point(4, 21);
+            this.tabPage9.Name = "tabPage9";
+            this.tabPage9.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage9.Size = new System.Drawing.Size(612, 745);
+            this.tabPage9.TabIndex = 8;
+            this.tabPage9.Text = "Debug";
+            this.tabPage9.UseVisualStyleBackColor = true;
+            // 
+            // tabPage10
+            // 
+            this.tabPage10.Controls.Add(this.buttonImportDesign);
+            this.tabPage10.Controls.Add(this.buttonGetDesign);
+            this.tabPage10.Controls.Add(this.labelDesignNumber);
+            this.tabPage10.Controls.Add(this.textBoxDesignNumber);
+            this.tabPage10.Location = new System.Drawing.Point(4, 21);
+            this.tabPage10.Name = "tabPage10";
+            this.tabPage10.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage10.Size = new System.Drawing.Size(612, 745);
+            this.tabPage10.TabIndex = 9;
+            this.tabPage10.Text = "Import Design";
+            this.tabPage10.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 911);
-            this.Controls.Add(this.labelTotalAisles);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.labelOrderGenSeed);
-            this.Controls.Add(this.labelPickListSize);
-            this.Controls.Add(this.labelNumberOrders);
-            this.Controls.Add(this.labelNumberSKUs);
-            this.Controls.Add(this.labelSkewness40);
-            this.Controls.Add(this.labelSkewness20);
-            this.Controls.Add(this.labelNETSchedule);
-            this.Controls.Add(this.labelDesignClass);
-            this.Controls.Add(this.labelSuccessRule);
-            this.Controls.Add(this.labelSigmaChangeFrequency);
-            this.Controls.Add(this.labelInitialSigma);
-            this.Controls.Add(this.labelMaxIteration);
-            this.Controls.Add(this.labelESSeed);
-            this.Controls.Add(this.labelLambda);
-            this.Controls.Add(this.labelMu);
-            this.Controls.Add(this.labelAllocationSeed);
-            this.Controls.Add(this.comboBoxGenerate);
-            this.Controls.Add(this.checkBoxStraightAllocation);
-            this.Controls.Add(this.comboBoxNetSchedule);
-            this.Controls.Add(this.progressBarBatch);
-            this.Controls.Add(this.buttonBatchSearch);
-            this.Controls.Add(this.labelDesignNumber);
-            this.Controls.Add(this.labelNFTLambda);
-            this.Controls.Add(this.labelNFT);
-            this.Controls.Add(this.textBoxNFTLambda);
-            this.Controls.Add(this.textBoxNFT0);
-            this.Controls.Add(this.checkBoxNFT);
-            this.Controls.Add(this.checkBoxResize);
-            this.Controls.Add(this.textBoxDesignNumber);
-            this.Controls.Add(this.buttonImportDesign);
-            this.Controls.Add(this.buttonGetDesign);
-            this.Controls.Add(this.textBoxESSuccessRule);
-            this.Controls.Add(this.textBoxC34U);
-            this.Controls.Add(this.textBoxC34L);
-            this.Controls.Add(this.textBoxC25U);
-            this.Controls.Add(this.textBoxC25L);
-            this.Controls.Add(this.textBoxC24U);
-            this.Controls.Add(this.textBoxC24L);
-            this.Controls.Add(this.textBoxC23U);
-            this.Controls.Add(this.textBoxC23L);
-            this.Controls.Add(this.textBoxC15U);
-            this.Controls.Add(this.textBoxC15L);
-            this.Controls.Add(this.textBoxC45U);
-            this.Controls.Add(this.textBoxC35U);
-            this.Controls.Add(this.textBoxC14U);
-            this.Controls.Add(this.textBoxC13U);
-            this.Controls.Add(this.textBoxC12U);
-            this.Controls.Add(this.textBoxC45L);
-            this.Controls.Add(this.textBoxC35L);
-            this.Controls.Add(this.textBoxC14L);
-            this.Controls.Add(this.textBoxC13L);
-            this.Controls.Add(this.textBoxC12L);
-            this.Controls.Add(this.textBoxPickAdjuster8U);
-            this.Controls.Add(this.textBoxPickAdjuster8L);
-            this.Controls.Add(this.labelPickAdjuster8);
-            this.Controls.Add(this.textBoxPickAdjuster8);
-            this.Controls.Add(this.textBoxPickAdjuster7U);
-            this.Controls.Add(this.textBoxPickAdjuster7L);
-            this.Controls.Add(this.labelPickAdjuster7);
-            this.Controls.Add(this.textBoxPickAdjuster7);
-            this.Controls.Add(this.textBoxAdjuster8U);
-            this.Controls.Add(this.textBoxAdjuster8L);
-            this.Controls.Add(this.labelAdjuster8);
-            this.Controls.Add(this.textBoxAdjuster8);
-            this.Controls.Add(this.textBoxAdjuster7U);
-            this.Controls.Add(this.textBoxAdjuster7L);
-            this.Controls.Add(this.labelAdjuster7);
-            this.Controls.Add(this.textBoxAdjuster7);
-            this.Controls.Add(this.textBoxAngle8U);
-            this.Controls.Add(this.textBoxAngle8L);
-            this.Controls.Add(this.labelAngle8);
-            this.Controls.Add(this.textBoxAngle8);
-            this.Controls.Add(this.textBoxAngle7U);
-            this.Controls.Add(this.textBoxAngle7L);
-            this.Controls.Add(this.labelAngle7);
-            this.Controls.Add(this.textBoxAngle7);
-            this.Controls.Add(this.labelPickerSize);
-            this.Controls.Add(this.textBoxPickerSize);
-            this.Controls.Add(this.comboBoxComputing);
-            this.Controls.Add(this.checkBoxC45);
-            this.Controls.Add(this.checkBoxC35);
-            this.Controls.Add(this.checkBoxC34);
-            this.Controls.Add(this.checkBoxC25);
-            this.Controls.Add(this.checkBoxC24);
-            this.Controls.Add(this.checkBoxC23);
-            this.Controls.Add(this.checkBoxC15);
-            this.Controls.Add(this.checkBoxC14);
-            this.Controls.Add(this.checkBoxC13);
-            this.Controls.Add(this.checkBoxC12);
-            this.Controls.Add(this.textBoxOrderGenRandSeed);
-            this.Controls.Add(this.textBoxOrderSize);
-            this.Controls.Add(this.textBoxNumberOrders);
-            this.Controls.Add(this.textBoxNumberSKUs);
-            this.Controls.Add(this.textBoxDemandSkewness80);
-            this.Controls.Add(this.textBoxDemandSkewness20);
-            this.Controls.Add(this.textBoxLoc2);
-            this.Controls.Add(this.textBoxLoc1);
-            this.Controls.Add(this.buttonTwoLocationDistance);
-            this.Controls.Add(this.checkBoxVisibilityGraph);
-            this.Controls.Add(this.checkBoxExport);
-            this.Controls.Add(this.comboBoxDesignClass);
-            this.Controls.Add(this.labelPickingAisleWidth);
-            this.Controls.Add(this.labelCrossAisleWidth);
-            this.Controls.Add(this.textBoxPickingAisleWidth);
-            this.Controls.Add(this.textBoxCrossAisleWidth);
-            this.Controls.Add(this.labelLDepth);
-            this.Controls.Add(this.labelLWidth);
-            this.Controls.Add(this.textBoxLDepth);
-            this.Controls.Add(this.textBoxLWidth);
-            this.Controls.Add(this.textBoxPickAdjuster6U);
-            this.Controls.Add(this.textBoxPickAdjuster6L);
-            this.Controls.Add(this.labelPickAdjuster6);
-            this.Controls.Add(this.textBoxPickAdjuster6);
-            this.Controls.Add(this.textBoxPickAdjuster5U);
-            this.Controls.Add(this.textBoxPickAdjuster5L);
-            this.Controls.Add(this.labelPickAdjuster5);
-            this.Controls.Add(this.textBoxPickAdjuster5);
-            this.Controls.Add(this.textBoxAdjuster6U);
-            this.Controls.Add(this.textBoxAdjuster6L);
-            this.Controls.Add(this.labelAdjuster6);
-            this.Controls.Add(this.textBoxAdjuster6);
-            this.Controls.Add(this.labelAdjuster5);
-            this.Controls.Add(this.textBoxAdjuster5U);
-            this.Controls.Add(this.textBoxAdjuster5L);
-            this.Controls.Add(this.textBoxAdjuster5);
-            this.Controls.Add(this.textBoxAngle6U);
-            this.Controls.Add(this.textBoxAngle6L);
-            this.Controls.Add(this.textBoxAngle6);
-            this.Controls.Add(this.labelAngle6);
-            this.Controls.Add(this.textBoxAngle5U);
-            this.Controls.Add(this.textBoxAngle5L);
-            this.Controls.Add(this.labelAngle5);
-            this.Controls.Add(this.textBoxAngle5);
-            this.Controls.Add(this.textBoxI1YU);
-            this.Controls.Add(this.textBoxI1YL);
-            this.Controls.Add(this.textBoxI1XU);
-            this.Controls.Add(this.textBoxI1XL);
-            this.Controls.Add(this.labelI1Y);
-            this.Controls.Add(this.textBoxI1Y);
-            this.Controls.Add(this.labelI1X);
-            this.Controls.Add(this.textBoxI1X);
-            this.Controls.Add(this.textBoxE4U);
-            this.Controls.Add(this.textBoxE4L);
-            this.Controls.Add(this.labelE4);
-            this.Controls.Add(this.textBoxE4);
-            this.Controls.Add(this.textBoxPickAdjuster4U);
-            this.Controls.Add(this.textBoxPickAdjuster4L);
-            this.Controls.Add(this.labelPickAdjuster4);
-            this.Controls.Add(this.textBoxPickAdjuster4);
-            this.Controls.Add(this.textBoxAdjuster4U);
-            this.Controls.Add(this.textBoxAdjuster4L);
-            this.Controls.Add(this.labelAdjuster4);
-            this.Controls.Add(this.textBoxAdjuster4);
-            this.Controls.Add(this.labelAngle4);
-            this.Controls.Add(this.textBoxAngle4U);
-            this.Controls.Add(this.textBoxAngle4L);
-            this.Controls.Add(this.textBoxAngle4);
-            this.Controls.Add(this.textBoxAspectRatioU);
-            this.Controls.Add(this.textBoxAspectRatioL);
-            this.Controls.Add(this.labelAspectRatio);
-            this.Controls.Add(this.textBoxAspectRatio);
-            this.Controls.Add(this.labelArea);
-            this.Controls.Add(this.textBoxArea);
-            this.Controls.Add(this.labelSampleSize);
-            this.Controls.Add(this.labelAvgOrderSize);
-            this.Controls.Add(this.checkBoxTSP);
-            this.Controls.Add(this.textBoxPickAdjuster3U);
-            this.Controls.Add(this.textBoxPickAdjuster2U);
-            this.Controls.Add(this.textBoxPickAdjuster1U);
-            this.Controls.Add(this.textBoxPickAdjuster3L);
-            this.Controls.Add(this.textBoxPickAdjuster2L);
-            this.Controls.Add(this.textBoxPickAdjuster1L);
-            this.Controls.Add(this.labelPickAdjuster3);
-            this.Controls.Add(this.labelPickAdjuster2);
-            this.Controls.Add(this.labelPickAdjuster1);
-            this.Controls.Add(this.textBoxPickAdjuster3);
-            this.Controls.Add(this.textBoxPickAdjuster2);
-            this.Controls.Add(this.textBoxPickAdjuster1);
-            this.Controls.Add(this.labelMagnify);
-            this.Controls.Add(this.textBoxMagnify);
-            this.Controls.Add(this.textBoxSampleSize);
-            this.Controls.Add(this.checkBoxAllSearch);
-            this.Controls.Add(this.progressBarAlg);
-            this.Controls.Add(this.textBoxAvgOrderSize);
-            this.Controls.Add(this.buttonDoE);
-            this.Controls.Add(this.labelMaxOrderSize);
-            this.Controls.Add(this.labelMaxOrder);
-            this.Controls.Add(this.labelTotalOrders);
-            this.Controls.Add(this.labelTotalSKUS);
-            this.Controls.Add(this.textBoxAllocationSeed);
-            this.Controls.Add(this.ButtonImportSKUs);
-            this.Controls.Add(this.buttonImport);
-            this.Controls.Add(this.textBoxTSP);
-            this.Controls.Add(this.textBoxOrderIndex);
-            this.Controls.Add(this.buttonFindLocation);
-            this.Controls.Add(this.textBoxPDU);
-            this.Controls.Add(this.textBoxE3U);
-            this.Controls.Add(this.textBoxE2U);
-            this.Controls.Add(this.textBoxE1U);
-            this.Controls.Add(this.textBoxAdjuster3U);
-            this.Controls.Add(this.textBoxAdjuster2U);
-            this.Controls.Add(this.textBoxAdjuster1U);
-            this.Controls.Add(this.textBoxAngle3U);
-            this.Controls.Add(this.textBoxAngle2U);
-            this.Controls.Add(this.textBoxAngle1U);
-            this.Controls.Add(this.textBoxPDL);
-            this.Controls.Add(this.textBoxE3L);
-            this.Controls.Add(this.textBoxE2L);
-            this.Controls.Add(this.textBoxE1L);
-            this.Controls.Add(this.textBoxAdjuster3L);
-            this.Controls.Add(this.textBoxAdjuster2L);
-            this.Controls.Add(this.textBoxAdjuster1L);
-            this.Controls.Add(this.textBoxAngle3L);
-            this.Controls.Add(this.textBoxAngle2L);
-            this.Controls.Add(this.textBoxAngle1L);
-            this.Controls.Add(this.labelE3);
-            this.Controls.Add(this.textBoxE3);
-            this.Controls.Add(this.labelAngle3);
-            this.Controls.Add(this.labelAdjuster3);
-            this.Controls.Add(this.textBoxAdjuster3);
-            this.Controls.Add(this.textBoxAngle3);
-            this.Controls.Add(this.textBoxESCounter);
-            this.Controls.Add(this.textBoxSigma);
-            this.Controls.Add(this.textBoxESIteration);
-            this.Controls.Add(this.textBoxESSeed);
-            this.Controls.Add(this.textBoxLambda);
-            this.Controls.Add(this.textBoxMu);
-            this.Controls.Add(this.buttonSolveES);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.labelAdjuster1);
-            this.Controls.Add(this.textBoxAdjuster2);
-            this.Controls.Add(this.textBoxAdjuster1);
-            this.Controls.Add(this.labelPd);
-            this.Controls.Add(this.textBoxpd);
-            this.Controls.Add(this.labelNumberColor);
-            this.Controls.Add(this.textBoxNumberColors);
-            this.Controls.Add(this.textBoxNeighbors);
-            this.Controls.Add(this.textBoxRegions);
-            this.Controls.Add(this.labelAngle2);
-            this.Controls.Add(this.textBoxAngle2);
-            this.Controls.Add(this.textBoxE2);
-            this.Controls.Add(this.labelE2);
-            this.Controls.Add(this.textBoxE1);
-            this.Controls.Add(this.labelE1);
-            this.Controls.Add(this.labelDistanceOutput);
-            this.Controls.Add(this.buttonImportOrders);
-            this.Controls.Add(this.labelTotalLocations);
-            this.Controls.Add(this.labelWHDepth);
-            this.Controls.Add(this.labelWHWidth);
-            this.Controls.Add(this.textBoxWHDepth);
-            this.Controls.Add(this.textBoxWHWidth);
-            this.Controls.Add(this.buttonReset);
-            this.Controls.Add(this.buttonCreate);
-            this.Controls.Add(this.labelAngle1);
-            this.Controls.Add(this.textBoxAngle1);
+            this.ClientSize = new System.Drawing.Size(1189, 791);
+            this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.panelDrawing);
             this.Controls.Add(this.menuStripTop);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F);
@@ -3150,6 +3909,44 @@ namespace GABAK
             this.Text = "GABAK Warehouse Layout Optimizer";
             this.menuStripTop.ResumeLayout(false);
             this.menuStripTop.PerformLayout();
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
+            this.groupBoxBenderParameters.ResumeLayout(false);
+            this.groupBoxBenderParameters.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPickLists)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSKUs)).EndInit();
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
+            this.tabPage4.ResumeLayout(false);
+            this.tabPage4.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.tabPage5.ResumeLayout(false);
+            this.groupBoxLowerUpperBounds3.ResumeLayout(false);
+            this.groupBoxLowerUpperBounds3.PerformLayout();
+            this.groupBoxExcessLocations.ResumeLayout(false);
+            this.groupBoxExcessLocations.PerformLayout();
+            this.groupBoxPickListSampling.ResumeLayout(false);
+            this.groupBoxPickListSampling.PerformLayout();
+            this.groupBoxLowerUpperBounds2.ResumeLayout(false);
+            this.groupBoxLowerUpperBounds2.PerformLayout();
+            this.groupBoxESParameters.ResumeLayout(false);
+            this.groupBoxESParameters.PerformLayout();
+            this.tabPage6.ResumeLayout(false);
+            this.tabPage7.ResumeLayout(false);
+            this.tabPage8.ResumeLayout(false);
+            this.tabPage8.PerformLayout();
+            this.tabPage9.ResumeLayout(false);
+            this.tabPage9.PerformLayout();
+            this.tabPage10.ResumeLayout(false);
+            this.tabPage10.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -3165,9 +3962,7 @@ namespace GABAK
         private System.Windows.Forms.TextBox textBoxWHDepth;
         private System.Windows.Forms.Label labelWHWidth;
         private System.Windows.Forms.Label labelWHDepth;
-        private System.Windows.Forms.Label labelTotalLocations;
         private System.Windows.Forms.Button buttonImportOrders;
-        private System.Windows.Forms.Label labelDistanceOutput;
         public System.Windows.Forms.Panel panelDrawing;
         private System.Windows.Forms.Label labelE1;
         private System.Windows.Forms.TextBox textBoxE1;
@@ -3188,8 +3983,6 @@ namespace GABAK
         private System.Windows.Forms.ToolStripMenuItem exportToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem colorToolStripMenuItem;
-        private System.Windows.Forms.TextBox textBoxNumberColors;
-        private System.Windows.Forms.Label labelNumberColor;
         private System.Windows.Forms.TextBox textBoxpd;
         private System.Windows.Forms.Label labelPd;
         private System.Windows.Forms.TextBox textBoxAdjuster1;
@@ -3233,17 +4026,12 @@ namespace GABAK
         private System.Windows.Forms.TextBox textBoxOrderIndex;
         private System.Windows.Forms.TextBox textBoxTSP;
         private System.Windows.Forms.Button buttonImport;
-        private System.Windows.Forms.Button ButtonImportSKUs;
+        private System.Windows.Forms.Button buttonImportSKUs;
         private System.Windows.Forms.TextBox textBoxAllocationSeed;
-        private System.Windows.Forms.Label labelTotalSKUS;
-        private System.Windows.Forms.Label labelTotalOrders;
-        private System.Windows.Forms.Label labelMaxOrder;
-        private System.Windows.Forms.Label labelMaxOrderSize;
         private System.Windows.Forms.Button buttonDoE;
         private System.Windows.Forms.TextBox textBoxAvgOrderSize;
         public System.Windows.Forms.ProgressBar progressBarAlg;
         private System.Windows.Forms.CheckBox checkBoxAllSearch;
-        private System.Windows.Forms.TextBox textBoxSampleSize;
         private System.Windows.Forms.TextBox textBoxMagnify;
         private System.Windows.Forms.Label labelMagnify;
         private System.Windows.Forms.TextBox textBoxPickAdjuster1;
@@ -3258,9 +4046,7 @@ namespace GABAK
         private System.Windows.Forms.TextBox textBoxPickAdjuster1U;
         private System.Windows.Forms.TextBox textBoxPickAdjuster2U;
         private System.Windows.Forms.TextBox textBoxPickAdjuster3U;
-        private System.Windows.Forms.CheckBox checkBoxTSP;
         private System.Windows.Forms.Label labelAvgOrderSize;
-        private System.Windows.Forms.Label labelSampleSize;
         private System.Windows.Forms.TextBox textBoxArea;
         private System.Windows.Forms.Label labelArea;
         private System.Windows.Forms.TextBox textBoxAspectRatio;
@@ -3325,7 +4111,6 @@ namespace GABAK
         private System.Windows.Forms.Label labelLWidth;
         private System.Windows.Forms.TextBox textBoxLDepth;
         private System.Windows.Forms.TextBox textBoxLWidth;
-        private System.Windows.Forms.ComboBox comboBoxDesignClass;
         private System.Windows.Forms.CheckBox checkBoxExport;
         private System.Windows.Forms.CheckBox checkBoxVisibilityGraph;
         private System.Windows.Forms.Button buttonTwoLocationDistance;
@@ -3420,7 +4205,6 @@ namespace GABAK
         private System.Windows.Forms.Label labelInitialSigma;
         private System.Windows.Forms.Label labelSigmaChangeFrequency;
         private System.Windows.Forms.Label labelSuccessRule;
-        private System.Windows.Forms.Label labelDesignClass;
         private System.Windows.Forms.Label labelNETSchedule;
         private System.Windows.Forms.Label labelSkewness20;
         private System.Windows.Forms.Label labelSkewness40;
@@ -3429,7 +4213,84 @@ namespace GABAK
         private System.Windows.Forms.Label labelPickListSize;
         private System.Windows.Forms.Label labelOrderGenSeed;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox comboBoxRouting;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.Label labelMaxOrderSize;
+        private System.Windows.Forms.Label labelMaxOrder;
+        private System.Windows.Forms.Label labelTotalOrders;
+        private System.Windows.Forms.Label labelTotalSKUS;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.Label labelTotalAisles;
+        private System.Windows.Forms.Label labelDistanceOutput;
+        private System.Windows.Forms.Label labelTotalLocations;
+        private System.Windows.Forms.TabPage tabPage5;
+        private System.Windows.Forms.TabPage tabPage6;
+        private System.Windows.Forms.TabPage tabPage7;
+        private System.Windows.Forms.TabPage tabPage8;
+        private System.Windows.Forms.TabPage tabPage9;
+        private System.Windows.Forms.TabPage tabPage10;
+        private System.Windows.Forms.GroupBox groupBoxLowerUpperBounds2;
+        private System.Windows.Forms.Label label35;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label36;
+        private System.Windows.Forms.Label label37;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label38;
+        private System.Windows.Forms.Label label39;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label40;
+        private System.Windows.Forms.Label label41;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label42;
+        private System.Windows.Forms.Label label43;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label44;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.Label label29;
+        private System.Windows.Forms.Label label30;
+        private System.Windows.Forms.Label label31;
+        private System.Windows.Forms.Label label32;
+        private System.Windows.Forms.Label label33;
+        private System.Windows.Forms.Label label34;
+        private System.Windows.Forms.GroupBox groupBoxESParameters;
+        private System.Windows.Forms.TextBox textBoxSampleSize;
+        private System.Windows.Forms.Label labelSampleSize;
+        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Label label45;
+        private System.Windows.Forms.DataGridView dataGridViewPickLists;
+        private System.Windows.Forms.DataGridView dataGridViewSKUs;
+        private System.Windows.Forms.GroupBox groupBoxBenderParameters;
+        private System.Windows.Forms.GroupBox groupBoxPickListSampling;
+        private System.Windows.Forms.GroupBox groupBoxLowerUpperBounds3;
+        private System.Windows.Forms.GroupBox groupBoxExcessLocations;
+        private System.Windows.Forms.Label labelNumberColor;
+        private System.Windows.Forms.TextBox textBoxNumberColors;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox groupBox1;
     }
 }
 

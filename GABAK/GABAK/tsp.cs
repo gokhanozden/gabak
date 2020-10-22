@@ -1,13 +1,9 @@
 ﻿//MIT License
 //Copyright(c) 2018 Sabahattin Gokhan Ozden
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace GABAK
 {
-    class tsp
+    internal class tsp
     {
         private int N;
         private double[,] A;
@@ -17,12 +13,11 @@ namespace GABAK
         {
             N = p_N;
             filename = p_filename;
-            A = new double[N,N];
+            A = new double[N, N];
         }
 
         public void addPoint()
         {
-
         }
 
         public void generatePAR()
@@ -46,7 +41,7 @@ namespace GABAK
             s = s + "DIMENSION: " + N.ToString() + "\n";
             s = s + "EDGE_WEIGHT_TYPE: EXPLICIT\n";
             s = s + "EDGE_WEIGHT_FORMAT: LOWER_DIAG_ROW\n";
-            System.IO.File.WriteAllText(filename+".tsp", s);
+            System.IO.File.WriteAllText(filename + ".tsp", s);
         }
     }
 }

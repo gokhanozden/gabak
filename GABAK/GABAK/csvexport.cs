@@ -2,28 +2,29 @@
 //Copyright(c) 2018 Sabahattin Gokhan Ozden
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.IO;
 using System.Data.SqlTypes;
+using System.IO;
+using System.Text;
 
 namespace GABAK
 {
-    class csvexport
+    internal class csvexport
     {
         /// <summary>
         /// To keep the ordered list of column names
         /// </summary>
-        List<string> fields = new List<string>();
+        private List<string> fields = new List<string>();
 
         /// <summary>
         /// The list of rows
         /// </summary>
-        List<Dictionary<string, object>> rows = new List<Dictionary<string, object>>();
+        private List<Dictionary<string, object>> rows = new List<Dictionary<string, object>>();
 
         /// <summary>
         /// The current row
         /// </summary>
-        Dictionary<string, object> currentRow { get { return rows[rows.Count - 1]; } }
+        private Dictionary<string, object> currentRow
+        { get { return rows[rows.Count - 1]; } }
 
         /// <summary>
         /// Set a value on this column
@@ -49,7 +50,7 @@ namespace GABAK
         /// <summary>
         /// Converts a value to how it should output in a csv file
         /// </summary>
-        string makeValueCsvFriendly(object value)
+        private string makeValueCsvFriendly(object value)
         {
             if (value == null) return "";
             if (value is INullable && ((INullable)value).IsNull) return "";
@@ -119,7 +120,6 @@ namespace GABAK
             }
             catch
             {
-
             }
         }
 

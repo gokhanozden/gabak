@@ -3,19 +3,17 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Drawing;
 using System.Threading.Tasks;
 
 namespace GABAK
 {
-
-    class warehouse
+    internal class warehouse
     {
         /// <summary>
         /// Id used for unique identification of warehouses
         /// </summary>
         public static int nextID;
+
         public int id { get; private set; }
 
         /// <summary>
@@ -48,6 +46,7 @@ namespace GABAK
         /// A list that has all pick and deposit point edges of warehouse object
         /// </summary>
         public List<edge> pdedges;
+
         /// <summary>
         /// A list that has 4 corner nodes of warehouse object
         /// </summary>
@@ -92,6 +91,7 @@ namespace GABAK
         /// An array (for thread-safety) that has all storage location centers, PD, and polygon vertices used in visibility graph calculations
         /// </summary>
         public node[] graphnodes;
+
         /// <summary>
         /// An array (for thread-safety) that stores all the polygons which are used in collision calculations in visibility graph
         /// </summary>
@@ -101,6 +101,7 @@ namespace GABAK
         /// A list that has all regions of warehouse object
         /// </summary>
         public List<region> regions;
+
         /// <summary>
         /// A list that has all the edges that connects picking aisle beginning and ending points on region edges
         /// </summary>
@@ -131,6 +132,7 @@ namespace GABAK
         public bool usevisibilitygraph;
 
         public double manytomanytotaldistancessum;
+
         /// <summary>
         /// Default constructor of warehouse object
         /// </summary>
@@ -186,7 +188,7 @@ namespace GABAK
             {
                 Array.Clear(locationnodedistances, 0, locationnodedistances.Length);
             }
-            if( visibilitygraphdistances != null)
+            if (visibilitygraphdistances != null)
             {
                 Array.Clear(visibilitygraphdistances, 0, visibilitygraphdistances.Length);
             }
@@ -543,7 +545,7 @@ namespace GABAK
                     }
                 }
 
-                //there are exterior nodes on the left and on the right on the same corner edge 
+                //there are exterior nodes on the left and on the right on the same corner edge
                 if (tmpl > -1 && tmpr > -1)
                 {
                     //disconnect left exterior node with the topleft corner node
@@ -634,7 +636,7 @@ namespace GABAK
                     }
                 }
 
-                //there are exterior nodes on the left and on the right on the same corner edge 
+                //there are exterior nodes on the left and on the right on the same corner edge
                 if (tmpl > -1 && tmpr > -1)
                 {
                     //disconnect the two connected exterior nodes on the left and on the right
@@ -718,7 +720,7 @@ namespace GABAK
                     }
                 }
 
-                //there are exterior nodes on the left and on the right 
+                //there are exterior nodes on the left and on the right
                 if (tmpl > -1 && tmpr > -1)
                 {
                     //disconnect left exterior node with the topright corner node
@@ -784,7 +786,7 @@ namespace GABAK
                 tmplocation = Double.MinValue;
                 for (int i = 0; i < exteriornodes.Count; i++)
                 {
-                    if (exteriornodes[i].getLocation() >= 0.25 && exteriornodes[i].getLocation() < 0.5)
+                    if (exteriornodes[i].getLocation() >= 0.25 && exteriornodes[i].getLocation() <= 0.5)
                     {
                         if (exteriornodes[i].getLocation() < e.getLocation() && exteriornodes[i].getLocation() > tmplocation)
                         {
@@ -799,7 +801,7 @@ namespace GABAK
                 tmplocation = Double.MaxValue;
                 for (int i = 0; i < exteriornodes.Count; i++)
                 {
-                    if (exteriornodes[i].getLocation() > 0.25 && exteriornodes[i].getLocation() <= 0.5)
+                    if (exteriornodes[i].getLocation() >= 0.25 && exteriornodes[i].getLocation() <= 0.5)
                     {
                         if (exteriornodes[i].getLocation() > e.getLocation() && exteriornodes[i].getLocation() < tmplocation)
                         {
@@ -809,7 +811,7 @@ namespace GABAK
                     }
                 }
 
-                //there are exterior nodes on the left and on the right on the same corner edge 
+                //there are exterior nodes on the left and on the right on the same corner edge
                 if (tmpl > -1 && tmpr > -1)
                 {
                     //disconnect the two connected exterior nodes on the left and on the right
@@ -893,7 +895,7 @@ namespace GABAK
                     }
                 }
 
-                //there are exterior nodes on the left and on the right 
+                //there are exterior nodes on the left and on the right
                 if (tmpl > -1 && tmpr > -1)
                 {
                     //disconnect left exterior node with the bottomright corner node
@@ -959,7 +961,7 @@ namespace GABAK
                 tmplocation = Double.MinValue;
                 for (int i = 0; i < exteriornodes.Count; i++)
                 {
-                    if (exteriornodes[i].getLocation() >= 0.5 && exteriornodes[i].getLocation() < 0.75)
+                    if (exteriornodes[i].getLocation() >= 0.5 && exteriornodes[i].getLocation() <= 0.75)
                     {
                         if (exteriornodes[i].getLocation() < e.getLocation() && exteriornodes[i].getLocation() > tmplocation)
                         {
@@ -974,7 +976,7 @@ namespace GABAK
                 tmplocation = Double.MaxValue;
                 for (int i = 0; i < exteriornodes.Count; i++)
                 {
-                    if (exteriornodes[i].getLocation() > 0.5 && exteriornodes[i].getLocation() <= 0.75)
+                    if (exteriornodes[i].getLocation() >= 0.5 && exteriornodes[i].getLocation() <= 0.75)
                     {
                         if (exteriornodes[i].getLocation() > e.getLocation() && exteriornodes[i].getLocation() < tmplocation)
                         {
@@ -984,7 +986,7 @@ namespace GABAK
                     }
                 }
 
-                //there are exterior nodes on the left and on the right on the same corner edge 
+                //there are exterior nodes on the left and on the right on the same corner edge
                 if (tmpl > -1 && tmpr > -1)
                 {
                     //disconnect the two connected exterior nodes on the left and on the right
@@ -1072,7 +1074,6 @@ namespace GABAK
                 {
                     for (int i = 0; i < exteriornodes.Count; i++)
                     {
-
                         if (exteriornodes[i].getLocation() == 0)
                         {
                             tmpr = i;
@@ -1080,7 +1081,7 @@ namespace GABAK
                     }
                 }
 
-                //there are exterior nodes on the left and on the right 
+                //there are exterior nodes on the left and on the right
                 if (tmpl > -1 && tmpr > -1)
                 {
                     //disconnect left exterior node with the bottomleft corner node
@@ -1161,7 +1162,7 @@ namespace GABAK
                 tmplocation = Double.MaxValue;
                 for (int i = 0; i < exteriornodes.Count; i++)
                 {
-                    if (exteriornodes[i].getLocation() > 0.75 && exteriornodes[i].getLocation() < 1)
+                    if (exteriornodes[i].getLocation() >= 0.75 && exteriornodes[i].getLocation() < 1)
                     {
                         if (exteriornodes[i].getLocation() > e.getLocation() && exteriornodes[i].getLocation() < tmplocation)
                         {
@@ -1176,7 +1177,6 @@ namespace GABAK
                 {
                     for (int i = 0; i < exteriornodes.Count; i++)
                     {
-
                         if (exteriornodes[i].getLocation() == 0)
                         {
                             tmpr = i;
@@ -1184,7 +1184,7 @@ namespace GABAK
                     }
                 }
 
-                //there are exterior nodes on the left and on the right on the same corner edge 
+                //there are exterior nodes on the left and on the right on the same corner edge
                 if (tmpl > -1 && tmpr > -1)
                 {
                     //disconnect the two connected exterior nodes on the left and on the right
@@ -1334,7 +1334,7 @@ namespace GABAK
         /// <returns>Returns false when intersects</returns>
         private bool checkCrossAislesIntersectExteriorInterior(edge p_edge1, edge p_edge2)
         {
-            if(p_edge1.getEnd() == p_edge2.getStart() || p_edge1.getEnd() == p_edge2.getEnd() ||
+            if (p_edge1.getEnd() == p_edge2.getStart() || p_edge1.getEnd() == p_edge2.getEnd() ||
                 p_edge1.getStart() == p_edge2.getStart() || p_edge1.getStart() == p_edge2.getEnd())
             {
                 return true;//This means two edges have one common node
@@ -1393,7 +1393,7 @@ namespace GABAK
             {
                 for (int j = i + 1; j < ext.Count() + p_ix.Count(); j++)
                 {
-                    if(p_connections[k])
+                    if (p_connections[k])
                     {
                         connectioncount[i]++;
                         connectioncount[j]++;
@@ -1408,7 +1408,7 @@ namespace GABAK
                 problematicconnections[i] = false;
             }
 
-            for(int i = ext.Count(); i < ext.Count() + p_ix.Count(); i++)
+            for (int i = ext.Count(); i < ext.Count() + p_ix.Count(); i++)
             {
                 if (connectioncount[i] == 1)
                 {
@@ -1430,11 +1430,11 @@ namespace GABAK
 
             for (int i = 0; i < ext.Count() + p_ix.Count(); i++)
             {
-                if(connectioncount[i] > 0 && i < ext.Count())//There is a connection for this exteriornode
+                if (connectioncount[i] > 0 && i < ext.Count())//There is a connection for this exteriornode
                 {
                     addExteriorNode(ext[i]);
                 }
-                else if(connectioncount[i] > 0 && i >= ext.Count())//There is a connection for this interiornode
+                else if (connectioncount[i] > 0 && i >= ext.Count())//There is a connection for this interiornode
                 {
                     addInteriorNode(p_ix[i - ext.Count()], p_iy[i - ext.Count()]);
                 }
@@ -1443,13 +1443,13 @@ namespace GABAK
             k = 0;
             for (int i = 0; i < ext.Count() + p_ix.Count() - 1; i++)
             {
-                for(int j = i + 1; j < ext.Count() + p_ix.Count(); j++)
+                for (int j = i + 1; j < ext.Count() + p_ix.Count(); j++)
                 {
-                    if(p_connections[k])
+                    if (p_connections[k])
                     {
-                        if(i < ext.Count())//then i is exteriornode
+                        if (i < ext.Count())//then i is exteriornode
                         {
-                            if( j < ext.Count())//then j is exteriornode
+                            if (j < ext.Count())//then j is exteriornode
                             {
                                 if (checkExteriorNodesOnSameEdge(ext[i], ext[j]))//Check if design is invalid
                                 {
@@ -1460,7 +1460,7 @@ namespace GABAK
                                 {
                                     int a = -1;
                                     int b = -1;
-                                    for(int l = 0; l < exteriornodes.Count(); l++)
+                                    for (int l = 0; l < exteriornodes.Count(); l++)
                                     {
                                         if (ext[i] == exteriornodes[l].getLocation())
                                             a = l;
@@ -1469,7 +1469,6 @@ namespace GABAK
                                     }
                                     connect(exteriornodes[a], exteriornodes[b], k);
                                 }
-                                
                             }
                             else//then j is interiornode
                             {
@@ -1490,12 +1489,12 @@ namespace GABAK
                             if (j < ext.Count())//then j is exteriornode
                             {
                                 if (p_connections[k])
-                                connect(interiornodes[i - ext.Count()], exteriornodes[j], k);
+                                    connect(interiornodes[i - ext.Count()], exteriornodes[j], k);
                             }
                             else//then j is interiornode
                             {
                                 if (p_connections[k])
-                                connect(interiornodes[i - ext.Count()], interiornodes[j - ext.Count()], k);
+                                    connect(interiornodes[i - ext.Count()], interiornodes[j - ext.Count()], k);
                             }
                         }
                     }
@@ -1533,11 +1532,11 @@ namespace GABAK
         /// <returns></returns>
         private bool checkRegionEdgesIntersect(bool[] p_connections)
         {
-            for(int i = 0; i < regionedges.Count(); i++)
+            for (int i = 0; i < regionedges.Count(); i++)
             {
-                for(int j = 0; j < i; j++)
+                for (int j = 0; j < i; j++)
                 {
-                    if(!checkCrossAislesIntersectExteriorInterior(regionedges[i], regionedges[j]))//Two segments crosses then return false
+                    if (!checkCrossAislesIntersectExteriorInterior(regionedges[i], regionedges[j]))//Two segments crosses then return false
                     {
                         problematicconnections[regionedges[i].connectionk] = true;
                         problematicconnections[regionedges[j].connectionk] = true;
@@ -1698,7 +1697,6 @@ namespace GABAK
             addExteriorNode(ext[2]);
             connect(exteriornodes[0], exteriornodes[2]);
             connect(exteriornodes[1], exteriornodes[2]);
-
 
             //Find regions
             findRegions(p_angle, p_adjuster, p_pickadjuster, p_crossaislewidth, p_pickingaislewidth, p_locationwidth, p_locationdepth, "3-0-2");
@@ -2326,7 +2324,6 @@ namespace GABAK
                 return false;
             }
 
-
             addExteriorNode(ext[0]);
             addExteriorNode(ext[1]);
             addExteriorNode(ext[2]);
@@ -2799,7 +2796,6 @@ namespace GABAK
                 clockwiseedges.RemoveAt(0);
             }
 
-
             for (int i = 0; i < tempregionlist[removeregionposition].regionedges.Count; i++)
             {
                 clockwiseedges.Add(tempregionlist[removeregionposition].regionedges[i]);
@@ -2849,6 +2845,7 @@ namespace GABAK
                     addRegion(tempregionlist[0]);
                     tempregionlist.Remove(tempregionlist[0]);
                     break;
+
                 case "4-0-4":
                     tempregionlist[0].setRegionAngle(p_angle[4]);
                     tempregionlist[0].setHorizontalAdjuster(p_adjuster[4]);
@@ -2857,6 +2854,7 @@ namespace GABAK
                     addRegion(tempregionlist[0]);
                     tempregionlist.Remove(tempregionlist[0]);
                     break;
+
                 case "4-0-5":
                     for (int i = 0; i < tempregionlist[0].regionedges.Count; i++)
                     {
@@ -2886,7 +2884,6 @@ namespace GABAK
                     }
                     break;
             }
-
 
             //Connect each picking aisle node on the same region edge with next one and
             //if they are the first and last connect them with region edge beginning and end
@@ -3058,7 +3055,6 @@ namespace GABAK
                 pd.setY(tempY);
                 pd.setLocation(p_location);
             }
-
         }
 
         private void addPickandDepositNode(double p_location)
@@ -3254,6 +3250,7 @@ namespace GABAK
                 return false;
             }
         }
+
         /// <summary>
         /// Calculates total number of storage locations in warehouse object
         /// </summary>
@@ -4034,7 +4031,7 @@ namespace GABAK
                     int h = mylist2[i][j];
                     bool isthereleftstorage = false;
                     bool isthererightstorage = false;
-                    
+
                     //Calculation of two polygons
                     double Xl1 = -1, Xl2 = -1, Xl3 = -1, Xl4 = -1;
                     double Yl1 = -1, Yl2 = -1, Yl3 = -1, Yl4 = -1;
@@ -4178,7 +4175,7 @@ namespace GABAK
                         double dr3r4 = visualmath.distance(Xr3, Yr3, Xr4, Yr4);
                         double dr1r2 = visualmath.distance(Xr1, Yr1, Xr2, Yr2);
                         double dr1r3 = visualmath.distance(Xr1, Yr1, Xr3, Yr3);
-                        Xr1 += (((Xr1r3 * (pickersize / 2) ) / dr1r3) + ((Xr1r2 * (pickersize / 2)) / dr1r2));
+                        Xr1 += (((Xr1r3 * (pickersize / 2)) / dr1r3) + ((Xr1r2 * (pickersize / 2)) / dr1r2));
                         Yr1 += (((Yr1r3 * (pickersize / 2)) / dr1r3) + ((Yr1r2 * (pickersize / 2)) / dr1r2));
                         Xr2 += ((Xr2r4 * (pickersize / 2)) / dr2r4);
                         Yr2 += ((Yr2r4 * (pickersize / 2)) / dr2r4);
@@ -4213,19 +4210,19 @@ namespace GABAK
                     for (int k = 0; k < regions[i].pickingaisleedges[j].getOnEdgeNodes().Count; k++)
                     {
                         graphnodes[g] = regions[i].pickingaisleedges[j].getOnEdgeNodes()[k];
-                        if(isthereleftstorage && isthererightstorage)//Only right polygon
+                        if (isthereleftstorage && isthererightstorage)//Only right polygon
                         {
                             graphnodes[g].indexpolygonleft = h - 2;
                             graphnodes[g].indexpolygonright = h - 1;
                         }
-                        else if(isthereleftstorage)//Only left polygon
+                        else if (isthereleftstorage)//Only left polygon
                         {
                             graphnodes[g].indexpolygonleft = h - 1;
-                            graphnodes[g].indexpolygonright = - 1;//No right polygon
+                            graphnodes[g].indexpolygonright = -1;//No right polygon
                         }
-                        else if(isthererightstorage)//Only right polygon
+                        else if (isthererightstorage)//Only right polygon
                         {
-                            graphnodes[g].indexpolygonleft = - 1;//No left polygon
+                            graphnodes[g].indexpolygonleft = -1;//No left polygon
                             graphnodes[g].indexpolygonright = h - 1;
                         }
                         else
@@ -4249,7 +4246,7 @@ namespace GABAK
                 graphnodes[i].indexgraphnode = i;
             });
             connectivity = new bool[graphnodes.Length, graphnodes.Length];
-            for(int i = 0; i < graphnodes.Length; i++)
+            for (int i = 0; i < graphnodes.Length; i++)
             //Parallel.For(0, graphnodes.Length, i =>
             {
                 //bool haspickingaisle =false;
@@ -4304,11 +4301,10 @@ namespace GABAK
 
         private void findPolygonNeighbors()
         {
-            for(int i = 0; i < polygons.Length; i++)
+            for (int i = 0; i < polygons.Length; i++)
             {
-                for(int j = 0; j < i; j++)
+                for (int j = 0; j < i; j++)
                 {
-                    
                 }
             }
         }
@@ -4332,7 +4328,7 @@ namespace GABAK
                     {
                         i = p_node1.indexpolygonleft;
                     }
-                    else if(k == 1 && p_node1.indexpolygonright != -1)//There is a right polygon for node1
+                    else if (k == 1 && p_node1.indexpolygonright != -1)//There is a right polygon for node1
                     {
                         i = p_node1.indexpolygonright;
                     }
@@ -4356,7 +4352,7 @@ namespace GABAK
                     }
                 }
             }
-            else if(p_node1.type == options.locationnode && p_node2.type != options.locationnode)
+            else if (p_node1.type == options.locationnode && p_node2.type != options.locationnode)
             {
                 for (int k = 0; k < 2; k++)//There are two possible polygons to check
                 {
@@ -4369,7 +4365,7 @@ namespace GABAK
                     {
                         i = p_node1.indexpolygonright;
                     }
-                    
+
                     if (i != -1)
                     {
                         for (int j = 0; j < polygonedgecount - 1; j++)
@@ -4451,7 +4447,7 @@ namespace GABAK
             //}
             for (int i = 0; i < polygons.Length; i++)
             {
-                if(isInsidePolygon(p_node1.getX(), p_node1.getY(), polygons[i]) || isInsidePolygon(p_node2.getX(), p_node2.getY(), polygons[i]))
+                if (isInsidePolygon(p_node1.getX(), p_node1.getY(), polygons[i]) || isInsidePolygon(p_node2.getX(), p_node2.getY(), polygons[i]))
                 {
                     return true;
                 }
@@ -4482,8 +4478,6 @@ namespace GABAK
             return isInside;
         }
 
-
-
         /// <summary>
         /// This is another layer whether two nodes should be connected or not, returns false if should not be connected
         /// </summary>
@@ -4508,7 +4502,7 @@ namespace GABAK
             else if (p_node1.type == options.polygonnode && p_node2.type == options.polygonnode && p_node1.indexregion == p_node2.indexregion)//If they are both polygonnode and they are in the same region then do some checks for special connections of polygons
             {
                 //No check
-                if((p_node1.indexpolygonlocation == 11 && p_node2.indexpolygonlocation == 22) || (p_node1.indexpolygonlocation == 22 && p_node2.indexpolygonlocation == 11))//l1-r2
+                if ((p_node1.indexpolygonlocation == 11 && p_node2.indexpolygonlocation == 22) || (p_node1.indexpolygonlocation == 22 && p_node2.indexpolygonlocation == 11))//l1-r2
                 {
                     return false; //They are not supposed to be connected
                 }

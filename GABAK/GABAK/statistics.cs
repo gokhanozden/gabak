@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web.UI.DataVisualization.Charting;
 
 namespace GABAK
 {
-    static class statistics
+    internal static class statistics
     {
         //public static double[] tInterval(double[] p_data, double p_confidencelevel)
         //{
@@ -78,10 +73,9 @@ namespace GABAK
                       + 0.011630447319) * y - 0.009279453341) * y
                       + 0.005353579108) * y - 0.002141268741) * y
                       + 0.000535310849) * y + 0.999936657524;
-
                 }
             }
-            if ( z > 0.0)
+            if (z > 0.0)
             {
                 return (p + 1.0) / 2;
             }
@@ -121,7 +115,7 @@ namespace GABAK
             t = t * t;
 
             // Computers using inverse for small T-values
-            if(t < 1)
+            if (t < 1)
             {
                 s = df;
                 r = y;
@@ -139,7 +133,7 @@ namespace GABAK
 
             // Computes using approximation formulas
             l = Math.Abs((1 - k) * Math.Pow(z, (1 / 3)) - 1 + j) / Math.Sqrt(k * Math.Pow(z, (2 / 3)) + j);
- 
+
             if (r < 4)
             {
                 l = l * (1 + 0.08 * Math.Pow(l, 4) / Math.Pow(r, 3));
@@ -170,7 +164,7 @@ namespace GABAK
         //    lna, lnb, pp, t, u, err, x, al, h, w, afac;
         //if(p <= 0) return 0;
         //if(p >= 1) return 1;
-        //if(a >= 1 && b >= 1) 
+        //if(a >= 1 && b >= 1)
         //{
         //    pp = (p < 0.5) ? p : 1 - p;
         //    t = Math.sqrt(-2 * Math.log(pp));
@@ -180,7 +174,7 @@ namespace GABAK
         //    h = 2 / (1 / (2 * a - 1)  + 1 / (2 * b - 1));
         //    w = (x * Math.sqrt(al + h) / h) - (1 / (2 * b - 1) - 1 / (2 * a - 1)) * (al + 5 / 6 - 2 / (3 * h));
         //    x = a / (a + b * Math.exp(2 * w));
-        //} 
+        //}
         //else
         //{
         //    lna = Math.log(a / (a + b));
@@ -220,6 +214,5 @@ namespace GABAK
         //for (; j < 6; j++) ser += cof[j] / ++y;
         //return Math.log(2.5066282746310005 * ser / xx) - tmp;
         //}
-
     }
 }

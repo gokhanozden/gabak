@@ -2,9 +2,6 @@
 //Copyright(c) 2018 Sabahattin Gokhan Ozden
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Drawing;
 
 namespace GABAK
 {
@@ -14,6 +11,7 @@ namespace GABAK
     public class region
     {
         public static int nextID;
+
         /// <summary>
         /// ID of the region
         /// </summary>
@@ -22,17 +20,19 @@ namespace GABAK
         /// <summary>
         /// Angle of the picking aisles in the region
         /// </summary>
-        private double angle;
+        public double angle { get; private set; }
 
         private double crossaislewidth;
         private double pickingaislewidth;
         private double locationwidth;
         private double locationdepth;
+
         //Horizontal adjuster is used for shifting the picking aisles inside a region to left or right
         private double horizontaladjuster;
+
         //Vertical adjuster is used for shifting the pick locations up and down in a picking aisle, that's why we call it vertical
         private double verticaladjuster;
-        
+
         public List<edge> regionedges;
         public List<edge> pickingaisleedges;
         public List<edge> pickingaisleregionedges;
@@ -234,7 +234,7 @@ namespace GABAK
             //Temporary edges used to add picking aisles to the region
             //infeasible ones are eliminated and not added as picking aisles
             List<edge> tempedges = new List<edge>();
-            
+
             //calculate the gap between picking aisles
             double gap = (pickingaislewidth + 2 * locationdepth);
             int k = 0;
@@ -323,7 +323,7 @@ namespace GABAK
         }
 
         /// <summary>
-        /// Finds all region nodes that are part of region edges and adds them to regionnodes list, this list is used in isInsideRegion method 
+        /// Finds all region nodes that are part of region edges and adds them to regionnodes list, this list is used in isInsideRegion method
         /// </summary>
         private void findRegionNodes()
         {
@@ -349,11 +349,11 @@ namespace GABAK
                 regionnodes.Add(regionedges[0].getEnd());
                 previousdirection = false;
             }
-            for(int i = 1; i < regionedges.Count; i++)
+            for (int i = 1; i < regionedges.Count; i++)
             {
                 if (previousdirection)
                 {
-                    if(regionedges[i - 1].getEnd() == regionedges[i].getStart())
+                    if (regionedges[i - 1].getEnd() == regionedges[i].getStart())
                     {
                         regionnodes.Add(regionedges[i].getStart());
                         direction = true;
@@ -424,7 +424,7 @@ namespace GABAK
             double Yl4, Yr4;
 
             double Xs, Xe, Xr, Ys, Ye, Yr;
-            
+
             if (p_edge.getStart().getY() > p_edge.getEnd().getY())
             {
                 Xs = p_edge.getEnd().getX();
@@ -441,7 +441,7 @@ namespace GABAK
             }
 
             //Check which reference point is close to starting coordinate (Xs, Ys)
-            if(p_referencenode1.getY() < p_referencenode2.getY())
+            if (p_referencenode1.getY() < p_referencenode2.getY())
             {
                 Xr = p_referencenode1.getX();
                 Yr = p_referencenode1.getY();
@@ -511,7 +511,7 @@ namespace GABAK
             {
                 if (Xr < Xs)
                 {
-                    if(incx > 0)
+                    if (incx > 0)
                     {
                         while (X < Xs)
                         {
@@ -527,11 +527,10 @@ namespace GABAK
                             Y = Y - incy;
                         }
                     }
-                    
                 }
                 else
                 {
-                    if(incx > 0)
+                    if (incx > 0)
                     {
                         while (X > Xs)
                         {
@@ -582,7 +581,7 @@ namespace GABAK
                         }
                     }
                 }
-                    
+
                 Xr2 = X - incx / 2 + (halfpickingaislewidth + locationdepth) * Math.Cos(angle);
                 Yr2 = Y - incy / 2 + (halfpickingaislewidth + locationdepth) * Math.Sin(angle);
 
@@ -605,8 +604,8 @@ namespace GABAK
                         }
                     }
                 }
-                    
-                if(s1 != null)
+
+                if (s1 != null)
                 {
                     c.s1 = s1;
                 }
@@ -642,7 +641,7 @@ namespace GABAK
         {
             List<node> tmpnodes = new List<node>();
             //Add all the nodes
-            for (int i = 0; i < regionedges.Count; i++ )
+            for (int i = 0; i < regionedges.Count; i++)
             {
                 if (!tmpnodes.Contains(regionedges[i].getStart()))
                 {
@@ -654,7 +653,7 @@ namespace GABAK
                 }
             }
             //If there are less than three nodes (highly unlikely) in a region, then the area is set to zero
-            if(tmpnodes.Count < 3)
+            if (tmpnodes.Count < 3)
             {
                 return 0;
             }
@@ -675,7 +674,7 @@ namespace GABAK
         /// <returns>True if it is on cross aisle</returns>
         private bool isOnCrossAisle(double p_X, double p_Y)
         {
-            for(int i = 0; i < regionedges.Count; i++)
+            for (int i = 0; i < regionedges.Count; i++)
             {
                 if (regionedges[i].isInsideEdgeRegion(p_X, p_Y)) return true;
             }
