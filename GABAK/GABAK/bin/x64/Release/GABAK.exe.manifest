@@ -61,19 +61,10 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>3myALXSf4/8nJMsbbWbNteCk5+Pjrm1kOJVXjSlxW1M=</dsig:DigestValue>
+        <dsig:DigestValue>9egiUnzodWywSVcVwOU9zbtVPZn7D4KvIV+9uIIfjKY=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
-  <file name="AviFile.dll" size="36864">
-    <hash>
-      <dsig:Transforms>
-        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
-      </dsig:Transforms>
-      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>cX3dO2p9zXgTaEJRDIy75OFfaWzAiiZksfxG3VgjJSQ=</dsig:DigestValue>
-    </hash>
-  </file>
   <file name="dbo.Table.sql" size="861">
     <hash>
       <dsig:Transforms>

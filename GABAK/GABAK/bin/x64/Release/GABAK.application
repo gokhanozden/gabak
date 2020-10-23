@@ -14,14 +14,14 @@
     <framework targetVersion="4.7.2" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="GABAK.exe.manifest" size="8160">
+    <dependentAssembly dependencyType="install" codebase="GABAK.exe.manifest" size="7770">
       <assemblyIdentity name="GABAK.exe" version="1.0.0.0" publicKeyToken="0000000000000000" language="en" processorArchitecture="amd64" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>p6BdLUkgBfLFW44gC6dMonmhfGhvpwXArtSq2JWERA4=</dsig:DigestValue>
+        <dsig:DigestValue>VWXd4Timb5qv1IAkt7B2fM0mS9zPED3UCmhduLZdl+Y=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
