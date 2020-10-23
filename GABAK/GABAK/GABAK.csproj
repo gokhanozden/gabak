@@ -295,22 +295,6 @@
     <Compile Include="vector.cs" />
     <Compile Include="visualmath.cs" />
     <Compile Include="warehouse.cs" />
-    <None Include="publish\Application Files\GABAK_1_0_0_1\AviFile.dll.deploy" />
-    <None Include="publish\Application Files\GABAK_1_0_0_1\dbo.Table.sql.deploy" />
-    <None Include="publish\Application Files\GABAK_1_0_0_1\GABAK.application" />
-    <None Include="publish\Application Files\GABAK_1_0_0_1\GABAK.exe.config.deploy" />
-    <None Include="publish\Application Files\GABAK_1_0_0_1\GABAK.exe.deploy" />
-    <None Include="publish\Application Files\GABAK_1_0_0_1\GABAK.exe.manifest" />
-    <None Include="publish\Application Files\GABAK_1_0_0_1\gabak.mdf.deploy" />
-    <None Include="publish\Application Files\GABAK_1_0_0_1\gabak\availableservers.txt.deploy" />
-    <None Include="publish\Application Files\GABAK_1_0_0_1\gabak\concorde.exe.deploy" />
-    <None Include="publish\Application Files\GABAK_1_0_0_1\gabak\cygwin1.dll.deploy" />
-    <None Include="publish\Application Files\GABAK_1_0_0_1\gabak\lkh.exe.deploy" />
-    <None Include="publish\Application Files\GABAK_1_0_0_1\gabak\QSConcorde.dll.deploy" />
-    <None Include="publish\Application Files\GABAK_1_0_0_1\gabak\QSopt.dll.deploy" />
-    <None Include="publish\Application Files\GABAK_1_0_0_1\gabak_log.ldf.deploy" />
-    <None Include="publish\Application Files\GABAK_1_0_0_1\warehouseicon_32x32.ico.deploy" />
-    <None Include="publish\GABAK.application" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0">
@@ -349,8 +333,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DependentUpon>gabak.mdf</DependentUpon>
     </Content>
-    <Content Include="publish\publish.htm" />
-    <Content Include="publish\setup.exe" />
     <Content Include="warehouseicon_32x32.ico" />
   </ItemGroup>
   <ItemGroup />
