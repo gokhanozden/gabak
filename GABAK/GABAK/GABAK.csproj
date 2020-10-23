@@ -43,7 +43,7 @@
     <PublisherName>Gokhan Ozden</PublisherName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>2</ApplicationRevision>
+    <ApplicationRevision>1</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -143,16 +143,13 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>5E10CE167CB20E64A07AFF963E1D532363EA8E28</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>39F1B5DB71263EEACEB14F1ED9C09C1D4078FDDD</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestKeyFile>GABAK_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
-  </PropertyGroup>
-  <PropertyGroup>
-    <AssemblyOriginatorKeyFile>GABAK_1_TemporaryKey.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -165,6 +162,9 @@
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>warehouseicon_32x32.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>GABAK_TemporaryKey.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AviFile, Version=1.0.6701.24187, Culture=neutral, processorArchitecture=MSIL">
@@ -272,7 +272,6 @@
     <None Include="gabakDataSet.xss">
       <DependentUpon>gabakDataSet.xsd</DependentUpon>
     </None>
-    <None Include="GABAK_1_TemporaryKey.pfx" />
     <None Include="GABAK_TemporaryKey.pfx" />
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
@@ -296,21 +295,21 @@
     <Compile Include="vector.cs" />
     <Compile Include="visualmath.cs" />
     <Compile Include="warehouse.cs" />
-    <None Include="publish\Application Files\GABAK_1_0_0_1\AviFile.dll.deploy" />
-    <None Include="publish\Application Files\GABAK_1_0_0_1\dbo.Table.sql.deploy" />
-    <None Include="publish\Application Files\GABAK_1_0_0_1\GABAK.application" />
-    <None Include="publish\Application Files\GABAK_1_0_0_1\GABAK.exe.config.deploy" />
-    <None Include="publish\Application Files\GABAK_1_0_0_1\GABAK.exe.deploy" />
-    <None Include="publish\Application Files\GABAK_1_0_0_1\GABAK.exe.manifest" />
-    <None Include="publish\Application Files\GABAK_1_0_0_1\gabak.mdf.deploy" />
-    <None Include="publish\Application Files\GABAK_1_0_0_1\gabak\availableservers.txt.deploy" />
-    <None Include="publish\Application Files\GABAK_1_0_0_1\gabak\concorde.exe.deploy" />
-    <None Include="publish\Application Files\GABAK_1_0_0_1\gabak\cygwin1.dll.deploy" />
-    <None Include="publish\Application Files\GABAK_1_0_0_1\gabak\lkh.exe.deploy" />
-    <None Include="publish\Application Files\GABAK_1_0_0_1\gabak\QSConcorde.dll.deploy" />
-    <None Include="publish\Application Files\GABAK_1_0_0_1\gabak\QSopt.dll.deploy" />
-    <None Include="publish\Application Files\GABAK_1_0_0_1\gabak_log.ldf.deploy" />
-    <None Include="publish\Application Files\GABAK_1_0_0_1\warehouseicon_32x32.ico.deploy" />
+    <None Include="publish\Application Files\GABAK_1_0_0_0\AviFile.dll.deploy" />
+    <None Include="publish\Application Files\GABAK_1_0_0_0\dbo.Table.sql.deploy" />
+    <None Include="publish\Application Files\GABAK_1_0_0_0\GABAK.application" />
+    <None Include="publish\Application Files\GABAK_1_0_0_0\GABAK.exe.config.deploy" />
+    <None Include="publish\Application Files\GABAK_1_0_0_0\GABAK.exe.deploy" />
+    <None Include="publish\Application Files\GABAK_1_0_0_0\GABAK.exe.manifest" />
+    <None Include="publish\Application Files\GABAK_1_0_0_0\gabak.mdf.deploy" />
+    <None Include="publish\Application Files\GABAK_1_0_0_0\gabak\availableservers.txt.deploy" />
+    <None Include="publish\Application Files\GABAK_1_0_0_0\gabak\concorde.exe.deploy" />
+    <None Include="publish\Application Files\GABAK_1_0_0_0\gabak\cygwin1.dll.deploy" />
+    <None Include="publish\Application Files\GABAK_1_0_0_0\gabak\lkh.exe.deploy" />
+    <None Include="publish\Application Files\GABAK_1_0_0_0\gabak\QSConcorde.dll.deploy" />
+    <None Include="publish\Application Files\GABAK_1_0_0_0\gabak\QSopt.dll.deploy" />
+    <None Include="publish\Application Files\GABAK_1_0_0_0\gabak_log.ldf.deploy" />
+    <None Include="publish\Application Files\GABAK_1_0_0_0\warehouseicon_32x32.ico.deploy" />
     <None Include="publish\GABAK.application" />
   </ItemGroup>
   <ItemGroup>
