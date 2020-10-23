@@ -1,0 +1,185 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
+  <asmv1:assemblyIdentity name="GABAK.exe" version="1.0.0.1" publicKeyToken="8055b27f269e13ee" language="en" processorArchitecture="amd64" type="win32" />
+  <description asmv2:iconFile="warehouseicon_32x32.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
+  <application />
+  <entryPoint>
+    <assemblyIdentity name="GABAK" version="1.0.0.0" publicKeyToken="8055B27F269E13EE" language="neutral" processorArchitecture="amd64" />
+    <commandLine file="GABAK.exe" parameters="" />
+  </entryPoint>
+  <trustInfo>
+    <security>
+      <applicationRequestMinimum>
+        <PermissionSet version="1" class="System.Security.NamedPermissionSet" Name="LocalIntranet" Description="Default rights given to applications on the local intranet" Unrestricted="true" ID="Custom" SameSite="site" />
+        <defaultAssemblyRequest permissionSetReference="Custom" />
+      </applicationRequestMinimum>
+      <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
+        <!-- UAC Manifest Options
+             If you want to change the Windows User Account Control level replace the 
+             requestedExecutionLevel node with one of the following.
+
+        <requestedExecutionLevel  level="asInvoker" uiAccess="false" />
+        <requestedExecutionLevel  level="requireAdministrator" uiAccess="false" />
+        <requestedExecutionLevel  level="highestAvailable" uiAccess="false" />
+
+            Specifying requestedExecutionLevel element will disable file and registry virtualization. 
+            Remove this element if your application requires this virtualization for backwards
+            compatibility.
+        -->
+        <requestedExecutionLevel level="asInvoker" uiAccess="false" />
+      </requestedPrivileges>
+    </security>
+  </trustInfo>
+  <dependency>
+    <dependentOS>
+      <osVersionInfo>
+        <os majorVersion="5" minorVersion="1" buildNumber="2600" servicePackMajor="0" />
+      </osVersionInfo>
+    </dependentOS>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="Microsoft.Windows.CommonLanguageRuntime" version="4.0.30319.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="AviFile.dll" size="36864">
+      <assemblyIdentity name="AviFile" version="1.0.6721.21039" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>cX3dO2p9zXgTaEJRDIy75OFfaWzAiiZksfxG3VgjJSQ=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="GABAK.exe" size="290776">
+      <assemblyIdentity name="GABAK" version="1.0.0.0" publicKeyToken="8055B27F269E13EE" language="neutral" processorArchitecture="amd64" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>vRR+e+Ll2DIM7bjjTE7faxFxZGm/gg2bh2j909Y7dxY=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <file name="dbo.Table.sql" size="861">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>5HsphEfNy1Nzhootq7obDFwyhKzXDaL0VQezn/7H5eU=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="GABAK.exe.config" size="1674">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>3yQW7Ow74MQc2+2DzSi7ihtoRmPl5O5UtI2Ly6so2ag=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="gabak.mdf" size="8388608" writeableType="applicationData">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>zodzoRbmfcnqrWaRDOtgQBo6LeDDK0SkllarPJNqxl8=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="gabak\availableservers.txt" size="33">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>shogmByt4Rh3+TfyNzapMwNvS7rBgWhwW5x8t2CKrGM=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="gabak\concorde.exe" size="2610778">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>kd8lN0wWxAep7sjwPvuEbdtyoquO7v0L9fY0WjmYhZo=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="gabak\cygwin1.dll" size="2813484">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>WnlVDbV0zEmqUtGcJ2y2r6HgfLNiwH4JH0ir+3cV70s=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="gabak\lkh.exe" size="338944">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>xXPNlnXk8Rz3jZcX2X19SutJLvxvaak3q+93AnKVeUk=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="gabak\QSConcorde.dll" size="954368">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>3yTCHr6jSRP87NzFsXK1D5NNNkR+rz6v/z4Gneqq1ZY=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="gabak\QSopt.dll" size="397312">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>EUNVQok9xJnmvlg24AviGT7BWw5Uzn6D3sCsPtlXG9w=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="gabak_log.ldf" size="8388608" writeableType="applicationData">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>IPv6wlsRu7nRcI4KiTB3oI7Q2Wbk+eFbxDQ6gQC7/2M=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="warehouseicon_32x32.ico" size="4662">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>XUAT5caFSso0r4jbPRt4kJxxF/AWAGxWmlciXhNHSeg=</dsig:DigestValue>
+    </hash>
+  </file>
+  <compatibility xmlns="urn:schemas-microsoft-com:compatibility.v1">
+    <application>
+      <!-- A list of the Windows versions that this application has been tested on
+           and is designed to work with. Uncomment the appropriate elements
+           and Windows will automatically select the most compatible environment. -->
+      <!-- Windows Vista -->
+      <!--<supportedOS Id="{e2011457-1546-43c5-a5fe-008deee3d3f0}" />-->
+      <!-- Windows 7 -->
+      <!--<supportedOS Id="{35138b9a-5d96-4fbd-8e2d-a2440225f93a}" />-->
+      <!-- Windows 8 -->
+      <!--<supportedOS Id="{4a2f28e3-53b9-4441-ba9c-d69d4a4a6e38}" />-->
+      <!-- Windows 8.1 -->
+      <!--<supportedOS Id="{1f676c76-80e1-4239-95bb-83d0f6d0da78}" />-->
+      <!-- Windows 10 -->
+      <!--<supportedOS Id="{8e0f7a12-bfb3-4fe8-b9a5-48fd50a15a9a}" />-->
+    </application>
+  </compatibility>
+<publisherIdentity name="CN=GOKHANLENOVO\Gokhan" issuerKeyHash="c7f5a06f8f7d8525c8fceb349198d30809ffb3cd" /><Signature Id="StrongNameSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>6r9qZsMavb1BjUJuyLsxFfYu2N7q009ONeYGunw+vds=</DigestValue></Reference></SignedInfo><SignatureValue>UOeRIpnU5Mo/EcoiRDjFCl7Q5cK0TlZcGOnRoj/2JcVs15MJDnvkQodN6EVR9nFX4f+Znut/ivKzscsDct8Ppkew3itEl1a1wgIrvtw+7BUNIzdnX2phq17A1j3T8/7xU+QPAZZGYqefSRajBjQfTs4sGQ/3pHUNYQvpsy8Sv7w=</SignatureValue><KeyInfo Id="StrongNameKeyInfo"><KeyValue><RSAKeyValue><Modulus>lB6Ev+xz7zz0eq6vcRND1lj+PM01oA8QYSmbOHy2XJ0HlCxsaU42DdPLwdO8OrmvQOzTCijIfah9lbJiRHBB59sJ0qs5fJ7mcvM5op6H9oc11zEcY5mJViP5syLwYoOT1/TTIAzqUzmbC9/whH+ddNsqXohz3DVqVNmtzs2z/Ok=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><msrel:RelData xmlns:msrel="http://schemas.microsoft.com/windows/rel/2005/reldata"><r:license xmlns:r="urn:mpeg:mpeg21:2003:01-REL-R-NS" xmlns:as="http://schemas.microsoft.com/windows/pki/2005/Authenticode"><r:grant><as:ManifestInformation Hash="dbbd3e7cba06e6354e4fd3eaded82ef61531bbc86e428d41bdbd1ac3666abfea" Description="" Url=""><as:assemblyIdentity name="GABAK.exe" version="1.0.0.1" publicKeyToken="8055b27f269e13ee" language="en" processorArchitecture="amd64" type="win32" /></as:ManifestInformation><as:SignedBy /><as:AuthenticodePublisher><as:X509SubjectName>CN=GOKHANLENOVO\Gokhan</as:X509SubjectName></as:AuthenticodePublisher></r:grant><r:issuer><Signature Id="AuthenticodeSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>XUcDCCskvZ4WP6miJQ7J+auALQ6tQiVCiO18IR+yhqs=</DigestValue></Reference></SignedInfo><SignatureValue>OSv1Ai0cLsn5e5zBg7kDxTROLwyETO+JCc8VfN0gBzQOknUKHGx3bes3IOdTK2If2CXivufL/a9CUf3vPESEb5kV5vMo4GBciAxlX29LoxG3xRVAYZLLuf6zW0q5UD33IuSMVeBNRTKcUw1bzNOfipihDtJHPoxE+1aC5Niy6ns=</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>lB6Ev+xz7zz0eq6vcRND1lj+PM01oA8QYSmbOHy2XJ0HlCxsaU42DdPLwdO8OrmvQOzTCijIfah9lbJiRHBB59sJ0qs5fJ7mcvM5op6H9oc11zEcY5mJViP5syLwYoOT1/TTIAzqUzmbC9/whH+ddNsqXohz3DVqVNmtzs2z/Ok=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><X509Data><X509Certificate>MIIB5TCCAU6gAwIBAgIQOVY0P0zdVblGUDXyVaxXPzANBgkqhkiG9w0BAQsFADAxMS8wLQYDVQQDHiYARwBPAEsASABBAE4ATABFAE4ATwBWAE8AXABHAG8AawBoAGEAbjAeFw0yMDEwMjMxOTE5MjFaFw0yMTEwMjQwMTE5MjFaMDExLzAtBgNVBAMeJgBHAE8ASwBIAEEATgBMAEUATgBPAFYATwBcAEcAbwBrAGgAYQBuMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCUHoS/7HPvPPR6rq9xE0PWWP48zTWgDxBhKZs4fLZcnQeULGxpTjYN08vB07w6ua9A7NMKKMh9qH2VsmJEcEHn2wnSqzl8nuZy8zminof2hzXXMRxjmYlWI/mzIvBig5PX9NMgDOpTOZsL3/CEf5102ypeiHPcNWpU2a3OzbP86QIDAQABMA0GCSqGSIb3DQEBCwUAA4GBAI8UkRXgWdpyV521hXysFWWtXcuEmyNyJhIf7+i5zDMycCwneudrHjH5OLmfujVG8E4RrMu6uRi7YotnT/UEE2Q6mnk9m1r9pxF6+GWUZSEEufVtXcqLBdQfdVBCcXjSPHSB8Wugd9ALs2QDKzHmYUjMV649lYTXTdHgb8MrWfcx</X509Certificate></X509Data></KeyInfo></Signature></r:issuer></r:license></msrel:RelData></KeyInfo></Signature></asmv1:assembly>
