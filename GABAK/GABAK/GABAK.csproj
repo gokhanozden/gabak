@@ -36,14 +36,14 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <InstallUrl>https://github.com/gokhanozden/gabak/tree/master/GABAK/GABAK/publish/</InstallUrl>
+    <InstallUrl>https://raw.githubusercontent.com/gokhanozden/gabak/tree/master/GABAK/GABAK/publish/</InstallUrl>
     <SupportUrl>https://github.com/gokhanozden/gabak</SupportUrl>
     <TargetCulture>en</TargetCulture>
     <ProductName>GABAK Warehouse Layout Optimizer</ProductName>
     <PublisherName>Gokhan Ozden</PublisherName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationRevision>1</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
