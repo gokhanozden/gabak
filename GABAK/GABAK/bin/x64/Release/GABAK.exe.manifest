@@ -3,7 +3,7 @@
   <asmv1:assemblyIdentity name="GABAK.exe" version="1.0.0.0" publicKeyToken="0000000000000000" language="en" processorArchitecture="amd64" type="win32" />
   <application />
   <entryPoint>
-    <assemblyIdentity name="GABAK" version="1.0.0.0" publicKeyToken="B4D3578CA34B25C6" language="neutral" processorArchitecture="amd64" />
+    <assemblyIdentity name="GABAK" version="1.0.0.0" publicKeyToken="A71795F81B71ED67" language="neutral" processorArchitecture="amd64" />
     <commandLine file="GABAK.exe" parameters="" />
   </entryPoint>
   <trustInfo>
@@ -55,13 +55,13 @@
   </dependency>
   <dependency>
     <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="GABAK.exe" size="286168">
-      <assemblyIdentity name="GABAK" version="1.0.0.0" publicKeyToken="B4D3578CA34B25C6" language="neutral" processorArchitecture="amd64" />
+      <assemblyIdentity name="GABAK" version="1.0.0.0" publicKeyToken="A71795F81B71ED67" language="neutral" processorArchitecture="amd64" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>xLx3gNGAic/5stji4uPgWFMuVT4Am4pNvvGnaIGvhp4=</dsig:DigestValue>
+        <dsig:DigestValue>3myALXSf4/8nJMsbbWbNteCk5+Pjrm1kOJVXjSlxW1M=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

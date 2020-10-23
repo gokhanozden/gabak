@@ -43,7 +43,7 @@
     <PublisherName>Gokhan Ozden</PublisherName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -143,11 +143,10 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>34A6CFCDDAEEC5FBE8ACF029622970523EFAAA7F</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>5E10CE167CB20E64A07AFF963E1D532363EA8E28</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>
-    </ManifestKeyFile>
+    <ManifestKeyFile>GABAK_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
@@ -265,6 +264,7 @@
       <DependentUpon>gabakDataSet.xsd</DependentUpon>
     </None>
     <None Include="GABAK_1_TemporaryKey.pfx" />
+    <None Include="GABAK_TemporaryKey.pfx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
