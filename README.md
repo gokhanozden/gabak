@@ -17,11 +17,11 @@ WHAT CAN YOU DO WITH GABAK (HOW CAN YOU USE IT IN YOUR RESEARCH)?
 
 GETTING STARTED
 If you would like to only use the tool without building it from the source code, here are the steps:
-1. Go to gabak/GABAK/GABAK/bin/x64/Release/ folder
-2. Under that folder download GABAK.exe and AviFile.dll. You can save these files anywhere you want but they need to be located under same folder. GABAK.exe is the 64-bit executable that you will use to perform optimization or test layouts. AviFile.dll is used for creating videos from optimization runs so you can show nice visualizations for your experiments and get better understanding how optimization is working to lower the objective function (i.e., average travel cost) by changing the layouts.
-3. Then go to gabak/GABAK/GABAK/gabak/ (I know it is weird) folder and copy this folder and all of its contents under "C:\". So your Concorde.exe file should have a path like this "C:\gabak\concorde.exe". This is very important because in the code the paths of the files inside this folder are hard coded as well as the location of TSP files created and feeded as an input to these TSP solvers. If you have permission issues to create a folder under this level, you need to build the executable from source and change the exact paths in routing.cs file. GABAK is using LKH and Concorde TSP solvers to optimize the routings. It creates a TSP file for every pick list and these TSP files are sent to Concorde or LKH in order to get an optimal solution.
-4. Once you have copied "gabak" folder in previous step, you can start to use the tool.
+1.Go to https://www.gokhanozden.com/gabak/publish.htm
+2.Click Install.
+3.Follow the installation steps.
+4.Download and unzip gabak.zip folder under C:/ so it should look like this C:/gabak (this needs to be done manually and you need admin privileges). This part is needed for TSP Solver.
 
-If you would like to build it from source code, you can download any Visual Studio (I am using Visual Studio community edition 2015) and open the solution file once you downloaded the whole project. There are multiple source code files in the project and I suggest you to start with the small files like "SKU.cs" and move to the larger files like "MainForm.cs". The code is fairly well commented out but I will be adding more documents about how each folder is being used.
+If you would like to build it from source code, you can download any Visual Studio (I am using Visual Studio community edition 2019) and open the solution file once you downloaded the whole project. There are multiple source code files in the project and I suggest you to start with the small files like "SKU.cs" and move to the larger files like "MainForm.cs". The code is fairly well commented out but I will be adding more documents about how each folder is being used.
 
 If you have any questions please send me an e-mail gokhan@psu.edu or gokhan.ozden@yahoo.com.
