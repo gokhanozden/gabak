@@ -17,9 +17,13 @@ WHAT CAN YOU DO WITH GABAK (HOW CAN YOU USE IT IN YOUR RESEARCH)?
 
 GETTING STARTED
 If you would like to only use the tool without building it from the source code, here are the steps:
+
 1.Go to https://www.gokhanozden.com/gabak/publish.htm
+
 2.Click Install.
+
 3.Follow the installation steps.
+
 4.Download and unzip gabak.zip folder under C:/ so it should look like this C:/gabak (this needs to be done manually and you need admin privileges). This part is needed for TSP Solver.
 
 If you would like to build it from source code, you can download any Visual Studio (I am using Visual Studio community edition 2019) and open the solution file once you downloaded the whole project. There are multiple source code files in the project and I suggest you to start with the small files like "SKU.cs" and move to the larger files like "MainForm.cs". The code is fairly well commented out but I will be adding more documents about how each folder is being used.
