@@ -26,7 +26,7 @@
     </SccAuxPath>
     <SccProvider>
     </SccProvider>
-    <PublishUrl>publish\</PublishUrl>
+    <PublishUrl>ftp://ftp.gokhanozden.com/</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Web</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
@@ -36,16 +36,17 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <InstallUrl>https://raw.githubusercontent.com/gokhanozden/gabak/master/GABAK/GABAK/publish/</InstallUrl>
+    <InstallUrl>https://www.gokhanozden.com/gabak/</InstallUrl>
     <SupportUrl>https://github.com/gokhanozden/gabak</SupportUrl>
     <TargetCulture>en</TargetCulture>
     <ProductName>GABAK Warehouse Layout Optimizer</ProductName>
-    <PublisherName>Gokhan Ozden</PublisherName>
+    <PublisherName>GABAK</PublisherName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>2</ApplicationRevision>
+    <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <UseApplicationTrust>false</UseApplicationTrust>
+    <UseApplicationTrust>true</UseApplicationTrust>
+    <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -149,7 +150,7 @@
     <ManifestKeyFile>GABAK_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <SignAssembly>true</SignAssembly>
+    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -167,8 +168,7 @@
     <AssemblyOriginatorKeyFile>GABAK_TemporaryKey.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AviFile, Version=1.0.6701.24187, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="AviFile">
       <HintPath>.\AviFile.dll</HintPath>
     </Reference>
     <Reference Include="System" />
@@ -297,9 +297,9 @@
     <Compile Include="warehouse.cs" />
   </ItemGroup>
   <ItemGroup>
-    <BootstrapperPackage Include=".NETFramework,Version=v4.0">
+    <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
       <Visible>False</Visible>
-      <ProductName>Microsoft .NET Framework 4 %28x86 and x64%29</ProductName>
+      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 and x64%29</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
@@ -323,12 +323,6 @@
     <Content Include="gabak.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="gabak\availableservers.txt" />
-    <Content Include="gabak\concorde.exe" />
-    <Content Include="gabak\cygwin1.dll" />
-    <Content Include="gabak\lkh.exe" />
-    <Content Include="gabak\QSConcorde.dll" />
-    <Content Include="gabak\QSopt.dll" />
     <Content Include="gabak_log.ldf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DependentUpon>gabak.mdf</DependentUpon>

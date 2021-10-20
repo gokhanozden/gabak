@@ -627,6 +627,9 @@ namespace GABAK
             }
         }
 
+        /// <summary>
+        /// Draws all visibility graph connectivity edges
+        /// </summary>
         private void drawConnectivity()
         {
             int mycounter = 0;
@@ -640,6 +643,7 @@ namespace GABAK
                         mypen.Color = Color.Black;
                         mypen.Width = (float)m / 10;
                         graphicsObj.DrawLine(mypen, (float)mywh.graphnodes[i].getX() * m, (float)mywh.graphnodes[i].getY() * m, (float)mywh.graphnodes[j].getX() * m, (float)mywh.graphnodes[j].getY() * m);
+                        mysvg.addLine((float)mywh.graphnodes[i].getX() * m, (float)mywh.graphnodes[i].getY() * m, (float)mywh.graphnodes[j].getX() * m, (float)mywh.graphnodes[j].getY() * m, mypen.Width, mypen.Color);
                         mycounter++;
                     }
                 }
@@ -691,10 +695,10 @@ namespace GABAK
                 mypen.Color = getColorFromWaveLength(wavelength);
                 //Set to black
                 if (options.numbercolors == 1) mypen.Color = Color.Black;
-                //mypen.Width = 1 * m;
-                //mypen.Alignment = PenAlignment.Center;
+                mypen.Width = 1 * m;
+                mypen.Alignment = PenAlignment.Center;
                 //graphicsObj.DrawEllipse(mypen, ((float)p_pickingaisleedge.getOnEdgeNodes()[i].getX()) * m - m / 2, (float)p_pickingaisleedge.getOnEdgeNodes()[i].getY() * m - m / 2, m, m);
-                //mysvg.addCircle((float)p_pickingaisleedge.getOnEdgeNodes()[i].getX() * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].getY() * m, m, mypen.Width, mypen.Color);
+                mysvg.addCircle((float)p_pickingaisleedge.getOnEdgeNodes()[i].getX() * m - m / 2, (float)p_pickingaisleedge.getOnEdgeNodes()[i].getY() * m - m / 2, m, m, mypen.Color);
                 //pickingaislecoordinates.Add(p_pickingaisleedge.getOnEdgeNodes()[i].getX().ToString() + "\t" + p_pickingaisleedge.getOnEdgeNodes()[i].getY().ToString());
                 //using (System.IO.StreamWriter file =
                 //new System.IO.StreamWriter(@"C:\concorde\LocationCoordinates.txt", true))
@@ -710,10 +714,10 @@ namespace GABAK
                     graphicsObj.DrawLine(mypen, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s1.X4 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s1.Y4 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s1.X3 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s1.Y3 * m);
                     graphicsObj.DrawLine(mypen, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s1.X3 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s1.Y3 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s1.X1 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s1.Y1 * m);
                     //Svg writing
-                    mysvg.addLine((float)p_pickingaisleedge.getOnEdgeNodes()[i].s1.X1 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s1.Y1, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s1.X2 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s1.Y2 * m, mypen.Width, mypen.Color);
-                    mysvg.addLine((float)p_pickingaisleedge.getOnEdgeNodes()[i].s1.X2 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s1.Y2, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s1.X4 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s1.Y4 * m, mypen.Width, mypen.Color);
-                    mysvg.addLine((float)p_pickingaisleedge.getOnEdgeNodes()[i].s1.X4 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s1.Y4, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s1.X3 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s1.Y3 * m, mypen.Width, mypen.Color);
-                    mysvg.addLine((float)p_pickingaisleedge.getOnEdgeNodes()[i].s1.X3 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s1.Y3, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s1.X1 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s1.Y1 * m, mypen.Width, mypen.Color);
+                    mysvg.addLine((float)p_pickingaisleedge.getOnEdgeNodes()[i].s1.X1 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s1.Y1 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s1.X2 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s1.Y2 * m, mypen.Width, mypen.Color);
+                    mysvg.addLine((float)p_pickingaisleedge.getOnEdgeNodes()[i].s1.X2 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s1.Y2 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s1.X4 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s1.Y4 * m, mypen.Width, mypen.Color);
+                    mysvg.addLine((float)p_pickingaisleedge.getOnEdgeNodes()[i].s1.X4 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s1.Y4 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s1.X3 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s1.Y3 * m, mypen.Width, mypen.Color);
+                    mysvg.addLine((float)p_pickingaisleedge.getOnEdgeNodes()[i].s1.X3 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s1.Y3 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s1.X1 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s1.Y1 * m, mypen.Width, mypen.Color);
                     //ARDesign writing
                     //We calculate x and y coordinates using 4 X and 4 Y averages these X and Ys are the box edges so taking X and Y average will give us the box center
                     double x = p_pickingaisleedge.getOnEdgeNodes()[i].s1.X1 + p_pickingaisleedge.getOnEdgeNodes()[i].s1.X2 + p_pickingaisleedge.getOnEdgeNodes()[i].s1.X3 + p_pickingaisleedge.getOnEdgeNodes()[i].s1.X4;
@@ -734,10 +738,10 @@ namespace GABAK
                     graphicsObj.DrawLine(mypen, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s2.X4 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s2.Y4 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s2.X3 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s2.Y3 * m);
                     graphicsObj.DrawLine(mypen, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s2.X3 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s2.Y3 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s2.X1 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s2.Y1 * m);
                     //Svg writing
-                    mysvg.addLine((float)p_pickingaisleedge.getOnEdgeNodes()[i].s2.X1 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s2.Y1, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s2.X2 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s2.Y2 * m, mypen.Width, mypen.Color);
-                    mysvg.addLine((float)p_pickingaisleedge.getOnEdgeNodes()[i].s2.X2 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s2.Y2, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s2.X4 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s2.Y4 * m, mypen.Width, mypen.Color);
-                    mysvg.addLine((float)p_pickingaisleedge.getOnEdgeNodes()[i].s2.X4 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s2.Y4, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s2.X3 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s2.Y3 * m, mypen.Width, mypen.Color);
-                    mysvg.addLine((float)p_pickingaisleedge.getOnEdgeNodes()[i].s2.X3 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s2.Y3, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s2.X1 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s2.Y1 * m, mypen.Width, mypen.Color);
+                    mysvg.addLine((float)p_pickingaisleedge.getOnEdgeNodes()[i].s2.X1 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s2.Y1 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s2.X2 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s2.Y2 * m, mypen.Width, mypen.Color);
+                    mysvg.addLine((float)p_pickingaisleedge.getOnEdgeNodes()[i].s2.X2 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s2.Y2 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s2.X4 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s2.Y4 * m, mypen.Width, mypen.Color);
+                    mysvg.addLine((float)p_pickingaisleedge.getOnEdgeNodes()[i].s2.X4 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s2.Y4 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s2.X3 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s2.Y3 * m, mypen.Width, mypen.Color);
+                    mysvg.addLine((float)p_pickingaisleedge.getOnEdgeNodes()[i].s2.X3 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s2.Y3 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s2.X1 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s2.Y1 * m, mypen.Width, mypen.Color);
                     //ARDesign writing
                     //We calculate x and y coordinates using 4 X and 4 Y averages these X and Ys are the box edges so taking X and Y average will give us the box center
                     double x = p_pickingaisleedge.getOnEdgeNodes()[i].s2.X1 + p_pickingaisleedge.getOnEdgeNodes()[i].s2.X2 + p_pickingaisleedge.getOnEdgeNodes()[i].s2.X3 + p_pickingaisleedge.getOnEdgeNodes()[i].s2.X4;
@@ -981,21 +985,29 @@ namespace GABAK
 
         private void exporttocsv()
         {
-            csvexport myexcel = new csvexport();
-            for (int i = 0; i < mywh.regions.Count; i++)
+            if(mywh != null)
             {
-                for (int j = 0; j < mywh.regions[i].pickingaisleedges.Count; j++)
+                csvexport myexcel = new csvexport();
+                for (int i = 0; i < mywh.regions.Count; i++)
                 {
-                    for (int k = 0; k < mywh.regions[i].pickingaisleedges[j].getOnEdgeNodes().Count; k++)
+                    for (int j = 0; j < mywh.regions[i].pickingaisleedges.Count; j++)
                     {
-                        myexcel.addRow();
-                        myexcel["x"] = mywh.regions[i].pickingaisleedges[j].getOnEdgeNodes()[k].getX().ToString();
-                        myexcel["y"] = mywh.regions[i].pickingaisleedges[j].getOnEdgeNodes()[k].getY().ToString();
-                        myexcel["total distance"] = mywh.regions[i].pickingaisleedges[j].getOnEdgeNodes()[k].totaldistance.ToString();
+                        for (int k = 0; k < mywh.regions[i].pickingaisleedges[j].getOnEdgeNodes().Count; k++)
+                        {
+                            myexcel.addRow();
+                            myexcel["x"] = mywh.regions[i].pickingaisleedges[j].getOnEdgeNodes()[k].getX().ToString();
+                            myexcel["y"] = mywh.regions[i].pickingaisleedges[j].getOnEdgeNodes()[k].getY().ToString();
+                            myexcel["total distance"] = mywh.regions[i].pickingaisleedges[j].getOnEdgeNodes()[k].totaldistance.ToString();
+                        }
                     }
                 }
+                myexcel.exportToFile("export.csv");
             }
-            myexcel.exportToFile("export.csv");
+            else
+            {
+                MessageBox.Show("Please create a warehouse first","Error 1001");
+            }
+            
         }
 
         private void exportToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1031,8 +1043,8 @@ namespace GABAK
 
         private async void buttonSolveES_Click(object sender, EventArgs e)
         {
-            await Task.Run(() => solveES());
-            //solveES();
+            //await Task.Run(() => solveES());
+            solveES();
         }
 
         private void solveES()
@@ -1647,15 +1659,16 @@ namespace GABAK
                     textBoxNeighbors.AppendText("xPercent cannot be greater than or equal to yPercent\n");
                 }
             }
-            //If you want to generate all dual command combinations (all possible orders with 2 picks)
-            else if (comboBoxGenerate.SelectedIndex == 3)
+            
+            //If you want to generate all single or dual command combinations (all possible orders with 1 or 2 picks)
+            else if (comboBoxGenerate.SelectedIndex == 2 || comboBoxGenerate.SelectedIndex == 3)
             {
                 myskus.Clear();
                 int totalNumberSKUs = Convert.ToInt32(textBoxNumberSKUs.Text);
                 if (totalNumberSKUs > 0)
                 {
                     sku tmpsku;
-                    double pickprobability = 1 / totalNumberSKUs;//Each item are being picked with equal probability (uniform demand)
+                    double pickprobability = 1.0 / (double)totalNumberSKUs;//Each item are being picked with equal probability (uniform demand)
                     for (int i = 0; i < totalNumberSKUs; i++)
                     {
                         tmpsku = new sku(i + 1);//id starts from 1 instead of 0
@@ -1697,9 +1710,18 @@ namespace GABAK
                 }
                 labelTotalSKUS.Text = "# SKU: " + myskus.Count().ToString();
             }
-            var anonTypeArr = myskus.Select(
-                x => new { x.ID, x.pickprobability, x.frequency }).ToArray();
-            dataGridViewSKUs.DataSource = anonTypeArr;
+            dataGridViewSKUs.Rows.Clear();
+            dataGridViewSKUs.Refresh();
+            dataGridViewSKUs.ColumnCount = 3;
+            dataGridViewSKUs.Columns[0].Name = "SKU";
+            dataGridViewSKUs.Columns[1].Name = "Pick Probability";
+            dataGridViewSKUs.Columns[2].Name = "Pick Frequency";
+            for (int i = 0; i < myskus.Count(); i++)
+            {
+                dataGridViewSKUs.Rows.Add(new string[] { myskus[i].ID.ToString(), myskus[i].pickprobability.ToString(), myskus[i].frequency.ToString() });
+                
+            }
+            dataGridViewSKUs.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;//Resize the columns
         }
 
         private void importOptimizationRuns()
@@ -2545,7 +2567,7 @@ namespace GABAK
         /// <param name="e"></param>
         private void buttonImportOrders_Click(object sender, EventArgs e)
         {
-            if (comboBoxGenerate.SelectedIndex == 1)
+            if (comboBoxGenerate.SelectedIndex == 1)//Use Bender's Generation
             {
                 myorders.Clear();
                 int numberoforderlists = Convert.ToInt32(textBoxNumberOrders.Text);
@@ -2572,7 +2594,7 @@ namespace GABAK
                 double totalnumberofpicks = 0;
                 for (int i = 0; i < myorders.Count(); i++)
                 {
-                    totalnumberofpicks = totalnumberofpicks + myorders[i].getOrderSize();
+                    totalnumberofpicks += myorders[i].getOrderSize();
                 }
                 avgTourLength = totalnumberofpicks / myorders.Count();
 
@@ -2580,6 +2602,25 @@ namespace GABAK
                 labelMaxOrder.Text = "MaxOrderID: 0";
                 labelMaxOrderSize.Text = "Max Order #: " + ordersize.ToString();
                 textBoxAvgOrderSize.Text = avgTourLength.ToString("#.##");
+                textBoxSampleSize.Text = myorders.Count().ToString();
+            }
+            else if (comboBoxGenerate.SelectedIndex == 2)//All single command picks
+            {
+                myorders.Clear();
+                int numberofSKUs = Convert.ToInt32(textBoxNumberSKUs.Text);
+                int orderNumberCounter = 0;
+                order tmporder;
+                for (int i = 0; i < numberofSKUs; i++)
+                {
+                    tmporder = new order(orderNumberCounter);
+                    tmporder.addSKU(myskus[i]);//First item
+                    myorders.Add(tmporder);
+                    orderNumberCounter++;
+                }
+                labelTotalOrders.Text = "# Orders: " + myorders.Count().ToString();
+                labelMaxOrder.Text = "MaxOrderID: 0";
+                labelMaxOrderSize.Text = "Max Order #: 0";
+                textBoxAvgOrderSize.Text = "1";
                 textBoxSampleSize.Text = myorders.Count().ToString();
             }
             else if (comboBoxGenerate.SelectedIndex == 3)//All dual command combinations
@@ -2596,6 +2637,7 @@ namespace GABAK
                         tmporder.addSKU(myskus[i]);//First item
                         tmporder.addSKU(myskus[j]);//Second item
                         myorders.Add(tmporder);
+                        orderNumberCounter++;
                     }
                 }
                 labelTotalOrders.Text = "# Orders: " + myorders.Count().ToString();
@@ -2604,7 +2646,7 @@ namespace GABAK
                 textBoxAvgOrderSize.Text = "2";
                 textBoxSampleSize.Text = myorders.Count().ToString();
             }
-            else
+            else //Use CSV Data for Importing Pick Lists (that includes SKUs)
             {
                 myorders.Clear();
                 int maxorderid = 0;
@@ -2705,6 +2747,20 @@ namespace GABAK
                     textBoxSampleSize.Text = myorders.Count().ToString();
                 }
             }
+
+            dataGridViewPickLists.Rows.Clear();
+            dataGridViewPickLists.Refresh();
+            dataGridViewPickLists.ColumnCount = 2;
+            dataGridViewPickLists.Columns[0].Name = "Order ID";
+            dataGridViewPickLists.Columns[1].Name = "SKU";
+            for (int i = 0; i < myorders.Count(); i++)
+            {
+                for (int j = 0; j< myorders[i].getOrderSize(); j++)
+                {
+                    dataGridViewPickLists.Rows.Add(new string[] { myorders[i].getOrderID().ToString(), myorders[i].getOrderSkus()[j].ID.ToString()});
+                }
+            }
+            dataGridViewPickLists.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;//Resize the columns
         }
 
         //Start of Textboxchanged parts
@@ -3094,6 +3150,8 @@ namespace GABAK
                     buttonImportSKUs.Enabled = true;
                     buttonImportOrders.Enabled = true;
                     groupBoxBenderParameters.Visible = true;
+                    labelNumberSKUs.Visible = true;
+                    textBoxNumberSKUs.Visible = true;
                     break;
 
                 case 2:
@@ -3101,6 +3159,8 @@ namespace GABAK
                     buttonImportSKUs.Enabled = true;
                     buttonImportOrders.Enabled = true;
                     groupBoxBenderParameters.Visible = false;
+                    labelNumberSKUs.Visible = true;
+                    textBoxNumberSKUs.Visible = true;
                     break;
 
                 case 3:
@@ -3108,6 +3168,8 @@ namespace GABAK
                     buttonImportSKUs.Enabled = true;
                     buttonImportOrders.Enabled = true;
                     groupBoxBenderParameters.Visible = false;
+                    labelNumberSKUs.Visible = true;
+                    textBoxNumberSKUs.Visible = true;
                     break;
 
                 default:
@@ -3115,6 +3177,8 @@ namespace GABAK
                     buttonImportSKUs.Enabled = false;
                     buttonImportOrders.Enabled = false;
                     groupBoxBenderParameters.Visible = false;
+                    labelNumberSKUs.Visible = false;
+                    textBoxNumberSKUs.Visible = false;
                     break;
             }
         }

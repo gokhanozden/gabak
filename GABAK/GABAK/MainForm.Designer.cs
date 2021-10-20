@@ -373,6 +373,7 @@ namespace GABAK
             this.tabPage9 = new System.Windows.Forms.TabPage();
             this.tabPage10 = new System.Windows.Forms.TabPage();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.labelCrossAisleSegments = new System.Windows.Forms.Label();
             this.menuStripTop.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -404,7 +405,7 @@ namespace GABAK
             this.textBoxAngle1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAngle1.Name = "textBoxAngle1";
             this.textBoxAngle1.Size = new System.Drawing.Size(40, 18);
-            this.textBoxAngle1.TabIndex = 41;
+            this.textBoxAngle1.TabIndex = 4028;
             this.textBoxAngle1.Text = "32";
             this.textBoxAngle1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkNumeric);
             // 
@@ -415,7 +416,7 @@ namespace GABAK
             this.labelAngle1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelAngle1.Name = "labelAngle1";
             this.labelAngle1.Size = new System.Drawing.Size(43, 13);
-            this.labelAngle1.TabIndex = 2;
+            this.labelAngle1.TabIndex = 4119;
             this.labelAngle1.Text = "Angle 1";
             // 
             // buttonCreate
@@ -424,7 +425,7 @@ namespace GABAK
             this.buttonCreate.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.buttonCreate.Name = "buttonCreate";
             this.buttonCreate.Size = new System.Drawing.Size(74, 21);
-            this.buttonCreate.TabIndex = 60;
+            this.buttonCreate.TabIndex = 4051;
             this.buttonCreate.Text = "Create";
             this.buttonCreate.UseVisualStyleBackColor = true;
             this.buttonCreate.Click += new System.EventHandler(this.buttonCreate_Click);
@@ -447,7 +448,7 @@ namespace GABAK
             this.buttonReset.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.buttonReset.Name = "buttonReset";
             this.buttonReset.Size = new System.Drawing.Size(74, 21);
-            this.buttonReset.TabIndex = 61;
+            this.buttonReset.TabIndex = 4052;
             this.buttonReset.Text = "Reset";
             this.buttonReset.UseVisualStyleBackColor = true;
             this.buttonReset.Click += new System.EventHandler(this.buttonReset_Click);
@@ -458,7 +459,7 @@ namespace GABAK
             this.textBoxWHWidth.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxWHWidth.Name = "textBoxWHWidth";
             this.textBoxWHWidth.Size = new System.Drawing.Size(40, 18);
-            this.textBoxWHWidth.TabIndex = 20;
+            this.textBoxWHWidth.TabIndex = 4005;
             this.textBoxWHWidth.Text = "400";
             this.textBoxWHWidth.TextChanged += new System.EventHandler(this.textBoxWHWidth_TextChanged);
             this.textBoxWHWidth.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkNumeric);
@@ -469,7 +470,7 @@ namespace GABAK
             this.textBoxWHDepth.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxWHDepth.Name = "textBoxWHDepth";
             this.textBoxWHDepth.Size = new System.Drawing.Size(40, 18);
-            this.textBoxWHDepth.TabIndex = 21;
+            this.textBoxWHDepth.TabIndex = 4006;
             this.textBoxWHDepth.Text = "200";
             this.textBoxWHDepth.TextChanged += new System.EventHandler(this.textBoxWHDepth_TextChanged);
             this.textBoxWHDepth.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkNumeric);
@@ -481,7 +482,7 @@ namespace GABAK
             this.labelWHWidth.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelWHWidth.Name = "labelWHWidth";
             this.labelWHWidth.Size = new System.Drawing.Size(89, 13);
-            this.labelWHWidth.TabIndex = 9;
+            this.labelWHWidth.TabIndex = 4104;
             this.labelWHWidth.Text = "Warehouse Width";
             // 
             // labelWHDepth
@@ -491,7 +492,7 @@ namespace GABAK
             this.labelWHDepth.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelWHDepth.Name = "labelWHDepth";
             this.labelWHDepth.Size = new System.Drawing.Size(92, 13);
-            this.labelWHDepth.TabIndex = 10;
+            this.labelWHDepth.TabIndex = 4105;
             this.labelWHDepth.Text = "Warehouse Depth";
             // 
             // buttonImportOrders
@@ -500,7 +501,7 @@ namespace GABAK
             this.buttonImportOrders.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.buttonImportOrders.Name = "buttonImportOrders";
             this.buttonImportOrders.Size = new System.Drawing.Size(187, 21);
-            this.buttonImportOrders.TabIndex = 64;
+            this.buttonImportOrders.TabIndex = 1004;
             this.buttonImportOrders.Text = "Import or Generate Pick Lists";
             this.buttonImportOrders.UseVisualStyleBackColor = true;
             this.buttonImportOrders.Click += new System.EventHandler(this.buttonImportOrders_Click);
@@ -508,40 +509,44 @@ namespace GABAK
             // labelE1
             // 
             this.labelE1.AutoSize = true;
-            this.labelE1.Location = new System.Drawing.Point(51, 204);
+            this.labelE1.Location = new System.Drawing.Point(17, 220);
             this.labelE1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelE1.Name = "labelE1";
-            this.labelE1.Size = new System.Drawing.Size(20, 13);
-            this.labelE1.TabIndex = 26;
-            this.labelE1.Text = "E1";
+            this.labelE1.Size = new System.Drawing.Size(101, 13);
+            this.labelE1.TabIndex = 4111;
+            this.labelE1.Text = "Exterior Node 1 (E1)";
+            this.toolTip1.SetToolTip(this.labelE1, "First Exterior Node (Standardized, Top Left Corner is 0, Top Right Corner is 0.25" +
+        ", Bottom Right Corner is 0.5, Bottom Left Corner is 0.75)");
             // 
             // textBoxE1
             // 
-            this.textBoxE1.Location = new System.Drawing.Point(73, 201);
+            this.textBoxE1.Location = new System.Drawing.Point(120, 216);
             this.textBoxE1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxE1.Name = "textBoxE1";
             this.textBoxE1.Size = new System.Drawing.Size(40, 18);
-            this.textBoxE1.TabIndex = 30;
+            this.textBoxE1.TabIndex = 4021;
             this.textBoxE1.Text = "0.0416";
             this.textBoxE1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkNumeric);
             // 
             // labelE2
             // 
             this.labelE2.AutoSize = true;
-            this.labelE2.Location = new System.Drawing.Point(51, 221);
+            this.labelE2.Location = new System.Drawing.Point(17, 236);
             this.labelE2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelE2.Name = "labelE2";
-            this.labelE2.Size = new System.Drawing.Size(20, 13);
-            this.labelE2.TabIndex = 28;
-            this.labelE2.Text = "E2";
+            this.labelE2.Size = new System.Drawing.Size(101, 13);
+            this.labelE2.TabIndex = 4112;
+            this.labelE2.Text = "Exterior Node 2 (E2)";
+            this.toolTip1.SetToolTip(this.labelE2, "Second Exterior Node (Standardized, Top Left Corner is 0, Top Right Corner is 0.2" +
+        "5, Bottom Right Corner is 0.5, Bottom Left Corner is 0.75)");
             // 
             // textBoxE2
             // 
-            this.textBoxE2.Location = new System.Drawing.Point(73, 218);
+            this.textBoxE2.Location = new System.Drawing.Point(120, 233);
             this.textBoxE2.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxE2.Name = "textBoxE2";
             this.textBoxE2.Size = new System.Drawing.Size(40, 18);
-            this.textBoxE2.TabIndex = 31;
+            this.textBoxE2.TabIndex = 4022;
             this.textBoxE2.Text = "0.2083";
             this.textBoxE2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkNumeric);
             // 
@@ -657,7 +662,7 @@ namespace GABAK
             this.textBoxAngle2.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAngle2.Name = "textBoxAngle2";
             this.textBoxAngle2.Size = new System.Drawing.Size(40, 18);
-            this.textBoxAngle2.TabIndex = 42;
+            this.textBoxAngle2.TabIndex = 4029;
             this.textBoxAngle2.Text = "147";
             this.textBoxAngle2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkNumeric);
             // 
@@ -668,7 +673,7 @@ namespace GABAK
             this.labelAngle2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelAngle2.Name = "labelAngle2";
             this.labelAngle2.Size = new System.Drawing.Size(43, 13);
-            this.labelAngle2.TabIndex = 31;
+            this.labelAngle2.TabIndex = 4120;
             this.labelAngle2.Text = "Angle 2";
             // 
             // printDocument1
@@ -699,23 +704,24 @@ namespace GABAK
             // 
             // textBoxpd
             // 
-            this.textBoxpd.Location = new System.Drawing.Point(73, 303);
+            this.textBoxpd.Location = new System.Drawing.Point(120, 318);
             this.textBoxpd.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxpd.Name = "textBoxpd";
             this.textBoxpd.Size = new System.Drawing.Size(40, 18);
-            this.textBoxpd.TabIndex = 40;
+            this.textBoxpd.TabIndex = 4027;
             this.textBoxpd.Text = "0.625";
             this.textBoxpd.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkNumeric);
             // 
             // labelPd
             // 
             this.labelPd.AutoSize = true;
-            this.labelPd.Location = new System.Drawing.Point(43, 306);
+            this.labelPd.Location = new System.Drawing.Point(5, 321);
             this.labelPd.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelPd.Name = "labelPd";
-            this.labelPd.Size = new System.Drawing.Size(28, 13);
-            this.labelPd.TabIndex = 42;
-            this.labelPd.Text = "PnD";
+            this.labelPd.Size = new System.Drawing.Size(113, 13);
+            this.labelPd.TabIndex = 4117;
+            this.labelPd.Text = "Pick and Deposit Point";
+            this.toolTip1.SetToolTip(this.labelPd, resources.GetString("labelPd.ToolTip"));
             // 
             // textBoxAdjuster1
             // 
@@ -723,7 +729,7 @@ namespace GABAK
             this.textBoxAdjuster1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAdjuster1.Name = "textBoxAdjuster1";
             this.textBoxAdjuster1.Size = new System.Drawing.Size(40, 18);
-            this.textBoxAdjuster1.TabIndex = 49;
+            this.textBoxAdjuster1.TabIndex = 4036;
             this.textBoxAdjuster1.Text = "0.5";
             this.textBoxAdjuster1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkNumeric);
             // 
@@ -733,7 +739,7 @@ namespace GABAK
             this.textBoxAdjuster2.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAdjuster2.Name = "textBoxAdjuster2";
             this.textBoxAdjuster2.Size = new System.Drawing.Size(40, 18);
-            this.textBoxAdjuster2.TabIndex = 50;
+            this.textBoxAdjuster2.TabIndex = 4036;
             this.textBoxAdjuster2.Text = "0.5";
             this.textBoxAdjuster2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkNumeric);
             // 
@@ -744,7 +750,7 @@ namespace GABAK
             this.labelAdjuster1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelAdjuster1.Name = "labelAdjuster1";
             this.labelAdjuster1.Size = new System.Drawing.Size(54, 13);
-            this.labelAdjuster1.TabIndex = 53;
+            this.labelAdjuster1.TabIndex = 4127;
             this.labelAdjuster1.Text = "Adjuster 1";
             // 
             // label2
@@ -754,7 +760,7 @@ namespace GABAK
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(54, 13);
-            this.label2.TabIndex = 54;
+            this.label2.TabIndex = 4128;
             this.label2.Text = "Adjuster 2";
             // 
             // buttonSolveES
@@ -763,7 +769,7 @@ namespace GABAK
             this.buttonSolveES.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.buttonSolveES.Name = "buttonSolveES";
             this.buttonSolveES.Size = new System.Drawing.Size(74, 21);
-            this.buttonSolveES.TabIndex = 63;
+            this.buttonSolveES.TabIndex = 5091;
             this.buttonSolveES.Text = "Optimize";
             this.buttonSolveES.UseVisualStyleBackColor = true;
             this.buttonSolveES.Click += new System.EventHandler(this.buttonSolveES_Click);
@@ -774,7 +780,7 @@ namespace GABAK
             this.textBoxMu.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxMu.Name = "textBoxMu";
             this.textBoxMu.Size = new System.Drawing.Size(50, 18);
-            this.textBoxMu.TabIndex = 200;
+            this.textBoxMu.TabIndex = 5001;
             this.textBoxMu.Text = "20";
             // 
             // textBoxLambda
@@ -783,7 +789,7 @@ namespace GABAK
             this.textBoxLambda.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxLambda.Name = "textBoxLambda";
             this.textBoxLambda.Size = new System.Drawing.Size(50, 18);
-            this.textBoxLambda.TabIndex = 201;
+            this.textBoxLambda.TabIndex = 5002;
             this.textBoxLambda.Text = "120";
             // 
             // textBoxESSeed
@@ -792,7 +798,7 @@ namespace GABAK
             this.textBoxESSeed.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxESSeed.Name = "textBoxESSeed";
             this.textBoxESSeed.Size = new System.Drawing.Size(50, 18);
-            this.textBoxESSeed.TabIndex = 202;
+            this.textBoxESSeed.TabIndex = 5003;
             this.textBoxESSeed.Text = "0";
             // 
             // textBoxESIteration
@@ -801,7 +807,7 @@ namespace GABAK
             this.textBoxESIteration.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxESIteration.Name = "textBoxESIteration";
             this.textBoxESIteration.Size = new System.Drawing.Size(50, 18);
-            this.textBoxESIteration.TabIndex = 203;
+            this.textBoxESIteration.TabIndex = 5004;
             this.textBoxESIteration.Text = "100";
             // 
             // textBoxSigma
@@ -810,7 +816,7 @@ namespace GABAK
             this.textBoxSigma.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxSigma.Name = "textBoxSigma";
             this.textBoxSigma.Size = new System.Drawing.Size(50, 18);
-            this.textBoxSigma.TabIndex = 204;
+            this.textBoxSigma.TabIndex = 5005;
             this.textBoxSigma.Text = "0.5";
             // 
             // textBoxESCounter
@@ -819,7 +825,7 @@ namespace GABAK
             this.textBoxESCounter.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxESCounter.Name = "textBoxESCounter";
             this.textBoxESCounter.Size = new System.Drawing.Size(50, 18);
-            this.textBoxESCounter.TabIndex = 205;
+            this.textBoxESCounter.TabIndex = 5006;
             this.textBoxESCounter.Text = "10";
             // 
             // textBoxAngle3
@@ -828,7 +834,7 @@ namespace GABAK
             this.textBoxAngle3.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAngle3.Name = "textBoxAngle3";
             this.textBoxAngle3.Size = new System.Drawing.Size(40, 18);
-            this.textBoxAngle3.TabIndex = 43;
+            this.textBoxAngle3.TabIndex = 4030;
             this.textBoxAngle3.Text = "90";
             this.textBoxAngle3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkNumeric);
             // 
@@ -838,7 +844,7 @@ namespace GABAK
             this.textBoxAdjuster3.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAdjuster3.Name = "textBoxAdjuster3";
             this.textBoxAdjuster3.Size = new System.Drawing.Size(40, 18);
-            this.textBoxAdjuster3.TabIndex = 51;
+            this.textBoxAdjuster3.TabIndex = 4037;
             this.textBoxAdjuster3.Text = "0.5";
             this.textBoxAdjuster3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkNumeric);
             // 
@@ -849,7 +855,7 @@ namespace GABAK
             this.labelAdjuster3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelAdjuster3.Name = "labelAdjuster3";
             this.labelAdjuster3.Size = new System.Drawing.Size(54, 13);
-            this.labelAdjuster3.TabIndex = 216;
+            this.labelAdjuster3.TabIndex = 4129;
             this.labelAdjuster3.Text = "Adjuster 3";
             // 
             // labelAngle3
@@ -859,28 +865,30 @@ namespace GABAK
             this.labelAngle3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelAngle3.Name = "labelAngle3";
             this.labelAngle3.Size = new System.Drawing.Size(43, 13);
-            this.labelAngle3.TabIndex = 217;
+            this.labelAngle3.TabIndex = 4121;
             this.labelAngle3.Text = "Angle 3";
             // 
             // textBoxE3
             // 
-            this.textBoxE3.Location = new System.Drawing.Point(73, 235);
+            this.textBoxE3.Location = new System.Drawing.Point(120, 250);
             this.textBoxE3.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxE3.Name = "textBoxE3";
             this.textBoxE3.Size = new System.Drawing.Size(40, 18);
-            this.textBoxE3.TabIndex = 32;
+            this.textBoxE3.TabIndex = 4023;
             this.textBoxE3.Text = "0.625";
             this.textBoxE3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkNumeric);
             // 
             // labelE3
             // 
             this.labelE3.AutoSize = true;
-            this.labelE3.Location = new System.Drawing.Point(51, 238);
+            this.labelE3.Location = new System.Drawing.Point(17, 253);
             this.labelE3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelE3.Name = "labelE3";
-            this.labelE3.Size = new System.Drawing.Size(20, 13);
-            this.labelE3.TabIndex = 219;
-            this.labelE3.Text = "E3";
+            this.labelE3.Size = new System.Drawing.Size(101, 13);
+            this.labelE3.TabIndex = 4113;
+            this.labelE3.Text = "Exterior Node 3 (E3)";
+            this.toolTip1.SetToolTip(this.labelE3, "Third Exterior Node (Standardized, Top Left Corner is 0, Top Right Corner is 0.25" +
+        ", Bottom Right Corner is 0.5, Bottom Left Corner is 0.75)");
             // 
             // textBoxAngle1L
             // 
@@ -888,7 +896,7 @@ namespace GABAK
             this.textBoxAngle1L.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAngle1L.Name = "textBoxAngle1L";
             this.textBoxAngle1L.Size = new System.Drawing.Size(33, 18);
-            this.textBoxAngle1L.TabIndex = 300;
+            this.textBoxAngle1L.TabIndex = 5044;
             this.textBoxAngle1L.Text = "0";
             // 
             // textBoxAngle2L
@@ -897,7 +905,7 @@ namespace GABAK
             this.textBoxAngle2L.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAngle2L.Name = "textBoxAngle2L";
             this.textBoxAngle2L.Size = new System.Drawing.Size(33, 18);
-            this.textBoxAngle2L.TabIndex = 302;
+            this.textBoxAngle2L.TabIndex = 5046;
             this.textBoxAngle2L.Text = "0";
             // 
             // textBoxAngle3L
@@ -906,7 +914,7 @@ namespace GABAK
             this.textBoxAngle3L.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAngle3L.Name = "textBoxAngle3L";
             this.textBoxAngle3L.Size = new System.Drawing.Size(33, 18);
-            this.textBoxAngle3L.TabIndex = 304;
+            this.textBoxAngle3L.TabIndex = 5048;
             this.textBoxAngle3L.Text = "0";
             // 
             // textBoxAdjuster1L
@@ -915,7 +923,7 @@ namespace GABAK
             this.textBoxAdjuster1L.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAdjuster1L.Name = "textBoxAdjuster1L";
             this.textBoxAdjuster1L.Size = new System.Drawing.Size(33, 18);
-            this.textBoxAdjuster1L.TabIndex = 310;
+            this.textBoxAdjuster1L.TabIndex = 5059;
             this.textBoxAdjuster1L.Text = "0";
             // 
             // textBoxAdjuster2L
@@ -924,7 +932,7 @@ namespace GABAK
             this.textBoxAdjuster2L.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAdjuster2L.Name = "textBoxAdjuster2L";
             this.textBoxAdjuster2L.Size = new System.Drawing.Size(33, 18);
-            this.textBoxAdjuster2L.TabIndex = 312;
+            this.textBoxAdjuster2L.TabIndex = 5061;
             this.textBoxAdjuster2L.Text = "0";
             // 
             // textBoxAdjuster3L
@@ -933,7 +941,7 @@ namespace GABAK
             this.textBoxAdjuster3L.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAdjuster3L.Name = "textBoxAdjuster3L";
             this.textBoxAdjuster3L.Size = new System.Drawing.Size(33, 18);
-            this.textBoxAdjuster3L.TabIndex = 314;
+            this.textBoxAdjuster3L.TabIndex = 5063;
             this.textBoxAdjuster3L.Text = "0";
             // 
             // textBoxE1L
@@ -942,7 +950,7 @@ namespace GABAK
             this.textBoxE1L.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxE1L.Name = "textBoxE1L";
             this.textBoxE1L.Size = new System.Drawing.Size(33, 18);
-            this.textBoxE1L.TabIndex = 330;
+            this.textBoxE1L.TabIndex = 5030;
             this.textBoxE1L.Text = "0";
             // 
             // textBoxE2L
@@ -951,7 +959,7 @@ namespace GABAK
             this.textBoxE2L.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxE2L.Name = "textBoxE2L";
             this.textBoxE2L.Size = new System.Drawing.Size(33, 18);
-            this.textBoxE2L.TabIndex = 332;
+            this.textBoxE2L.TabIndex = 5032;
             this.textBoxE2L.Text = "0";
             // 
             // textBoxE3L
@@ -960,7 +968,7 @@ namespace GABAK
             this.textBoxE3L.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxE3L.Name = "textBoxE3L";
             this.textBoxE3L.Size = new System.Drawing.Size(33, 18);
-            this.textBoxE3L.TabIndex = 334;
+            this.textBoxE3L.TabIndex = 5034;
             this.textBoxE3L.Text = "0";
             // 
             // textBoxPDL
@@ -969,7 +977,7 @@ namespace GABAK
             this.textBoxPDL.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxPDL.Name = "textBoxPDL";
             this.textBoxPDL.Size = new System.Drawing.Size(33, 18);
-            this.textBoxPDL.TabIndex = 340;
+            this.textBoxPDL.TabIndex = 5042;
             this.textBoxPDL.Text = "0";
             // 
             // textBoxPDU
@@ -978,7 +986,7 @@ namespace GABAK
             this.textBoxPDU.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxPDU.Name = "textBoxPDU";
             this.textBoxPDU.Size = new System.Drawing.Size(33, 18);
-            this.textBoxPDU.TabIndex = 341;
+            this.textBoxPDU.TabIndex = 5043;
             this.textBoxPDU.Text = "1";
             // 
             // textBoxE3U
@@ -987,7 +995,7 @@ namespace GABAK
             this.textBoxE3U.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxE3U.Name = "textBoxE3U";
             this.textBoxE3U.Size = new System.Drawing.Size(33, 18);
-            this.textBoxE3U.TabIndex = 335;
+            this.textBoxE3U.TabIndex = 5035;
             this.textBoxE3U.Text = "1";
             // 
             // textBoxE2U
@@ -996,7 +1004,7 @@ namespace GABAK
             this.textBoxE2U.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxE2U.Name = "textBoxE2U";
             this.textBoxE2U.Size = new System.Drawing.Size(33, 18);
-            this.textBoxE2U.TabIndex = 333;
+            this.textBoxE2U.TabIndex = 5033;
             this.textBoxE2U.Text = "1";
             // 
             // textBoxE1U
@@ -1005,7 +1013,7 @@ namespace GABAK
             this.textBoxE1U.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxE1U.Name = "textBoxE1U";
             this.textBoxE1U.Size = new System.Drawing.Size(33, 18);
-            this.textBoxE1U.TabIndex = 331;
+            this.textBoxE1U.TabIndex = 5031;
             this.textBoxE1U.Text = "1";
             // 
             // textBoxAdjuster3U
@@ -1014,7 +1022,7 @@ namespace GABAK
             this.textBoxAdjuster3U.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAdjuster3U.Name = "textBoxAdjuster3U";
             this.textBoxAdjuster3U.Size = new System.Drawing.Size(33, 18);
-            this.textBoxAdjuster3U.TabIndex = 315;
+            this.textBoxAdjuster3U.TabIndex = 5064;
             this.textBoxAdjuster3U.Text = "1";
             // 
             // textBoxAdjuster2U
@@ -1023,7 +1031,7 @@ namespace GABAK
             this.textBoxAdjuster2U.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAdjuster2U.Name = "textBoxAdjuster2U";
             this.textBoxAdjuster2U.Size = new System.Drawing.Size(33, 18);
-            this.textBoxAdjuster2U.TabIndex = 313;
+            this.textBoxAdjuster2U.TabIndex = 5062;
             this.textBoxAdjuster2U.Text = "1";
             // 
             // textBoxAdjuster1U
@@ -1032,7 +1040,7 @@ namespace GABAK
             this.textBoxAdjuster1U.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAdjuster1U.Name = "textBoxAdjuster1U";
             this.textBoxAdjuster1U.Size = new System.Drawing.Size(33, 18);
-            this.textBoxAdjuster1U.TabIndex = 311;
+            this.textBoxAdjuster1U.TabIndex = 5060;
             this.textBoxAdjuster1U.Text = "1";
             // 
             // textBoxAngle3U
@@ -1041,7 +1049,7 @@ namespace GABAK
             this.textBoxAngle3U.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAngle3U.Name = "textBoxAngle3U";
             this.textBoxAngle3U.Size = new System.Drawing.Size(33, 18);
-            this.textBoxAngle3U.TabIndex = 305;
+            this.textBoxAngle3U.TabIndex = 5049;
             this.textBoxAngle3U.Text = "1";
             // 
             // textBoxAngle2U
@@ -1050,7 +1058,7 @@ namespace GABAK
             this.textBoxAngle2U.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAngle2U.Name = "textBoxAngle2U";
             this.textBoxAngle2U.Size = new System.Drawing.Size(33, 18);
-            this.textBoxAngle2U.TabIndex = 303;
+            this.textBoxAngle2U.TabIndex = 5047;
             this.textBoxAngle2U.Text = "1";
             // 
             // textBoxAngle1U
@@ -1059,7 +1067,7 @@ namespace GABAK
             this.textBoxAngle1U.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAngle1U.Name = "textBoxAngle1U";
             this.textBoxAngle1U.Size = new System.Drawing.Size(33, 18);
-            this.textBoxAngle1U.TabIndex = 301;
+            this.textBoxAngle1U.TabIndex = 5045;
             this.textBoxAngle1U.Text = "1";
             // 
             // buttonFindLocation
@@ -1096,7 +1104,7 @@ namespace GABAK
             this.buttonImport.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.buttonImport.Name = "buttonImport";
             this.buttonImport.Size = new System.Drawing.Size(187, 21);
-            this.buttonImport.TabIndex = 347;
+            this.buttonImport.TabIndex = 1002;
             this.buttonImport.Text = "Import Data in Single Excel File";
             this.buttonImport.UseVisualStyleBackColor = true;
             this.buttonImport.Click += new System.EventHandler(this.buttonImport_Click);
@@ -1107,18 +1115,18 @@ namespace GABAK
             this.buttonImportSKUs.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.buttonImportSKUs.Name = "buttonImportSKUs";
             this.buttonImportSKUs.Size = new System.Drawing.Size(187, 21);
-            this.buttonImportSKUs.TabIndex = 348;
+            this.buttonImportSKUs.TabIndex = 1003;
             this.buttonImportSKUs.Text = "Import or Generate SKUs";
             this.buttonImportSKUs.UseVisualStyleBackColor = true;
             this.buttonImportSKUs.Click += new System.EventHandler(this.ButtonImportSKUs_Click);
             // 
             // textBoxAllocationSeed
             // 
-            this.textBoxAllocationSeed.Location = new System.Drawing.Point(94, 50);
+            this.textBoxAllocationSeed.Location = new System.Drawing.Point(94, 49);
             this.textBoxAllocationSeed.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAllocationSeed.Name = "textBoxAllocationSeed";
             this.textBoxAllocationSeed.Size = new System.Drawing.Size(40, 18);
-            this.textBoxAllocationSeed.TabIndex = 349;
+            this.textBoxAllocationSeed.TabIndex = 2003;
             this.textBoxAllocationSeed.Text = "0";
             // 
             // buttonDoE
@@ -1138,7 +1146,7 @@ namespace GABAK
             this.textBoxAvgOrderSize.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAvgOrderSize.Name = "textBoxAvgOrderSize";
             this.textBoxAvgOrderSize.Size = new System.Drawing.Size(40, 18);
-            this.textBoxAvgOrderSize.TabIndex = 356;
+            this.textBoxAvgOrderSize.TabIndex = 2002;
             this.textBoxAvgOrderSize.Text = "1";
             // 
             // progressBarAlg
@@ -1147,7 +1155,7 @@ namespace GABAK
             this.progressBarAlg.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.progressBarAlg.Name = "progressBarAlg";
             this.progressBarAlg.Size = new System.Drawing.Size(100, 16);
-            this.progressBarAlg.TabIndex = 357;
+            this.progressBarAlg.TabIndex = 5153;
             // 
             // checkBoxAllSearch
             // 
@@ -1158,8 +1166,10 @@ namespace GABAK
             this.checkBoxAllSearch.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.checkBoxAllSearch.Name = "checkBoxAllSearch";
             this.checkBoxAllSearch.Size = new System.Drawing.Size(129, 17);
-            this.checkBoxAllSearch.TabIndex = 358;
+            this.checkBoxAllSearch.TabIndex = 5092;
             this.checkBoxAllSearch.Text = "Full Pick List Sampling";
+            this.toolTip1.SetToolTip(this.checkBoxAllSearch, "Uncheck if you want to use incremental dynamic sampling which increases the numbe" +
+        "r of picklists by number of iterations");
             this.checkBoxAllSearch.UseVisualStyleBackColor = true;
             // 
             // textBoxMagnify
@@ -1168,7 +1178,7 @@ namespace GABAK
             this.textBoxMagnify.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxMagnify.Name = "textBoxMagnify";
             this.textBoxMagnify.Size = new System.Drawing.Size(33, 18);
-            this.textBoxMagnify.TabIndex = 361;
+            this.textBoxMagnify.TabIndex = 4009;
             this.textBoxMagnify.Text = "1.0";
             // 
             // labelMagnify
@@ -1178,7 +1188,7 @@ namespace GABAK
             this.labelMagnify.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelMagnify.Name = "labelMagnify";
             this.labelMagnify.Size = new System.Drawing.Size(44, 13);
-            this.labelMagnify.TabIndex = 362;
+            this.labelMagnify.TabIndex = 4107;
             this.labelMagnify.Text = "Magnify";
             // 
             // textBoxPickAdjuster1
@@ -1187,7 +1197,7 @@ namespace GABAK
             this.textBoxPickAdjuster1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxPickAdjuster1.Name = "textBoxPickAdjuster1";
             this.textBoxPickAdjuster1.Size = new System.Drawing.Size(40, 18);
-            this.textBoxPickAdjuster1.TabIndex = 57;
+            this.textBoxPickAdjuster1.TabIndex = 4043;
             this.textBoxPickAdjuster1.Text = "0.5";
             this.textBoxPickAdjuster1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkNumeric);
             // 
@@ -1197,7 +1207,7 @@ namespace GABAK
             this.textBoxPickAdjuster2.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxPickAdjuster2.Name = "textBoxPickAdjuster2";
             this.textBoxPickAdjuster2.Size = new System.Drawing.Size(40, 18);
-            this.textBoxPickAdjuster2.TabIndex = 58;
+            this.textBoxPickAdjuster2.TabIndex = 4044;
             this.textBoxPickAdjuster2.Text = "0.5";
             this.textBoxPickAdjuster2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkNumeric);
             // 
@@ -1207,7 +1217,7 @@ namespace GABAK
             this.textBoxPickAdjuster3.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxPickAdjuster3.Name = "textBoxPickAdjuster3";
             this.textBoxPickAdjuster3.Size = new System.Drawing.Size(40, 18);
-            this.textBoxPickAdjuster3.TabIndex = 59;
+            this.textBoxPickAdjuster3.TabIndex = 4045;
             this.textBoxPickAdjuster3.Text = "0.5";
             this.textBoxPickAdjuster3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkNumeric);
             // 
@@ -1218,7 +1228,7 @@ namespace GABAK
             this.labelPickAdjuster1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelPickAdjuster1.Name = "labelPickAdjuster1";
             this.labelPickAdjuster1.Size = new System.Drawing.Size(76, 13);
-            this.labelPickAdjuster1.TabIndex = 365;
+            this.labelPickAdjuster1.TabIndex = 4135;
             this.labelPickAdjuster1.Text = "Pick Adjuster 1";
             // 
             // labelPickAdjuster2
@@ -1228,7 +1238,7 @@ namespace GABAK
             this.labelPickAdjuster2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelPickAdjuster2.Name = "labelPickAdjuster2";
             this.labelPickAdjuster2.Size = new System.Drawing.Size(76, 13);
-            this.labelPickAdjuster2.TabIndex = 366;
+            this.labelPickAdjuster2.TabIndex = 4136;
             this.labelPickAdjuster2.Text = "Pick Adjuster 2";
             // 
             // labelPickAdjuster3
@@ -1238,7 +1248,7 @@ namespace GABAK
             this.labelPickAdjuster3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelPickAdjuster3.Name = "labelPickAdjuster3";
             this.labelPickAdjuster3.Size = new System.Drawing.Size(76, 13);
-            this.labelPickAdjuster3.TabIndex = 367;
+            this.labelPickAdjuster3.TabIndex = 4137;
             this.labelPickAdjuster3.Text = "Pick Adjuster 3";
             // 
             // textBoxPickAdjuster1L
@@ -1247,7 +1257,7 @@ namespace GABAK
             this.textBoxPickAdjuster1L.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxPickAdjuster1L.Name = "textBoxPickAdjuster1L";
             this.textBoxPickAdjuster1L.Size = new System.Drawing.Size(33, 18);
-            this.textBoxPickAdjuster1L.TabIndex = 368;
+            this.textBoxPickAdjuster1L.TabIndex = 5075;
             this.textBoxPickAdjuster1L.Text = "0";
             // 
             // textBoxPickAdjuster2L
@@ -1256,7 +1266,7 @@ namespace GABAK
             this.textBoxPickAdjuster2L.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxPickAdjuster2L.Name = "textBoxPickAdjuster2L";
             this.textBoxPickAdjuster2L.Size = new System.Drawing.Size(33, 18);
-            this.textBoxPickAdjuster2L.TabIndex = 369;
+            this.textBoxPickAdjuster2L.TabIndex = 5077;
             this.textBoxPickAdjuster2L.Text = "0";
             // 
             // textBoxPickAdjuster3L
@@ -1265,7 +1275,7 @@ namespace GABAK
             this.textBoxPickAdjuster3L.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxPickAdjuster3L.Name = "textBoxPickAdjuster3L";
             this.textBoxPickAdjuster3L.Size = new System.Drawing.Size(33, 18);
-            this.textBoxPickAdjuster3L.TabIndex = 370;
+            this.textBoxPickAdjuster3L.TabIndex = 5079;
             this.textBoxPickAdjuster3L.Text = "0";
             // 
             // textBoxPickAdjuster1U
@@ -1274,7 +1284,7 @@ namespace GABAK
             this.textBoxPickAdjuster1U.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxPickAdjuster1U.Name = "textBoxPickAdjuster1U";
             this.textBoxPickAdjuster1U.Size = new System.Drawing.Size(33, 18);
-            this.textBoxPickAdjuster1U.TabIndex = 371;
+            this.textBoxPickAdjuster1U.TabIndex = 5076;
             this.textBoxPickAdjuster1U.Text = "1";
             // 
             // textBoxPickAdjuster2U
@@ -1283,7 +1293,7 @@ namespace GABAK
             this.textBoxPickAdjuster2U.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxPickAdjuster2U.Name = "textBoxPickAdjuster2U";
             this.textBoxPickAdjuster2U.Size = new System.Drawing.Size(33, 18);
-            this.textBoxPickAdjuster2U.TabIndex = 372;
+            this.textBoxPickAdjuster2U.TabIndex = 5078;
             this.textBoxPickAdjuster2U.Text = "1";
             // 
             // textBoxPickAdjuster3U
@@ -1292,7 +1302,7 @@ namespace GABAK
             this.textBoxPickAdjuster3U.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxPickAdjuster3U.Name = "textBoxPickAdjuster3U";
             this.textBoxPickAdjuster3U.Size = new System.Drawing.Size(33, 18);
-            this.textBoxPickAdjuster3U.TabIndex = 373;
+            this.textBoxPickAdjuster3U.TabIndex = 5080;
             this.textBoxPickAdjuster3U.Text = "1";
             // 
             // labelAvgOrderSize
@@ -1302,7 +1312,7 @@ namespace GABAK
             this.labelAvgOrderSize.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelAvgOrderSize.Name = "labelAvgOrderSize";
             this.labelAvgOrderSize.Size = new System.Drawing.Size(69, 13);
-            this.labelAvgOrderSize.TabIndex = 375;
+            this.labelAvgOrderSize.TabIndex = 2100;
             this.labelAvgOrderSize.Text = "Avg Ord Size";
             // 
             // textBoxArea
@@ -1311,7 +1321,7 @@ namespace GABAK
             this.textBoxArea.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxArea.Name = "textBoxArea";
             this.textBoxArea.Size = new System.Drawing.Size(40, 18);
-            this.textBoxArea.TabIndex = 18;
+            this.textBoxArea.TabIndex = 4007;
             this.textBoxArea.Text = "80000";
             this.textBoxArea.TextChanged += new System.EventHandler(this.textBoxArea_TextChanged);
             this.textBoxArea.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkNumeric);
@@ -1323,16 +1333,16 @@ namespace GABAK
             this.labelArea.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelArea.Name = "labelArea";
             this.labelArea.Size = new System.Drawing.Size(85, 13);
-            this.labelArea.TabIndex = 378;
+            this.labelArea.TabIndex = 4106;
             this.labelArea.Text = "Warehouse Area";
             // 
             // textBoxAspectRatio
             // 
-            this.textBoxAspectRatio.Location = new System.Drawing.Point(73, 184);
+            this.textBoxAspectRatio.Location = new System.Drawing.Point(120, 199);
             this.textBoxAspectRatio.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAspectRatio.Name = "textBoxAspectRatio";
             this.textBoxAspectRatio.Size = new System.Drawing.Size(40, 18);
-            this.textBoxAspectRatio.TabIndex = 22;
+            this.textBoxAspectRatio.TabIndex = 4020;
             this.textBoxAspectRatio.Text = "0.5";
             this.textBoxAspectRatio.TextChanged += new System.EventHandler(this.textBoxAspectRatio_TextChanged);
             this.textBoxAspectRatio.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.checkNumeric);
@@ -1340,12 +1350,13 @@ namespace GABAK
             // labelAspectRatio
             // 
             this.labelAspectRatio.AutoSize = true;
-            this.labelAspectRatio.Location = new System.Drawing.Point(5, 187);
+            this.labelAspectRatio.Location = new System.Drawing.Point(52, 202);
             this.labelAspectRatio.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelAspectRatio.Name = "labelAspectRatio";
             this.labelAspectRatio.Size = new System.Drawing.Size(66, 13);
-            this.labelAspectRatio.TabIndex = 380;
+            this.labelAspectRatio.TabIndex = 4110;
             this.labelAspectRatio.Text = "Aspect Ratio";
+            this.toolTip1.SetToolTip(this.labelAspectRatio, "Aspect Ratio of the Warehouse (Minimum 0, Maximum 1)");
             // 
             // textBoxAspectRatioL
             // 
@@ -1353,7 +1364,7 @@ namespace GABAK
             this.textBoxAspectRatioL.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAspectRatioL.Name = "textBoxAspectRatioL";
             this.textBoxAspectRatioL.Size = new System.Drawing.Size(33, 18);
-            this.textBoxAspectRatioL.TabIndex = 381;
+            this.textBoxAspectRatioL.TabIndex = 5028;
             this.textBoxAspectRatioL.Text = "0.2";
             // 
             // textBoxAspectRatioU
@@ -1362,7 +1373,7 @@ namespace GABAK
             this.textBoxAspectRatioU.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAspectRatioU.Name = "textBoxAspectRatioU";
             this.textBoxAspectRatioU.Size = new System.Drawing.Size(33, 18);
-            this.textBoxAspectRatioU.TabIndex = 382;
+            this.textBoxAspectRatioU.TabIndex = 5029;
             this.textBoxAspectRatioU.Text = "1";
             // 
             // textBoxAngle4
@@ -1371,7 +1382,7 @@ namespace GABAK
             this.textBoxAngle4.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAngle4.Name = "textBoxAngle4";
             this.textBoxAngle4.Size = new System.Drawing.Size(40, 18);
-            this.textBoxAngle4.TabIndex = 44;
+            this.textBoxAngle4.TabIndex = 4031;
             this.textBoxAngle4.Text = "90";
             // 
             // textBoxAngle4L
@@ -1380,7 +1391,7 @@ namespace GABAK
             this.textBoxAngle4L.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAngle4L.Name = "textBoxAngle4L";
             this.textBoxAngle4L.Size = new System.Drawing.Size(33, 18);
-            this.textBoxAngle4L.TabIndex = 384;
+            this.textBoxAngle4L.TabIndex = 5050;
             this.textBoxAngle4L.Text = "0";
             // 
             // textBoxAngle4U
@@ -1389,7 +1400,7 @@ namespace GABAK
             this.textBoxAngle4U.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAngle4U.Name = "textBoxAngle4U";
             this.textBoxAngle4U.Size = new System.Drawing.Size(33, 18);
-            this.textBoxAngle4U.TabIndex = 385;
+            this.textBoxAngle4U.TabIndex = 5051;
             this.textBoxAngle4U.Text = "1";
             // 
             // labelAngle4
@@ -1399,7 +1410,7 @@ namespace GABAK
             this.labelAngle4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelAngle4.Name = "labelAngle4";
             this.labelAngle4.Size = new System.Drawing.Size(43, 13);
-            this.labelAngle4.TabIndex = 386;
+            this.labelAngle4.TabIndex = 4122;
             this.labelAngle4.Text = "Angle 4";
             // 
             // textBoxAdjuster4
@@ -1408,7 +1419,7 @@ namespace GABAK
             this.textBoxAdjuster4.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAdjuster4.Name = "textBoxAdjuster4";
             this.textBoxAdjuster4.Size = new System.Drawing.Size(40, 18);
-            this.textBoxAdjuster4.TabIndex = 52;
+            this.textBoxAdjuster4.TabIndex = 4038;
             this.textBoxAdjuster4.Text = "0.5";
             // 
             // labelAdjuster4
@@ -1418,7 +1429,7 @@ namespace GABAK
             this.labelAdjuster4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelAdjuster4.Name = "labelAdjuster4";
             this.labelAdjuster4.Size = new System.Drawing.Size(54, 13);
-            this.labelAdjuster4.TabIndex = 388;
+            this.labelAdjuster4.TabIndex = 4130;
             this.labelAdjuster4.Text = "Adjuster 4";
             // 
             // textBoxAdjuster4L
@@ -1427,7 +1438,7 @@ namespace GABAK
             this.textBoxAdjuster4L.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAdjuster4L.Name = "textBoxAdjuster4L";
             this.textBoxAdjuster4L.Size = new System.Drawing.Size(33, 18);
-            this.textBoxAdjuster4L.TabIndex = 389;
+            this.textBoxAdjuster4L.TabIndex = 5065;
             this.textBoxAdjuster4L.Text = "0";
             // 
             // textBoxAdjuster4U
@@ -1436,7 +1447,7 @@ namespace GABAK
             this.textBoxAdjuster4U.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAdjuster4U.Name = "textBoxAdjuster4U";
             this.textBoxAdjuster4U.Size = new System.Drawing.Size(33, 18);
-            this.textBoxAdjuster4U.TabIndex = 390;
+            this.textBoxAdjuster4U.TabIndex = 5066;
             this.textBoxAdjuster4U.Text = "1";
             // 
             // textBoxPickAdjuster4
@@ -1445,7 +1456,7 @@ namespace GABAK
             this.textBoxPickAdjuster4.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxPickAdjuster4.Name = "textBoxPickAdjuster4";
             this.textBoxPickAdjuster4.Size = new System.Drawing.Size(40, 18);
-            this.textBoxPickAdjuster4.TabIndex = 60;
+            this.textBoxPickAdjuster4.TabIndex = 4046;
             this.textBoxPickAdjuster4.Text = "0.5";
             // 
             // labelPickAdjuster4
@@ -1455,7 +1466,7 @@ namespace GABAK
             this.labelPickAdjuster4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelPickAdjuster4.Name = "labelPickAdjuster4";
             this.labelPickAdjuster4.Size = new System.Drawing.Size(76, 13);
-            this.labelPickAdjuster4.TabIndex = 392;
+            this.labelPickAdjuster4.TabIndex = 4138;
             this.labelPickAdjuster4.Text = "Pick Adjuster 4";
             // 
             // textBoxPickAdjuster4L
@@ -1464,7 +1475,7 @@ namespace GABAK
             this.textBoxPickAdjuster4L.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxPickAdjuster4L.Name = "textBoxPickAdjuster4L";
             this.textBoxPickAdjuster4L.Size = new System.Drawing.Size(33, 18);
-            this.textBoxPickAdjuster4L.TabIndex = 393;
+            this.textBoxPickAdjuster4L.TabIndex = 5081;
             this.textBoxPickAdjuster4L.Text = "0";
             // 
             // textBoxPickAdjuster4U
@@ -1473,27 +1484,29 @@ namespace GABAK
             this.textBoxPickAdjuster4U.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxPickAdjuster4U.Name = "textBoxPickAdjuster4U";
             this.textBoxPickAdjuster4U.Size = new System.Drawing.Size(33, 18);
-            this.textBoxPickAdjuster4U.TabIndex = 394;
+            this.textBoxPickAdjuster4U.TabIndex = 5082;
             this.textBoxPickAdjuster4U.Text = "1";
             // 
             // textBoxE4
             // 
-            this.textBoxE4.Location = new System.Drawing.Point(73, 252);
+            this.textBoxE4.Location = new System.Drawing.Point(120, 267);
             this.textBoxE4.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxE4.Name = "textBoxE4";
             this.textBoxE4.Size = new System.Drawing.Size(40, 18);
-            this.textBoxE4.TabIndex = 33;
+            this.textBoxE4.TabIndex = 4024;
             this.textBoxE4.Text = "0.625";
             // 
             // labelE4
             // 
             this.labelE4.AutoSize = true;
-            this.labelE4.Location = new System.Drawing.Point(51, 255);
+            this.labelE4.Location = new System.Drawing.Point(17, 270);
             this.labelE4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelE4.Name = "labelE4";
-            this.labelE4.Size = new System.Drawing.Size(20, 13);
-            this.labelE4.TabIndex = 396;
-            this.labelE4.Text = "E4";
+            this.labelE4.Size = new System.Drawing.Size(101, 13);
+            this.labelE4.TabIndex = 4114;
+            this.labelE4.Text = "Exterior Node 4 (E4)";
+            this.toolTip1.SetToolTip(this.labelE4, "Fourth Exterior Node (Standardized, Top Left Corner is 0, Top Right Corner is 0.2" +
+        "5, Bottom Right Corner is 0.5, Bottom Left Corner is 0.75)");
             // 
             // textBoxE4L
             // 
@@ -1501,7 +1514,7 @@ namespace GABAK
             this.textBoxE4L.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxE4L.Name = "textBoxE4L";
             this.textBoxE4L.Size = new System.Drawing.Size(33, 18);
-            this.textBoxE4L.TabIndex = 397;
+            this.textBoxE4L.TabIndex = 5036;
             this.textBoxE4L.Text = "0";
             // 
             // textBoxE4U
@@ -1510,46 +1523,50 @@ namespace GABAK
             this.textBoxE4U.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxE4U.Name = "textBoxE4U";
             this.textBoxE4U.Size = new System.Drawing.Size(33, 18);
-            this.textBoxE4U.TabIndex = 398;
+            this.textBoxE4U.TabIndex = 5037;
             this.textBoxE4U.Text = "1";
             // 
             // textBoxI1X
             // 
-            this.textBoxI1X.Location = new System.Drawing.Point(73, 269);
+            this.textBoxI1X.Location = new System.Drawing.Point(120, 284);
             this.textBoxI1X.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxI1X.Name = "textBoxI1X";
             this.textBoxI1X.Size = new System.Drawing.Size(40, 18);
-            this.textBoxI1X.TabIndex = 35;
+            this.textBoxI1X.TabIndex = 4025;
             this.textBoxI1X.Text = "0.5";
             // 
             // labelI1X
             // 
             this.labelI1X.AutoSize = true;
-            this.labelI1X.Location = new System.Drawing.Point(48, 272);
+            this.labelI1X.Location = new System.Drawing.Point(4, 287);
             this.labelI1X.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelI1X.Name = "labelI1X";
-            this.labelI1X.Size = new System.Drawing.Size(23, 13);
-            this.labelI1X.TabIndex = 400;
-            this.labelI1X.Text = "I1X";
+            this.labelI1X.Size = new System.Drawing.Size(114, 13);
+            this.labelI1X.TabIndex = 4115;
+            this.labelI1X.Text = "Interior Node 1 (X Axis)";
+            this.toolTip1.SetToolTip(this.labelI1X, "First (and currently only) Interior Node\'s X Axis (Standardized, Leftmost side of" +
+        " the warehouse is 0, rightmost of the warehouse is 1)");
             // 
             // textBoxI1Y
             // 
-            this.textBoxI1Y.Location = new System.Drawing.Point(73, 286);
+            this.textBoxI1Y.Location = new System.Drawing.Point(120, 301);
             this.textBoxI1Y.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxI1Y.Name = "textBoxI1Y";
             this.textBoxI1Y.Size = new System.Drawing.Size(40, 18);
-            this.textBoxI1Y.TabIndex = 36;
+            this.textBoxI1Y.TabIndex = 4026;
             this.textBoxI1Y.Text = "0.5";
             // 
             // labelI1Y
             // 
             this.labelI1Y.AutoSize = true;
-            this.labelI1Y.Location = new System.Drawing.Point(48, 289);
+            this.labelI1Y.Location = new System.Drawing.Point(4, 304);
             this.labelI1Y.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelI1Y.Name = "labelI1Y";
-            this.labelI1Y.Size = new System.Drawing.Size(23, 13);
-            this.labelI1Y.TabIndex = 402;
-            this.labelI1Y.Text = "I1Y";
+            this.labelI1Y.Size = new System.Drawing.Size(114, 13);
+            this.labelI1Y.TabIndex = 4116;
+            this.labelI1Y.Text = "Interior Node 1 (Y Axis)";
+            this.toolTip1.SetToolTip(this.labelI1Y, "First (and currently only) Interior Node\'s Y Axis (Standardized, Top side of the " +
+        "warehouse is 0, bottom side of the warehouse is 1)");
             // 
             // textBoxI1XL
             // 
@@ -1557,7 +1574,7 @@ namespace GABAK
             this.textBoxI1XL.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxI1XL.Name = "textBoxI1XL";
             this.textBoxI1XL.Size = new System.Drawing.Size(33, 18);
-            this.textBoxI1XL.TabIndex = 403;
+            this.textBoxI1XL.TabIndex = 5038;
             this.textBoxI1XL.Text = "0.001";
             // 
             // textBoxI1XU
@@ -1566,7 +1583,7 @@ namespace GABAK
             this.textBoxI1XU.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxI1XU.Name = "textBoxI1XU";
             this.textBoxI1XU.Size = new System.Drawing.Size(33, 18);
-            this.textBoxI1XU.TabIndex = 404;
+            this.textBoxI1XU.TabIndex = 5039;
             this.textBoxI1XU.Text = "0.999";
             // 
             // textBoxI1YL
@@ -1575,7 +1592,7 @@ namespace GABAK
             this.textBoxI1YL.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxI1YL.Name = "textBoxI1YL";
             this.textBoxI1YL.Size = new System.Drawing.Size(33, 18);
-            this.textBoxI1YL.TabIndex = 405;
+            this.textBoxI1YL.TabIndex = 5040;
             this.textBoxI1YL.Text = "0.001";
             // 
             // textBoxI1YU
@@ -1584,7 +1601,7 @@ namespace GABAK
             this.textBoxI1YU.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxI1YU.Name = "textBoxI1YU";
             this.textBoxI1YU.Size = new System.Drawing.Size(33, 18);
-            this.textBoxI1YU.TabIndex = 406;
+            this.textBoxI1YU.TabIndex = 5041;
             this.textBoxI1YU.Text = "0.999";
             // 
             // textBoxAngle5
@@ -1593,7 +1610,7 @@ namespace GABAK
             this.textBoxAngle5.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAngle5.Name = "textBoxAngle5";
             this.textBoxAngle5.Size = new System.Drawing.Size(40, 18);
-            this.textBoxAngle5.TabIndex = 45;
+            this.textBoxAngle5.TabIndex = 4032;
             this.textBoxAngle5.Text = "90";
             // 
             // labelAngle5
@@ -1603,7 +1620,7 @@ namespace GABAK
             this.labelAngle5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelAngle5.Name = "labelAngle5";
             this.labelAngle5.Size = new System.Drawing.Size(43, 13);
-            this.labelAngle5.TabIndex = 408;
+            this.labelAngle5.TabIndex = 4123;
             this.labelAngle5.Text = "Angle 5";
             // 
             // textBoxAngle5L
@@ -1612,7 +1629,7 @@ namespace GABAK
             this.textBoxAngle5L.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAngle5L.Name = "textBoxAngle5L";
             this.textBoxAngle5L.Size = new System.Drawing.Size(33, 18);
-            this.textBoxAngle5L.TabIndex = 409;
+            this.textBoxAngle5L.TabIndex = 5052;
             this.textBoxAngle5L.Text = "0";
             // 
             // textBoxAngle5U
@@ -1621,7 +1638,7 @@ namespace GABAK
             this.textBoxAngle5U.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAngle5U.Name = "textBoxAngle5U";
             this.textBoxAngle5U.Size = new System.Drawing.Size(33, 18);
-            this.textBoxAngle5U.TabIndex = 410;
+            this.textBoxAngle5U.TabIndex = 5052;
             this.textBoxAngle5U.Text = "1";
             // 
             // labelAngle6
@@ -1631,7 +1648,7 @@ namespace GABAK
             this.labelAngle6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelAngle6.Name = "labelAngle6";
             this.labelAngle6.Size = new System.Drawing.Size(43, 13);
-            this.labelAngle6.TabIndex = 411;
+            this.labelAngle6.TabIndex = 4124;
             this.labelAngle6.Text = "Angle 6";
             // 
             // textBoxAngle6
@@ -1640,7 +1657,7 @@ namespace GABAK
             this.textBoxAngle6.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAngle6.Name = "textBoxAngle6";
             this.textBoxAngle6.Size = new System.Drawing.Size(40, 18);
-            this.textBoxAngle6.TabIndex = 46;
+            this.textBoxAngle6.TabIndex = 4033;
             this.textBoxAngle6.Text = "90";
             // 
             // textBoxAngle6L
@@ -1649,7 +1666,7 @@ namespace GABAK
             this.textBoxAngle6L.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAngle6L.Name = "textBoxAngle6L";
             this.textBoxAngle6L.Size = new System.Drawing.Size(33, 18);
-            this.textBoxAngle6L.TabIndex = 413;
+            this.textBoxAngle6L.TabIndex = 5053;
             this.textBoxAngle6L.Text = "0";
             // 
             // textBoxAngle6U
@@ -1658,7 +1675,7 @@ namespace GABAK
             this.textBoxAngle6U.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAngle6U.Name = "textBoxAngle6U";
             this.textBoxAngle6U.Size = new System.Drawing.Size(33, 18);
-            this.textBoxAngle6U.TabIndex = 414;
+            this.textBoxAngle6U.TabIndex = 5054;
             this.textBoxAngle6U.Text = "1";
             // 
             // textBoxAdjuster5
@@ -1667,7 +1684,7 @@ namespace GABAK
             this.textBoxAdjuster5.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAdjuster5.Name = "textBoxAdjuster5";
             this.textBoxAdjuster5.Size = new System.Drawing.Size(40, 18);
-            this.textBoxAdjuster5.TabIndex = 53;
+            this.textBoxAdjuster5.TabIndex = 4039;
             this.textBoxAdjuster5.Text = "0.5";
             // 
             // textBoxAdjuster5L
@@ -1676,7 +1693,7 @@ namespace GABAK
             this.textBoxAdjuster5L.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAdjuster5L.Name = "textBoxAdjuster5L";
             this.textBoxAdjuster5L.Size = new System.Drawing.Size(33, 18);
-            this.textBoxAdjuster5L.TabIndex = 416;
+            this.textBoxAdjuster5L.TabIndex = 5067;
             this.textBoxAdjuster5L.Text = "0";
             // 
             // textBoxAdjuster5U
@@ -1685,7 +1702,7 @@ namespace GABAK
             this.textBoxAdjuster5U.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAdjuster5U.Name = "textBoxAdjuster5U";
             this.textBoxAdjuster5U.Size = new System.Drawing.Size(33, 18);
-            this.textBoxAdjuster5U.TabIndex = 417;
+            this.textBoxAdjuster5U.TabIndex = 5068;
             this.textBoxAdjuster5U.Text = "1";
             // 
             // labelAdjuster5
@@ -1695,7 +1712,7 @@ namespace GABAK
             this.labelAdjuster5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelAdjuster5.Name = "labelAdjuster5";
             this.labelAdjuster5.Size = new System.Drawing.Size(54, 13);
-            this.labelAdjuster5.TabIndex = 418;
+            this.labelAdjuster5.TabIndex = 4131;
             this.labelAdjuster5.Text = "Adjuster 5";
             // 
             // textBoxAdjuster6
@@ -1704,7 +1721,7 @@ namespace GABAK
             this.textBoxAdjuster6.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAdjuster6.Name = "textBoxAdjuster6";
             this.textBoxAdjuster6.Size = new System.Drawing.Size(40, 18);
-            this.textBoxAdjuster6.TabIndex = 54;
+            this.textBoxAdjuster6.TabIndex = 4040;
             this.textBoxAdjuster6.Text = "0.5";
             // 
             // labelAdjuster6
@@ -1714,7 +1731,7 @@ namespace GABAK
             this.labelAdjuster6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelAdjuster6.Name = "labelAdjuster6";
             this.labelAdjuster6.Size = new System.Drawing.Size(54, 13);
-            this.labelAdjuster6.TabIndex = 420;
+            this.labelAdjuster6.TabIndex = 4132;
             this.labelAdjuster6.Text = "Adjuster 6";
             // 
             // textBoxAdjuster6L
@@ -1723,7 +1740,7 @@ namespace GABAK
             this.textBoxAdjuster6L.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAdjuster6L.Name = "textBoxAdjuster6L";
             this.textBoxAdjuster6L.Size = new System.Drawing.Size(33, 18);
-            this.textBoxAdjuster6L.TabIndex = 421;
+            this.textBoxAdjuster6L.TabIndex = 5069;
             this.textBoxAdjuster6L.Text = "0";
             // 
             // textBoxAdjuster6U
@@ -1732,7 +1749,7 @@ namespace GABAK
             this.textBoxAdjuster6U.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAdjuster6U.Name = "textBoxAdjuster6U";
             this.textBoxAdjuster6U.Size = new System.Drawing.Size(33, 18);
-            this.textBoxAdjuster6U.TabIndex = 422;
+            this.textBoxAdjuster6U.TabIndex = 5070;
             this.textBoxAdjuster6U.Text = "1";
             // 
             // textBoxPickAdjuster5
@@ -1741,7 +1758,7 @@ namespace GABAK
             this.textBoxPickAdjuster5.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxPickAdjuster5.Name = "textBoxPickAdjuster5";
             this.textBoxPickAdjuster5.Size = new System.Drawing.Size(40, 18);
-            this.textBoxPickAdjuster5.TabIndex = 61;
+            this.textBoxPickAdjuster5.TabIndex = 4047;
             this.textBoxPickAdjuster5.Text = "0.5";
             // 
             // labelPickAdjuster5
@@ -1751,7 +1768,7 @@ namespace GABAK
             this.labelPickAdjuster5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelPickAdjuster5.Name = "labelPickAdjuster5";
             this.labelPickAdjuster5.Size = new System.Drawing.Size(76, 13);
-            this.labelPickAdjuster5.TabIndex = 424;
+            this.labelPickAdjuster5.TabIndex = 4139;
             this.labelPickAdjuster5.Text = "Pick Adjuster 5";
             // 
             // textBoxPickAdjuster5L
@@ -1760,7 +1777,7 @@ namespace GABAK
             this.textBoxPickAdjuster5L.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxPickAdjuster5L.Name = "textBoxPickAdjuster5L";
             this.textBoxPickAdjuster5L.Size = new System.Drawing.Size(33, 18);
-            this.textBoxPickAdjuster5L.TabIndex = 425;
+            this.textBoxPickAdjuster5L.TabIndex = 5083;
             this.textBoxPickAdjuster5L.Text = "0";
             // 
             // textBoxPickAdjuster5U
@@ -1769,7 +1786,7 @@ namespace GABAK
             this.textBoxPickAdjuster5U.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxPickAdjuster5U.Name = "textBoxPickAdjuster5U";
             this.textBoxPickAdjuster5U.Size = new System.Drawing.Size(33, 18);
-            this.textBoxPickAdjuster5U.TabIndex = 426;
+            this.textBoxPickAdjuster5U.TabIndex = 5084;
             this.textBoxPickAdjuster5U.Text = "1";
             // 
             // textBoxPickAdjuster6
@@ -1778,7 +1795,7 @@ namespace GABAK
             this.textBoxPickAdjuster6.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxPickAdjuster6.Name = "textBoxPickAdjuster6";
             this.textBoxPickAdjuster6.Size = new System.Drawing.Size(40, 18);
-            this.textBoxPickAdjuster6.TabIndex = 62;
+            this.textBoxPickAdjuster6.TabIndex = 4048;
             this.textBoxPickAdjuster6.Text = "0.5";
             // 
             // labelPickAdjuster6
@@ -1788,7 +1805,7 @@ namespace GABAK
             this.labelPickAdjuster6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelPickAdjuster6.Name = "labelPickAdjuster6";
             this.labelPickAdjuster6.Size = new System.Drawing.Size(76, 13);
-            this.labelPickAdjuster6.TabIndex = 428;
+            this.labelPickAdjuster6.TabIndex = 4140;
             this.labelPickAdjuster6.Text = "Pick Adjuster 6";
             // 
             // textBoxPickAdjuster6L
@@ -1797,7 +1814,7 @@ namespace GABAK
             this.textBoxPickAdjuster6L.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxPickAdjuster6L.Name = "textBoxPickAdjuster6L";
             this.textBoxPickAdjuster6L.Size = new System.Drawing.Size(33, 18);
-            this.textBoxPickAdjuster6L.TabIndex = 429;
+            this.textBoxPickAdjuster6L.TabIndex = 5085;
             this.textBoxPickAdjuster6L.Text = "0";
             // 
             // textBoxPickAdjuster6U
@@ -1806,7 +1823,7 @@ namespace GABAK
             this.textBoxPickAdjuster6U.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxPickAdjuster6U.Name = "textBoxPickAdjuster6U";
             this.textBoxPickAdjuster6U.Size = new System.Drawing.Size(33, 18);
-            this.textBoxPickAdjuster6U.TabIndex = 430;
+            this.textBoxPickAdjuster6U.TabIndex = 5086;
             this.textBoxPickAdjuster6U.Text = "1";
             // 
             // labelPickingAisleWidth
@@ -1816,7 +1833,7 @@ namespace GABAK
             this.labelPickingAisleWidth.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelPickingAisleWidth.Name = "labelPickingAisleWidth";
             this.labelPickingAisleWidth.Size = new System.Drawing.Size(94, 13);
-            this.labelPickingAisleWidth.TabIndex = 434;
+            this.labelPickingAisleWidth.TabIndex = 4103;
             this.labelPickingAisleWidth.Text = "Picking Aisle Width";
             // 
             // labelCrossAisleWidth
@@ -1826,7 +1843,7 @@ namespace GABAK
             this.labelCrossAisleWidth.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelCrossAisleWidth.Name = "labelCrossAisleWidth";
             this.labelCrossAisleWidth.Size = new System.Drawing.Size(87, 13);
-            this.labelCrossAisleWidth.TabIndex = 433;
+            this.labelCrossAisleWidth.TabIndex = 4102;
             this.labelCrossAisleWidth.Text = "Cross Aisle Width";
             // 
             // textBoxPickingAisleWidth
@@ -1835,7 +1852,7 @@ namespace GABAK
             this.textBoxPickingAisleWidth.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxPickingAisleWidth.Name = "textBoxPickingAisleWidth";
             this.textBoxPickingAisleWidth.Size = new System.Drawing.Size(40, 18);
-            this.textBoxPickingAisleWidth.TabIndex = 19;
+            this.textBoxPickingAisleWidth.TabIndex = 4004;
             this.textBoxPickingAisleWidth.Text = "12";
             // 
             // textBoxCrossAisleWidth
@@ -1844,7 +1861,7 @@ namespace GABAK
             this.textBoxCrossAisleWidth.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxCrossAisleWidth.Name = "textBoxCrossAisleWidth";
             this.textBoxCrossAisleWidth.Size = new System.Drawing.Size(40, 18);
-            this.textBoxCrossAisleWidth.TabIndex = 18;
+            this.textBoxCrossAisleWidth.TabIndex = 4003;
             this.textBoxCrossAisleWidth.Text = "12";
             this.textBoxCrossAisleWidth.Leave += new System.EventHandler(this.textBoxCrossAisleWidth_Leave);
             // 
@@ -1855,7 +1872,7 @@ namespace GABAK
             this.labelLDepth.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelLDepth.Name = "labelLDepth";
             this.labelLDepth.Size = new System.Drawing.Size(79, 13);
-            this.labelLDepth.TabIndex = 432;
+            this.labelLDepth.TabIndex = 4102;
             this.labelLDepth.Text = "Location Depth";
             // 
             // labelLWidth
@@ -1865,7 +1882,7 @@ namespace GABAK
             this.labelLWidth.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelLWidth.Name = "labelLWidth";
             this.labelLWidth.Size = new System.Drawing.Size(76, 13);
-            this.labelLWidth.TabIndex = 431;
+            this.labelLWidth.TabIndex = 4101;
             this.labelLWidth.Text = "Location Width";
             // 
             // textBoxLDepth
@@ -1874,7 +1891,7 @@ namespace GABAK
             this.textBoxLDepth.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxLDepth.Name = "textBoxLDepth";
             this.textBoxLDepth.Size = new System.Drawing.Size(40, 18);
-            this.textBoxLDepth.TabIndex = 17;
+            this.textBoxLDepth.TabIndex = 4002;
             this.textBoxLDepth.Text = "4";
             // 
             // textBoxLWidth
@@ -1883,7 +1900,7 @@ namespace GABAK
             this.textBoxLWidth.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxLWidth.Name = "textBoxLWidth";
             this.textBoxLWidth.Size = new System.Drawing.Size(40, 18);
-            this.textBoxLWidth.TabIndex = 16;
+            this.textBoxLWidth.TabIndex = 4001;
             this.textBoxLWidth.Text = "4";
             // 
             // checkBoxExport
@@ -1904,7 +1921,7 @@ namespace GABAK
             this.checkBoxVisibilityGraph.Location = new System.Drawing.Point(9, 10);
             this.checkBoxVisibilityGraph.Name = "checkBoxVisibilityGraph";
             this.checkBoxVisibilityGraph.Size = new System.Drawing.Size(115, 17);
-            this.checkBoxVisibilityGraph.TabIndex = 457;
+            this.checkBoxVisibilityGraph.TabIndex = 3001;
             this.checkBoxVisibilityGraph.Text = "Use Visibility Graph";
             this.checkBoxVisibilityGraph.UseVisualStyleBackColor = true;
             this.checkBoxVisibilityGraph.CheckedChanged += new System.EventHandler(this.checkBoxVisibilityGraph_CheckedChanged);
@@ -1935,150 +1952,150 @@ namespace GABAK
             // 
             // textBoxDemandSkewness20
             // 
-            this.textBoxDemandSkewness20.Location = new System.Drawing.Point(95, 19);
+            this.textBoxDemandSkewness20.Location = new System.Drawing.Point(122, 15);
             this.textBoxDemandSkewness20.Name = "textBoxDemandSkewness20";
             this.textBoxDemandSkewness20.Size = new System.Drawing.Size(50, 18);
-            this.textBoxDemandSkewness20.TabIndex = 462;
+            this.textBoxDemandSkewness20.TabIndex = 1006;
             this.textBoxDemandSkewness20.Text = "20";
             // 
             // textBoxDemandSkewness80
             // 
-            this.textBoxDemandSkewness80.Location = new System.Drawing.Point(95, 36);
+            this.textBoxDemandSkewness80.Location = new System.Drawing.Point(122, 32);
             this.textBoxDemandSkewness80.Name = "textBoxDemandSkewness80";
             this.textBoxDemandSkewness80.Size = new System.Drawing.Size(50, 18);
-            this.textBoxDemandSkewness80.TabIndex = 463;
+            this.textBoxDemandSkewness80.TabIndex = 1007;
             this.textBoxDemandSkewness80.Text = "20.0001";
             // 
             // textBoxNumberSKUs
             // 
-            this.textBoxNumberSKUs.Location = new System.Drawing.Point(95, 53);
+            this.textBoxNumberSKUs.Location = new System.Drawing.Point(512, 11);
             this.textBoxNumberSKUs.Name = "textBoxNumberSKUs";
             this.textBoxNumberSKUs.Size = new System.Drawing.Size(50, 18);
-            this.textBoxNumberSKUs.TabIndex = 464;
+            this.textBoxNumberSKUs.TabIndex = 1005;
             this.textBoxNumberSKUs.Text = "1000";
             // 
             // textBoxNumberOrders
             // 
-            this.textBoxNumberOrders.Location = new System.Drawing.Point(95, 70);
+            this.textBoxNumberOrders.Location = new System.Drawing.Point(122, 49);
             this.textBoxNumberOrders.Name = "textBoxNumberOrders";
             this.textBoxNumberOrders.Size = new System.Drawing.Size(50, 18);
-            this.textBoxNumberOrders.TabIndex = 465;
+            this.textBoxNumberOrders.TabIndex = 1008;
             this.textBoxNumberOrders.Text = "200";
             // 
             // textBoxOrderSize
             // 
-            this.textBoxOrderSize.Location = new System.Drawing.Point(95, 87);
+            this.textBoxOrderSize.Location = new System.Drawing.Point(122, 66);
             this.textBoxOrderSize.Name = "textBoxOrderSize";
             this.textBoxOrderSize.Size = new System.Drawing.Size(50, 18);
-            this.textBoxOrderSize.TabIndex = 466;
+            this.textBoxOrderSize.TabIndex = 1009;
             this.textBoxOrderSize.Text = "5";
             // 
             // textBoxOrderGenRandSeed
             // 
-            this.textBoxOrderGenRandSeed.Location = new System.Drawing.Point(95, 104);
+            this.textBoxOrderGenRandSeed.Location = new System.Drawing.Point(122, 83);
             this.textBoxOrderGenRandSeed.Name = "textBoxOrderGenRandSeed";
             this.textBoxOrderGenRandSeed.Size = new System.Drawing.Size(50, 18);
-            this.textBoxOrderGenRandSeed.TabIndex = 467;
+            this.textBoxOrderGenRandSeed.TabIndex = 1010;
             this.textBoxOrderGenRandSeed.Text = "0";
             // 
             // checkBoxC12
             // 
             this.checkBoxC12.AutoSize = true;
-            this.checkBoxC12.Location = new System.Drawing.Point(13, 19);
+            this.checkBoxC12.Location = new System.Drawing.Point(13, 31);
             this.checkBoxC12.Name = "checkBoxC12";
-            this.checkBoxC12.Size = new System.Drawing.Size(45, 17);
-            this.checkBoxC12.TabIndex = 468;
-            this.checkBoxC12.Text = "C12";
+            this.checkBoxC12.Size = new System.Drawing.Size(83, 17);
+            this.checkBoxC12.TabIndex = 4010;
+            this.checkBoxC12.Text = "C12 (E1-E2)";
             this.checkBoxC12.UseVisualStyleBackColor = true;
             // 
             // checkBoxC13
             // 
             this.checkBoxC13.AutoSize = true;
-            this.checkBoxC13.Location = new System.Drawing.Point(13, 36);
+            this.checkBoxC13.Location = new System.Drawing.Point(13, 48);
             this.checkBoxC13.Name = "checkBoxC13";
-            this.checkBoxC13.Size = new System.Drawing.Size(45, 17);
-            this.checkBoxC13.TabIndex = 469;
-            this.checkBoxC13.Text = "C13";
+            this.checkBoxC13.Size = new System.Drawing.Size(83, 17);
+            this.checkBoxC13.TabIndex = 4011;
+            this.checkBoxC13.Text = "C13 (E1-E3)";
             this.checkBoxC13.UseVisualStyleBackColor = true;
             // 
             // checkBoxC14
             // 
             this.checkBoxC14.AutoSize = true;
-            this.checkBoxC14.Location = new System.Drawing.Point(13, 53);
+            this.checkBoxC14.Location = new System.Drawing.Point(13, 65);
             this.checkBoxC14.Name = "checkBoxC14";
-            this.checkBoxC14.Size = new System.Drawing.Size(45, 17);
-            this.checkBoxC14.TabIndex = 470;
-            this.checkBoxC14.Text = "C14";
+            this.checkBoxC14.Size = new System.Drawing.Size(83, 17);
+            this.checkBoxC14.TabIndex = 4012;
+            this.checkBoxC14.Text = "C14 (E1-E4)";
             this.checkBoxC14.UseVisualStyleBackColor = true;
             // 
             // checkBoxC15
             // 
             this.checkBoxC15.AutoSize = true;
-            this.checkBoxC15.Location = new System.Drawing.Point(13, 70);
+            this.checkBoxC15.Location = new System.Drawing.Point(13, 82);
             this.checkBoxC15.Name = "checkBoxC15";
-            this.checkBoxC15.Size = new System.Drawing.Size(45, 17);
-            this.checkBoxC15.TabIndex = 471;
-            this.checkBoxC15.Text = "C15";
+            this.checkBoxC15.Size = new System.Drawing.Size(79, 17);
+            this.checkBoxC15.TabIndex = 4013;
+            this.checkBoxC15.Text = "C15 (E1-I1)";
             this.checkBoxC15.UseVisualStyleBackColor = true;
             // 
             // checkBoxC23
             // 
             this.checkBoxC23.AutoSize = true;
-            this.checkBoxC23.Location = new System.Drawing.Point(13, 87);
+            this.checkBoxC23.Location = new System.Drawing.Point(13, 99);
             this.checkBoxC23.Name = "checkBoxC23";
-            this.checkBoxC23.Size = new System.Drawing.Size(45, 17);
-            this.checkBoxC23.TabIndex = 472;
-            this.checkBoxC23.Text = "C23";
+            this.checkBoxC23.Size = new System.Drawing.Size(83, 17);
+            this.checkBoxC23.TabIndex = 4014;
+            this.checkBoxC23.Text = "C23 (E2-E3)";
             this.checkBoxC23.UseVisualStyleBackColor = true;
             // 
             // checkBoxC24
             // 
             this.checkBoxC24.AutoSize = true;
-            this.checkBoxC24.Location = new System.Drawing.Point(13, 104);
+            this.checkBoxC24.Location = new System.Drawing.Point(13, 116);
             this.checkBoxC24.Name = "checkBoxC24";
-            this.checkBoxC24.Size = new System.Drawing.Size(45, 17);
-            this.checkBoxC24.TabIndex = 473;
-            this.checkBoxC24.Text = "C24";
+            this.checkBoxC24.Size = new System.Drawing.Size(83, 17);
+            this.checkBoxC24.TabIndex = 4015;
+            this.checkBoxC24.Text = "C24 (E2-E4)";
             this.checkBoxC24.UseVisualStyleBackColor = true;
             // 
             // checkBoxC25
             // 
             this.checkBoxC25.AutoSize = true;
-            this.checkBoxC25.Location = new System.Drawing.Point(13, 121);
+            this.checkBoxC25.Location = new System.Drawing.Point(13, 133);
             this.checkBoxC25.Name = "checkBoxC25";
-            this.checkBoxC25.Size = new System.Drawing.Size(45, 17);
-            this.checkBoxC25.TabIndex = 474;
-            this.checkBoxC25.Text = "C25";
+            this.checkBoxC25.Size = new System.Drawing.Size(79, 17);
+            this.checkBoxC25.TabIndex = 4016;
+            this.checkBoxC25.Text = "C25 (E2-I1)";
             this.checkBoxC25.UseVisualStyleBackColor = true;
             // 
             // checkBoxC34
             // 
             this.checkBoxC34.AutoSize = true;
-            this.checkBoxC34.Location = new System.Drawing.Point(13, 138);
+            this.checkBoxC34.Location = new System.Drawing.Point(13, 150);
             this.checkBoxC34.Name = "checkBoxC34";
-            this.checkBoxC34.Size = new System.Drawing.Size(45, 17);
-            this.checkBoxC34.TabIndex = 475;
-            this.checkBoxC34.Text = "C34";
+            this.checkBoxC34.Size = new System.Drawing.Size(83, 17);
+            this.checkBoxC34.TabIndex = 4017;
+            this.checkBoxC34.Text = "C34 (E3-E4)";
             this.checkBoxC34.UseVisualStyleBackColor = true;
             // 
             // checkBoxC35
             // 
             this.checkBoxC35.AutoSize = true;
-            this.checkBoxC35.Location = new System.Drawing.Point(13, 155);
+            this.checkBoxC35.Location = new System.Drawing.Point(13, 167);
             this.checkBoxC35.Name = "checkBoxC35";
-            this.checkBoxC35.Size = new System.Drawing.Size(45, 17);
-            this.checkBoxC35.TabIndex = 476;
-            this.checkBoxC35.Text = "C35";
+            this.checkBoxC35.Size = new System.Drawing.Size(79, 17);
+            this.checkBoxC35.TabIndex = 4018;
+            this.checkBoxC35.Text = "C35 (E3-I1)";
             this.checkBoxC35.UseVisualStyleBackColor = true;
             // 
             // checkBoxC45
             // 
             this.checkBoxC45.AutoSize = true;
-            this.checkBoxC45.Location = new System.Drawing.Point(13, 172);
+            this.checkBoxC45.Location = new System.Drawing.Point(13, 184);
             this.checkBoxC45.Name = "checkBoxC45";
-            this.checkBoxC45.Size = new System.Drawing.Size(45, 17);
-            this.checkBoxC45.TabIndex = 477;
-            this.checkBoxC45.Text = "C45";
+            this.checkBoxC45.Size = new System.Drawing.Size(79, 17);
+            this.checkBoxC45.TabIndex = 4019;
+            this.checkBoxC45.Text = "C45 (E4-I1)";
             this.checkBoxC45.UseVisualStyleBackColor = true;
             // 
             // comboBoxComputing
@@ -2099,7 +2116,7 @@ namespace GABAK
             this.textBoxPickerSize.Location = new System.Drawing.Point(66, 27);
             this.textBoxPickerSize.Name = "textBoxPickerSize";
             this.textBoxPickerSize.Size = new System.Drawing.Size(20, 18);
-            this.textBoxPickerSize.TabIndex = 480;
+            this.textBoxPickerSize.TabIndex = 3002;
             this.textBoxPickerSize.Text = "2";
             this.textBoxPickerSize.TextChanged += new System.EventHandler(this.textBoxPickerSize_TextChanged);
             // 
@@ -2109,7 +2126,7 @@ namespace GABAK
             this.labelPickerSize.Location = new System.Drawing.Point(8, 30);
             this.labelPickerSize.Name = "labelPickerSize";
             this.labelPickerSize.Size = new System.Drawing.Size(58, 13);
-            this.labelPickerSize.TabIndex = 481;
+            this.labelPickerSize.TabIndex = 3100;
             this.labelPickerSize.Text = "Picker Size";
             // 
             // textBoxAngle7
@@ -2118,7 +2135,7 @@ namespace GABAK
             this.textBoxAngle7.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAngle7.Name = "textBoxAngle7";
             this.textBoxAngle7.Size = new System.Drawing.Size(40, 18);
-            this.textBoxAngle7.TabIndex = 47;
+            this.textBoxAngle7.TabIndex = 4034;
             this.textBoxAngle7.Text = "90";
             // 
             // labelAngle7
@@ -2128,7 +2145,7 @@ namespace GABAK
             this.labelAngle7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelAngle7.Name = "labelAngle7";
             this.labelAngle7.Size = new System.Drawing.Size(43, 13);
-            this.labelAngle7.TabIndex = 483;
+            this.labelAngle7.TabIndex = 4125;
             this.labelAngle7.Text = "Angle 7";
             // 
             // textBoxAngle7L
@@ -2137,7 +2154,7 @@ namespace GABAK
             this.textBoxAngle7L.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAngle7L.Name = "textBoxAngle7L";
             this.textBoxAngle7L.Size = new System.Drawing.Size(33, 18);
-            this.textBoxAngle7L.TabIndex = 484;
+            this.textBoxAngle7L.TabIndex = 5055;
             this.textBoxAngle7L.Text = "0";
             // 
             // textBoxAngle7U
@@ -2146,7 +2163,7 @@ namespace GABAK
             this.textBoxAngle7U.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAngle7U.Name = "textBoxAngle7U";
             this.textBoxAngle7U.Size = new System.Drawing.Size(33, 18);
-            this.textBoxAngle7U.TabIndex = 485;
+            this.textBoxAngle7U.TabIndex = 5056;
             this.textBoxAngle7U.Text = "1";
             // 
             // textBoxAngle8U
@@ -2155,7 +2172,7 @@ namespace GABAK
             this.textBoxAngle8U.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAngle8U.Name = "textBoxAngle8U";
             this.textBoxAngle8U.Size = new System.Drawing.Size(33, 18);
-            this.textBoxAngle8U.TabIndex = 489;
+            this.textBoxAngle8U.TabIndex = 5058;
             this.textBoxAngle8U.Text = "1";
             // 
             // textBoxAngle8L
@@ -2164,7 +2181,7 @@ namespace GABAK
             this.textBoxAngle8L.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAngle8L.Name = "textBoxAngle8L";
             this.textBoxAngle8L.Size = new System.Drawing.Size(33, 18);
-            this.textBoxAngle8L.TabIndex = 488;
+            this.textBoxAngle8L.TabIndex = 5057;
             this.textBoxAngle8L.Text = "0";
             // 
             // labelAngle8
@@ -2174,7 +2191,7 @@ namespace GABAK
             this.labelAngle8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelAngle8.Name = "labelAngle8";
             this.labelAngle8.Size = new System.Drawing.Size(43, 13);
-            this.labelAngle8.TabIndex = 487;
+            this.labelAngle8.TabIndex = 4126;
             this.labelAngle8.Text = "Angle 8";
             // 
             // textBoxAngle8
@@ -2183,7 +2200,7 @@ namespace GABAK
             this.textBoxAngle8.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAngle8.Name = "textBoxAngle8";
             this.textBoxAngle8.Size = new System.Drawing.Size(40, 18);
-            this.textBoxAngle8.TabIndex = 48;
+            this.textBoxAngle8.TabIndex = 4035;
             this.textBoxAngle8.Text = "90";
             // 
             // textBoxAdjuster7U
@@ -2192,7 +2209,7 @@ namespace GABAK
             this.textBoxAdjuster7U.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAdjuster7U.Name = "textBoxAdjuster7U";
             this.textBoxAdjuster7U.Size = new System.Drawing.Size(33, 18);
-            this.textBoxAdjuster7U.TabIndex = 493;
+            this.textBoxAdjuster7U.TabIndex = 5072;
             this.textBoxAdjuster7U.Text = "1";
             // 
             // textBoxAdjuster7L
@@ -2201,7 +2218,7 @@ namespace GABAK
             this.textBoxAdjuster7L.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAdjuster7L.Name = "textBoxAdjuster7L";
             this.textBoxAdjuster7L.Size = new System.Drawing.Size(33, 18);
-            this.textBoxAdjuster7L.TabIndex = 492;
+            this.textBoxAdjuster7L.TabIndex = 5071;
             this.textBoxAdjuster7L.Text = "0";
             // 
             // labelAdjuster7
@@ -2211,7 +2228,7 @@ namespace GABAK
             this.labelAdjuster7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelAdjuster7.Name = "labelAdjuster7";
             this.labelAdjuster7.Size = new System.Drawing.Size(54, 13);
-            this.labelAdjuster7.TabIndex = 491;
+            this.labelAdjuster7.TabIndex = 4133;
             this.labelAdjuster7.Text = "Adjuster 7";
             // 
             // textBoxAdjuster7
@@ -2220,7 +2237,7 @@ namespace GABAK
             this.textBoxAdjuster7.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAdjuster7.Name = "textBoxAdjuster7";
             this.textBoxAdjuster7.Size = new System.Drawing.Size(40, 18);
-            this.textBoxAdjuster7.TabIndex = 55;
+            this.textBoxAdjuster7.TabIndex = 4041;
             this.textBoxAdjuster7.Text = "0.5";
             // 
             // textBoxAdjuster8U
@@ -2229,7 +2246,7 @@ namespace GABAK
             this.textBoxAdjuster8U.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAdjuster8U.Name = "textBoxAdjuster8U";
             this.textBoxAdjuster8U.Size = new System.Drawing.Size(33, 18);
-            this.textBoxAdjuster8U.TabIndex = 497;
+            this.textBoxAdjuster8U.TabIndex = 5074;
             this.textBoxAdjuster8U.Text = "1";
             // 
             // textBoxAdjuster8L
@@ -2238,7 +2255,7 @@ namespace GABAK
             this.textBoxAdjuster8L.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAdjuster8L.Name = "textBoxAdjuster8L";
             this.textBoxAdjuster8L.Size = new System.Drawing.Size(33, 18);
-            this.textBoxAdjuster8L.TabIndex = 496;
+            this.textBoxAdjuster8L.TabIndex = 5073;
             this.textBoxAdjuster8L.Text = "0";
             // 
             // labelAdjuster8
@@ -2248,7 +2265,7 @@ namespace GABAK
             this.labelAdjuster8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelAdjuster8.Name = "labelAdjuster8";
             this.labelAdjuster8.Size = new System.Drawing.Size(54, 13);
-            this.labelAdjuster8.TabIndex = 495;
+            this.labelAdjuster8.TabIndex = 4134;
             this.labelAdjuster8.Text = "Adjuster 8";
             // 
             // textBoxAdjuster8
@@ -2257,7 +2274,7 @@ namespace GABAK
             this.textBoxAdjuster8.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAdjuster8.Name = "textBoxAdjuster8";
             this.textBoxAdjuster8.Size = new System.Drawing.Size(40, 18);
-            this.textBoxAdjuster8.TabIndex = 56;
+            this.textBoxAdjuster8.TabIndex = 4042;
             this.textBoxAdjuster8.Text = "0.5";
             // 
             // textBoxPickAdjuster7U
@@ -2266,7 +2283,7 @@ namespace GABAK
             this.textBoxPickAdjuster7U.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxPickAdjuster7U.Name = "textBoxPickAdjuster7U";
             this.textBoxPickAdjuster7U.Size = new System.Drawing.Size(33, 18);
-            this.textBoxPickAdjuster7U.TabIndex = 501;
+            this.textBoxPickAdjuster7U.TabIndex = 5088;
             this.textBoxPickAdjuster7U.Text = "1";
             // 
             // textBoxPickAdjuster7L
@@ -2275,7 +2292,7 @@ namespace GABAK
             this.textBoxPickAdjuster7L.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxPickAdjuster7L.Name = "textBoxPickAdjuster7L";
             this.textBoxPickAdjuster7L.Size = new System.Drawing.Size(33, 18);
-            this.textBoxPickAdjuster7L.TabIndex = 500;
+            this.textBoxPickAdjuster7L.TabIndex = 5087;
             this.textBoxPickAdjuster7L.Text = "0";
             // 
             // labelPickAdjuster7
@@ -2285,7 +2302,7 @@ namespace GABAK
             this.labelPickAdjuster7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelPickAdjuster7.Name = "labelPickAdjuster7";
             this.labelPickAdjuster7.Size = new System.Drawing.Size(76, 13);
-            this.labelPickAdjuster7.TabIndex = 499;
+            this.labelPickAdjuster7.TabIndex = 4141;
             this.labelPickAdjuster7.Text = "Pick Adjuster 7";
             // 
             // textBoxPickAdjuster7
@@ -2294,7 +2311,7 @@ namespace GABAK
             this.textBoxPickAdjuster7.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxPickAdjuster7.Name = "textBoxPickAdjuster7";
             this.textBoxPickAdjuster7.Size = new System.Drawing.Size(40, 18);
-            this.textBoxPickAdjuster7.TabIndex = 63;
+            this.textBoxPickAdjuster7.TabIndex = 4049;
             this.textBoxPickAdjuster7.Text = "0.5";
             // 
             // textBoxPickAdjuster8U
@@ -2303,7 +2320,7 @@ namespace GABAK
             this.textBoxPickAdjuster8U.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxPickAdjuster8U.Name = "textBoxPickAdjuster8U";
             this.textBoxPickAdjuster8U.Size = new System.Drawing.Size(33, 18);
-            this.textBoxPickAdjuster8U.TabIndex = 505;
+            this.textBoxPickAdjuster8U.TabIndex = 5090;
             this.textBoxPickAdjuster8U.Text = "1";
             // 
             // textBoxPickAdjuster8L
@@ -2312,7 +2329,7 @@ namespace GABAK
             this.textBoxPickAdjuster8L.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxPickAdjuster8L.Name = "textBoxPickAdjuster8L";
             this.textBoxPickAdjuster8L.Size = new System.Drawing.Size(33, 18);
-            this.textBoxPickAdjuster8L.TabIndex = 504;
+            this.textBoxPickAdjuster8L.TabIndex = 5089;
             this.textBoxPickAdjuster8L.Text = "0";
             // 
             // labelPickAdjuster8
@@ -2322,7 +2339,7 @@ namespace GABAK
             this.labelPickAdjuster8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelPickAdjuster8.Name = "labelPickAdjuster8";
             this.labelPickAdjuster8.Size = new System.Drawing.Size(76, 13);
-            this.labelPickAdjuster8.TabIndex = 503;
+            this.labelPickAdjuster8.TabIndex = 4142;
             this.labelPickAdjuster8.Text = "Pick Adjuster 8";
             // 
             // textBoxPickAdjuster8
@@ -2331,7 +2348,7 @@ namespace GABAK
             this.textBoxPickAdjuster8.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxPickAdjuster8.Name = "textBoxPickAdjuster8";
             this.textBoxPickAdjuster8.Size = new System.Drawing.Size(40, 18);
-            this.textBoxPickAdjuster8.TabIndex = 64;
+            this.textBoxPickAdjuster8.TabIndex = 4050;
             this.textBoxPickAdjuster8.Text = "0.5";
             // 
             // textBoxC34U
@@ -2340,7 +2357,7 @@ namespace GABAK
             this.textBoxC34U.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxC34U.Name = "textBoxC34U";
             this.textBoxC34U.Size = new System.Drawing.Size(33, 18);
-            this.textBoxC34U.TabIndex = 525;
+            this.textBoxC34U.TabIndex = 5023;
             this.textBoxC34U.Text = "1";
             // 
             // textBoxC34L
@@ -2349,7 +2366,7 @@ namespace GABAK
             this.textBoxC34L.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxC34L.Name = "textBoxC34L";
             this.textBoxC34L.Size = new System.Drawing.Size(33, 18);
-            this.textBoxC34L.TabIndex = 524;
+            this.textBoxC34L.TabIndex = 5022;
             this.textBoxC34L.Text = "0";
             // 
             // textBoxC25U
@@ -2358,7 +2375,7 @@ namespace GABAK
             this.textBoxC25U.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxC25U.Name = "textBoxC25U";
             this.textBoxC25U.Size = new System.Drawing.Size(33, 18);
-            this.textBoxC25U.TabIndex = 523;
+            this.textBoxC25U.TabIndex = 5021;
             this.textBoxC25U.Text = "1";
             // 
             // textBoxC25L
@@ -2367,7 +2384,7 @@ namespace GABAK
             this.textBoxC25L.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxC25L.Name = "textBoxC25L";
             this.textBoxC25L.Size = new System.Drawing.Size(33, 18);
-            this.textBoxC25L.TabIndex = 522;
+            this.textBoxC25L.TabIndex = 5020;
             this.textBoxC25L.Text = "0";
             // 
             // textBoxC24U
@@ -2376,7 +2393,7 @@ namespace GABAK
             this.textBoxC24U.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxC24U.Name = "textBoxC24U";
             this.textBoxC24U.Size = new System.Drawing.Size(33, 18);
-            this.textBoxC24U.TabIndex = 521;
+            this.textBoxC24U.TabIndex = 5019;
             this.textBoxC24U.Text = "1";
             // 
             // textBoxC24L
@@ -2385,7 +2402,7 @@ namespace GABAK
             this.textBoxC24L.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxC24L.Name = "textBoxC24L";
             this.textBoxC24L.Size = new System.Drawing.Size(33, 18);
-            this.textBoxC24L.TabIndex = 520;
+            this.textBoxC24L.TabIndex = 5018;
             this.textBoxC24L.Text = "0";
             // 
             // textBoxC23U
@@ -2394,7 +2411,7 @@ namespace GABAK
             this.textBoxC23U.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxC23U.Name = "textBoxC23U";
             this.textBoxC23U.Size = new System.Drawing.Size(33, 18);
-            this.textBoxC23U.TabIndex = 519;
+            this.textBoxC23U.TabIndex = 5017;
             this.textBoxC23U.Text = "1";
             // 
             // textBoxC23L
@@ -2403,7 +2420,7 @@ namespace GABAK
             this.textBoxC23L.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxC23L.Name = "textBoxC23L";
             this.textBoxC23L.Size = new System.Drawing.Size(33, 18);
-            this.textBoxC23L.TabIndex = 518;
+            this.textBoxC23L.TabIndex = 5016;
             this.textBoxC23L.Text = "0";
             // 
             // textBoxC15U
@@ -2412,7 +2429,7 @@ namespace GABAK
             this.textBoxC15U.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxC15U.Name = "textBoxC15U";
             this.textBoxC15U.Size = new System.Drawing.Size(33, 18);
-            this.textBoxC15U.TabIndex = 517;
+            this.textBoxC15U.TabIndex = 5015;
             this.textBoxC15U.Text = "1";
             // 
             // textBoxC15L
@@ -2421,7 +2438,7 @@ namespace GABAK
             this.textBoxC15L.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxC15L.Name = "textBoxC15L";
             this.textBoxC15L.Size = new System.Drawing.Size(33, 18);
-            this.textBoxC15L.TabIndex = 516;
+            this.textBoxC15L.TabIndex = 5014;
             this.textBoxC15L.Text = "0";
             // 
             // textBoxC45U
@@ -2430,7 +2447,7 @@ namespace GABAK
             this.textBoxC45U.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxC45U.Name = "textBoxC45U";
             this.textBoxC45U.Size = new System.Drawing.Size(33, 18);
-            this.textBoxC45U.TabIndex = 515;
+            this.textBoxC45U.TabIndex = 5027;
             this.textBoxC45U.Text = "1";
             // 
             // textBoxC35U
@@ -2439,7 +2456,7 @@ namespace GABAK
             this.textBoxC35U.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxC35U.Name = "textBoxC35U";
             this.textBoxC35U.Size = new System.Drawing.Size(33, 18);
-            this.textBoxC35U.TabIndex = 513;
+            this.textBoxC35U.TabIndex = 5025;
             this.textBoxC35U.Text = "1";
             // 
             // textBoxC14U
@@ -2448,7 +2465,7 @@ namespace GABAK
             this.textBoxC14U.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxC14U.Name = "textBoxC14U";
             this.textBoxC14U.Size = new System.Drawing.Size(33, 18);
-            this.textBoxC14U.TabIndex = 511;
+            this.textBoxC14U.TabIndex = 5013;
             this.textBoxC14U.Text = "1";
             // 
             // textBoxC13U
@@ -2457,7 +2474,7 @@ namespace GABAK
             this.textBoxC13U.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxC13U.Name = "textBoxC13U";
             this.textBoxC13U.Size = new System.Drawing.Size(33, 18);
-            this.textBoxC13U.TabIndex = 509;
+            this.textBoxC13U.TabIndex = 5011;
             this.textBoxC13U.Text = "1";
             // 
             // textBoxC12U
@@ -2466,7 +2483,7 @@ namespace GABAK
             this.textBoxC12U.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxC12U.Name = "textBoxC12U";
             this.textBoxC12U.Size = new System.Drawing.Size(33, 18);
-            this.textBoxC12U.TabIndex = 507;
+            this.textBoxC12U.TabIndex = 5009;
             this.textBoxC12U.Text = "1";
             // 
             // textBoxC45L
@@ -2475,7 +2492,7 @@ namespace GABAK
             this.textBoxC45L.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxC45L.Name = "textBoxC45L";
             this.textBoxC45L.Size = new System.Drawing.Size(33, 18);
-            this.textBoxC45L.TabIndex = 514;
+            this.textBoxC45L.TabIndex = 5026;
             this.textBoxC45L.Text = "0";
             // 
             // textBoxC35L
@@ -2484,7 +2501,7 @@ namespace GABAK
             this.textBoxC35L.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxC35L.Name = "textBoxC35L";
             this.textBoxC35L.Size = new System.Drawing.Size(33, 18);
-            this.textBoxC35L.TabIndex = 512;
+            this.textBoxC35L.TabIndex = 5024;
             this.textBoxC35L.Text = "0";
             // 
             // textBoxC14L
@@ -2493,7 +2510,7 @@ namespace GABAK
             this.textBoxC14L.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxC14L.Name = "textBoxC14L";
             this.textBoxC14L.Size = new System.Drawing.Size(33, 18);
-            this.textBoxC14L.TabIndex = 510;
+            this.textBoxC14L.TabIndex = 5012;
             this.textBoxC14L.Text = "0";
             // 
             // textBoxC13L
@@ -2502,7 +2519,7 @@ namespace GABAK
             this.textBoxC13L.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxC13L.Name = "textBoxC13L";
             this.textBoxC13L.Size = new System.Drawing.Size(33, 18);
-            this.textBoxC13L.TabIndex = 508;
+            this.textBoxC13L.TabIndex = 5010;
             this.textBoxC13L.Text = "0";
             // 
             // textBoxC12L
@@ -2511,7 +2528,7 @@ namespace GABAK
             this.textBoxC12L.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxC12L.Name = "textBoxC12L";
             this.textBoxC12L.Size = new System.Drawing.Size(33, 18);
-            this.textBoxC12L.TabIndex = 506;
+            this.textBoxC12L.TabIndex = 5008;
             this.textBoxC12L.Text = "0";
             // 
             // textBoxESSuccessRule
@@ -2519,7 +2536,7 @@ namespace GABAK
             this.textBoxESSuccessRule.Location = new System.Drawing.Point(112, 121);
             this.textBoxESSuccessRule.Name = "textBoxESSuccessRule";
             this.textBoxESSuccessRule.Size = new System.Drawing.Size(50, 18);
-            this.textBoxESSuccessRule.TabIndex = 526;
+            this.textBoxESSuccessRule.TabIndex = 5007;
             this.textBoxESSuccessRule.Text = "0.05";
             // 
             // buttonGetDesign
@@ -2556,7 +2573,7 @@ namespace GABAK
             this.checkBoxResize.Location = new System.Drawing.Point(110, 135);
             this.checkBoxResize.Name = "checkBoxResize";
             this.checkBoxResize.Size = new System.Drawing.Size(83, 17);
-            this.checkBoxResize.TabIndex = 530;
+            this.checkBoxResize.TabIndex = 4008;
             this.checkBoxResize.Text = "Resize to Fit";
             this.checkBoxResize.UseVisualStyleBackColor = true;
             // 
@@ -2568,7 +2585,7 @@ namespace GABAK
             this.checkBoxNFT.Location = new System.Drawing.Point(6, 19);
             this.checkBoxNFT.Name = "checkBoxNFT";
             this.checkBoxNFT.Size = new System.Drawing.Size(150, 17);
-            this.checkBoxNFT.TabIndex = 531;
+            this.checkBoxNFT.TabIndex = 5093;
             this.checkBoxNFT.Text = "Penalize Excess Locations";
             this.checkBoxNFT.UseVisualStyleBackColor = true;
             this.checkBoxNFT.CheckedChanged += new System.EventHandler(this.checkBoxNFT_CheckedChanged);
@@ -2578,7 +2595,7 @@ namespace GABAK
             this.textBoxNFT0.Location = new System.Drawing.Point(43, 42);
             this.textBoxNFT0.Name = "textBoxNFT0";
             this.textBoxNFT0.Size = new System.Drawing.Size(52, 18);
-            this.textBoxNFT0.TabIndex = 532;
+            this.textBoxNFT0.TabIndex = 5094;
             this.textBoxNFT0.Text = "10";
             // 
             // textBoxNFTLambda
@@ -2586,7 +2603,7 @@ namespace GABAK
             this.textBoxNFTLambda.Location = new System.Drawing.Point(43, 59);
             this.textBoxNFTLambda.Name = "textBoxNFTLambda";
             this.textBoxNFTLambda.Size = new System.Drawing.Size(52, 18);
-            this.textBoxNFTLambda.TabIndex = 533;
+            this.textBoxNFTLambda.TabIndex = 5095;
             this.textBoxNFTLambda.Text = "0.05";
             // 
             // labelNFT
@@ -2595,8 +2612,9 @@ namespace GABAK
             this.labelNFT.Location = new System.Drawing.Point(8, 44);
             this.labelNFT.Name = "labelNFT";
             this.labelNFT.Size = new System.Drawing.Size(31, 13);
-            this.labelNFT.TabIndex = 534;
+            this.labelNFT.TabIndex = 5156;
             this.labelNFT.Text = "NFT0";
+            this.toolTip1.SetToolTip(this.labelNFT, "Initial Near Feasibility Threshold Value");
             // 
             // labelNFTLambda
             // 
@@ -2604,8 +2622,9 @@ namespace GABAK
             this.labelNFTLambda.Location = new System.Drawing.Point(8, 61);
             this.labelNFTLambda.Name = "labelNFTLambda";
             this.labelNFTLambda.Size = new System.Drawing.Size(34, 13);
-            this.labelNFTLambda.TabIndex = 535;
+            this.labelNFTLambda.TabIndex = 5157;
             this.labelNFTLambda.Text = "NLam";
+            this.toolTip1.SetToolTip(this.labelNFTLambda, "Near Feasibility Threshold Lambda Value");
             // 
             // labelDesignNumber
             // 
@@ -2651,7 +2670,7 @@ namespace GABAK
             this.checkBoxStraightAllocation.Location = new System.Drawing.Point(15, 15);
             this.checkBoxStraightAllocation.Name = "checkBoxStraightAllocation";
             this.checkBoxStraightAllocation.Size = new System.Drawing.Size(122, 17);
-            this.checkBoxStraightAllocation.TabIndex = 540;
+            this.checkBoxStraightAllocation.TabIndex = 2001;
             this.checkBoxStraightAllocation.Text = "Dedicated Allocation";
             this.checkBoxStraightAllocation.UseVisualStyleBackColor = true;
             // 
@@ -2667,16 +2686,16 @@ namespace GABAK
             this.comboBoxGenerate.Location = new System.Drawing.Point(174, 9);
             this.comboBoxGenerate.Name = "comboBoxGenerate";
             this.comboBoxGenerate.Size = new System.Drawing.Size(187, 20);
-            this.comboBoxGenerate.TabIndex = 541;
+            this.comboBoxGenerate.TabIndex = 1001;
             this.comboBoxGenerate.SelectedIndexChanged += new System.EventHandler(this.ComboBoxGenerate_SelectedIndexChanged);
             // 
             // labelAllocationSeed
             // 
             this.labelAllocationSeed.AutoSize = true;
-            this.labelAllocationSeed.Location = new System.Drawing.Point(12, 53);
+            this.labelAllocationSeed.Location = new System.Drawing.Point(12, 52);
             this.labelAllocationSeed.Name = "labelAllocationSeed";
             this.labelAllocationSeed.Size = new System.Drawing.Size(80, 13);
-            this.labelAllocationSeed.TabIndex = 542;
+            this.labelAllocationSeed.TabIndex = 2101;
             this.labelAllocationSeed.Text = "Allocation Seed";
             // 
             // labelMu
@@ -2685,7 +2704,7 @@ namespace GABAK
             this.labelMu.Location = new System.Drawing.Point(72, 22);
             this.labelMu.Name = "labelMu";
             this.labelMu.Size = new System.Drawing.Size(36, 13);
-            this.labelMu.TabIndex = 543;
+            this.labelMu.TabIndex = 5101;
             this.labelMu.Text = "Mu (μ)";
             // 
             // labelLambda
@@ -2694,7 +2713,7 @@ namespace GABAK
             this.labelLambda.Location = new System.Drawing.Point(49, 39);
             this.labelLambda.Name = "labelLambda";
             this.labelLambda.Size = new System.Drawing.Size(59, 13);
-            this.labelLambda.TabIndex = 544;
+            this.labelLambda.TabIndex = 5102;
             this.labelLambda.Text = "Lambda (λ)";
             // 
             // labelESSeed
@@ -2703,7 +2722,7 @@ namespace GABAK
             this.labelESSeed.Location = new System.Drawing.Point(59, 57);
             this.labelESSeed.Name = "labelESSeed";
             this.labelESSeed.Size = new System.Drawing.Size(49, 13);
-            this.labelESSeed.TabIndex = 545;
+            this.labelESSeed.TabIndex = 5103;
             this.labelESSeed.Text = "ES Seed";
             // 
             // labelMaxIteration
@@ -2712,7 +2731,7 @@ namespace GABAK
             this.labelMaxIteration.Location = new System.Drawing.Point(40, 73);
             this.labelMaxIteration.Name = "labelMaxIteration";
             this.labelMaxIteration.Size = new System.Drawing.Size(68, 13);
-            this.labelMaxIteration.TabIndex = 546;
+            this.labelMaxIteration.TabIndex = 5104;
             this.labelMaxIteration.Text = "Max Iteration";
             // 
             // labelInitialSigma
@@ -2721,7 +2740,7 @@ namespace GABAK
             this.labelInitialSigma.Location = new System.Drawing.Point(29, 90);
             this.labelInitialSigma.Name = "labelInitialSigma";
             this.labelInitialSigma.Size = new System.Drawing.Size(78, 13);
-            this.labelInitialSigma.TabIndex = 547;
+            this.labelInitialSigma.TabIndex = 5105;
             this.labelInitialSigma.Text = "Initial Sigma (σ)";
             // 
             // labelSigmaChangeFrequency
@@ -2730,7 +2749,7 @@ namespace GABAK
             this.labelSigmaChangeFrequency.Location = new System.Drawing.Point(5, 107);
             this.labelSigmaChangeFrequency.Name = "labelSigmaChangeFrequency";
             this.labelSigmaChangeFrequency.Size = new System.Drawing.Size(102, 13);
-            this.labelSigmaChangeFrequency.TabIndex = 548;
+            this.labelSigmaChangeFrequency.TabIndex = 5106;
             this.labelSigmaChangeFrequency.Text = "σ Update Frequency";
             // 
             // labelSuccessRule
@@ -2739,7 +2758,7 @@ namespace GABAK
             this.labelSuccessRule.Location = new System.Drawing.Point(11, 124);
             this.labelSuccessRule.Name = "labelSuccessRule";
             this.labelSuccessRule.Size = new System.Drawing.Size(97, 13);
-            this.labelSuccessRule.TabIndex = 549;
+            this.labelSuccessRule.TabIndex = 5107;
             this.labelSuccessRule.Text = "Success Rule Ratio";
             // 
             // labelNETSchedule
@@ -2754,55 +2773,55 @@ namespace GABAK
             // labelSkewness20
             // 
             this.labelSkewness20.AutoSize = true;
-            this.labelSkewness20.Location = new System.Drawing.Point(21, 22);
+            this.labelSkewness20.Location = new System.Drawing.Point(48, 18);
             this.labelSkewness20.Name = "labelSkewness20";
             this.labelSkewness20.Size = new System.Drawing.Size(74, 13);
-            this.labelSkewness20.TabIndex = 552;
+            this.labelSkewness20.TabIndex = 1103;
             this.labelSkewness20.Text = "20 (skewness)";
             // 
             // labelSkewness40
             // 
             this.labelSkewness40.AutoSize = true;
-            this.labelSkewness40.Location = new System.Drawing.Point(21, 39);
+            this.labelSkewness40.Location = new System.Drawing.Point(48, 35);
             this.labelSkewness40.Name = "labelSkewness40";
             this.labelSkewness40.Size = new System.Drawing.Size(74, 13);
-            this.labelSkewness40.TabIndex = 553;
+            this.labelSkewness40.TabIndex = 1104;
             this.labelSkewness40.Text = "40 (skewness)";
             // 
             // labelNumberSKUs
             // 
             this.labelNumberSKUs.AutoSize = true;
-            this.labelNumberSKUs.Location = new System.Drawing.Point(41, 56);
+            this.labelNumberSKUs.Location = new System.Drawing.Point(398, 14);
             this.labelNumberSKUs.Name = "labelNumberSKUs";
-            this.labelNumberSKUs.Size = new System.Drawing.Size(54, 13);
-            this.labelNumberSKUs.TabIndex = 554;
-            this.labelNumberSKUs.Text = "# of SKUs";
+            this.labelNumberSKUs.Size = new System.Drawing.Size(113, 13);
+            this.labelNumberSKUs.TabIndex = 1101;
+            this.labelNumberSKUs.Text = "# of SKUs to Generate";
             // 
             // labelNumberOrders
             // 
             this.labelNumberOrders.AutoSize = true;
-            this.labelNumberOrders.Location = new System.Drawing.Point(36, 72);
+            this.labelNumberOrders.Location = new System.Drawing.Point(4, 52);
             this.labelNumberOrders.Name = "labelNumberOrders";
-            this.labelNumberOrders.Size = new System.Drawing.Size(59, 13);
-            this.labelNumberOrders.TabIndex = 555;
-            this.labelNumberOrders.Text = "# of Orders";
+            this.labelNumberOrders.Size = new System.Drawing.Size(118, 13);
+            this.labelNumberOrders.TabIndex = 1105;
+            this.labelNumberOrders.Text = "# of Orders to Generate";
             // 
             // labelPickListSize
             // 
             this.labelPickListSize.AutoSize = true;
-            this.labelPickListSize.Location = new System.Drawing.Point(27, 89);
+            this.labelPickListSize.Location = new System.Drawing.Point(54, 68);
             this.labelPickListSize.Name = "labelPickListSize";
             this.labelPickListSize.Size = new System.Drawing.Size(68, 13);
-            this.labelPickListSize.TabIndex = 556;
+            this.labelPickListSize.TabIndex = 1106;
             this.labelPickListSize.Text = "Pick List Size";
             // 
             // labelOrderGenSeed
             // 
             this.labelOrderGenSeed.AutoSize = true;
-            this.labelOrderGenSeed.Location = new System.Drawing.Point(10, 106);
+            this.labelOrderGenSeed.Location = new System.Drawing.Point(37, 85);
             this.labelOrderGenSeed.Name = "labelOrderGenSeed";
             this.labelOrderGenSeed.Size = new System.Drawing.Size(84, 13);
-            this.labelOrderGenSeed.TabIndex = 557;
+            this.labelOrderGenSeed.TabIndex = 1107;
             this.labelOrderGenSeed.Text = "Order Gen Seed";
             // 
             // label1
@@ -2826,7 +2845,7 @@ namespace GABAK
             this.comboBoxRouting.Location = new System.Drawing.Point(11, 51);
             this.comboBoxRouting.Name = "comboBoxRouting";
             this.comboBoxRouting.Size = new System.Drawing.Size(89, 20);
-            this.comboBoxRouting.TabIndex = 560;
+            this.comboBoxRouting.TabIndex = 3103;
             // 
             // tabControl1
             // 
@@ -2850,11 +2869,13 @@ namespace GABAK
             // 
             this.tabPage1.Controls.Add(this.groupBoxBenderParameters);
             this.tabPage1.Controls.Add(this.dataGridViewPickLists);
+            this.tabPage1.Controls.Add(this.labelNumberSKUs);
             this.tabPage1.Controls.Add(this.dataGridViewSKUs);
             this.tabPage1.Controls.Add(this.label45);
             this.tabPage1.Controls.Add(this.textBoxSampleSize);
             this.tabPage1.Controls.Add(this.labelSampleSize);
             this.tabPage1.Controls.Add(this.labelMaxOrderSize);
+            this.tabPage1.Controls.Add(this.textBoxNumberSKUs);
             this.tabPage1.Controls.Add(this.labelMaxOrder);
             this.tabPage1.Controls.Add(this.labelTotalOrders);
             this.tabPage1.Controls.Add(this.labelTotalSKUS);
@@ -2873,20 +2894,18 @@ namespace GABAK
             // 
             this.groupBoxBenderParameters.Controls.Add(this.textBoxOrderGenRandSeed);
             this.groupBoxBenderParameters.Controls.Add(this.labelSkewness40);
-            this.groupBoxBenderParameters.Controls.Add(this.labelNumberSKUs);
             this.groupBoxBenderParameters.Controls.Add(this.labelNumberOrders);
             this.groupBoxBenderParameters.Controls.Add(this.textBoxOrderSize);
             this.groupBoxBenderParameters.Controls.Add(this.labelPickListSize);
             this.groupBoxBenderParameters.Controls.Add(this.textBoxNumberOrders);
             this.groupBoxBenderParameters.Controls.Add(this.labelOrderGenSeed);
-            this.groupBoxBenderParameters.Controls.Add(this.textBoxNumberSKUs);
             this.groupBoxBenderParameters.Controls.Add(this.textBoxDemandSkewness80);
             this.groupBoxBenderParameters.Controls.Add(this.labelSkewness20);
             this.groupBoxBenderParameters.Controls.Add(this.textBoxDemandSkewness20);
-            this.groupBoxBenderParameters.Location = new System.Drawing.Point(390, 12);
+            this.groupBoxBenderParameters.Location = new System.Drawing.Point(390, 35);
             this.groupBoxBenderParameters.Name = "groupBoxBenderParameters";
-            this.groupBoxBenderParameters.Size = new System.Drawing.Size(200, 130);
-            this.groupBoxBenderParameters.TabIndex = 567;
+            this.groupBoxBenderParameters.Size = new System.Drawing.Size(200, 107);
+            this.groupBoxBenderParameters.TabIndex = 1102;
             this.groupBoxBenderParameters.TabStop = false;
             this.groupBoxBenderParameters.Text = "Bender\'s Model Parameters";
             // 
@@ -2896,7 +2915,7 @@ namespace GABAK
             this.dataGridViewPickLists.Location = new System.Drawing.Point(350, 482);
             this.dataGridViewPickLists.Name = "dataGridViewPickLists";
             this.dataGridViewPickLists.Size = new System.Drawing.Size(240, 150);
-            this.dataGridViewPickLists.TabIndex = 566;
+            this.dataGridViewPickLists.TabIndex = 1114;
             // 
             // dataGridViewSKUs
             // 
@@ -2908,7 +2927,7 @@ namespace GABAK
             this.dataGridViewSKUs.Name = "dataGridViewSKUs";
             this.dataGridViewSKUs.ReadOnly = true;
             this.dataGridViewSKUs.Size = new System.Drawing.Size(240, 150);
-            this.dataGridViewSKUs.TabIndex = 565;
+            this.dataGridViewSKUs.TabIndex = 1113;
             // 
             // label45
             // 
@@ -2916,7 +2935,7 @@ namespace GABAK
             this.label45.Location = new System.Drawing.Point(21, 12);
             this.label45.Name = "label45";
             this.label45.Size = new System.Drawing.Size(147, 13);
-            this.label45.TabIndex = 564;
+            this.label45.TabIndex = 1100;
             this.label45.Text = "Import or Generate Pick Lists: ";
             // 
             // textBoxSampleSize
@@ -2925,7 +2944,7 @@ namespace GABAK
             this.textBoxSampleSize.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxSampleSize.Name = "textBoxSampleSize";
             this.textBoxSampleSize.Size = new System.Drawing.Size(52, 18);
-            this.textBoxSampleSize.TabIndex = 562;
+            this.textBoxSampleSize.TabIndex = 1011;
             this.textBoxSampleSize.Text = "0";
             // 
             // labelSampleSize
@@ -2935,7 +2954,7 @@ namespace GABAK
             this.labelSampleSize.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelSampleSize.Name = "labelSampleSize";
             this.labelSampleSize.Size = new System.Drawing.Size(62, 13);
-            this.labelSampleSize.TabIndex = 563;
+            this.labelSampleSize.TabIndex = 1112;
             this.labelSampleSize.Text = "SampleSize";
             // 
             // labelMaxOrderSize
@@ -2945,7 +2964,7 @@ namespace GABAK
             this.labelMaxOrderSize.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelMaxOrderSize.Name = "labelMaxOrderSize";
             this.labelMaxOrderSize.Size = new System.Drawing.Size(68, 13);
-            this.labelMaxOrderSize.TabIndex = 561;
+            this.labelMaxOrderSize.TabIndex = 1111;
             this.labelMaxOrderSize.Text = "Max Order #:";
             // 
             // labelMaxOrder
@@ -2955,7 +2974,7 @@ namespace GABAK
             this.labelMaxOrder.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelMaxOrder.Name = "labelMaxOrder";
             this.labelMaxOrder.Size = new System.Drawing.Size(67, 13);
-            this.labelMaxOrder.TabIndex = 560;
+            this.labelMaxOrder.TabIndex = 1109;
             this.labelMaxOrder.Text = "MaxOrderID:";
             // 
             // labelTotalOrders
@@ -2965,7 +2984,7 @@ namespace GABAK
             this.labelTotalOrders.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelTotalOrders.Name = "labelTotalOrders";
             this.labelTotalOrders.Size = new System.Drawing.Size(50, 13);
-            this.labelTotalOrders.TabIndex = 559;
+            this.labelTotalOrders.TabIndex = 1110;
             this.labelTotalOrders.Text = "# Orders:";
             // 
             // labelTotalSKUS
@@ -2975,7 +2994,7 @@ namespace GABAK
             this.labelTotalSKUS.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelTotalSKUS.Name = "labelTotalSKUS";
             this.labelTotalSKUS.Size = new System.Drawing.Size(40, 13);
-            this.labelTotalSKUS.TabIndex = 558;
+            this.labelTotalSKUS.TabIndex = 1108;
             this.labelTotalSKUS.Text = "# SKU:";
             // 
             // tabPage2
@@ -2998,20 +3017,20 @@ namespace GABAK
             // labelNumberColor
             // 
             this.labelNumberColor.AutoSize = true;
-            this.labelNumberColor.Location = new System.Drawing.Point(5, 70);
+            this.labelNumberColor.Location = new System.Drawing.Point(5, 69);
             this.labelNumberColor.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelNumberColor.Name = "labelNumberColor";
             this.labelNumberColor.Size = new System.Drawing.Size(87, 13);
-            this.labelNumberColor.TabIndex = 543;
+            this.labelNumberColor.TabIndex = 2102;
             this.labelNumberColor.Text = "Number of Colors";
             // 
             // textBoxNumberColors
             // 
-            this.textBoxNumberColors.Location = new System.Drawing.Point(94, 67);
+            this.textBoxNumberColors.Location = new System.Drawing.Point(94, 66);
             this.textBoxNumberColors.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxNumberColors.Name = "textBoxNumberColors";
             this.textBoxNumberColors.Size = new System.Drawing.Size(40, 18);
-            this.textBoxNumberColors.TabIndex = 544;
+            this.textBoxNumberColors.TabIndex = 2004;
             this.textBoxNumberColors.Text = "5";
             // 
             // tabPage3
@@ -3099,12 +3118,13 @@ namespace GABAK
             this.groupBox4.Location = new System.Drawing.Point(418, 6);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(190, 430);
-            this.groupBox4.TabIndex = 566;
+            this.groupBox4.TabIndex = 4118;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Warehouse Region Variables";
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.labelCrossAisleSegments);
             this.groupBox2.Controls.Add(this.labelAspectRatio);
             this.groupBox2.Controls.Add(this.labelI1Y);
             this.groupBox2.Controls.Add(this.checkBoxC12);
@@ -3133,8 +3153,8 @@ namespace GABAK
             this.groupBox2.Controls.Add(this.labelE2);
             this.groupBox2.Location = new System.Drawing.Point(212, 6);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(200, 325);
-            this.groupBox2.TabIndex = 564;
+            this.groupBox2.Size = new System.Drawing.Size(200, 339);
+            this.groupBox2.TabIndex = 4108;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Design Class Variables";
             // 
@@ -3160,7 +3180,7 @@ namespace GABAK
             this.groupBox1.Location = new System.Drawing.Point(6, 6);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(200, 172);
-            this.groupBox1.TabIndex = 563;
+            this.groupBox1.TabIndex = 4100;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Control Parameters";
             // 
@@ -3170,7 +3190,7 @@ namespace GABAK
             this.labelTotalAisles.Location = new System.Drawing.Point(52, 212);
             this.labelTotalAisles.Name = "labelTotalAisles";
             this.labelTotalAisles.Size = new System.Drawing.Size(62, 13);
-            this.labelTotalAisles.TabIndex = 562;
+            this.labelTotalAisles.TabIndex = 4143;
             this.labelTotalAisles.Text = "Total Aisles:";
             // 
             // labelDistanceOutput
@@ -3180,7 +3200,7 @@ namespace GABAK
             this.labelDistanceOutput.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelDistanceOutput.Name = "labelDistanceOutput";
             this.labelDistanceOutput.Size = new System.Drawing.Size(94, 13);
-            this.labelDistanceOutput.TabIndex = 561;
+            this.labelDistanceOutput.TabIndex = 4145;
             this.labelDistanceOutput.Text = "Average Distance:";
             // 
             // labelTotalLocations
@@ -3190,7 +3210,7 @@ namespace GABAK
             this.labelTotalLocations.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelTotalLocations.Name = "labelTotalLocations";
             this.labelTotalLocations.Size = new System.Drawing.Size(80, 13);
-            this.labelTotalLocations.TabIndex = 560;
+            this.labelTotalLocations.TabIndex = 4144;
             this.labelTotalLocations.Text = "Total Locations:";
             // 
             // tabPage5
@@ -3269,7 +3289,7 @@ namespace GABAK
             this.groupBoxLowerUpperBounds3.Location = new System.Drawing.Point(212, 6);
             this.groupBoxLowerUpperBounds3.Name = "groupBoxLowerUpperBounds3";
             this.groupBoxLowerUpperBounds3.Size = new System.Drawing.Size(200, 431);
-            this.groupBoxLowerUpperBounds3.TabIndex = 555;
+            this.groupBoxLowerUpperBounds3.TabIndex = 5108;
             this.groupBoxLowerUpperBounds3.TabStop = false;
             this.groupBoxLowerUpperBounds3.Text = "Lower and Upper Bounds";
             // 
@@ -3280,7 +3300,7 @@ namespace GABAK
             this.label16.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(66, 13);
-            this.label16.TabIndex = 565;
+            this.label16.TabIndex = 5119;
             this.label16.Text = "Aspect Ratio";
             // 
             // label35
@@ -3290,7 +3310,7 @@ namespace GABAK
             this.label35.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label35.Name = "label35";
             this.label35.Size = new System.Drawing.Size(64, 13);
-            this.label35.TabIndex = 584;
+            this.label35.TabIndex = 5111;
             this.label35.Text = "C14 (E1-E4)";
             // 
             // label44
@@ -3300,18 +3320,18 @@ namespace GABAK
             this.label44.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label44.Name = "label44";
             this.label44.Size = new System.Drawing.Size(64, 13);
-            this.label44.TabIndex = 590;
+            this.label44.TabIndex = 5109;
             this.label44.Text = "C12 (E1-E2)";
             // 
             // label36
             // 
             this.label36.AutoSize = true;
-            this.label36.Location = new System.Drawing.Point(6, 70);
+            this.label36.Location = new System.Drawing.Point(5, 70);
             this.label36.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label36.Name = "label36";
-            this.label36.Size = new System.Drawing.Size(63, 13);
-            this.label36.TabIndex = 585;
-            this.label36.Text = "C15  (E1-I1)";
+            this.label36.Size = new System.Drawing.Size(60, 13);
+            this.label36.TabIndex = 5112;
+            this.label36.Text = "C15 (E1-I1)";
             // 
             // label4
             // 
@@ -3320,17 +3340,17 @@ namespace GABAK
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(20, 13);
-            this.label4.TabIndex = 553;
+            this.label4.TabIndex = 5120;
             this.label4.Text = "E1";
             // 
             // label37
             // 
             this.label37.AutoSize = true;
-            this.label37.Location = new System.Drawing.Point(6, 87);
+            this.label37.Location = new System.Drawing.Point(5, 87);
             this.label37.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label37.Name = "label37";
             this.label37.Size = new System.Drawing.Size(64, 13);
-            this.label37.TabIndex = 586;
+            this.label37.TabIndex = 5113;
             this.label37.Text = "C23 (E2-E3)";
             // 
             // label38
@@ -3340,7 +3360,7 @@ namespace GABAK
             this.label38.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label38.Name = "label38";
             this.label38.Size = new System.Drawing.Size(64, 13);
-            this.label38.TabIndex = 587;
+            this.label38.TabIndex = 5114;
             this.label38.Text = "C24 (E2-E4)";
             // 
             // label5
@@ -3350,28 +3370,28 @@ namespace GABAK
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(20, 13);
-            this.label5.TabIndex = 554;
+            this.label5.TabIndex = 5121;
             this.label5.Text = "E2";
             // 
             // label39
             // 
             this.label39.AutoSize = true;
-            this.label39.Location = new System.Drawing.Point(7, 172);
+            this.label39.Location = new System.Drawing.Point(5, 172);
             this.label39.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(63, 13);
-            this.label39.TabIndex = 593;
-            this.label39.Text = "C45  (E4-I1)";
+            this.label39.Size = new System.Drawing.Size(60, 13);
+            this.label39.TabIndex = 5118;
+            this.label39.Text = "C45 (E4-I1)";
             // 
             // label40
             // 
             this.label40.AutoSize = true;
-            this.label40.Location = new System.Drawing.Point(7, 155);
+            this.label40.Location = new System.Drawing.Point(5, 155);
             this.label40.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label40.Name = "label40";
-            this.label40.Size = new System.Drawing.Size(63, 13);
-            this.label40.TabIndex = 592;
-            this.label40.Text = "C35  (E3-I1)";
+            this.label40.Size = new System.Drawing.Size(60, 13);
+            this.label40.TabIndex = 5117;
+            this.label40.Text = "C35 (E3-I1)";
             // 
             // label22
             // 
@@ -3380,7 +3400,7 @@ namespace GABAK
             this.label22.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(23, 13);
-            this.label22.TabIndex = 571;
+            this.label22.TabIndex = 5126;
             this.label22.Text = "I1Y";
             // 
             // label41
@@ -3390,7 +3410,7 @@ namespace GABAK
             this.label41.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label41.Name = "label41";
             this.label41.Size = new System.Drawing.Size(64, 13);
-            this.label41.TabIndex = 591;
+            this.label41.TabIndex = 5110;
             this.label41.Text = "C13 (E1-E3)";
             // 
             // label21
@@ -3400,7 +3420,7 @@ namespace GABAK
             this.label21.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(23, 13);
-            this.label21.TabIndex = 570;
+            this.label21.TabIndex = 5125;
             this.label21.Text = "I1X";
             // 
             // label7
@@ -3410,7 +3430,7 @@ namespace GABAK
             this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(28, 13);
-            this.label7.TabIndex = 556;
+            this.label7.TabIndex = 5127;
             this.label7.Text = "PnD";
             // 
             // label20
@@ -3420,7 +3440,7 @@ namespace GABAK
             this.label20.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(20, 13);
-            this.label20.TabIndex = 569;
+            this.label20.TabIndex = 5123;
             this.label20.Text = "E4";
             // 
             // label42
@@ -3429,9 +3449,9 @@ namespace GABAK
             this.label42.Location = new System.Drawing.Point(5, 121);
             this.label42.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label42.Name = "label42";
-            this.label42.Size = new System.Drawing.Size(63, 13);
-            this.label42.TabIndex = 588;
-            this.label42.Text = "C25  (E2-I1)";
+            this.label42.Size = new System.Drawing.Size(60, 13);
+            this.label42.TabIndex = 5115;
+            this.label42.Text = "C25 (E2-I1)";
             // 
             // label12
             // 
@@ -3440,17 +3460,17 @@ namespace GABAK
             this.label12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(20, 13);
-            this.label12.TabIndex = 561;
+            this.label12.TabIndex = 5122;
             this.label12.Text = "E3";
             // 
             // label43
             // 
             this.label43.AutoSize = true;
-            this.label43.Location = new System.Drawing.Point(6, 138);
+            this.label43.Location = new System.Drawing.Point(5, 138);
             this.label43.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label43.Name = "label43";
             this.label43.Size = new System.Drawing.Size(64, 13);
-            this.label43.TabIndex = 589;
+            this.label43.TabIndex = 5116;
             this.label43.Text = "C34 (E3-E4)";
             // 
             // groupBoxExcessLocations
@@ -3463,7 +3483,7 @@ namespace GABAK
             this.groupBoxExcessLocations.Location = new System.Drawing.Point(8, 230);
             this.groupBoxExcessLocations.Name = "groupBoxExcessLocations";
             this.groupBoxExcessLocations.Size = new System.Drawing.Size(200, 100);
-            this.groupBoxExcessLocations.TabIndex = 553;
+            this.groupBoxExcessLocations.TabIndex = 5155;
             this.groupBoxExcessLocations.TabStop = false;
             this.groupBoxExcessLocations.Text = "Excess Locations";
             // 
@@ -3473,7 +3493,7 @@ namespace GABAK
             this.groupBoxPickListSampling.Location = new System.Drawing.Point(8, 190);
             this.groupBoxPickListSampling.Name = "groupBoxPickListSampling";
             this.groupBoxPickListSampling.Size = new System.Drawing.Size(200, 35);
-            this.groupBoxPickListSampling.TabIndex = 552;
+            this.groupBoxPickListSampling.TabIndex = 5154;
             this.groupBoxPickListSampling.TabStop = false;
             this.groupBoxPickListSampling.Text = "Pick List Sampling";
             // 
@@ -3554,7 +3574,7 @@ namespace GABAK
             this.groupBoxLowerUpperBounds2.Location = new System.Drawing.Point(418, 6);
             this.groupBoxLowerUpperBounds2.Name = "groupBoxLowerUpperBounds2";
             this.groupBoxLowerUpperBounds2.Size = new System.Drawing.Size(190, 431);
-            this.groupBoxLowerUpperBounds2.TabIndex = 551;
+            this.groupBoxLowerUpperBounds2.TabIndex = 5128;
             this.groupBoxLowerUpperBounds2.TabStop = false;
             this.groupBoxLowerUpperBounds2.Text = "Lower and Upper Bounds";
             // 
@@ -3565,7 +3585,7 @@ namespace GABAK
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(43, 13);
-            this.label3.TabIndex = 552;
+            this.label3.TabIndex = 5129;
             this.label3.Text = "Angle 1";
             // 
             // label6
@@ -3575,7 +3595,7 @@ namespace GABAK
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(43, 13);
-            this.label6.TabIndex = 555;
+            this.label6.TabIndex = 5130;
             this.label6.Text = "Angle 2";
             // 
             // label8
@@ -3585,7 +3605,7 @@ namespace GABAK
             this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(54, 13);
-            this.label8.TabIndex = 557;
+            this.label8.TabIndex = 5137;
             this.label8.Text = "Adjuster 1";
             // 
             // label9
@@ -3595,7 +3615,7 @@ namespace GABAK
             this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(54, 13);
-            this.label9.TabIndex = 558;
+            this.label9.TabIndex = 5138;
             this.label9.Text = "Adjuster 2";
             // 
             // label10
@@ -3605,7 +3625,7 @@ namespace GABAK
             this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(54, 13);
-            this.label10.TabIndex = 559;
+            this.label10.TabIndex = 5139;
             this.label10.Text = "Adjuster 3";
             // 
             // label11
@@ -3615,7 +3635,7 @@ namespace GABAK
             this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(43, 13);
-            this.label11.TabIndex = 560;
+            this.label11.TabIndex = 5131;
             this.label11.Text = "Angle 3";
             // 
             // label13
@@ -3625,7 +3645,7 @@ namespace GABAK
             this.label13.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(76, 13);
-            this.label13.TabIndex = 562;
+            this.label13.TabIndex = 5145;
             this.label13.Text = "Pick Adjuster 1";
             // 
             // label14
@@ -3635,7 +3655,7 @@ namespace GABAK
             this.label14.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(76, 13);
-            this.label14.TabIndex = 563;
+            this.label14.TabIndex = 5146;
             this.label14.Text = "Pick Adjuster 2";
             // 
             // label15
@@ -3645,7 +3665,7 @@ namespace GABAK
             this.label15.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(76, 13);
-            this.label15.TabIndex = 564;
+            this.label15.TabIndex = 5147;
             this.label15.Text = "Pick Adjuster 3";
             // 
             // label17
@@ -3655,7 +3675,7 @@ namespace GABAK
             this.label17.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(43, 13);
-            this.label17.TabIndex = 566;
+            this.label17.TabIndex = 5132;
             this.label17.Text = "Angle 4";
             // 
             // label18
@@ -3665,7 +3685,7 @@ namespace GABAK
             this.label18.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(54, 13);
-            this.label18.TabIndex = 567;
+            this.label18.TabIndex = 5140;
             this.label18.Text = "Adjuster 4";
             // 
             // label19
@@ -3675,7 +3695,7 @@ namespace GABAK
             this.label19.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(76, 13);
-            this.label19.TabIndex = 568;
+            this.label19.TabIndex = 5148;
             this.label19.Text = "Pick Adjuster 4";
             // 
             // label23
@@ -3685,7 +3705,7 @@ namespace GABAK
             this.label23.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(76, 13);
-            this.label23.TabIndex = 583;
+            this.label23.TabIndex = 5152;
             this.label23.Text = "Pick Adjuster 8";
             // 
             // label24
@@ -3695,7 +3715,7 @@ namespace GABAK
             this.label24.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(43, 13);
-            this.label24.TabIndex = 572;
+            this.label24.TabIndex = 5133;
             this.label24.Text = "Angle 5";
             // 
             // label25
@@ -3705,7 +3725,7 @@ namespace GABAK
             this.label25.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(43, 13);
-            this.label25.TabIndex = 573;
+            this.label25.TabIndex = 5134;
             this.label25.Text = "Angle 6";
             // 
             // label26
@@ -3715,7 +3735,7 @@ namespace GABAK
             this.label26.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(76, 13);
-            this.label26.TabIndex = 582;
+            this.label26.TabIndex = 5151;
             this.label26.Text = "Pick Adjuster 7";
             // 
             // label27
@@ -3725,7 +3745,7 @@ namespace GABAK
             this.label27.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(54, 13);
-            this.label27.TabIndex = 574;
+            this.label27.TabIndex = 5141;
             this.label27.Text = "Adjuster 5";
             // 
             // label28
@@ -3735,7 +3755,7 @@ namespace GABAK
             this.label28.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label28.Name = "label28";
             this.label28.Size = new System.Drawing.Size(54, 13);
-            this.label28.TabIndex = 575;
+            this.label28.TabIndex = 5142;
             this.label28.Text = "Adjuster 6";
             // 
             // label29
@@ -3745,7 +3765,7 @@ namespace GABAK
             this.label29.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label29.Name = "label29";
             this.label29.Size = new System.Drawing.Size(54, 13);
-            this.label29.TabIndex = 581;
+            this.label29.TabIndex = 5144;
             this.label29.Text = "Adjuster 8";
             // 
             // label30
@@ -3755,7 +3775,7 @@ namespace GABAK
             this.label30.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label30.Name = "label30";
             this.label30.Size = new System.Drawing.Size(76, 13);
-            this.label30.TabIndex = 576;
+            this.label30.TabIndex = 5149;
             this.label30.Text = "Pick Adjuster 5";
             // 
             // label31
@@ -3765,7 +3785,7 @@ namespace GABAK
             this.label31.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label31.Name = "label31";
             this.label31.Size = new System.Drawing.Size(76, 13);
-            this.label31.TabIndex = 577;
+            this.label31.TabIndex = 5150;
             this.label31.Text = "Pick Adjuster 6";
             // 
             // label32
@@ -3775,7 +3795,7 @@ namespace GABAK
             this.label32.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label32.Name = "label32";
             this.label32.Size = new System.Drawing.Size(54, 13);
-            this.label32.TabIndex = 580;
+            this.label32.TabIndex = 5143;
             this.label32.Text = "Adjuster 7";
             // 
             // label33
@@ -3785,7 +3805,7 @@ namespace GABAK
             this.label33.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label33.Name = "label33";
             this.label33.Size = new System.Drawing.Size(43, 13);
-            this.label33.TabIndex = 579;
+            this.label33.TabIndex = 5136;
             this.label33.Text = "Angle 8";
             // 
             // label34
@@ -3795,7 +3815,7 @@ namespace GABAK
             this.label34.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label34.Name = "label34";
             this.label34.Size = new System.Drawing.Size(43, 13);
-            this.label34.TabIndex = 578;
+            this.label34.TabIndex = 5135;
             this.label34.Text = "Angle 7";
             // 
             // groupBoxESParameters
@@ -3817,7 +3837,7 @@ namespace GABAK
             this.groupBoxESParameters.Location = new System.Drawing.Point(6, 6);
             this.groupBoxESParameters.Name = "groupBoxESParameters";
             this.groupBoxESParameters.Size = new System.Drawing.Size(200, 151);
-            this.groupBoxESParameters.TabIndex = 550;
+            this.groupBoxESParameters.TabIndex = 5100;
             this.groupBoxESParameters.TabStop = false;
             this.groupBoxESParameters.Text = "Evolution Strategy Optimization Parameters";
             // 
@@ -3890,6 +3910,15 @@ namespace GABAK
             this.tabPage10.TabIndex = 9;
             this.tabPage10.Text = "Import Design";
             this.tabPage10.UseVisualStyleBackColor = true;
+            // 
+            // labelCrossAisleSegments
+            // 
+            this.labelCrossAisleSegments.AutoSize = true;
+            this.labelCrossAisleSegments.Location = new System.Drawing.Point(10, 15);
+            this.labelCrossAisleSegments.Name = "labelCrossAisleSegments";
+            this.labelCrossAisleSegments.Size = new System.Drawing.Size(108, 13);
+            this.labelCrossAisleSegments.TabIndex = 4109;
+            this.labelCrossAisleSegments.Text = "Cross Aisle Segments";
             // 
             // MainForm
             // 
@@ -4291,6 +4320,7 @@ namespace GABAK
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label labelCrossAisleSegments;
     }
 }
 

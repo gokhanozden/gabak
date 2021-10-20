@@ -1,12 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
-  <asmv1:assemblyIdentity name="GABAK.exe" version="1.0.0.1" publicKeyToken="0000000000000000" language="en" processorArchitecture="amd64" type="win32" />
-  <description asmv2:iconFile="warehouseicon_32x32.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
+  <asmv1:assemblyIdentity name="GABAK.exe" version="1.0.0.0" publicKeyToken="0000000000000000" language="en" processorArchitecture="amd64" type="win32" />
+  <description asmv2:iconFile="warehouseicon_32x32.ico" asmv2:publisher="GABAK" asmv2:product="GABAK Warehouse Layout Optimizer" asmv2:supportUrl="https://github.com/gokhanozden/gabak" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
-    <assemblyIdentity name="GABAK" version="1.0.0.0" publicKeyToken="8055B27F269E13EE" language="neutral" processorArchitecture="amd64" />
+    <assemblyIdentity name="GABAK" version="1.0.0.0" language="neutral" processorArchitecture="amd64" />
     <commandLine file="GABAK.exe" parameters="" />
   </entryPoint>
+  <co.v1:useManifestForTrust xmlns="urn:schemas-microsoft-com:asm.v1" />
   <trustInfo>
     <security>
       <applicationRequestMinimum>
@@ -43,26 +44,26 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="AviFile.dll" size="36864">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="AviFile.dll" size="37808">
       <assemblyIdentity name="AviFile" version="1.0.6721.21039" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>cX3dO2p9zXgTaEJRDIy75OFfaWzAiiZksfxG3VgjJSQ=</dsig:DigestValue>
+        <dsig:DigestValue>gon9UxdqYs/NOe9J6RNJfPEkCj0Dncc9iVrwaylAI4U=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="GABAK.exe" size="290776">
-      <assemblyIdentity name="GABAK" version="1.0.0.0" publicKeyToken="8055B27F269E13EE" language="neutral" processorArchitecture="amd64" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="GABAK.exe" size="293336">
+      <assemblyIdentity name="GABAK" version="1.0.0.0" language="neutral" processorArchitecture="amd64" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>vRR+e+Ll2DIM7bjjTE7faxFxZGm/gg2bh2j909Y7dxY=</dsig:DigestValue>
+        <dsig:DigestValue>E1LzS6KVntl1B5IhiZVL1vZUdocE6oCjfQ+IYnwz5zg=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -91,60 +92,6 @@
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
       <dsig:DigestValue>zodzoRbmfcnqrWaRDOtgQBo6LeDDK0SkllarPJNqxl8=</dsig:DigestValue>
-    </hash>
-  </file>
-  <file name="gabak\availableservers.txt" size="33">
-    <hash>
-      <dsig:Transforms>
-        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
-      </dsig:Transforms>
-      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>shogmByt4Rh3+TfyNzapMwNvS7rBgWhwW5x8t2CKrGM=</dsig:DigestValue>
-    </hash>
-  </file>
-  <file name="gabak\concorde.exe" size="2610778">
-    <hash>
-      <dsig:Transforms>
-        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
-      </dsig:Transforms>
-      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>kd8lN0wWxAep7sjwPvuEbdtyoquO7v0L9fY0WjmYhZo=</dsig:DigestValue>
-    </hash>
-  </file>
-  <file name="gabak\cygwin1.dll" size="2813484">
-    <hash>
-      <dsig:Transforms>
-        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
-      </dsig:Transforms>
-      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>WnlVDbV0zEmqUtGcJ2y2r6HgfLNiwH4JH0ir+3cV70s=</dsig:DigestValue>
-    </hash>
-  </file>
-  <file name="gabak\lkh.exe" size="338944">
-    <hash>
-      <dsig:Transforms>
-        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
-      </dsig:Transforms>
-      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>xXPNlnXk8Rz3jZcX2X19SutJLvxvaak3q+93AnKVeUk=</dsig:DigestValue>
-    </hash>
-  </file>
-  <file name="gabak\QSConcorde.dll" size="954368">
-    <hash>
-      <dsig:Transforms>
-        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
-      </dsig:Transforms>
-      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>3yTCHr6jSRP87NzFsXK1D5NNNkR+rz6v/z4Gneqq1ZY=</dsig:DigestValue>
-    </hash>
-  </file>
-  <file name="gabak\QSopt.dll" size="397312">
-    <hash>
-      <dsig:Transforms>
-        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
-      </dsig:Transforms>
-      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>EUNVQok9xJnmvlg24AviGT7BWw5Uzn6D3sCsPtlXG9w=</dsig:DigestValue>
     </hash>
   </file>
   <file name="gabak_log.ldf" size="8388608" writeableType="applicationData">
