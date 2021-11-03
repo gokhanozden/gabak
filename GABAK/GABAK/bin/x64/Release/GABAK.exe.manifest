@@ -56,14 +56,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="GABAK.exe" size="293336">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="GABAK.exe" size="292352">
       <assemblyIdentity name="GABAK" version="1.0.0.0" language="neutral" processorArchitecture="amd64" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>E1LzS6KVntl1B5IhiZVL1vZUdocE6oCjfQ+IYnwz5zg=</dsig:DigestValue>
+        <dsig:DigestValue>pHepj0c/khjM2R0cejrgLugncLY3vLYkLBVOkIf2NUo=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

@@ -135,7 +135,7 @@ namespace GABAK
         }
 
         /// <summary>
-        /// Solves routing of an order in a warehouse by using aisle centers method and 2OPT
+        /// Solves routing of an order in a warehouse by using visibility graph method and 2OPT
         /// </summary>
         /// <param name="p_wh">Warehouse object</param>
         /// <param name="p_order">Order object</param>
