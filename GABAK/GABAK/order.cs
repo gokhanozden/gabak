@@ -58,5 +58,69 @@ namespace GABAK
         {
             skus.Add(p_sku);
         }
+        /// <summary>
+        /// Returns the minimum x coordinate among the coordinates of SKU locations. Used for calculating the area of smallest rectangle that covers only the pick locations.
+        /// </summary>
+        /// <returns></returns>
+        public double returnMinX()
+        {
+            double minX = double.MaxValue;
+            for(int i = 0; i < getOrderSize(); i++)
+            {
+                if(minX > skus[i].location.getX())
+                {
+                    minX = skus[i].location.getX();
+                }
+            }
+            return minX;
+        }
+        /// <summary>
+        /// Returns the minimum y coordinate among the coordinates of SKU locations. Used for calculating the area of smallest rectangle that covers only the pick locations.
+        /// </summary>
+        /// <returns></returns>
+        public double returnMinY()
+        {
+            double minY = double.MaxValue;
+            for (int i = 0; i < getOrderSize(); i++)
+            {
+                if (minY > skus[i].location.getY())
+                {
+                    minY = skus[i].location.getX();
+                }
+            }
+            return minY;
+        }
+        /// <summary>
+        /// Returns the maximum x coordinate among the coordinates of SKU locations. Used for calculating the area of smallest rectangle that covers only the pick locations.
+        /// </summary>
+        /// <returns></returns>
+        public double returnMaxX()
+        {
+            double maxX = double.MinValue;
+            for (int i = 0; i < getOrderSize(); i++)
+            {
+                if (maxX < skus[i].location.getX())
+                {
+                    maxX = skus[i].location.getX();
+                }
+            }
+            return maxX;
+        }
+        /// <summary>
+        /// Returns the minimum y coordinate among the coordinates of SKU locations. Used for calculating the area of smallest rectangle that covers only the pick locations.
+        /// </summary>
+        /// <returns></returns>
+        public double returnMaxY()
+        {
+            double maxY = double.MinValue;
+            for (int i = 0; i < getOrderSize(); i++)
+            {
+                if (maxY < skus[i].location.getY())
+                {
+                    maxY = skus[i].location.getX();
+                }
+            }
+            return maxY;
+        }
     }
 }
