@@ -32,7 +32,7 @@ namespace GABAK
         private double avgTourLength = 1;
         private float m = 1;//Magnify factor
         private bool solving = false;//Used for aspect ratio warehouse width auto conversion on key change if it is set to false then only it works on key focus
-        private string problemfolder = "";
+        private string problemfolder = "C:\\gabak\\runs\\";
         private List<string[]> lines;//Used for importing designs
         private svg mysvg;
         private ardesign myardesign;
