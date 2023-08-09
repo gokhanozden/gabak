@@ -315,6 +315,7 @@ namespace GABAK
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.labelCrossAisleSegments = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.labelTotalAisles = new System.Windows.Forms.Label();
             this.labelDistanceOutput = new System.Windows.Forms.Label();
@@ -373,7 +374,6 @@ namespace GABAK
             this.tabPage9 = new System.Windows.Forms.TabPage();
             this.tabPage10 = new System.Windows.Forms.TabPage();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.labelCrossAisleSegments = new System.Windows.Forms.Label();
             this.menuStripTop.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -509,7 +509,7 @@ namespace GABAK
             // labelE1
             // 
             this.labelE1.AutoSize = true;
-            this.labelE1.Location = new System.Drawing.Point(17, 220);
+            this.labelE1.Location = new System.Drawing.Point(50, 220);
             this.labelE1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelE1.Name = "labelE1";
             this.labelE1.Size = new System.Drawing.Size(101, 13);
@@ -520,7 +520,7 @@ namespace GABAK
             // 
             // textBoxE1
             // 
-            this.textBoxE1.Location = new System.Drawing.Point(120, 216);
+            this.textBoxE1.Location = new System.Drawing.Point(155, 217);
             this.textBoxE1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxE1.Name = "textBoxE1";
             this.textBoxE1.Size = new System.Drawing.Size(40, 18);
@@ -531,7 +531,7 @@ namespace GABAK
             // labelE2
             // 
             this.labelE2.AutoSize = true;
-            this.labelE2.Location = new System.Drawing.Point(17, 236);
+            this.labelE2.Location = new System.Drawing.Point(50, 236);
             this.labelE2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelE2.Name = "labelE2";
             this.labelE2.Size = new System.Drawing.Size(101, 13);
@@ -542,7 +542,7 @@ namespace GABAK
             // 
             // textBoxE2
             // 
-            this.textBoxE2.Location = new System.Drawing.Point(120, 233);
+            this.textBoxE2.Location = new System.Drawing.Point(155, 234);
             this.textBoxE2.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxE2.Name = "textBoxE2";
             this.textBoxE2.Size = new System.Drawing.Size(40, 18);
@@ -704,7 +704,7 @@ namespace GABAK
             // 
             // textBoxpd
             // 
-            this.textBoxpd.Location = new System.Drawing.Point(120, 318);
+            this.textBoxpd.Location = new System.Drawing.Point(155, 319);
             this.textBoxpd.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxpd.Name = "textBoxpd";
             this.textBoxpd.Size = new System.Drawing.Size(40, 18);
@@ -715,7 +715,7 @@ namespace GABAK
             // labelPd
             // 
             this.labelPd.AutoSize = true;
-            this.labelPd.Location = new System.Drawing.Point(5, 321);
+            this.labelPd.Location = new System.Drawing.Point(38, 321);
             this.labelPd.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelPd.Name = "labelPd";
             this.labelPd.Size = new System.Drawing.Size(113, 13);
@@ -870,7 +870,7 @@ namespace GABAK
             // 
             // textBoxE3
             // 
-            this.textBoxE3.Location = new System.Drawing.Point(120, 250);
+            this.textBoxE3.Location = new System.Drawing.Point(155, 251);
             this.textBoxE3.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxE3.Name = "textBoxE3";
             this.textBoxE3.Size = new System.Drawing.Size(40, 18);
@@ -881,7 +881,7 @@ namespace GABAK
             // labelE3
             // 
             this.labelE3.AutoSize = true;
-            this.labelE3.Location = new System.Drawing.Point(17, 253);
+            this.labelE3.Location = new System.Drawing.Point(50, 253);
             this.labelE3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelE3.Name = "labelE3";
             this.labelE3.Size = new System.Drawing.Size(101, 13);
@@ -1338,7 +1338,7 @@ namespace GABAK
             // 
             // textBoxAspectRatio
             // 
-            this.textBoxAspectRatio.Location = new System.Drawing.Point(120, 199);
+            this.textBoxAspectRatio.Location = new System.Drawing.Point(155, 199);
             this.textBoxAspectRatio.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxAspectRatio.Name = "textBoxAspectRatio";
             this.textBoxAspectRatio.Size = new System.Drawing.Size(40, 18);
@@ -1350,12 +1350,12 @@ namespace GABAK
             // labelAspectRatio
             // 
             this.labelAspectRatio.AutoSize = true;
-            this.labelAspectRatio.Location = new System.Drawing.Point(52, 202);
+            this.labelAspectRatio.Location = new System.Drawing.Point(21, 202);
             this.labelAspectRatio.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelAspectRatio.Name = "labelAspectRatio";
-            this.labelAspectRatio.Size = new System.Drawing.Size(66, 13);
+            this.labelAspectRatio.Size = new System.Drawing.Size(130, 13);
             this.labelAspectRatio.TabIndex = 4110;
-            this.labelAspectRatio.Text = "Aspect Ratio";
+            this.labelAspectRatio.Text = "Aspect Ratio (depth/width)";
             this.toolTip1.SetToolTip(this.labelAspectRatio, "Aspect Ratio of the Warehouse (Minimum 0, Maximum 1)");
             // 
             // textBoxAspectRatioL
@@ -1489,7 +1489,7 @@ namespace GABAK
             // 
             // textBoxE4
             // 
-            this.textBoxE4.Location = new System.Drawing.Point(120, 267);
+            this.textBoxE4.Location = new System.Drawing.Point(155, 268);
             this.textBoxE4.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxE4.Name = "textBoxE4";
             this.textBoxE4.Size = new System.Drawing.Size(40, 18);
@@ -1499,7 +1499,7 @@ namespace GABAK
             // labelE4
             // 
             this.labelE4.AutoSize = true;
-            this.labelE4.Location = new System.Drawing.Point(17, 270);
+            this.labelE4.Location = new System.Drawing.Point(50, 270);
             this.labelE4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelE4.Name = "labelE4";
             this.labelE4.Size = new System.Drawing.Size(101, 13);
@@ -1528,7 +1528,7 @@ namespace GABAK
             // 
             // textBoxI1X
             // 
-            this.textBoxI1X.Location = new System.Drawing.Point(120, 284);
+            this.textBoxI1X.Location = new System.Drawing.Point(155, 285);
             this.textBoxI1X.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxI1X.Name = "textBoxI1X";
             this.textBoxI1X.Size = new System.Drawing.Size(40, 18);
@@ -1538,7 +1538,7 @@ namespace GABAK
             // labelI1X
             // 
             this.labelI1X.AutoSize = true;
-            this.labelI1X.Location = new System.Drawing.Point(4, 287);
+            this.labelI1X.Location = new System.Drawing.Point(37, 287);
             this.labelI1X.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelI1X.Name = "labelI1X";
             this.labelI1X.Size = new System.Drawing.Size(114, 13);
@@ -1549,7 +1549,7 @@ namespace GABAK
             // 
             // textBoxI1Y
             // 
-            this.textBoxI1Y.Location = new System.Drawing.Point(120, 301);
+            this.textBoxI1Y.Location = new System.Drawing.Point(155, 302);
             this.textBoxI1Y.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBoxI1Y.Name = "textBoxI1Y";
             this.textBoxI1Y.Size = new System.Drawing.Size(40, 18);
@@ -1559,7 +1559,7 @@ namespace GABAK
             // labelI1Y
             // 
             this.labelI1Y.AutoSize = true;
-            this.labelI1Y.Location = new System.Drawing.Point(4, 304);
+            this.labelI1Y.Location = new System.Drawing.Point(37, 304);
             this.labelI1Y.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelI1Y.Name = "labelI1Y";
             this.labelI1Y.Size = new System.Drawing.Size(114, 13);
@@ -3158,6 +3158,15 @@ namespace GABAK
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Design Class Variables";
             // 
+            // labelCrossAisleSegments
+            // 
+            this.labelCrossAisleSegments.AutoSize = true;
+            this.labelCrossAisleSegments.Location = new System.Drawing.Point(10, 15);
+            this.labelCrossAisleSegments.Name = "labelCrossAisleSegments";
+            this.labelCrossAisleSegments.Size = new System.Drawing.Size(108, 13);
+            this.labelCrossAisleSegments.TabIndex = 4109;
+            this.labelCrossAisleSegments.Text = "Cross Aisle Segments";
+            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.labelLWidth);
@@ -3910,15 +3919,6 @@ namespace GABAK
             this.tabPage10.TabIndex = 9;
             this.tabPage10.Text = "Import Design";
             this.tabPage10.UseVisualStyleBackColor = true;
-            // 
-            // labelCrossAisleSegments
-            // 
-            this.labelCrossAisleSegments.AutoSize = true;
-            this.labelCrossAisleSegments.Location = new System.Drawing.Point(10, 15);
-            this.labelCrossAisleSegments.Name = "labelCrossAisleSegments";
-            this.labelCrossAisleSegments.Size = new System.Drawing.Size(108, 13);
-            this.labelCrossAisleSegments.TabIndex = 4109;
-            this.labelCrossAisleSegments.Text = "Cross Aisle Segments";
             // 
             // MainForm
             // 
