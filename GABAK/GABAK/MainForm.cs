@@ -266,6 +266,7 @@ namespace GABAK
                 myardesign.closePickList();
             }
             myardesign.closePickLists();
+            myardesign.closeWarehouse();
             //mywh.randomizeOrders();
             double totalcost = 0;
             int samplesize = Convert.ToInt32(textBoxSampleSize.Text);
