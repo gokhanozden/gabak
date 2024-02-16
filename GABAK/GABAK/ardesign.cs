@@ -38,7 +38,7 @@ namespace GABAK
 
         public void addStorageLocation(double p_x, double p_y, bool p_flip)
         {
-            content.AppendLine("<storagelocation x = \"" + p_x.ToString() + "\" y = \"" + p_y.ToString() + "\" flip = \"" + p_flip.ToString() + "\"" + " /></storagelocation>");
+            content.AppendLine("<storagelocation x = \"" + p_x.ToString() + "\" y = \"" + p_y.ToString() + "\" flip = \"" + p_flip.ToString() + "\"" + "></storagelocation>");
         }
 
         public void addPickLists()
@@ -63,7 +63,7 @@ namespace GABAK
 
         public void addPickLocation(double p_x, double p_y)
         {
-            content.AppendLine("<picklocation x = \"" + p_x.ToString() + "\" y = \"" + p_y.ToString() + "\" /></picklocation>");
+            content.AppendLine("<picklocation x = \"" + p_x.ToString() + "\" y = \"" + p_y.ToString() + "\"></picklocation>");
         }
 
         public void closeWarehouse()
