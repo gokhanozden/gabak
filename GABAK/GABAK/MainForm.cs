@@ -742,7 +742,7 @@ namespace GABAK
                     //We make pd point as the starting point in ardesign
                     //So when we start the camera in AR it starts from PD instead of top left corner which is 0,0 for GUI
                     //But we want PD to act like 0,0 for ardesign
-                    myardesign.addStorageLocation(p_pickingaisleedge.getOnEdgeNodes()[i].s2.X1, p_pickingaisleedge.getOnEdgeNodes()[i].s2.X2, p_pickingaisleedge.getOnEdgeNodes()[i].s2.X3, p_pickingaisleedge.getOnEdgeNodes()[i].s2.X4, p_pickingaisleedge.getOnEdgeNodes()[i].s2.Y1, p_pickingaisleedge.getOnEdgeNodes()[i].s2.Y2, p_pickingaisleedge.getOnEdgeNodes()[i].s2.Y3, p_pickingaisleedge.getOnEdgeNodes()[i].s2.Y4, true);
+                    myardesign.addStorageLocation(p_pickingaisleedge.getOnEdgeNodes()[i].s2.X1, p_pickingaisleedge.getOnEdgeNodes()[i].s2.X2, p_pickingaisleedge.getOnEdgeNodes()[i].s2.X3, p_pickingaisleedge.getOnEdgeNodes()[i].s2.X4, p_pickingaisleedge.getOnEdgeNodes()[i].s2.Y1, p_pickingaisleedge.getOnEdgeNodes()[i].s2.Y2, p_pickingaisleedge.getOnEdgeNodes()[i].s2.Y3, p_pickingaisleedge.getOnEdgeNodes()[i].s2.Y4, false);
                 }
             }
         }
