@@ -192,7 +192,7 @@ namespace GABAK
             //Clear svg content
             mysvg = new svg(panelDrawing.Width, panelDrawing.Height);
             //Clear ARDesign content
-            myardesign = new ardesign(mywh.getWidth(), mywh.getDepth(), mywh.pickinglocationwidth, mywh.pickinglocationdepth);
+            myardesign = new ardesign(mywh.getWidth(), mywh.getDepth(), mywh.pdnodes[0].getX() * m, mywh.pdnodes[0].getY() * m, mywh.pickinglocationwidth, mywh.pickinglocationdepth);
 
             TimeSpan elapsed1 = DateTime.Now - start1;
             DateTime start2 = DateTime.Now;
@@ -721,16 +721,10 @@ namespace GABAK
                     mysvg.addLine((float)p_pickingaisleedge.getOnEdgeNodes()[i].s1.X3 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s1.Y3 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s1.X1 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s1.Y1 * m, mypen.Width, mypen.Color);
                     //ARDesign writing
                     //We calculate x and y coordinates using 4 X and 4 Y averages these X and Ys are the box edges so taking X and Y average will give us the box center
-                    double x = p_pickingaisleedge.getOnEdgeNodes()[i].s1.X1 + p_pickingaisleedge.getOnEdgeNodes()[i].s1.X2 + p_pickingaisleedge.getOnEdgeNodes()[i].s1.X3 + p_pickingaisleedge.getOnEdgeNodes()[i].s1.X4;
-                    x = x / 4 * m;
-                    double y = p_pickingaisleedge.getOnEdgeNodes()[i].s1.Y1 + p_pickingaisleedge.getOnEdgeNodes()[i].s1.Y2 + p_pickingaisleedge.getOnEdgeNodes()[i].s1.Y3 + p_pickingaisleedge.getOnEdgeNodes()[i].s1.Y4;
-                    y = y / 4 * m;
                     //We make pd point as the starting point in ardesign
                     //So when we start the camera in AR it starts from PD instead of top left corner which is 0,0 for GUI
                     //But we want PD to act like 0,0 for ardesign
-                    x = x - mywh.pdnodes[0].getX();
-                    y = y - mywh.pdnodes[0].getY();
-                    myardesign.addStorageLocation(x, y, true);
+                    myardesign.addStorageLocation(p_pickingaisleedge.getOnEdgeNodes()[i].s1.X1, p_pickingaisleedge.getOnEdgeNodes()[i].s1.X2, p_pickingaisleedge.getOnEdgeNodes()[i].s1.X3, p_pickingaisleedge.getOnEdgeNodes()[i].s1.X4, p_pickingaisleedge.getOnEdgeNodes()[i].s1.Y1, p_pickingaisleedge.getOnEdgeNodes()[i].s1.Y2, p_pickingaisleedge.getOnEdgeNodes()[i].s1.Y3, p_pickingaisleedge.getOnEdgeNodes()[i].s1.Y4, true);
                 }
                 if (p_pickingaisleedge.getOnEdgeNodes()[i].s2 != null)
                 {
@@ -745,16 +739,10 @@ namespace GABAK
                     mysvg.addLine((float)p_pickingaisleedge.getOnEdgeNodes()[i].s2.X3 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s2.Y3 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s2.X1 * m, (float)p_pickingaisleedge.getOnEdgeNodes()[i].s2.Y1 * m, mypen.Width, mypen.Color);
                     //ARDesign writing
                     //We calculate x and y coordinates using 4 X and 4 Y averages these X and Ys are the box edges so taking X and Y average will give us the box center
-                    double x = p_pickingaisleedge.getOnEdgeNodes()[i].s2.X1 + p_pickingaisleedge.getOnEdgeNodes()[i].s2.X2 + p_pickingaisleedge.getOnEdgeNodes()[i].s2.X3 + p_pickingaisleedge.getOnEdgeNodes()[i].s2.X4;
-                    x = x / 4 * m;
-                    double y = p_pickingaisleedge.getOnEdgeNodes()[i].s2.Y1 + p_pickingaisleedge.getOnEdgeNodes()[i].s2.Y2 + p_pickingaisleedge.getOnEdgeNodes()[i].s2.Y3 + p_pickingaisleedge.getOnEdgeNodes()[i].s2.Y4;
-                    y = y / 4 * m;
                     //We make pd point as the starting point in ardesign
                     //So when we start the camera in AR it starts from PD instead of top left corner which is 0,0 for GUI
                     //But we want PD to act like 0,0 for ardesign
-                    x = x - mywh.pdnodes[0].getX();
-                    y = y - mywh.pdnodes[0].getY();
-                    myardesign.addStorageLocation(x, y, false);
+                    myardesign.addStorageLocation(p_pickingaisleedge.getOnEdgeNodes()[i].s2.X1, p_pickingaisleedge.getOnEdgeNodes()[i].s2.X2, p_pickingaisleedge.getOnEdgeNodes()[i].s2.X3, p_pickingaisleedge.getOnEdgeNodes()[i].s2.X4, p_pickingaisleedge.getOnEdgeNodes()[i].s2.Y1, p_pickingaisleedge.getOnEdgeNodes()[i].s2.Y2, p_pickingaisleedge.getOnEdgeNodes()[i].s2.Y3, p_pickingaisleedge.getOnEdgeNodes()[i].s2.Y4, true);
                 }
             }
         }
@@ -1032,7 +1020,7 @@ namespace GABAK
             //Clear SVG content
             mysvg = new svg(panelDrawing.Width, panelDrawing.Height);
             //Clear ARDesign content
-            myardesign = new ardesign(mywh.getWidth(), mywh.getDepth(), mywh.pickinglocationwidth, mywh.pickinglocationdepth);
+            myardesign = new ardesign(mywh.getWidth(), mywh.getDepth(), mywh.pdnodes[0].getX() * m, mywh.pdnodes[0].getY() * m, mywh.pickinglocationwidth, mywh.pickinglocationdepth);
             //Draw created warehouse to panel
             this.drawWarehouse();
             myardesign.closeWarehouse();
@@ -1353,7 +1341,7 @@ namespace GABAK
                 //Clear SVG content
                 mysvg = new svg(panelDrawing.Width, panelDrawing.Height);
                 //Clear ARDesign content
-                myardesign = new ardesign(mywh.getWidth(), mywh.getDepth(), mywh.pickinglocationwidth, mywh.pickinglocationdepth);
+                myardesign = new ardesign(mywh.getWidth(), mywh.getDepth(), mywh.pdnodes[0].getX() * m, mywh.pdnodes[0].getY() * m, mywh.pickinglocationwidth, mywh.pickinglocationdepth);
                 //Draw created warehouse to panel
                 this.drawWarehouse();
                 labelTotalLocations.Text = "Total Locations: " + mywh.totalNumberOfLocations().ToString();
@@ -1422,7 +1410,7 @@ namespace GABAK
                 //Clear SVG content
                 mysvg = new svg(panelDrawing.Width, panelDrawing.Height);
                 //Clear ARDesign content
-                myardesign = new ardesign(mywh.getWidth(), mywh.getDepth(), mywh.pickinglocationwidth, mywh.pickinglocationdepth);
+                myardesign = new ardesign(mywh.getWidth(), mywh.getDepth(), mywh.pdnodes[0].getX() * m, mywh.pdnodes[0].getY() * m, mywh.pickinglocationwidth, mywh.pickinglocationdepth);
                 this.drawWarehouse();
                 panelDrawing.BackgroundImage = myBitmap;
                 panelDrawing.Refresh();
