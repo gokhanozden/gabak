@@ -241,68 +241,6 @@ namespace GABAK
             return newtourlocations;
         }
 
-        ///// <summary>
-        ///// Solves routing of an order in a warehouse by using aisle centers method and 2OPT
-        ///// </summary>
-        ///// <param name="p_wh">Warehouse object</param>
-        ///// <param name="p_order">Order object</param>
-        ///// <param name="p_k">Index for order list</param>
-        ///// <returns></returns>
-        //public double tsp2OPTSteiner(warehouse p_wh, order p_order, int p_k)
-        //{
-        //    //List<node> tourlocations = new List<node>();
-        //    double[,] distances = new double[4, 4] {
-        //        {0, 10, 15, 20},   /*  initializers for row indexed by 0 */
-        //        {10, 0, 35, 25},   /*  initializers for row indexed by 1 */
-        //        {15, 35, 0, 30}, /*  initializers for row indexed by 2 */
-        //        {20, 25, 30, 0}  /*  initializers for row indexed by 3 */
-        //    };
-        //    int dimension = 4;
-        //    int[] tourlocations = { 0, 1, 2, 3 };
-        //    double minchange;
-        //    double change;
-        //    int mini;
-        //    int minj;
-        //    do
-        //    {
-        //        minchange = 0;
-        //        change = 0;
-        //        mini = 0;
-        //        minj = 0;
-        //        for (int i = 0; i < dimension - 1; i++)
-        //        {
-        //            for (int j = i + 2; j < dimension - 1; j++)
-        //            {
-        //                //Calculate the change in tourlength
-        //                double dist1 = distances[visualmath.mod(i, dimension), visualmath.mod(j + 1, dimension)];
-        //                double dist2 = distances[visualmath.mod(j, dimension), visualmath.mod(i - 1, dimension)];
-        //                double dist3 = distances[visualmath.mod(i - 1, dimension), visualmath.mod(i, dimension)];
-        //                double dist4 = distances[visualmath.mod(j, dimension), visualmath.mod(j + 1, dimension)];
-        //                change = dist1 + dist2 - dist3 - dist4;
-        //                if (minchange > change)
-        //                {
-        //                    minchange = change;
-        //                    mini = i;
-        //                    minj = j;
-        //                }
-        //            }
-        //        }
-        //        //apply mini/minj move
-        //        int tempcity;
-        //        tempcity = tourlocations[mini];
-        //        tourlocations[mini] = tourlocations[minj];
-        //        tourlocations[minj] = tempcity;
-        //    }
-        //    while (minchange < 0);
-
-        //    double distance =
-        //distances[tourlocations[0], tourlocations[1]] +
-        //        distances[tourlocations[1], tourlocations[2]] +
-        //        distances[tourlocations[2], tourlocations[3]] +
-        //        distances[tourlocations[3], tourlocations[0]];
-
-        //    return distance;
-        //}
 
         /// <summary>
         /// Returns the tour cost when using aisle centers method
