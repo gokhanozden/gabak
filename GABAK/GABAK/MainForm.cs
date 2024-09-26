@@ -1460,7 +1460,7 @@ namespace GABAK
                 {
                     for (int j = 0; j < dimension; j++)
                     {
-                        cost[i, j] = Convert.ToInt32(10 * mywh.shortestPathDistanceTwoLocations(tourlocations[i], tourlocations[j]));
+                        cost[i, j] = Convert.ToInt32(10 * mywh.shortestPathDistanceTwoLocationsSteiner(tourlocations[i], tourlocations[j]));
                     }
                 }
 
@@ -2897,7 +2897,7 @@ namespace GABAK
 
                     panelDrawing.Refresh();
 
-                    textBoxTSP.Text = mywh.shortestPathDistanceTwoLocations(mywh.locationnodes.ElementAt(loc1), mywh.locationnodes.ElementAt(loc2)).ToString();
+                    textBoxTSP.Text = mywh.shortestPathDistanceTwoLocationsSteiner(mywh.locationnodes.ElementAt(loc1), mywh.locationnodes.ElementAt(loc2)).ToString();
                 }
             }
         }
