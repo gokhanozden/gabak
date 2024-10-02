@@ -272,8 +272,10 @@ namespace GABAK
             int samplesize = Convert.ToInt32(textBoxSampleSize.Text);
             //If you want to solve it on this computer
             DateTime start8 = DateTime.Now;
+            //If you want to use aisle centers
             if (!mywh.usevisibilitygraph)
             {
+                //If you want to solve it using parallel computing
                 if (comboBoxComputing.SelectedIndex == 0)
                 {
                     var sums = new ConcurrentBag<double>();
@@ -305,6 +307,11 @@ namespace GABAK
                             else if (routingSolver == "2-Opt")
                             {
                                 tourcost = rt.tsp2OPTSteiner(tmpwh, tmporders[k], k);
+                                if (tourcost == 0) break;//This means that tour cost is really zero
+                            }
+                            else if (routingSolver == "Held-Karp")
+                            {
+                                tourcost = rt.tspHeldKarpSteiner(tmpwh, tmporders[k], k);
                                 if (tourcost == 0) break;//This means that tour cost is really zero
                             }
                         }
@@ -347,6 +354,7 @@ namespace GABAK
                         totalcost = rt.tspLKHNetSteiner(mywh, samplesize, mysocketservers, comboBoxNetSchedule.SelectedIndex);
                     }
                 }
+                //If you want to solve it using single threaded computing
                 else
                 {
                     var sums = new ConcurrentBag<double>();
@@ -380,6 +388,11 @@ namespace GABAK
                                 tourcost = rt.tsp2OPTSteiner(tmpwh, tmporders[k], k);
                                 if (tourcost == 0) break;//This means that tour cost is really zero
                             }
+                            else if (routingSolver == "Held-Karp")
+                            {
+                                tourcost = rt.tspHeldKarpSteiner(tmpwh, tmporders[k], k);
+                                if (tourcost == 0) break;//This means that tour cost is really zero
+                            }
                         }
                         sums.Add(tourcost);
                         sums2.Add(tmporders[k].getOrderSize());
@@ -402,8 +415,10 @@ namespace GABAK
                     totalcost = sums.Sum() / samplesize;
                 }
             }
+            //If you want to use visibility graph
             else
             {
+                //If you want to solve it using parallel computing
                 if (comboBoxComputing.SelectedIndex == 0)
                 {
                     var sums = new ConcurrentBag<double>();
@@ -412,7 +427,6 @@ namespace GABAK
                     string routingSolver = comboBoxRouting.GetItemText(comboBoxRouting.SelectedItem);
 
                     Parallel.For(0, samplesize, k =>
-                    //for (int k = 0; k < samplesize; k++)
                     {
                         warehouse tmpwh = mywh;
                         List<order> tmporders = mywh.getOrders();
@@ -433,6 +447,11 @@ namespace GABAK
                                 LKHdoneonce = true;
                             }
                             else if (routingSolver == "2-Opt")
+                            {
+                                tourcost = rt.tsp2OPTVisibility(tmpwh, tmporders[k], k);
+                                if (tourcost == 0) break;//This means that tour cost is really zero
+                            }
+                            else if (routingSolver == "Held-Karp")
                             {
                                 tourcost = rt.tsp2OPTVisibility(tmpwh, tmporders[k], k);
                                 if (tourcost == 0) break;//This means that tour cost is really zero
@@ -477,6 +496,7 @@ namespace GABAK
                         totalcost = rt.tspLKHNetVisibility(mywh, samplesize, mysocketservers, comboBoxNetSchedule.SelectedIndex);
                     }
                 }
+                //If you want to solve it using single threaded computing
                 else
                 {
                     var sums = new ConcurrentBag<double>();
@@ -484,13 +504,11 @@ namespace GABAK
                     var sums3 = new ConcurrentBag<int>();
                     string routingSolver = comboBoxRouting.GetItemText(comboBoxRouting.SelectedItem);
 
-                    //Parallel.For(0, samplesize, k =>
                     for (int k = 0; k < samplesize; k++)
                     {
                         warehouse tmpwh = mywh;
                         List<order> tmporders = mywh.getOrders();
                         routing rt = new routing();
-                        //totalcost += rt.tsp(tmpwh, tmporders[k]);
                         double tourcost = 0;
                         bool LKHdoneonce = false;
                         while (tourcost == 0)

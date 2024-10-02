@@ -62,12 +62,10 @@ namespace GABAK
         public double tspHeldKarpSteiner(warehouse p_wh, order p_order, int p_k)
         {
             List<node> tourlocations = new List<node>();
-            List<node> temptourlocations = new List<node>();
             //LKH and Concorde only solves for integer distances, therefore we need to convert double distances into integer
             //m = 10 will keep only one decimal such as 10.1, m = 100 will keep two decimals such as 10.01
             //We kept it m = 10 because we think it gives enough precision for our results (up to 0.1 ft or 0.1 m)
             double m = 10;
-            tourlocations.Add(p_wh.pdnodes[0]);//Each tour should have a PD point
             //Find the pick location of each SKU in the order in a warehouse
             //Do not double count the pick location if two SKUs are residing in the same location, this basically eliminates duplicate pick locations
             for (int i = 0; i < p_order.getOrderSize(); i++)
@@ -77,10 +75,28 @@ namespace GABAK
                     tourlocations.Add(p_order.getOrderSkus()[i].location);
                 }
             }
-            int dimension = tourlocations.Count;//Size of the TSP problem
-            
+            return Convert.ToDouble(Convert.ToInt32(heldKarpTourSteinerRecursive(p_wh.pdnodes[0], tourlocations, p_wh)) * m) / m;
+        }
 
-            return 0;
+        private double heldKarpTourSteinerRecursive(node startNode, List<node> remainingNodes, warehouse p_wh)
+        {
+            if (remainingNodes.Count == 0)//All cities are visited
+            {
+                return p_wh.shortestPathDistanceTwoLocationsSteiner(p_wh.pdnodes[0], startNode);
+            }
+            double minValueFound = double.MaxValue;
+                for (int i = 0; i < remainingNodes.Count; i++)
+                {
+                    node node = remainingNodes[i];
+                    remainingNodes.Remove(node);
+                    double currentCost = p_wh.shortestPathDistanceTwoLocationsSteiner(startNode, node) + heldKarpTourSteinerRecursive(node, remainingNodes, p_wh);
+                    if (currentCost < minValueFound)
+                    {
+                        minValueFound = currentCost;
+                    }
+                    remainingNodes.Add(node);
+                }
+                return minValueFound;
         }
 
         /// <summary>
@@ -94,6 +110,31 @@ namespace GABAK
         {
 
             return 0;
+        }
+
+        private double heldKarpTourVisibilityGraphRecursive(node startNode, List<node> remainingNodes, warehouse p_wh)
+        {
+            if (remainingNodes.Count == 0)
+            {
+                return p_wh.shortestPathDistanceTwoLocationsVisibilityGraph(p_wh.pdnodes[0], startNode);
+            }
+            else
+            {
+                double minValueFound = double.MaxValue;
+                for (int i = 0; i < remainingNodes.Count; i++)
+                {
+
+                    node node = remainingNodes[i];
+                    remainingNodes.Remove(node);
+                    double currentCost = p_wh.shortestPathDistanceTwoLocationsVisibilityGraph(startNode, remainingNodes[i]) + heldKarpTourVisibilityGraphRecursive(remainingNodes[i], remainingNodes, p_wh);
+                    if (currentCost < minValueFound)
+                    {
+                        minValueFound = currentCost;
+                    }
+                    remainingNodes.Add(node);
+                }
+                return minValueFound;
+            }
         }
 
         /// <summary>
@@ -144,13 +185,13 @@ namespace GABAK
             //The below code will only run when dimension > 3
             //Tour array can be used to keep the tour, currently we are only interested in tour cost for optimization purposes
             //Tours might be useful if we want to see tour details, currently we don't have an implementation for showing the actual tour
-            double bestdistance = tourCostSteiner(p_wh, tourlocations);
-            double initialbestdistance = bestdistance;
+            int bestdistance = Convert.ToInt32(tourCostSteiner(p_wh, tourlocations) * m);
+            int initialbestdistance = bestdistance;
             int mini;
             int minj;
             do
             {
-                bestdistance = tourCostSteiner(p_wh, tourlocations);
+                bestdistance = Convert.ToInt32(tourCostSteiner(p_wh, tourlocations) * m);
                 initialbestdistance = bestdistance;
                 mini = 0;
                 minj = 0;
@@ -159,7 +200,7 @@ namespace GABAK
                     for (int k = i + 1; k < dimension; k++)
                     {
                         temptourlocations = TwoOptSwap(i, k, tourlocations);
-                        double distance = tourCostSteiner(p_wh, temptourlocations);
+                        int distance = Convert.ToInt32(tourCostSteiner(p_wh, temptourlocations) * m);
                         if (bestdistance > distance)
                         {
                             bestdistance = distance;
@@ -226,13 +267,13 @@ namespace GABAK
             //The below code will only run when dimension > 3
             //Tour array can be used to keep the tour, currently we are only interested in tour cost for optimization purposes
             //Tours might be useful if we want to see tour details, currently we don't have an implementation for showing the actual tour
-            double bestdistance = tourCostVisibility(p_wh, tourlocations);
+            double bestdistance = tourCostVisibility(p_wh, tourlocations) / m;
             double initialbestdistance = bestdistance;
             int mini;
             int minj;
             do
             {
-                bestdistance = tourCostVisibility(p_wh, tourlocations);
+                bestdistance = tourCostVisibility(p_wh, tourlocations) / m;
                 initialbestdistance = bestdistance;
                 mini = 0;
                 minj = 0;
@@ -241,7 +282,7 @@ namespace GABAK
                     for (int k = i + 1; k < dimension; k++)
                     {
                         temptourlocations = TwoOptSwap(i, k, tourlocations);
-                        double distance = tourCostVisibility(p_wh, temptourlocations);
+                        double distance = tourCostVisibility(p_wh, temptourlocations) / m;
                         if (bestdistance > distance)
                         {
                             bestdistance = distance;
@@ -257,7 +298,7 @@ namespace GABAK
                 tourlocations[minj] = tempnode;
             }
             while (bestdistance - initialbestdistance < 0);
-            return tourCostVisibility(p_wh, tourlocations);
+            return tourCostVisibility(p_wh, tourlocations) / m;
         }
 
         private List<node> TwoOptSwap(int p_i, int p_k, List<node> p_tourlocations)
@@ -311,12 +352,16 @@ namespace GABAK
         /// <returns>Travel distance</returns>
         private double tourCostVisibility(warehouse p_wh, List<node> p_tour)
         {
+            //LKH and Concorde only solves for integer distances, therefore we need to convert double distances into integer
+            //m = 10 will keep only one decimal such as 10.1, m = 100 will keep two decimals such as 10.01
+            //We kept it m = 10 because we think it gives enough precision for our results (up to 0.1 ft or 0.1 m)
+            double m = 10;
             double tourcost = 0;
             for (int i = 0; i < p_tour.Count - 1; i++)
             {
-                tourcost += p_wh.shortestPathDistanceTwoLocationsVisibilityGraph(p_tour[i], p_tour[i + 1]);
+                tourcost += m * p_wh.shortestPathDistanceTwoLocationsVisibilityGraph(p_tour[i], p_tour[i + 1]);
             }
-            tourcost += p_wh.shortestPathDistanceTwoLocationsVisibilityGraph(p_tour[p_tour.Count - 1], p_tour[0]);//returning back to starting city
+            tourcost += m * p_wh.shortestPathDistanceTwoLocationsVisibilityGraph(p_tour[p_tour.Count - 1], p_tour[0]);//returning back to starting city
             return tourcost;
         }
 
