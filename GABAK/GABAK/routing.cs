@@ -75,21 +75,22 @@ namespace GABAK
                     tourlocations.Add(p_order.getOrderSkus()[i].location);
                 }
             }
-            return Convert.ToDouble(Convert.ToInt32(heldKarpTourSteinerRecursive(p_wh.pdnodes[0], tourlocations, p_wh)) * m) / m;
+            return Convert.ToDouble(heldKarpTourSteinerRecursive(p_wh.pdnodes[0], tourlocations, p_wh)) / m;
         }
 
-        private double heldKarpTourSteinerRecursive(node startNode, List<node> remainingNodes, warehouse p_wh)
+        private int heldKarpTourSteinerRecursive(node startNode, List<node> remainingNodes, warehouse p_wh)
         {
+            double m = 10;
             if (remainingNodes.Count == 0)//All cities are visited
             {
-                return p_wh.shortestPathDistanceTwoLocationsSteiner(p_wh.pdnodes[0], startNode);
+                return Convert.ToInt32(p_wh.shortestPathDistanceTwoLocationsSteiner(p_wh.pdnodes[0], startNode) * m);
             }
-            double minValueFound = double.MaxValue;
+            int minValueFound = int.MaxValue;
                 for (int i = 0; i < remainingNodes.Count; i++)
                 {
                     node node = remainingNodes[i];
                     remainingNodes.Remove(node);
-                    double currentCost = p_wh.shortestPathDistanceTwoLocationsSteiner(startNode, node) + heldKarpTourSteinerRecursive(node, remainingNodes, p_wh);
+                    int currentCost = Convert.ToInt32(p_wh.shortestPathDistanceTwoLocationsSteiner(startNode, node) * m) + heldKarpTourSteinerRecursive(node, remainingNodes, p_wh);
                     if (currentCost < minValueFound)
                     {
                         minValueFound = currentCost;
