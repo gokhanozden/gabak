@@ -66,6 +66,7 @@ namespace GABAK
             //m = 10 will keep only one decimal such as 10.1, m = 100 will keep two decimals such as 10.01
             //We kept it m = 10 because we think it gives enough precision for our results (up to 0.1 ft or 0.1 m)
             double m = 10;
+            tourlocations.Add(p_wh.pdnodes[0]);//Each tour should have a PD point
             //Find the pick location of each SKU in the order in a warehouse
             //Do not double count the pick location if two SKUs are residing in the same location, this basically eliminates duplicate pick locations
             for (int i = 0; i < p_order.getOrderSize(); i++)
@@ -75,29 +76,38 @@ namespace GABAK
                     tourlocations.Add(p_order.getOrderSkus()[i].location);
                 }
             }
-            return Convert.ToDouble(heldKarpTourSteinerRecursive(p_wh.pdnodes[0], tourlocations, p_wh)) / m;
-        }
-
-        private int heldKarpTourSteinerRecursive(node startNode, List<node> remainingNodes, warehouse p_wh)
-        {
-            double m = 10;
-            if (remainingNodes.Count == 0)//All cities are visited
+            int dimension = tourlocations.Count;//Size of the TSP problem
+            //If dimension is 2 or 3 then LKH or Concorde cannot solve the problem, we have to find optimal routes for these two dimensions manually inside our code
+            if (dimension == 2)
             {
-                return Convert.ToInt32(p_wh.shortestPathDistanceTwoLocationsSteiner(p_wh.pdnodes[0], startNode) * m);
+                return 2 * Convert.ToDouble(Convert.ToInt32(p_wh.shortestPathDistanceTwoLocationsSteiner(tourlocations[0], tourlocations[1])) * m) / m;
             }
-            int minValueFound = int.MaxValue;
-                for (int i = 0; i < remainingNodes.Count; i++)
+            if (dimension == 3)
+            {
+                double dist1 = p_wh.shortestPathDistanceTwoLocationsSteiner(tourlocations[0], tourlocations[1]) + p_wh.shortestPathDistanceTwoLocationsSteiner(tourlocations[1], tourlocations[2]) + p_wh.shortestPathDistanceTwoLocationsSteiner(tourlocations[2], tourlocations[0]);
+                double dist2 = p_wh.shortestPathDistanceTwoLocationsSteiner(tourlocations[0], tourlocations[2]) + p_wh.shortestPathDistanceTwoLocationsSteiner(tourlocations[2], tourlocations[1]) + p_wh.shortestPathDistanceTwoLocationsSteiner(tourlocations[1], tourlocations[0]);
+
+                if (dist1 < dist2)
                 {
-                    node node = remainingNodes[i];
-                    remainingNodes.Remove(node);
-                    int currentCost = Convert.ToInt32(p_wh.shortestPathDistanceTwoLocationsSteiner(startNode, node) * m) + heldKarpTourSteinerRecursive(node, remainingNodes, p_wh);
-                    if (currentCost < minValueFound)
-                    {
-                        minValueFound = currentCost;
-                    }
-                    remainingNodes.Add(node);
+                    return Convert.ToDouble(Convert.ToInt32(dist1 * m)) / m;
                 }
-                return minValueFound;
+                else
+                {
+                    return Convert.ToDouble(Convert.ToInt32(dist2 * m)) / m;
+                }
+            }
+            int[,] distanceMatrix = new int[dimension,dimension];
+            for (int i = 0; i < dimension; i++)
+            {
+                for (int j = 0; j < dimension; j++)
+                {
+                    distanceMatrix[i,j] = Convert.ToInt32(m * p_wh.shortestPathDistanceTwoLocationsSteiner(tourlocations[i], tourlocations[j]));
+                }
+            }
+
+            //Initalize the heldkarp object
+            heldkarp heldkarpsolver = new heldkarp(distanceMatrix);
+            return Convert.ToDouble(heldkarpsolver.SolveTSP()) / m;
         }
 
         /// <summary>
@@ -186,13 +196,13 @@ namespace GABAK
             //The below code will only run when dimension > 3
             //Tour array can be used to keep the tour, currently we are only interested in tour cost for optimization purposes
             //Tours might be useful if we want to see tour details, currently we don't have an implementation for showing the actual tour
-            int bestdistance = Convert.ToInt32(tourCostSteiner(p_wh, tourlocations) * m);
+            int bestdistance = Convert.ToInt32(tourCostSteiner(p_wh, tourlocations));
             int initialbestdistance = bestdistance;
             int mini;
             int minj;
             do
             {
-                bestdistance = Convert.ToInt32(tourCostSteiner(p_wh, tourlocations) * m);
+                bestdistance = Convert.ToInt32(tourCostSteiner(p_wh, tourlocations));
                 initialbestdistance = bestdistance;
                 mini = 0;
                 minj = 0;
@@ -201,7 +211,7 @@ namespace GABAK
                     for (int k = i + 1; k < dimension; k++)
                     {
                         temptourlocations = TwoOptSwap(i, k, tourlocations);
-                        int distance = Convert.ToInt32(tourCostSteiner(p_wh, temptourlocations) * m);
+                        int distance = Convert.ToInt32(tourCostSteiner(p_wh, temptourlocations));
                         if (bestdistance > distance)
                         {
                             bestdistance = distance;
@@ -217,7 +227,7 @@ namespace GABAK
                 tourlocations[minj] = tempnode;
             }
             while (bestdistance - initialbestdistance < 0);
-            return tourCostSteiner(p_wh, tourlocations);
+            return tourCostSteiner(p_wh, tourlocations) / m;
         }
 
         /// <summary>
@@ -334,14 +344,15 @@ namespace GABAK
         /// <param name="p_wh">Warehouse object</param>
         /// <param name="p_tour">Tour object</param>
         /// <returns>Travel distance</returns>
-        private double tourCostSteiner(warehouse p_wh, List<node> p_tour)
+        private int tourCostSteiner(warehouse p_wh, List<node> p_tour)
         {
-            double tourcost = 0;
+            double m = 10;
+            int tourcost = 0;
             for (int i = 0; i < p_tour.Count - 1; i++)
             {
-                tourcost += p_wh.shortestPathDistanceTwoLocationsSteiner(p_tour[i], p_tour[i + 1]);
+                tourcost += Convert.ToInt32(m * p_wh.shortestPathDistanceTwoLocationsSteiner(p_tour[i], p_tour[i + 1]));
             }
-            tourcost += p_wh.shortestPathDistanceTwoLocationsSteiner(p_tour[p_tour.Count - 1], p_tour[0]);//returning back to starting city
+            tourcost += Convert.ToInt32(m * p_wh.shortestPathDistanceTwoLocationsSteiner(p_tour[p_tour.Count - 1], p_tour[0]));//returning back to starting city
             return tourcost;
         }
 

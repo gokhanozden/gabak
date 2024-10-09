@@ -43,7 +43,7 @@
     <PublisherName>GABAK</PublisherName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>5</ApplicationRevision>
+    <ApplicationRevision>6</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>true</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -223,6 +223,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>gabakDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="heldkarp.cs" />
     <Compile Include="polygon.cs" />
     <Compile Include="priorityqueue.cs" />
     <Compile Include="Settings.cs" />
