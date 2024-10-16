@@ -45,11 +45,107 @@ namespace GABAK
             double totaltourdistance = 0;
             for (int i = 0; i < orderedlocations.Count() - 1; i++)
             {
-                totaltourdistance = totaltourdistance + wh.shortestPathDistanceTwoLocations(orderedlocations[i], orderedlocations[i + 1]);
+                totaltourdistance = totaltourdistance + wh.shortestPathDistanceTwoLocationsSteiner(orderedlocations[i], orderedlocations[i + 1]);
             }
-            totaltourdistance = totaltourdistance + wh.shortestPathDistanceTwoLocations(wh.pdnodes[0], orderedlocations[0]);
-            totaltourdistance = totaltourdistance + wh.shortestPathDistanceTwoLocations(wh.pdnodes[0], orderedlocations[orderedlocations.Count - 1]);
+            totaltourdistance = totaltourdistance + wh.shortestPathDistanceTwoLocationsSteiner(wh.pdnodes[0], orderedlocations[0]);
+            totaltourdistance = totaltourdistance + wh.shortestPathDistanceTwoLocationsSteiner(wh.pdnodes[0], orderedlocations[orderedlocations.Count - 1]);
             return totaltourdistance;
+        }
+
+        /// <summary>
+        /// Solves routing of an order in a warehouse by using aisle centers method and HeldKarp(Optimal)
+        /// </summary>
+        /// <param name="p_wh">Warehouse object</param>
+        /// <param name="p_order">Order object</param>
+        /// <param name="p_k">Index for order list</param>
+        /// <returns></returns>
+        public double tspHeldKarpSteiner(warehouse p_wh, order p_order, int p_k)
+        {
+            List<node> tourlocations = new List<node>();
+            //LKH and Concorde only solves for integer distances, therefore we need to convert double distances into integer
+            //m = 10 will keep only one decimal such as 10.1, m = 100 will keep two decimals such as 10.01
+            //We kept it m = 10 because we think it gives enough precision for our results (up to 0.1 ft or 0.1 m)
+            double m = 10;
+            tourlocations.Add(p_wh.pdnodes[0]);//Each tour should have a PD point
+            //Find the pick location of each SKU in the order in a warehouse
+            //Do not double count the pick location if two SKUs are residing in the same location, this basically eliminates duplicate pick locations
+            for (int i = 0; i < p_order.getOrderSize(); i++)
+            {
+                if (!tourlocations.Contains(p_order.getOrderSkus()[i].location))
+                {
+                    tourlocations.Add(p_order.getOrderSkus()[i].location);
+                }
+            }
+            int dimension = tourlocations.Count;//Size of the TSP problem
+            //If dimension is 2 or 3 then LKH or Concorde cannot solve the problem, we have to find optimal routes for these two dimensions manually inside our code
+            if (dimension == 2)
+            {
+                return 2 * Convert.ToDouble(Convert.ToInt32(p_wh.shortestPathDistanceTwoLocationsSteiner(tourlocations[0], tourlocations[1])) * m) / m;
+            }
+            if (dimension == 3)
+            {
+                double dist1 = p_wh.shortestPathDistanceTwoLocationsSteiner(tourlocations[0], tourlocations[1]) + p_wh.shortestPathDistanceTwoLocationsSteiner(tourlocations[1], tourlocations[2]) + p_wh.shortestPathDistanceTwoLocationsSteiner(tourlocations[2], tourlocations[0]);
+                double dist2 = p_wh.shortestPathDistanceTwoLocationsSteiner(tourlocations[0], tourlocations[2]) + p_wh.shortestPathDistanceTwoLocationsSteiner(tourlocations[2], tourlocations[1]) + p_wh.shortestPathDistanceTwoLocationsSteiner(tourlocations[1], tourlocations[0]);
+
+                if (dist1 < dist2)
+                {
+                    return Convert.ToDouble(Convert.ToInt32(dist1 * m)) / m;
+                }
+                else
+                {
+                    return Convert.ToDouble(Convert.ToInt32(dist2 * m)) / m;
+                }
+            }
+            int[,] distanceMatrix = new int[dimension,dimension];
+            for (int i = 0; i < dimension; i++)
+            {
+                for (int j = 0; j < dimension; j++)
+                {
+                    distanceMatrix[i,j] = Convert.ToInt32(m * p_wh.shortestPathDistanceTwoLocationsSteiner(tourlocations[i], tourlocations[j]));
+                }
+            }
+
+            //Initalize the heldkarp object
+            heldkarp heldkarpsolver = new heldkarp(distanceMatrix);
+            return Convert.ToDouble(heldkarpsolver.SolveTSP()) / m;
+        }
+
+        /// <summary>
+        /// Solves routing of an order in a warehouse by using visibility graph method and HeldKarp(Optimal)
+        /// </summary>
+        /// <param name="p_wh">Warehouse object</param>
+        /// <param name="p_order">Order object</param>
+        /// <param name="p_k">Index for order list</param>
+        /// <returns></returns>
+        public double tspHeldKarpVisibility(warehouse p_wh, order p_order, int p_k)
+        {
+
+            return 0;
+        }
+
+        private double heldKarpTourVisibilityGraphRecursive(node startNode, List<node> remainingNodes, warehouse p_wh)
+        {
+            if (remainingNodes.Count == 0)
+            {
+                return p_wh.shortestPathDistanceTwoLocationsVisibilityGraph(p_wh.pdnodes[0], startNode);
+            }
+            else
+            {
+                double minValueFound = double.MaxValue;
+                for (int i = 0; i < remainingNodes.Count; i++)
+                {
+
+                    node node = remainingNodes[i];
+                    remainingNodes.Remove(node);
+                    double currentCost = p_wh.shortestPathDistanceTwoLocationsVisibilityGraph(startNode, remainingNodes[i]) + heldKarpTourVisibilityGraphRecursive(remainingNodes[i], remainingNodes, p_wh);
+                    if (currentCost < minValueFound)
+                    {
+                        minValueFound = currentCost;
+                    }
+                    remainingNodes.Add(node);
+                }
+                return minValueFound;
+            }
         }
 
         /// <summary>
@@ -81,12 +177,12 @@ namespace GABAK
             //If dimension is 2 or 3 then LKH or Concorde cannot solve the problem, we have to find optimal routes for these two dimensions manually inside our code
             if (dimension == 2)
             {
-                return 2 * Convert.ToDouble(Convert.ToInt32(p_wh.shortestPathDistanceTwoLocations(tourlocations[0], tourlocations[1])) * m) / m;
+                return 2 * Convert.ToDouble(Convert.ToInt32(p_wh.shortestPathDistanceTwoLocationsSteiner(tourlocations[0], tourlocations[1])) * m) / m;
             }
             if (dimension == 3)
             {
-                double dist1 = p_wh.shortestPathDistanceTwoLocations(tourlocations[0], tourlocations[1]) + p_wh.shortestPathDistanceTwoLocations(tourlocations[1], tourlocations[2]) + p_wh.shortestPathDistanceTwoLocations(tourlocations[2], tourlocations[0]);
-                double dist2 = p_wh.shortestPathDistanceTwoLocations(tourlocations[0], tourlocations[2]) + p_wh.shortestPathDistanceTwoLocations(tourlocations[2], tourlocations[1]) + p_wh.shortestPathDistanceTwoLocations(tourlocations[1], tourlocations[0]);
+                double dist1 = p_wh.shortestPathDistanceTwoLocationsSteiner(tourlocations[0], tourlocations[1]) + p_wh.shortestPathDistanceTwoLocationsSteiner(tourlocations[1], tourlocations[2]) + p_wh.shortestPathDistanceTwoLocationsSteiner(tourlocations[2], tourlocations[0]);
+                double dist2 = p_wh.shortestPathDistanceTwoLocationsSteiner(tourlocations[0], tourlocations[2]) + p_wh.shortestPathDistanceTwoLocationsSteiner(tourlocations[2], tourlocations[1]) + p_wh.shortestPathDistanceTwoLocationsSteiner(tourlocations[1], tourlocations[0]);
 
                 if (dist1 < dist2)
                 {
@@ -100,13 +196,13 @@ namespace GABAK
             //The below code will only run when dimension > 3
             //Tour array can be used to keep the tour, currently we are only interested in tour cost for optimization purposes
             //Tours might be useful if we want to see tour details, currently we don't have an implementation for showing the actual tour
-            double bestdistance = tourCostSteiner(p_wh, tourlocations);
-            double initialbestdistance = bestdistance;
+            int bestdistance = Convert.ToInt32(tourCostSteiner(p_wh, tourlocations));
+            int initialbestdistance = bestdistance;
             int mini;
             int minj;
             do
             {
-                bestdistance = tourCostSteiner(p_wh, tourlocations);
+                bestdistance = Convert.ToInt32(tourCostSteiner(p_wh, tourlocations));
                 initialbestdistance = bestdistance;
                 mini = 0;
                 minj = 0;
@@ -115,7 +211,7 @@ namespace GABAK
                     for (int k = i + 1; k < dimension; k++)
                     {
                         temptourlocations = TwoOptSwap(i, k, tourlocations);
-                        double distance = tourCostSteiner(p_wh, temptourlocations);
+                        int distance = Convert.ToInt32(tourCostSteiner(p_wh, temptourlocations));
                         if (bestdistance > distance)
                         {
                             bestdistance = distance;
@@ -131,7 +227,7 @@ namespace GABAK
                 tourlocations[minj] = tempnode;
             }
             while (bestdistance - initialbestdistance < 0);
-            return tourCostSteiner(p_wh, tourlocations);
+            return tourCostSteiner(p_wh, tourlocations) / m;
         }
 
         /// <summary>
@@ -182,13 +278,13 @@ namespace GABAK
             //The below code will only run when dimension > 3
             //Tour array can be used to keep the tour, currently we are only interested in tour cost for optimization purposes
             //Tours might be useful if we want to see tour details, currently we don't have an implementation for showing the actual tour
-            double bestdistance = tourCostVisibility(p_wh, tourlocations);
+            double bestdistance = tourCostVisibility(p_wh, tourlocations) / m;
             double initialbestdistance = bestdistance;
             int mini;
             int minj;
             do
             {
-                bestdistance = tourCostVisibility(p_wh, tourlocations);
+                bestdistance = tourCostVisibility(p_wh, tourlocations) / m;
                 initialbestdistance = bestdistance;
                 mini = 0;
                 minj = 0;
@@ -197,7 +293,7 @@ namespace GABAK
                     for (int k = i + 1; k < dimension; k++)
                     {
                         temptourlocations = TwoOptSwap(i, k, tourlocations);
-                        double distance = tourCostVisibility(p_wh, temptourlocations);
+                        double distance = tourCostVisibility(p_wh, temptourlocations) / m;
                         if (bestdistance > distance)
                         {
                             bestdistance = distance;
@@ -213,7 +309,7 @@ namespace GABAK
                 tourlocations[minj] = tempnode;
             }
             while (bestdistance - initialbestdistance < 0);
-            return tourCostVisibility(p_wh, tourlocations);
+            return tourCostVisibility(p_wh, tourlocations) / m;
         }
 
         private List<node> TwoOptSwap(int p_i, int p_k, List<node> p_tourlocations)
@@ -241,68 +337,6 @@ namespace GABAK
             return newtourlocations;
         }
 
-        ///// <summary>
-        ///// Solves routing of an order in a warehouse by using aisle centers method and 2OPT
-        ///// </summary>
-        ///// <param name="p_wh">Warehouse object</param>
-        ///// <param name="p_order">Order object</param>
-        ///// <param name="p_k">Index for order list</param>
-        ///// <returns></returns>
-        //public double tsp2OPTSteiner(warehouse p_wh, order p_order, int p_k)
-        //{
-        //    //List<node> tourlocations = new List<node>();
-        //    double[,] distances = new double[4, 4] {
-        //        {0, 10, 15, 20},   /*  initializers for row indexed by 0 */
-        //        {10, 0, 35, 25},   /*  initializers for row indexed by 1 */
-        //        {15, 35, 0, 30}, /*  initializers for row indexed by 2 */
-        //        {20, 25, 30, 0}  /*  initializers for row indexed by 3 */
-        //    };
-        //    int dimension = 4;
-        //    int[] tourlocations = { 0, 1, 2, 3 };
-        //    double minchange;
-        //    double change;
-        //    int mini;
-        //    int minj;
-        //    do
-        //    {
-        //        minchange = 0;
-        //        change = 0;
-        //        mini = 0;
-        //        minj = 0;
-        //        for (int i = 0; i < dimension - 1; i++)
-        //        {
-        //            for (int j = i + 2; j < dimension - 1; j++)
-        //            {
-        //                //Calculate the change in tourlength
-        //                double dist1 = distances[visualmath.mod(i, dimension), visualmath.mod(j + 1, dimension)];
-        //                double dist2 = distances[visualmath.mod(j, dimension), visualmath.mod(i - 1, dimension)];
-        //                double dist3 = distances[visualmath.mod(i - 1, dimension), visualmath.mod(i, dimension)];
-        //                double dist4 = distances[visualmath.mod(j, dimension), visualmath.mod(j + 1, dimension)];
-        //                change = dist1 + dist2 - dist3 - dist4;
-        //                if (minchange > change)
-        //                {
-        //                    minchange = change;
-        //                    mini = i;
-        //                    minj = j;
-        //                }
-        //            }
-        //        }
-        //        //apply mini/minj move
-        //        int tempcity;
-        //        tempcity = tourlocations[mini];
-        //        tourlocations[mini] = tourlocations[minj];
-        //        tourlocations[minj] = tempcity;
-        //    }
-        //    while (minchange < 0);
-
-        //    double distance =
-        //distances[tourlocations[0], tourlocations[1]] +
-        //        distances[tourlocations[1], tourlocations[2]] +
-        //        distances[tourlocations[2], tourlocations[3]] +
-        //        distances[tourlocations[3], tourlocations[0]];
-
-        //    return distance;
-        //}
 
         /// <summary>
         /// Returns the tour cost when using aisle centers method
@@ -310,14 +344,15 @@ namespace GABAK
         /// <param name="p_wh">Warehouse object</param>
         /// <param name="p_tour">Tour object</param>
         /// <returns>Travel distance</returns>
-        private double tourCostSteiner(warehouse p_wh, List<node> p_tour)
+        private int tourCostSteiner(warehouse p_wh, List<node> p_tour)
         {
-            double tourcost = 0;
+            double m = 10;
+            int tourcost = 0;
             for (int i = 0; i < p_tour.Count - 1; i++)
             {
-                tourcost += p_wh.shortestPathDistanceTwoLocations(p_tour[i], p_tour[i + 1]);
+                tourcost += Convert.ToInt32(m * p_wh.shortestPathDistanceTwoLocationsSteiner(p_tour[i], p_tour[i + 1]));
             }
-            tourcost += p_wh.shortestPathDistanceTwoLocations(p_tour[p_tour.Count - 1], p_tour[0]);//returning back to starting city
+            tourcost += Convert.ToInt32(m * p_wh.shortestPathDistanceTwoLocationsSteiner(p_tour[p_tour.Count - 1], p_tour[0]));//returning back to starting city
             return tourcost;
         }
 
@@ -329,12 +364,16 @@ namespace GABAK
         /// <returns>Travel distance</returns>
         private double tourCostVisibility(warehouse p_wh, List<node> p_tour)
         {
+            //LKH and Concorde only solves for integer distances, therefore we need to convert double distances into integer
+            //m = 10 will keep only one decimal such as 10.1, m = 100 will keep two decimals such as 10.01
+            //We kept it m = 10 because we think it gives enough precision for our results (up to 0.1 ft or 0.1 m)
+            double m = 10;
             double tourcost = 0;
             for (int i = 0; i < p_tour.Count - 1; i++)
             {
-                tourcost += p_wh.shortestPathDistanceTwoLocationsVisibilityGraph(p_tour[i], p_tour[i + 1]);
+                tourcost += m * p_wh.shortestPathDistanceTwoLocationsVisibilityGraph(p_tour[i], p_tour[i + 1]);
             }
-            tourcost += p_wh.shortestPathDistanceTwoLocationsVisibilityGraph(p_tour[p_tour.Count - 1], p_tour[0]);//returning back to starting city
+            tourcost += m * p_wh.shortestPathDistanceTwoLocationsVisibilityGraph(p_tour[p_tour.Count - 1], p_tour[0]);//returning back to starting city
             return tourcost;
         }
 
@@ -366,12 +405,12 @@ namespace GABAK
             //If dimension is 2 or 3 then LKH or Concorde cannot solve the problem, we have to find optimal routes for these two dimensions manually inside our code
             if (dimension == 2)
             {
-                return 2 * Convert.ToDouble(Convert.ToInt32(p_wh.shortestPathDistanceTwoLocations(tourlocations[0], tourlocations[1])) * m) / m;
+                return 2 * Convert.ToDouble(Convert.ToInt32(p_wh.shortestPathDistanceTwoLocationsSteiner(tourlocations[0], tourlocations[1])) * m) / m;
             }
             if (dimension == 3)
             {
-                double dist1 = p_wh.shortestPathDistanceTwoLocations(tourlocations[0], tourlocations[1]) + p_wh.shortestPathDistanceTwoLocations(tourlocations[1], tourlocations[2]) + p_wh.shortestPathDistanceTwoLocations(tourlocations[2], tourlocations[0]);
-                double dist2 = p_wh.shortestPathDistanceTwoLocations(tourlocations[0], tourlocations[2]) + p_wh.shortestPathDistanceTwoLocations(tourlocations[2], tourlocations[1]) + p_wh.shortestPathDistanceTwoLocations(tourlocations[1], tourlocations[0]);
+                double dist1 = p_wh.shortestPathDistanceTwoLocationsSteiner(tourlocations[0], tourlocations[1]) + p_wh.shortestPathDistanceTwoLocationsSteiner(tourlocations[1], tourlocations[2]) + p_wh.shortestPathDistanceTwoLocationsSteiner(tourlocations[2], tourlocations[0]);
+                double dist2 = p_wh.shortestPathDistanceTwoLocationsSteiner(tourlocations[0], tourlocations[2]) + p_wh.shortestPathDistanceTwoLocationsSteiner(tourlocations[2], tourlocations[1]) + p_wh.shortestPathDistanceTwoLocationsSteiner(tourlocations[1], tourlocations[0]);
 
                 if (dist1 < dist2)
                 {
@@ -398,7 +437,7 @@ namespace GABAK
             {
                 for (int j = 0; j <= i; j++)
                 {
-                    cost[c] = Convert.ToInt32(m * p_wh.shortestPathDistanceTwoLocations(tourlocations[i], tourlocations[j]));
+                    cost[c] = Convert.ToInt32(m * p_wh.shortestPathDistanceTwoLocationsSteiner(tourlocations[i], tourlocations[j]));
                     c++;
                 }
             }
@@ -585,12 +624,12 @@ namespace GABAK
                         int dimension = tourlocations.Count;
                         if (dimension == 2)
                         {
-                            sums.Add(2 * Convert.ToDouble(Convert.ToInt32(p_wh.shortestPathDistanceTwoLocations(tourlocations[0], tourlocations[1])) * m) / m);
+                            sums.Add(2 * Convert.ToDouble(Convert.ToInt32(p_wh.shortestPathDistanceTwoLocationsSteiner(tourlocations[0], tourlocations[1])) * m) / m);
                         }
                         if (dimension == 3)
                         {
-                            double dist1 = p_wh.shortestPathDistanceTwoLocations(tourlocations[0], tourlocations[1]) + p_wh.shortestPathDistanceTwoLocations(tourlocations[1], tourlocations[2]) + p_wh.shortestPathDistanceTwoLocations(tourlocations[2], tourlocations[0]);
-                            double dist2 = p_wh.shortestPathDistanceTwoLocations(tourlocations[0], tourlocations[2]) + p_wh.shortestPathDistanceTwoLocations(tourlocations[2], tourlocations[1]) + p_wh.shortestPathDistanceTwoLocations(tourlocations[1], tourlocations[0]);
+                            double dist1 = p_wh.shortestPathDistanceTwoLocationsSteiner(tourlocations[0], tourlocations[1]) + p_wh.shortestPathDistanceTwoLocationsSteiner(tourlocations[1], tourlocations[2]) + p_wh.shortestPathDistanceTwoLocationsSteiner(tourlocations[2], tourlocations[0]);
+                            double dist2 = p_wh.shortestPathDistanceTwoLocationsSteiner(tourlocations[0], tourlocations[2]) + p_wh.shortestPathDistanceTwoLocationsSteiner(tourlocations[2], tourlocations[1]) + p_wh.shortestPathDistanceTwoLocationsSteiner(tourlocations[1], tourlocations[0]);
 
                             if (dist1 < dist2)
                             {
@@ -611,7 +650,7 @@ namespace GABAK
                         {
                             for (int j = 0; j <= i; j++)
                             {
-                                cost[c] = Convert.ToInt32(m * p_wh.shortestPathDistanceTwoLocations(tourlocations[i], tourlocations[j]));
+                                cost[c] = Convert.ToInt32(m * p_wh.shortestPathDistanceTwoLocationsSteiner(tourlocations[i], tourlocations[j]));
                                 c++;
                             }
                         }
@@ -870,12 +909,12 @@ namespace GABAK
             int dimension = tourlocations.Count;
             if (dimension == 2)
             {
-                return 2 * Convert.ToDouble(Convert.ToInt32(p_wh.shortestPathDistanceTwoLocations(tourlocations[0], tourlocations[1])) * m) / m;
+                return 2 * Convert.ToDouble(Convert.ToInt32(p_wh.shortestPathDistanceTwoLocationsSteiner(tourlocations[0], tourlocations[1])) * m) / m;
             }
             if (dimension == 3)
             {
-                double dist1 = p_wh.shortestPathDistanceTwoLocations(tourlocations[0], tourlocations[1]) + p_wh.shortestPathDistanceTwoLocations(tourlocations[1], tourlocations[2]) + p_wh.shortestPathDistanceTwoLocations(tourlocations[2], tourlocations[0]);
-                double dist2 = p_wh.shortestPathDistanceTwoLocations(tourlocations[0], tourlocations[2]) + p_wh.shortestPathDistanceTwoLocations(tourlocations[2], tourlocations[1]) + p_wh.shortestPathDistanceTwoLocations(tourlocations[1], tourlocations[0]);
+                double dist1 = p_wh.shortestPathDistanceTwoLocationsSteiner(tourlocations[0], tourlocations[1]) + p_wh.shortestPathDistanceTwoLocationsSteiner(tourlocations[1], tourlocations[2]) + p_wh.shortestPathDistanceTwoLocationsSteiner(tourlocations[2], tourlocations[0]);
+                double dist2 = p_wh.shortestPathDistanceTwoLocationsSteiner(tourlocations[0], tourlocations[2]) + p_wh.shortestPathDistanceTwoLocationsSteiner(tourlocations[2], tourlocations[1]) + p_wh.shortestPathDistanceTwoLocationsSteiner(tourlocations[1], tourlocations[0]);
 
                 if (dist1 < dist2)
                 {
@@ -897,7 +936,7 @@ namespace GABAK
             {
                 for (int j = 0; j <= i; j++)
                 {
-                    cost[c] = Convert.ToInt32(m * p_wh.shortestPathDistanceTwoLocations(tourlocations[i], tourlocations[j]));
+                    cost[c] = Convert.ToInt32(m * p_wh.shortestPathDistanceTwoLocationsSteiner(tourlocations[i], tourlocations[j]));
                     c++;
                 }
             }
@@ -1093,12 +1132,12 @@ namespace GABAK
                     int dimension = tourlocations.Count;
                     if (dimension == 2)
                     {
-                        sums.Add(2 * Convert.ToDouble(Convert.ToInt32(p_wh.shortestPathDistanceTwoLocations(tourlocations[0], tourlocations[1])) * m) / m);
+                        sums.Add(2 * Convert.ToDouble(Convert.ToInt32(p_wh.shortestPathDistanceTwoLocationsSteiner(tourlocations[0], tourlocations[1])) * m) / m);
                     }
                     if (dimension == 3)
                     {
-                        double dist1 = p_wh.shortestPathDistanceTwoLocations(tourlocations[0], tourlocations[1]) + p_wh.shortestPathDistanceTwoLocations(tourlocations[1], tourlocations[2]) + p_wh.shortestPathDistanceTwoLocations(tourlocations[2], tourlocations[0]);
-                        double dist2 = p_wh.shortestPathDistanceTwoLocations(tourlocations[0], tourlocations[2]) + p_wh.shortestPathDistanceTwoLocations(tourlocations[2], tourlocations[1]) + p_wh.shortestPathDistanceTwoLocations(tourlocations[1], tourlocations[0]);
+                        double dist1 = p_wh.shortestPathDistanceTwoLocationsSteiner(tourlocations[0], tourlocations[1]) + p_wh.shortestPathDistanceTwoLocationsSteiner(tourlocations[1], tourlocations[2]) + p_wh.shortestPathDistanceTwoLocationsSteiner(tourlocations[2], tourlocations[0]);
+                        double dist2 = p_wh.shortestPathDistanceTwoLocationsSteiner(tourlocations[0], tourlocations[2]) + p_wh.shortestPathDistanceTwoLocationsSteiner(tourlocations[2], tourlocations[1]) + p_wh.shortestPathDistanceTwoLocationsSteiner(tourlocations[1], tourlocations[0]);
 
                         if (dist1 < dist2)
                         {
@@ -1119,7 +1158,7 @@ namespace GABAK
                     {
                         for (int j = 0; j <= i; j++)
                         {
-                            cost[c] = Convert.ToInt32(m * p_wh.shortestPathDistanceTwoLocations(tourlocations[i], tourlocations[j]));
+                            cost[c] = Convert.ToInt32(m * p_wh.shortestPathDistanceTwoLocationsSteiner(tourlocations[i], tourlocations[j]));
                             c++;
                         }
                     }

@@ -36,14 +36,14 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <InstallUrl>https://www.gokhanozden.com/gabak/</InstallUrl>
+    <InstallUrl>http://www.gokhanozden.com/gabak/</InstallUrl>
     <SupportUrl>https://github.com/gokhanozden/gabak</SupportUrl>
     <TargetCulture>en</TargetCulture>
     <ProductName>GABAK Warehouse Layout Optimizer</ProductName>
     <PublisherName>GABAK</PublisherName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>4</ApplicationRevision>
+    <ApplicationRevision>6</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>true</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -262,6 +262,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>gabakDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="heldkarp.cs" />
     <Compile Include="polygon.cs" />
     <Compile Include="priorityqueue.cs" />
     <Compile Include="Settings.cs" />

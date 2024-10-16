@@ -2836,7 +2836,8 @@ namespace GABAK
             this.comboBoxRouting.Items.AddRange(new object[] {
             "LKH",
             "Concorde",
-            "2-Opt"});
+            "2-Opt",
+            "Held-Karp"});
             this.comboBoxRouting.Location = new System.Drawing.Point(11, 51);
             this.comboBoxRouting.Name = "comboBoxRouting";
             this.comboBoxRouting.Size = new System.Drawing.Size(89, 20);

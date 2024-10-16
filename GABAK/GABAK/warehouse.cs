@@ -3656,7 +3656,7 @@ namespace GABAK
             }
         }
 
-        public double shortestPathDistanceTwoLocations(node p_node1, node p_node2)
+        public double shortestPathDistanceTwoLocationsSteiner(node p_node1, node p_node2)
         {
             return locationnodedistances[p_node1.indexlocation, p_node2.indexlocation];
         }
