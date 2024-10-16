@@ -39,7 +39,6 @@ namespace GABAK
             this.textBoxAngle1 = new System.Windows.Forms.TextBox();
             this.labelAngle1 = new System.Windows.Forms.Label();
             this.buttonCreate = new System.Windows.Forms.Button();
-            this.panelDrawing = new System.Windows.Forms.Panel();
             this.buttonReset = new System.Windows.Forms.Button();
             this.textBoxWHWidth = new System.Windows.Forms.TextBox();
             this.textBoxWHDepth = new System.Windows.Forms.TextBox();
@@ -373,7 +372,14 @@ namespace GABAK
             this.tabPage8 = new System.Windows.Forms.TabPage();
             this.tabPage9 = new System.Windows.Forms.TabPage();
             this.tabPage10 = new System.Windows.Forms.TabPage();
+            this.tabPage11 = new System.Windows.Forms.TabPage();
+            this.sessionsLabel = new System.Windows.Forms.Label();
+            this.sessionsList = new System.Windows.Forms.ComboBox();
+            this.userIDInput = new System.Windows.Forms.TextBox();
+            this.createMapButton = new System.Windows.Forms.Button();
+            this.label46 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.panelDrawing = new System.Windows.Forms.Panel();
             this.menuStripTop.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -397,6 +403,7 @@ namespace GABAK
             this.tabPage8.SuspendLayout();
             this.tabPage9.SuspendLayout();
             this.tabPage10.SuspendLayout();
+            this.tabPage11.SuspendLayout();
             this.SuspendLayout();
             // 
             // textBoxAngle1
@@ -429,18 +436,6 @@ namespace GABAK
             this.buttonCreate.Text = "Create";
             this.buttonCreate.UseVisualStyleBackColor = true;
             this.buttonCreate.Click += new System.EventHandler(this.buttonCreate_Click);
-            // 
-            // panelDrawing
-            // 
-            this.panelDrawing.AllowDrop = true;
-            this.panelDrawing.AutoScroll = true;
-            this.panelDrawing.BackColor = System.Drawing.Color.White;
-            this.panelDrawing.Location = new System.Drawing.Point(623, 49);
-            this.panelDrawing.Margin = new System.Windows.Forms.Padding(0);
-            this.panelDrawing.Name = "panelDrawing";
-            this.panelDrawing.Size = new System.Drawing.Size(396, 366);
-            this.panelDrawing.TabIndex = 5;
-            this.panelDrawing.MouseClick += new System.Windows.Forms.MouseEventHandler(this.panelDrawing_MouseClick);
             // 
             // buttonReset
             // 
@@ -2859,10 +2854,11 @@ namespace GABAK
             this.tabControl1.Controls.Add(this.tabPage8);
             this.tabControl1.Controls.Add(this.tabPage9);
             this.tabControl1.Controls.Add(this.tabPage10);
+            this.tabControl1.Controls.Add(this.tabPage11);
             this.tabControl1.Location = new System.Drawing.Point(0, 28);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(620, 770);
+            this.tabControl1.Size = new System.Drawing.Size(695, 770);
             this.tabControl1.TabIndex = 561;
             // 
             // tabPage1
@@ -2886,7 +2882,7 @@ namespace GABAK
             this.tabPage1.Location = new System.Drawing.Point(4, 21);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(612, 745);
+            this.tabPage1.Size = new System.Drawing.Size(687, 745);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Input Data";
             // 
@@ -3009,7 +3005,7 @@ namespace GABAK
             this.tabPage2.Location = new System.Drawing.Point(4, 21);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(612, 745);
+            this.tabPage2.Size = new System.Drawing.Size(687, 745);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Storage";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -3042,7 +3038,7 @@ namespace GABAK
             this.tabPage3.Location = new System.Drawing.Point(4, 21);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(612, 745);
+            this.tabPage3.Size = new System.Drawing.Size(687, 745);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Routing";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -3060,7 +3056,7 @@ namespace GABAK
             this.tabPage4.Location = new System.Drawing.Point(4, 21);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(612, 745);
+            this.tabPage4.Size = new System.Drawing.Size(687, 745);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Design";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -3234,7 +3230,7 @@ namespace GABAK
             this.tabPage5.Location = new System.Drawing.Point(4, 21);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(612, 745);
+            this.tabPage5.Size = new System.Drawing.Size(687, 745);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "Optimization";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -3857,7 +3853,7 @@ namespace GABAK
             this.tabPage6.Location = new System.Drawing.Point(4, 21);
             this.tabPage6.Name = "tabPage6";
             this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage6.Size = new System.Drawing.Size(612, 745);
+            this.tabPage6.Size = new System.Drawing.Size(687, 745);
             this.tabPage6.TabIndex = 5;
             this.tabPage6.Text = "Batch Optimization";
             this.tabPage6.UseVisualStyleBackColor = true;
@@ -3868,7 +3864,7 @@ namespace GABAK
             this.tabPage7.Location = new System.Drawing.Point(4, 21);
             this.tabPage7.Name = "tabPage7";
             this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage7.Size = new System.Drawing.Size(612, 745);
+            this.tabPage7.Size = new System.Drawing.Size(687, 745);
             this.tabPage7.TabIndex = 6;
             this.tabPage7.Text = "Design of Experiments";
             this.tabPage7.UseVisualStyleBackColor = true;
@@ -3882,7 +3878,7 @@ namespace GABAK
             this.tabPage8.Location = new System.Drawing.Point(4, 21);
             this.tabPage8.Name = "tabPage8";
             this.tabPage8.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage8.Size = new System.Drawing.Size(612, 745);
+            this.tabPage8.Size = new System.Drawing.Size(687, 745);
             this.tabPage8.TabIndex = 7;
             this.tabPage8.Text = "Acceleration";
             this.tabPage8.UseVisualStyleBackColor = true;
@@ -3901,7 +3897,7 @@ namespace GABAK
             this.tabPage9.Location = new System.Drawing.Point(4, 21);
             this.tabPage9.Name = "tabPage9";
             this.tabPage9.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage9.Size = new System.Drawing.Size(612, 745);
+            this.tabPage9.Size = new System.Drawing.Size(687, 745);
             this.tabPage9.TabIndex = 8;
             this.tabPage9.Text = "Debug";
             this.tabPage9.UseVisualStyleBackColor = true;
@@ -3915,10 +3911,90 @@ namespace GABAK
             this.tabPage10.Location = new System.Drawing.Point(4, 21);
             this.tabPage10.Name = "tabPage10";
             this.tabPage10.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage10.Size = new System.Drawing.Size(612, 745);
+            this.tabPage10.Size = new System.Drawing.Size(687, 745);
             this.tabPage10.TabIndex = 9;
             this.tabPage10.Text = "Import Design";
             this.tabPage10.UseVisualStyleBackColor = true;
+            // 
+            // tabPage11
+            // 
+            this.tabPage11.Controls.Add(this.sessionsLabel);
+            this.tabPage11.Controls.Add(this.sessionsList);
+            this.tabPage11.Controls.Add(this.userIDInput);
+            this.tabPage11.Controls.Add(this.createMapButton);
+            this.tabPage11.Controls.Add(this.label46);
+            this.tabPage11.Location = new System.Drawing.Point(4, 21);
+            this.tabPage11.Name = "tabPage11";
+            this.tabPage11.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage11.Size = new System.Drawing.Size(687, 745);
+            this.tabPage11.TabIndex = 10;
+            this.tabPage11.Text = "App";
+            this.tabPage11.UseVisualStyleBackColor = true;
+            // 
+            // sessionsLabel
+            // 
+            this.sessionsLabel.AutoSize = true;
+            this.sessionsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.sessionsLabel.Location = new System.Drawing.Point(8, 75);
+            this.sessionsLabel.Name = "sessionsLabel";
+            this.sessionsLabel.Size = new System.Drawing.Size(65, 17);
+            this.sessionsLabel.TabIndex = 5;
+            this.sessionsLabel.Text = "Sessions";
+            this.sessionsLabel.Visible = false;
+            // 
+            // sessionsList
+            // 
+            this.sessionsList.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.sessionsList.FormattingEnabled = true;
+            this.sessionsList.Location = new System.Drawing.Point(11, 95);
+            this.sessionsList.Name = "sessionsList";
+            this.sessionsList.Size = new System.Drawing.Size(134, 24);
+            this.sessionsList.TabIndex = 4;
+            this.sessionsList.Visible = false;
+            this.sessionsList.SelectedIndexChanged += new System.EventHandler(this.sessionsList_SelectedIndexChanged);
+            // 
+            // userIDInput
+            // 
+            this.userIDInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.userIDInput.Location = new System.Drawing.Point(8, 35);
+            this.userIDInput.Name = "userIDInput";
+            this.userIDInput.Size = new System.Drawing.Size(137, 23);
+            this.userIDInput.TabIndex = 3;
+            this.userIDInput.KeyDown += new System.Windows.Forms.KeyEventHandler(this.userIDInput_KeyDown);
+            // 
+            // createMapButton
+            // 
+            this.createMapButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.createMapButton.Location = new System.Drawing.Point(8, 136);
+            this.createMapButton.Name = "createMapButton";
+            this.createMapButton.Size = new System.Drawing.Size(75, 23);
+            this.createMapButton.TabIndex = 2;
+            this.createMapButton.Text = "Create";
+            this.createMapButton.UseVisualStyleBackColor = true;
+            this.createMapButton.Visible = false;
+            this.createMapButton.Click += new System.EventHandler(this.createMapButton_Click);
+            // 
+            // label46
+            // 
+            this.label46.AutoSize = true;
+            this.label46.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label46.Location = new System.Drawing.Point(8, 15);
+            this.label46.Name = "label46";
+            this.label46.Size = new System.Drawing.Size(55, 17);
+            this.label46.TabIndex = 1;
+            this.label46.Text = "User ID";
+            // 
+            // panelDrawing
+            // 
+            this.panelDrawing.AllowDrop = true;
+            this.panelDrawing.AutoScroll = true;
+            this.panelDrawing.BackColor = System.Drawing.Color.White;
+            this.panelDrawing.Location = new System.Drawing.Point(698, 49);
+            this.panelDrawing.Margin = new System.Windows.Forms.Padding(0);
+            this.panelDrawing.Name = "panelDrawing";
+            this.panelDrawing.Size = new System.Drawing.Size(396, 366);
+            this.panelDrawing.TabIndex = 5;
+            this.panelDrawing.MouseClick += new System.Windows.Forms.MouseEventHandler(this.panelDrawing_MouseClick);
             // 
             // MainForm
             // 
@@ -3976,6 +4052,8 @@ namespace GABAK
             this.tabPage9.PerformLayout();
             this.tabPage10.ResumeLayout(false);
             this.tabPage10.PerformLayout();
+            this.tabPage11.ResumeLayout(false);
+            this.tabPage11.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -3992,7 +4070,6 @@ namespace GABAK
         private System.Windows.Forms.Label labelWHWidth;
         private System.Windows.Forms.Label labelWHDepth;
         private System.Windows.Forms.Button buttonImportOrders;
-        public System.Windows.Forms.Panel panelDrawing;
         private System.Windows.Forms.Label labelE1;
         private System.Windows.Forms.TextBox textBoxE1;
         private System.Windows.Forms.Label labelE2;
@@ -4321,6 +4398,13 @@ namespace GABAK
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label labelCrossAisleSegments;
+        private System.Windows.Forms.TabPage tabPage11;
+        private System.Windows.Forms.Label label46;
+        public System.Windows.Forms.Panel panelDrawing;
+        private System.Windows.Forms.Button createMapButton;
+        private System.Windows.Forms.TextBox userIDInput;
+        private System.Windows.Forms.Label sessionsLabel;
+        private System.Windows.Forms.ComboBox sessionsList;
     }
 }
 

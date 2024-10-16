@@ -15,7 +15,10 @@ using System.IO;
 using System.Linq;
 using System.Media;
 using System.Threading.Tasks;
+using System.Web;
 using System.Windows.Forms;
+using System.Net.Http;
+using static GABAK.Program;
 
 namespace GABAK
 {
@@ -724,7 +727,8 @@ namespace GABAK
                     //We make pd point as the starting point in ardesign
                     //So when we start the camera in AR it starts from PD instead of top left corner which is 0,0 for GUI
                     //But we want PD to act like 0,0 for ardesign
-                    myardesign.addStorageLocation(p_pickingaisleedge.getOnEdgeNodes()[i].s1.X1 * m, p_pickingaisleedge.getOnEdgeNodes()[i].s1.X2 * m, p_pickingaisleedge.getOnEdgeNodes()[i].s1.X3 * m, p_pickingaisleedge.getOnEdgeNodes()[i].s1.X4 * m, p_pickingaisleedge.getOnEdgeNodes()[i].s1.Y1 * m, p_pickingaisleedge.getOnEdgeNodes()[i].s1.Y2 * m, p_pickingaisleedge.getOnEdgeNodes()[i].s1.Y3 * m, p_pickingaisleedge.getOnEdgeNodes()[i].s1.Y4 * m, true);
+                    myardesign.addStorageLocation((p_pickingaisleedge.getOnEdgeNodes()[i].s1.X1 - mywh.pdnodes[0].getX()) * m, (p_pickingaisleedge.getOnEdgeNodes()[i].s1.X2 - mywh.pdnodes[0].getX()) * m, (p_pickingaisleedge.getOnEdgeNodes()[i].s1.X3 - mywh.pdnodes[0].getX()) * m, (p_pickingaisleedge.getOnEdgeNodes()[i].s1.X4 - mywh.pdnodes[0].getX()) * m, (p_pickingaisleedge.getOnEdgeNodes()[i].s1.Y1 - mywh.pdnodes[0].getY()) * m, (p_pickingaisleedge.getOnEdgeNodes()[i].s1.Y2 - mywh.pdnodes[0].getY()) * m, (p_pickingaisleedge.getOnEdgeNodes()[i].s1.Y3 - mywh.pdnodes[0].getY()) * m, (p_pickingaisleedge.getOnEdgeNodes()[i].s1.Y4 - mywh.pdnodes[0].getY()) * m, true);
+                    //myardesign.addStorageLocation((p_pickingaisleedge.getOnEdgeNodes()[i].s1.X1) * m, (p_pickingaisleedge.getOnEdgeNodes()[i].s1.X2) * m, (p_pickingaisleedge.getOnEdgeNodes()[i].s1.X3) * m, (p_pickingaisleedge.getOnEdgeNodes()[i].s1.X4) * m, (p_pickingaisleedge.getOnEdgeNodes()[i].s1.Y1) * m, (p_pickingaisleedge.getOnEdgeNodes()[i].s1.Y2) * m, (p_pickingaisleedge.getOnEdgeNodes()[i].s1.Y3) * m, (p_pickingaisleedge.getOnEdgeNodes()[i].s1.Y4) * m, true);
                 }
                 if (p_pickingaisleedge.getOnEdgeNodes()[i].s2 != null)
                 {
@@ -742,7 +746,8 @@ namespace GABAK
                     //We make pd point as the starting point in ardesign
                     //So when we start the camera in AR it starts from PD instead of top left corner which is 0,0 for GUI
                     //But we want PD to act like 0,0 for ardesign
-                    myardesign.addStorageLocation(p_pickingaisleedge.getOnEdgeNodes()[i].s2.X1 * m, p_pickingaisleedge.getOnEdgeNodes()[i].s2.X2 * m, p_pickingaisleedge.getOnEdgeNodes()[i].s2.X3 * m, p_pickingaisleedge.getOnEdgeNodes()[i].s2.X4 * m, p_pickingaisleedge.getOnEdgeNodes()[i].s2.Y1 * m, p_pickingaisleedge.getOnEdgeNodes()[i].s2.Y2 * m, p_pickingaisleedge.getOnEdgeNodes()[i].s2.Y3 * m, p_pickingaisleedge.getOnEdgeNodes()[i].s2.Y4 * m, false);
+                    myardesign.addStorageLocation((p_pickingaisleedge.getOnEdgeNodes()[i].s2.X1 - mywh.pdnodes[0].getX()) * m,(p_pickingaisleedge.getOnEdgeNodes()[i].s2.X2 - mywh.pdnodes[0].getX()) * m, (p_pickingaisleedge.getOnEdgeNodes()[i].s2.X3 - mywh.pdnodes[0].getX()) * m, (p_pickingaisleedge.getOnEdgeNodes()[i].s2.X4 - mywh.pdnodes[0].getX()) * m, (p_pickingaisleedge.getOnEdgeNodes()[i].s2.Y1 - mywh.pdnodes[0].getY()) * m, (p_pickingaisleedge.getOnEdgeNodes()[i].s2.Y2 - mywh.pdnodes[0].getY()) * m, (p_pickingaisleedge.getOnEdgeNodes()[i].s2.Y3 - mywh.pdnodes[0].getY()) * m, (p_pickingaisleedge.getOnEdgeNodes()[i].s2.Y4 - mywh.pdnodes[0].getY()) * m, false);
+                    //myardesign.addStorageLocation((p_pickingaisleedge.getOnEdgeNodes()[i].s2.X1) * m, (p_pickingaisleedge.getOnEdgeNodes()[i].s2.X2) * m, (p_pickingaisleedge.getOnEdgeNodes()[i].s2.X3) * m, (p_pickingaisleedge.getOnEdgeNodes()[i].s2.X4) * m, (p_pickingaisleedge.getOnEdgeNodes()[i].s2.Y1) * m, (p_pickingaisleedge.getOnEdgeNodes()[i].s2.Y2) * m, (p_pickingaisleedge.getOnEdgeNodes()[i].s2.Y3) * m, (p_pickingaisleedge.getOnEdgeNodes()[i].s2.Y4) * m, false);
                 }
             }
         }
@@ -3170,6 +3175,159 @@ namespace GABAK
                     textBoxNumberSKUs.Visible = false;
                     break;
             }
+        }
+
+        private readonly struct XY
+        {
+            public XY(double x, double y)
+            {
+                this.X = (float)x;
+                this.Y = (float)y;
+            }
+            public XY(float x, float y)
+            {
+                this.X = x;
+                this.Y = y;
+            }
+            public float X { get; }
+            public float Y { get; }
+        }
+
+        // used for drawing warehouse racks
+        private void drawRectangle(Graphics e, Pen pen, double width, double height, double degree, double x1, double x2, double x3, double x4, double y1, double y2, double y3, double y4)
+        {
+            e.DrawLine(pen, (float)x1, (float)y1, (float)x2, (float)y2);
+            e.DrawLine(pen, (float)x2, (float)y2, (float)x3, (float)y3);
+            e.DrawLine(pen, (float)x3, (float)y3, (float)x4, (float)y4);
+            e.DrawLine(pen, (float)x4, (float)y4, (float)x1, (float)y1);
+        }
+
+        // used for drawing user path
+        private void drawPath(Graphics e, Pen pen, double x1, double y1, double x2, double y2, XY origin)
+        {
+            float startX = (float)(origin.X - x1);
+            float startY = (float)(y1 + origin.Y);
+            float endX = (float)(origin.X - x2);
+            float endY = (float)(y2 + origin.Y);
+            e.DrawLine(pen, startX, startY, endX, endY);
+        }
+
+        // used for drawing pick locations
+        private void drawCircle(Graphics e, Pen pen, double x, double y, double width, double height)
+        {
+            e.DrawEllipse(pen, (float)x, (float)y, (float)width, (float)height);
+        }
+
+        public string selectedSessionID;
+        private void createMapButton_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(selectedSessionID))
+            {
+                (var userData, var warehouseData) = Program.FetchData(selectedSessionID);
+                panelDrawing.Width = Convert.ToInt32(warehouseData.WarehouseWidth * 8);
+                panelDrawing.Height = Convert.ToInt32(warehouseData.WarehouseDepth * 8);
+
+                Pen pen = new Pen(Color.FromArgb(255, 0, 0, 0));
+                pen.Width = 2;
+
+                XY origin = new XY(panelDrawing.Size.Width / 2, (float)(panelDrawing.Size.Height * 0.95));
+                XY pixelPerMeter = new XY(
+                    panelDrawing.Size.Width / warehouseData.WarehouseWidth,
+                    panelDrawing.Size.Height / warehouseData.WarehouseDepth
+                );
+
+                var img = new Bitmap(panelDrawing.Size.Width, panelDrawing.Size.Height);
+                var g = Graphics.FromImage(img);
+
+                // draw the warehouse racks
+                for (int i = 0; i < warehouseData.RacksLocation.Count; i++)
+                {
+                    // x1: bottom left, x2: top left, x3: top right, x4: bottom right 
+                    double x1 = warehouseData.RacksLocation[i].X2 * pixelPerMeter.X;
+                    double x2 = warehouseData.RacksLocation[i].X1 * pixelPerMeter.X;
+                    double x3 = warehouseData.RacksLocation[i].X3 * pixelPerMeter.X;
+                    double x4 = warehouseData.RacksLocation[i].X4 * pixelPerMeter.X;
+                    double y1 = warehouseData.RacksLocation[i].Y2 * pixelPerMeter.Y;
+                    double y2 = warehouseData.RacksLocation[i].Y1 * pixelPerMeter.Y;
+                    double y3 = warehouseData.RacksLocation[i].Y3 * pixelPerMeter.Y;
+                    double y4 = warehouseData.RacksLocation[i].Y4 * pixelPerMeter.Y;
+                    double degree = warehouseData.RacksLocation[i].Angle;
+                    this.drawRectangle(g, pen, warehouseData.RackWidth * pixelPerMeter.X, warehouseData.RackDepth * pixelPerMeter.Y, degree, x1, x2, x3, x4, y1, y2, y3, y4);
+                }
+
+                // draw the user path
+                for (int i = 0; i < userData.x.Count - 1; i++)
+                {
+                    double x1 = userData.x[i] * pixelPerMeter.X;
+                    double y1 = userData.z[i] * pixelPerMeter.Y;
+                    double x2 = userData.x[i + 1] * pixelPerMeter.X;
+                    double y2 = userData.z[i + 1] * pixelPerMeter.Y;
+                    this.drawPath(g, pen, x1, y1, x2, y2, origin);
+                }
+
+                // Draw the pick list locations
+                Pen picklistPen = new Pen(Color.Red, 2);
+                foreach (var picklist in warehouseData.ObjectivesLocation)
+                {
+                    foreach (var picklocation in picklist.Value)
+                    {
+                        double x = picklocation.X * pixelPerMeter.X;
+                        double y = picklocation.Y * pixelPerMeter.Y;
+
+                        float drawX = (float)(origin.X - x);
+                        float drawY = (float)(y + origin.Y);
+
+                        this.drawCircle(g, picklistPen, drawX, drawY, 10, 10);
+                    }
+                }
+
+                panelDrawing.BackgroundImage = img;
+                panelDrawing.Refresh();
+            }
+            else
+            {
+                Console.WriteLine("No session selected yet.");
+            }
+            
+        }
+
+        private void userIDInput_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+                string emailInput = userIDInput.Text;
+                var userInformation = Program.FetchUserInformation(emailInput);
+                if (userInformation != null)
+                {
+                    // Check if Sessions_List is null
+                    if (userInformation.Sessions != null)
+                    {
+                        // userInformation is valid
+                        sessionsLabel.Visible = true;
+                        sessionsList.Visible = true;
+                        sessionsList.Items.Clear();
+                        foreach (var session in userInformation.Sessions)
+                        {
+                            // dont want duplicate sessions
+                            if (!sessionsList.Items.Contains(session))
+                            {
+                                sessionsList.Items.Add(session);
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    // userInformation is invalid
+                    Console.WriteLine("userInformation is null.");
+                }
+            }
+        }
+        private void sessionsList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            selectedSessionID = sessionsList.SelectedItem.ToString();
+            createMapButton.Visible = true;
         }
     }
 }
