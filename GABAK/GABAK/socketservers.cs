@@ -16,7 +16,7 @@ namespace GABAK
         public void checkAvailableConcordeServers()
         {
             string line;
-            System.IO.StreamReader file = new System.IO.StreamReader("C:\\concorde\\availableservers.txt");
+            System.IO.StreamReader file = new System.IO.StreamReader("C:\\gabak\\availableservers.txt");
             while ((line = file.ReadLine()) != null)
             {
                 string[] raw = line.Split(',');

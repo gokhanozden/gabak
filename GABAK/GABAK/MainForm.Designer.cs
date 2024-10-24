@@ -1303,7 +1303,7 @@ namespace GABAK
             // labelAvgOrderSize
             // 
             this.labelAvgOrderSize.AutoSize = true;
-            this.labelAvgOrderSize.Location = new System.Drawing.Point(21, 35);
+            this.labelAvgOrderSize.Location = new System.Drawing.Point(23, 35);
             this.labelAvgOrderSize.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelAvgOrderSize.Name = "labelAvgOrderSize";
             this.labelAvgOrderSize.Size = new System.Drawing.Size(69, 13);
@@ -2101,7 +2101,7 @@ namespace GABAK
             "Parallel",
             "Cloud",
             "Single"});
-            this.comboBoxComputing.Location = new System.Drawing.Point(74, 6);
+            this.comboBoxComputing.Location = new System.Drawing.Point(81, 6);
             this.comboBoxComputing.Name = "comboBoxComputing";
             this.comboBoxComputing.Size = new System.Drawing.Size(67, 20);
             this.comboBoxComputing.TabIndex = 479;
@@ -2822,7 +2822,7 @@ namespace GABAK
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(7, 10);
+            this.label1.Location = new System.Drawing.Point(11, 9);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(65, 13);
@@ -3929,44 +3929,44 @@ namespace GABAK
             this.tabPage11.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage11.Size = new System.Drawing.Size(687, 745);
             this.tabPage11.TabIndex = 10;
-            this.tabPage11.Text = "App";
+            this.tabPage11.Text = "WARP";
             this.tabPage11.UseVisualStyleBackColor = true;
             // 
             // sessionsLabel
             // 
             this.sessionsLabel.AutoSize = true;
-            this.sessionsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.sessionsLabel.Location = new System.Drawing.Point(8, 75);
+            this.sessionsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.sessionsLabel.Location = new System.Drawing.Point(9, 35);
             this.sessionsLabel.Name = "sessionsLabel";
-            this.sessionsLabel.Size = new System.Drawing.Size(65, 17);
+            this.sessionsLabel.Size = new System.Drawing.Size(43, 12);
             this.sessionsLabel.TabIndex = 5;
             this.sessionsLabel.Text = "Sessions";
             this.sessionsLabel.Visible = false;
             // 
             // sessionsList
             // 
-            this.sessionsList.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.sessionsList.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.sessionsList.FormattingEnabled = true;
-            this.sessionsList.Location = new System.Drawing.Point(11, 95);
+            this.sessionsList.Location = new System.Drawing.Point(58, 32);
             this.sessionsList.Name = "sessionsList";
-            this.sessionsList.Size = new System.Drawing.Size(134, 24);
+            this.sessionsList.Size = new System.Drawing.Size(134, 20);
             this.sessionsList.TabIndex = 4;
             this.sessionsList.Visible = false;
             this.sessionsList.SelectedIndexChanged += new System.EventHandler(this.sessionsList_SelectedIndexChanged);
             // 
             // userIDInput
             // 
-            this.userIDInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.userIDInput.Location = new System.Drawing.Point(8, 35);
+            this.userIDInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.userIDInput.Location = new System.Drawing.Point(58, 12);
             this.userIDInput.Name = "userIDInput";
-            this.userIDInput.Size = new System.Drawing.Size(137, 23);
+            this.userIDInput.Size = new System.Drawing.Size(134, 18);
             this.userIDInput.TabIndex = 3;
             this.userIDInput.KeyDown += new System.Windows.Forms.KeyEventHandler(this.userIDInput_KeyDown);
             // 
             // createMapButton
             // 
-            this.createMapButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.createMapButton.Location = new System.Drawing.Point(8, 136);
+            this.createMapButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.createMapButton.Location = new System.Drawing.Point(58, 58);
             this.createMapButton.Name = "createMapButton";
             this.createMapButton.Size = new System.Drawing.Size(75, 23);
             this.createMapButton.TabIndex = 2;
@@ -3978,10 +3978,10 @@ namespace GABAK
             // label46
             // 
             this.label46.AutoSize = true;
-            this.label46.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label46.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label46.Location = new System.Drawing.Point(8, 15);
             this.label46.Name = "label46";
-            this.label46.Size = new System.Drawing.Size(55, 17);
+            this.label46.Size = new System.Drawing.Size(37, 12);
             this.label46.TabIndex = 1;
             this.label46.Text = "User ID";
             // 
