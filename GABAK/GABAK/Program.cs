@@ -11,6 +11,7 @@ using System.Xml.Linq;
 using System.Net.Http;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using static GABAK.Program;
 
 namespace GABAK
 {
@@ -35,6 +36,7 @@ namespace GABAK
         public class RootObject
         {
             public UserData data { get; set; }
+            public bool Final_Chunk { get; set; }
         }
 
         // Define classes to match the XML structure
@@ -89,7 +91,6 @@ namespace GABAK
                 var userEndpoint = new Uri($"https://www.gokhanozden.com/augmentedwarehouse/warp/php/get_all_user_sessions_from_email.php?email={emailInput}");
                 var userResult = client.GetAsync(userEndpoint).Result;
                 var userJson = userResult.Content.ReadAsStringAsync().Result;
-                //Console.WriteLine("Raw User JSON: " + userJson);
 
                 userInformation userInformationObject = JsonConvert.DeserializeObject<userInformation>(userJson);
                 
@@ -113,61 +114,51 @@ namespace GABAK
             {
                 var offset = 0;
                 var limit = 100;
-                var endpoint = new Uri($"https://www.gokhanozden.com/augmentedwarehouse/warp/php/get_user_coordinates.php?sessionID={sessionID}&offset={offset}&limit={limit}");
+                bool isFinalChunk = false;
+                UserData combinedUserData = new UserData();
 
-                // Fetch data from HTTP GET request and disregard async and do it synchronously
-                var result = client.GetAsync(endpoint).Result;
-                var json = result.Content.ReadAsStringAsync().Result;
+                while (!isFinalChunk) {
+                    var endpoint = new Uri($"https://www.gokhanozden.com/augmentedwarehouse/warp/testing/php/get_user_coordinates.php?sessionID={sessionID}&offset={offset}&limit={limit}");
+                    // Fetch data from HTTP GET request and disregard async and do it synchronously
+                    var result = client.GetAsync(endpoint).Result;
+                    var json = result.Content.ReadAsStringAsync().Result;
+                    // Deserialize JSON into the RootObject class
+                    RootObject rootObject = JsonConvert.DeserializeObject<RootObject>(json);
 
-                // DEBUG OUTPUT: Print the raw JSON response
-                //Console.WriteLine("Raw JSON: " + json);
 
-                // Deserialize JSON into the RootObject class
-                RootObject rootObject = JsonConvert.DeserializeObject<RootObject>(json);
+                    if (rootObject?.data != null)
+                    {
+                        combinedUserData.Module_Task_ID = rootObject.data.Module_Task_ID;
+                        combinedUserData.Pick_List_ID.AddRange(rootObject.data.Pick_List_ID);
+                        combinedUserData.x.AddRange(rootObject.data.x);
+                        combinedUserData.y.AddRange(rootObject.data.y);
+                        combinedUserData.z.AddRange(rootObject.data.z);
 
-                if (rootObject?.data != null)
-                {
-                    // Accessing specific values from the C# object
-                    var moduleTaskID = rootObject.data.Module_Task_ID;
-                    var pickListID = rootObject.data.Pick_List_ID;
-                    var userX = rootObject.data.x;
-                    var userY = rootObject.data.y;
-                    var userZ = rootObject.data.z;
-
-                    // DEBUG OUTPUT
-                    /*
-                    Console.WriteLine("Module_Task_ID: " + moduleTaskID);
-                    Console.WriteLine("Pick_List_ID: " + (pickListID.Count > 0 ? string.Join(", ", pickListID) : "No Data"));
-                    Console.WriteLine("X Coordinates: " + (userX.Count > 0 ? string.Join(", ", userX) : "No Data"));
-                    Console.WriteLine("Y Coordinates: " + (userY.Count > 0 ? string.Join(", ", userY) : "No Data"));
-                    Console.WriteLine("Z Coordinates: " + (userZ.Count > 0 ? string.Join(", ", userZ) : "No Data"));
-                    Console.WriteLine("First X Coordinate: " + userX[0]);*/
-                }
-                else
-                {
-                    Console.WriteLine("UserData is null or JSON deserialization failed.");
+                        //Console.WriteLine($"Offset: {offset}, Final_Chunk: {rootObject.Final_Chunk}");
+                        isFinalChunk = rootObject.Final_Chunk;
+                        offset = offset + 100;
+                    }
+                    else
+                    {
+                        Console.WriteLine("UserData is null or JSON deserialization failed.");
+                        break;
+                    }
                 }
 
                 // Handle fetching data from map (ARD file)
-                var mapEndpoint = new Uri($"https://www.gokhanozden.com/augmentedwarehouse/warp/php/get_module_task_info.php?moduleTaskId={rootObject.data.Module_Task_ID}");
-
+                var mapEndpoint = new Uri($"https://www.gokhanozden.com/augmentedwarehouse/warp/php/get_module_task_info.php?moduleTaskId={combinedUserData.Module_Task_ID}");
                 // Fetch data from HTTP GET request and disregard async and do it synchronously
                 var mapResult = client.GetAsync(mapEndpoint).Result;
                 var mapString = mapResult.Content.ReadAsStringAsync().Result;
-
-                // DEBUG OUTPUT
-                //Console.WriteLine("Raw string: " + mapString);
-
                 string extractedXML = CleanXML(mapString);
 
                 var warehouseData = ParseARD(extractedXML);
-
                 // DEBUG OUTPUT
-                
+
                 Console.WriteLine("Warehouse Width: " + warehouseData.WarehouseWidth);
                 Console.WriteLine("Warehouse Depth: " + warehouseData.WarehouseDepth);
                 Console.WriteLine("Number of Racks: " + warehouseData.RacksLocation.Count);
-                return (rootObject.data, warehouseData);
+                return (combinedUserData, warehouseData);
             }
         }
 

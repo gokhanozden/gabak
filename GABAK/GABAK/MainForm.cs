@@ -3212,12 +3212,12 @@ namespace GABAK
         }
 
         // used for drawing warehouse racks
-        private void drawRectangle(Graphics e, Pen pen, double width, double height, double degree, double x1, double x2, double x3, double x4, double y1, double y2, double y3, double y4)
+        private void drawRectangle(Graphics e, Pen pen, double width, double height, double degree, double x1, double x2, double x3, double x4, double y1, double y2, double y3, double y4, XY origin)
         {
-            e.DrawLine(pen, (float)x1, (float)y1, (float)x2, (float)y2);
-            e.DrawLine(pen, (float)x2, (float)y2, (float)x3, (float)y3);
-            e.DrawLine(pen, (float)x3, (float)y3, (float)x4, (float)y4);
-            e.DrawLine(pen, (float)x4, (float)y4, (float)x1, (float)y1);
+            e.DrawLine(pen, (float)x1 + origin.X, (float)y1 + origin.Y, (float)x2 + origin.X, (float)y2 + origin.Y);
+            e.DrawLine(pen, (float)x2 + origin.X, (float)y2 + origin.Y, (float)x3 + origin.X, (float)y3 + origin.Y);
+            e.DrawLine(pen, (float)x3 + origin.X, (float)y3 + origin.Y, (float)x4 + origin.X, (float)y4 + origin.Y);
+            e.DrawLine(pen, (float)x4 + origin.X, (float)y4 + origin.Y, (float)x1 + origin.X, (float)y1 + origin.Y);
         }
 
         // used for drawing user path
@@ -3270,7 +3270,7 @@ namespace GABAK
                     double y3 = warehouseData.RacksLocation[i].Y3 * pixelPerMeter.Y;
                     double y4 = warehouseData.RacksLocation[i].Y4 * pixelPerMeter.Y;
                     double degree = warehouseData.RacksLocation[i].Angle;
-                    this.drawRectangle(g, pen, warehouseData.RackWidth * pixelPerMeter.X, warehouseData.RackDepth * pixelPerMeter.Y, degree, x1, x2, x3, x4, y1, y2, y3, y4);
+                    this.drawRectangle(g, pen, warehouseData.RackWidth * pixelPerMeter.X, warehouseData.RackDepth * pixelPerMeter.Y, degree, x1, x2, x3, x4, y1, y2, y3, y4, origin);
                 }
 
                 // draw the user path
