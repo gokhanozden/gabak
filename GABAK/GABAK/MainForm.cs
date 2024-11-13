@@ -19,6 +19,7 @@ using System.Web;
 using System.Windows.Forms;
 using System.Net.Http;
 using static GABAK.Program;
+using System.Diagnostics.Eventing.Reader;
 
 namespace GABAK
 {
@@ -685,15 +686,18 @@ namespace GABAK
                 myardesign.addRegion(mywh.regions[i].angle);
                 for (int j = 0; j < mywh.regions[i].pickingaisleedges.Count; j++)
                 {
+                    // FIRST DEBUG TO GET AISLE BACKGROUNDS 
                     //mypen.Color = System.Drawing.Color.LightGray;
                     //mypen.Width = (float)mywh.regions[i].pickingaisleedges[j].width * m;
                     //graphicsObj.DrawLine(mypen, (float)mywh.regions[i].pickingaisleedges[j].getStart().getX() * m, (float)mywh.regions[i].pickingaisleedges[j].getStart().getY() * m, (float)mywh.regions[i].pickingaisleedges[j].getEnd().getX() * m, (float)mywh.regions[i].pickingaisleedges[j].getEnd().getY() * m);
-                    //mypen.Color = System.Drawing.Color.Black;
-                    //mypen.Width = 1 * m;
-                    //graphicsObj.DrawEllipse(mypen, (float)mywh.regions[i].pickingaisleedges[j].getStart().getX() * m - m / 2, (float)mywh.regions[i].pickingaisleedges[j].getStart().getY() * m - m / 2, m, m);
-                    //mysvg.addCircle((float)mywh.regions[i].pickingaisleedges[j].getStart().getX() * m, (float)mywh.regions[i].pickingaisleedges[j].getStart().getY() * m, m, mypen.Width, mypen.Color);
-                    //graphicsObj.DrawEllipse(mypen, (float)mywh.regions[i].pickingaisleedges[j].getEnd().getX() * m - m / 2, (float)mywh.regions[i].pickingaisleedges[j].getEnd().getY() * m - m / 2 , m, m);
-                    //mysvg.addCircle((float)mywh.regions[i].pickingaisleedges[j].getEnd().getX() * m, (float)mywh.regions[i].pickingaisleedges[j].getEnd().getY() * m, m, mypen.Width, mypen.Color);
+                    // SECOND DEBUG TO GET DOTTED OUTLINE
+                    mypen.Color = System.Drawing.Color.Black;
+                    mypen.Width = 1 * m;
+                    graphicsObj.DrawEllipse(mypen, (float)mywh.regions[i].pickingaisleedges[j].getStart().getX() * m - m / 2, (float)mywh.regions[i].pickingaisleedges[j].getStart().getY() * m - m / 2, m, m);
+                    mysvg.addCircle((float)mywh.regions[i].pickingaisleedges[j].getStart().getX() * m, (float)mywh.regions[i].pickingaisleedges[j].getStart().getY() * m, m, mypen.Width, mypen.Color);
+                    graphicsObj.DrawEllipse(mypen, (float)mywh.regions[i].pickingaisleedges[j].getEnd().getX() * m - m / 2, (float)mywh.regions[i].pickingaisleedges[j].getEnd().getY() * m - m / 2 , m, m);
+                    mysvg.addCircle((float)mywh.regions[i].pickingaisleedges[j].getEnd().getX() * m, (float)mywh.regions[i].pickingaisleedges[j].getEnd().getY() * m, m, mypen.Width, mypen.Color);
+                    // THIRD DEBUG TO GET AISLE LINES
                     //mypen.Color = System.Drawing.Color.Black;
                     //mypen.Width = m;
                     //graphicsObj.DrawLine(mypen, (float)mywh.regions[i].pickingaisleedges[j].getStart().getX() * m, (float)mywh.regions[i].pickingaisleedges[j].getStart().getY() * m, (float)mywh.regions[i].pickingaisleedges[j].getEnd().getX() * m, (float)mywh.regions[i].pickingaisleedges[j].getEnd().getY() * m);
@@ -3233,7 +3237,7 @@ namespace GABAK
         // used for drawing pick locations
         private void drawCircle(Graphics e, Pen pen, double x, double y, double width, double height)
         {
-            e.DrawEllipse(pen, (float)x, (float)y, (float)width, (float)height);
+            e.DrawEllipse(pen, (float)(x), (float)(y), (float)width, (float)height);
         }
 
         public string selectedSessionID;
@@ -3295,7 +3299,9 @@ namespace GABAK
                         float drawX = (float)(origin.X - x);
                         float drawY = (float)(y + origin.Y);
 
-                        this.drawCircle(g, picklistPen, drawX, drawY, 10, 10);
+                        // subtracted 10 and 5 because need to get the bottom right of the circle to spawn
+                        // the circle for the pick location (based on the width and height of circle 10x10)
+                        this.drawCircle(g, picklistPen, drawX - 10, drawY - 5, 10, 10);
                     }
                 }
 
@@ -3346,6 +3352,120 @@ namespace GABAK
         {
             selectedSessionID = sessionsList.SelectedItem.ToString();
             createMapButton.Visible = true;
+            labelDebugWARP.Visible = true;
+            checkBoxIsleBG.Visible = true;
+            checkBoxDottedOutline.Visible = true;
+            checkBoxIsleLines.Visible = true;
+        }
+
+        private void checkBoxIsleLines_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxIsleLines.Checked)
+            {
+                // Fetch the necessary data
+                (var userData, var warehouseData) = Program.FetchData(selectedSessionID);
+                XY origin = new XY(panelDrawing.Size.Width / 2, (float)(panelDrawing.Size.Height * 0.95));
+                XY pixelPerMeter = new XY(
+                    panelDrawing.Size.Width / warehouseData.WarehouseWidth,
+                    panelDrawing.Size.Height / warehouseData.WarehouseDepth
+                );
+
+                Pen mypen = new Pen(Color.Black);
+
+                // Use the existing graphics to draw directly on the panel
+                using (Graphics g = panelDrawing.CreateGraphics())
+                {
+                    for (int i = 0; i < warehouseData.RacksLocation.Count; i++)
+                    {
+                        double x1 = warehouseData.RacksLocation[i].X2 * pixelPerMeter.X;
+                        double x2 = warehouseData.RacksLocation[i].X1 * pixelPerMeter.X;
+                        double y1 = warehouseData.RacksLocation[i].Y2 * pixelPerMeter.Y;
+                        double y2 = warehouseData.RacksLocation[i].Y1 * pixelPerMeter.Y;
+
+                        //debug
+                        Console.WriteLine("Should display aisle lines");
+                    }
+                }
+            }
+            else
+            {
+                // If the checkbox is unchecked, repaint to clear the debug drawing
+                panelDrawing.Invalidate();
+            }
+        }
+        private void checkBoxIsleBG_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxIsleBG.Checked)
+            {
+                // Fetch the necessary data
+                (var userData, var warehouseData) = Program.FetchData(selectedSessionID);
+                XY origin = new XY(panelDrawing.Size.Width / 2, (float)(panelDrawing.Size.Height * 0.95));
+                XY pixelPerMeter = new XY(
+                    panelDrawing.Size.Width / warehouseData.WarehouseWidth,
+                    panelDrawing.Size.Height / warehouseData.WarehouseDepth
+                );
+
+                Pen mypen = new Pen(Color.LightGray);
+
+                // Use the existing graphics to draw directly on the panel
+                using (Graphics g = panelDrawing.CreateGraphics())
+                {
+                    for (int i = 0; i < warehouseData.RacksLocation.Count; i++)
+                    {
+                        double x1 = warehouseData.RacksLocation[i].X2 * pixelPerMeter.X;
+                        double x2 = warehouseData.RacksLocation[i].X1 * pixelPerMeter.X;
+                        double y1 = warehouseData.RacksLocation[i].Y2 * pixelPerMeter.Y;
+                        double y2 = warehouseData.RacksLocation[i].Y1 * pixelPerMeter.Y;
+
+                        mypen.Width = (float)(warehouseData.RackWidth * pixelPerMeter.X);
+
+                        g.DrawLine(mypen,(float)(origin.X + x1),(float)(y1 + origin.Y),(float)(origin.X + x2),(float)(y2 + origin.Y));
+                    }
+                }
+            }
+            else
+            {
+                // If the checkbox is unchecked, repaint to clear the debug drawing
+                panelDrawing.Invalidate();
+            }
+        }
+
+        private void checkBoxDottedOutline_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxDottedOutline.Checked)
+            {
+                // Fetch the necessary data
+                (var userData, var warehouseData) = Program.FetchData(selectedSessionID);
+                XY origin = new XY(panelDrawing.Size.Width / 2, (float)(panelDrawing.Size.Height * 0.95));
+                XY pixelPerMeter = new XY(
+                    panelDrawing.Size.Width / warehouseData.WarehouseWidth,
+                    panelDrawing.Size.Height / warehouseData.WarehouseDepth
+                );
+
+                Pen mypen = new Pen(Color.Black);
+                mypen.Width = 1 * (float)pixelPerMeter.X;
+
+                // Use the existing graphics to draw directly on the panel
+                using (Graphics g = panelDrawing.CreateGraphics())
+                {
+                    for (int i = 0; i < warehouseData.RacksLocation.Count; i++)
+                    {
+                        // Start and end points of the aisle
+                        double xStart = warehouseData.RacksLocation[i].X1 * pixelPerMeter.X;
+                        double yStart = warehouseData.RacksLocation[i].Y1 * pixelPerMeter.Y;
+                        double xEnd = warehouseData.RacksLocation[i].X2 * pixelPerMeter.X;
+                        double yEnd = warehouseData.RacksLocation[i].Y2 * pixelPerMeter.Y;
+
+                        //debug
+                        Console.WriteLine("Should display dotted outline");
+                    }
+                }
+            }
+            else
+            {
+                // If the checkbox is unchecked, repaint to clear the debug drawing
+                panelDrawing.Invalidate();
+            }
         }
     }
 }
