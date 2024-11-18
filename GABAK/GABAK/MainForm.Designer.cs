@@ -373,6 +373,10 @@ namespace GABAK
             this.tabPage9 = new System.Windows.Forms.TabPage();
             this.tabPage10 = new System.Windows.Forms.TabPage();
             this.tabPage11 = new System.Windows.Forms.TabPage();
+            this.checkBoxIsleLines = new System.Windows.Forms.CheckBox();
+            this.checkBoxDottedOutline = new System.Windows.Forms.CheckBox();
+            this.checkBoxIsleBG = new System.Windows.Forms.CheckBox();
+            this.labelDebugWARP = new System.Windows.Forms.Label();
             this.sessionsLabel = new System.Windows.Forms.Label();
             this.sessionsList = new System.Windows.Forms.ComboBox();
             this.userIDInput = new System.Windows.Forms.TextBox();
@@ -3919,6 +3923,10 @@ namespace GABAK
             // 
             // tabPage11
             // 
+            this.tabPage11.Controls.Add(this.checkBoxIsleLines);
+            this.tabPage11.Controls.Add(this.checkBoxDottedOutline);
+            this.tabPage11.Controls.Add(this.checkBoxIsleBG);
+            this.tabPage11.Controls.Add(this.labelDebugWARP);
             this.tabPage11.Controls.Add(this.sessionsLabel);
             this.tabPage11.Controls.Add(this.sessionsList);
             this.tabPage11.Controls.Add(this.userIDInput);
@@ -3932,11 +3940,57 @@ namespace GABAK
             this.tabPage11.Text = "WARP";
             this.tabPage11.UseVisualStyleBackColor = true;
             // 
+            // checkBoxIsleLines
+            // 
+            this.checkBoxIsleLines.AutoSize = true;
+            this.checkBoxIsleLines.Location = new System.Drawing.Point(10, 176);
+            this.checkBoxIsleLines.Name = "checkBoxIsleLines";
+            this.checkBoxIsleLines.Size = new System.Drawing.Size(70, 17);
+            this.checkBoxIsleLines.TabIndex = 13;
+            this.checkBoxIsleLines.Text = "Isle Lines";
+            this.checkBoxIsleLines.UseVisualStyleBackColor = true;
+            this.checkBoxIsleLines.Visible = false;
+            this.checkBoxIsleLines.CheckedChanged += new System.EventHandler(this.checkBoxIsleLines_CheckedChanged);
+            // 
+            // checkBoxDottedOutline
+            // 
+            this.checkBoxDottedOutline.AutoSize = true;
+            this.checkBoxDottedOutline.Location = new System.Drawing.Point(10, 153);
+            this.checkBoxDottedOutline.Name = "checkBoxDottedOutline";
+            this.checkBoxDottedOutline.Size = new System.Drawing.Size(94, 17);
+            this.checkBoxDottedOutline.TabIndex = 12;
+            this.checkBoxDottedOutline.Text = "Dotted Outline";
+            this.checkBoxDottedOutline.UseVisualStyleBackColor = true;
+            this.checkBoxDottedOutline.Visible = false;
+            this.checkBoxDottedOutline.CheckedChanged += new System.EventHandler(this.checkBoxDottedOutline_CheckedChanged);
+            // 
+            // checkBoxIsleBG
+            // 
+            this.checkBoxIsleBG.AutoSize = true;
+            this.checkBoxIsleBG.Location = new System.Drawing.Point(10, 130);
+            this.checkBoxIsleBG.Name = "checkBoxIsleBG";
+            this.checkBoxIsleBG.Size = new System.Drawing.Size(101, 17);
+            this.checkBoxIsleBG.TabIndex = 11;
+            this.checkBoxIsleBG.Text = "Isle Background";
+            this.checkBoxIsleBG.UseVisualStyleBackColor = true;
+            this.checkBoxIsleBG.Visible = false;
+            this.checkBoxIsleBG.CheckedChanged += new System.EventHandler(this.checkBoxIsleBG_CheckedChanged);
+            // 
+            // labelDebugWARP
+            // 
+            this.labelDebugWARP.AutoSize = true;
+            this.labelDebugWARP.Location = new System.Drawing.Point(7, 114);
+            this.labelDebugWARP.Name = "labelDebugWARP";
+            this.labelDebugWARP.Size = new System.Drawing.Size(39, 13);
+            this.labelDebugWARP.TabIndex = 6;
+            this.labelDebugWARP.Text = "Debug";
+            this.labelDebugWARP.Visible = false;
+            // 
             // sessionsLabel
             // 
             this.sessionsLabel.AutoSize = true;
             this.sessionsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sessionsLabel.Location = new System.Drawing.Point(9, 35);
+            this.sessionsLabel.Location = new System.Drawing.Point(8, 35);
             this.sessionsLabel.Name = "sessionsLabel";
             this.sessionsLabel.Size = new System.Drawing.Size(43, 12);
             this.sessionsLabel.TabIndex = 5;
@@ -4406,6 +4460,10 @@ namespace GABAK
         private System.Windows.Forms.TextBox userIDInput;
         private System.Windows.Forms.Label sessionsLabel;
         private System.Windows.Forms.ComboBox sessionsList;
+        private System.Windows.Forms.Label labelDebugWARP;
+        private System.Windows.Forms.CheckBox checkBoxIsleLines;
+        private System.Windows.Forms.CheckBox checkBoxDottedOutline;
+        private System.Windows.Forms.CheckBox checkBoxIsleBG;
     }
 }
 
