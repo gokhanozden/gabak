@@ -129,6 +129,9 @@
   <metadata name="printDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>384, 17</value>
   </metadata>
+  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
   <data name="labelPd.ToolTip" xml:space="preserve">
     <value>Location of the Single Pick and Deposit Point Around The Periphery of the Warehouse  (Standardized, Top Left Corner is 0, Top Right Corner is 0.25, Bottom Right Corner is 0.5, Bottom Left Corner is 0.75)</value>
   </data>

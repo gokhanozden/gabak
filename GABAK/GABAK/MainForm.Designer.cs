@@ -3945,12 +3945,11 @@ namespace GABAK
             this.checkBoxIsleLines.AutoSize = true;
             this.checkBoxIsleLines.Location = new System.Drawing.Point(10, 176);
             this.checkBoxIsleLines.Name = "checkBoxIsleLines";
-            this.checkBoxIsleLines.Size = new System.Drawing.Size(70, 17);
+            this.checkBoxIsleLines.Size = new System.Drawing.Size(76, 17);
             this.checkBoxIsleLines.TabIndex = 13;
-            this.checkBoxIsleLines.Text = "Isle Lines";
+            this.checkBoxIsleLines.Text = "Aisle Lines";
             this.checkBoxIsleLines.UseVisualStyleBackColor = true;
             this.checkBoxIsleLines.Visible = false;
-            this.checkBoxIsleLines.CheckedChanged += new System.EventHandler(this.checkBoxIsleLines_CheckedChanged);
             // 
             // checkBoxDottedOutline
             // 
@@ -3962,19 +3961,17 @@ namespace GABAK
             this.checkBoxDottedOutline.Text = "Dotted Outline";
             this.checkBoxDottedOutline.UseVisualStyleBackColor = true;
             this.checkBoxDottedOutline.Visible = false;
-            this.checkBoxDottedOutline.CheckedChanged += new System.EventHandler(this.checkBoxDottedOutline_CheckedChanged);
             // 
             // checkBoxIsleBG
             // 
             this.checkBoxIsleBG.AutoSize = true;
             this.checkBoxIsleBG.Location = new System.Drawing.Point(10, 130);
             this.checkBoxIsleBG.Name = "checkBoxIsleBG";
-            this.checkBoxIsleBG.Size = new System.Drawing.Size(101, 17);
+            this.checkBoxIsleBG.Size = new System.Drawing.Size(107, 17);
             this.checkBoxIsleBG.TabIndex = 11;
-            this.checkBoxIsleBG.Text = "Isle Background";
+            this.checkBoxIsleBG.Text = "Aisle Background";
             this.checkBoxIsleBG.UseVisualStyleBackColor = true;
             this.checkBoxIsleBG.Visible = false;
-            this.checkBoxIsleBG.CheckedChanged += new System.EventHandler(this.checkBoxIsleBG_CheckedChanged);
             // 
             // labelDebugWARP
             // 

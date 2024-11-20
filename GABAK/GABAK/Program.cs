@@ -125,7 +125,6 @@ namespace GABAK
                     // Deserialize JSON into the RootObject class
                     RootObject rootObject = JsonConvert.DeserializeObject<RootObject>(json);
 
-
                     if (rootObject?.data != null)
                     {
                         combinedUserData.Module_Task_ID = rootObject.data.Module_Task_ID;
@@ -155,9 +154,9 @@ namespace GABAK
                 var warehouseData = ParseARD(extractedXML);
                 // DEBUG OUTPUT
 
-                Console.WriteLine("Warehouse Width: " + warehouseData.WarehouseWidth);
-                Console.WriteLine("Warehouse Depth: " + warehouseData.WarehouseDepth);
-                Console.WriteLine("Number of Racks: " + warehouseData.RacksLocation.Count);
+                //Console.WriteLine("Warehouse Width: " + warehouseData.WarehouseWidth);
+                //Console.WriteLine("Warehouse Depth: " + warehouseData.WarehouseDepth);
+                //Console.WriteLine("Number of Racks: " + warehouseData.RacksLocation.Count);
                 return (combinedUserData, warehouseData);
             }
         }
@@ -181,7 +180,7 @@ namespace GABAK
             var warehouseData = new WarehouseData();
                 var xmlDoc = new XmlDocument();
                 xmlDoc.LoadXml(fullARD);
-
+                
                 // should select the first node that matches the xml path "//warehouse"
                 // if not null, parse the warehouse dimensions / storage location dimensions from XML attributes and convert to meters
                 var warehouseNode = xmlDoc.SelectSingleNode("//warehouse");

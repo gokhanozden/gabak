@@ -610,6 +610,7 @@ namespace GABAK
         {
             //this.drawRegionEdges();
             this.drawPickingAisles();
+            this.drawPickingAislesConditioned(graphicsObj, checkBoxIsleBG.Checked, checkBoxDottedOutline.Checked, checkBoxIsleLines.Checked);
             this.drawPDPoint();
             //this.drawConnectivity();
             //this.drawPolygons();
@@ -691,12 +692,12 @@ namespace GABAK
                     //mypen.Width = (float)mywh.regions[i].pickingaisleedges[j].width * m;
                     //graphicsObj.DrawLine(mypen, (float)mywh.regions[i].pickingaisleedges[j].getStart().getX() * m, (float)mywh.regions[i].pickingaisleedges[j].getStart().getY() * m, (float)mywh.regions[i].pickingaisleedges[j].getEnd().getX() * m, (float)mywh.regions[i].pickingaisleedges[j].getEnd().getY() * m);
                     // SECOND DEBUG TO GET DOTTED OUTLINE
-                    mypen.Color = System.Drawing.Color.Black;
-                    mypen.Width = 1 * m;
-                    graphicsObj.DrawEllipse(mypen, (float)mywh.regions[i].pickingaisleedges[j].getStart().getX() * m - m / 2, (float)mywh.regions[i].pickingaisleedges[j].getStart().getY() * m - m / 2, m, m);
-                    mysvg.addCircle((float)mywh.regions[i].pickingaisleedges[j].getStart().getX() * m, (float)mywh.regions[i].pickingaisleedges[j].getStart().getY() * m, m, mypen.Width, mypen.Color);
-                    graphicsObj.DrawEllipse(mypen, (float)mywh.regions[i].pickingaisleedges[j].getEnd().getX() * m - m / 2, (float)mywh.regions[i].pickingaisleedges[j].getEnd().getY() * m - m / 2 , m, m);
-                    mysvg.addCircle((float)mywh.regions[i].pickingaisleedges[j].getEnd().getX() * m, (float)mywh.regions[i].pickingaisleedges[j].getEnd().getY() * m, m, mypen.Width, mypen.Color);
+                    //mypen.Color = System.Drawing.Color.Black;
+                    //mypen.Width = 1 * m;
+                    //graphicsObj.DrawEllipse(mypen, (float)mywh.regions[i].pickingaisleedges[j].getStart().getX() * m - m / 2, (float)mywh.regions[i].pickingaisleedges[j].getStart().getY() * m - m / 2, m, m);
+                    //mysvg.addCircle((float)mywh.regions[i].pickingaisleedges[j].getStart().getX() * m, (float)mywh.regions[i].pickingaisleedges[j].getStart().getY() * m, m, mypen.Width, mypen.Color);
+                    //graphicsObj.DrawEllipse(mypen, (float)mywh.regions[i].pickingaisleedges[j].getEnd().getX() * m - m / 2, (float)mywh.regions[i].pickingaisleedges[j].getEnd().getY() * m - m / 2 , m, m);
+                    //mysvg.addCircle((float)mywh.regions[i].pickingaisleedges[j].getEnd().getX() * m, (float)mywh.regions[i].pickingaisleedges[j].getEnd().getY() * m, m, mypen.Width, mypen.Color);
                     // THIRD DEBUG TO GET AISLE LINES
                     //mypen.Color = System.Drawing.Color.Black;
                     //mypen.Width = m;
@@ -3246,6 +3247,7 @@ namespace GABAK
             if (!string.IsNullOrEmpty(selectedSessionID))
             {
                 (var userData, var warehouseData) = Program.FetchData(selectedSessionID);
+                /*
                 panelDrawing.Width = Convert.ToInt32(warehouseData.WarehouseWidth * 8);
                 panelDrawing.Height = Convert.ToInt32(warehouseData.WarehouseDepth * 8);
 
@@ -3306,7 +3308,17 @@ namespace GABAK
                 }
 
                 panelDrawing.BackgroundImage = img;
-                panelDrawing.Refresh();
+                panelDrawing.Refresh(); */
+                generateWarehouseFishbone(userData, warehouseData);
+                if (checkBoxIsleBG.Checked || checkBoxDottedOutline.Checked || checkBoxIsleLines.Checked)
+                {
+                    drawPickingAislesConditioned(graphicsObj, checkBoxIsleBG.Checked, checkBoxDottedOutline.Checked, checkBoxIsleLines.Checked);
+                    panelDrawing.Refresh();
+                }
+                else
+                {
+                    generateWarehouseFishbone(userData, warehouseData);
+                }
             }
             else
             {
@@ -3358,114 +3370,652 @@ namespace GABAK
             checkBoxIsleLines.Visible = true;
         }
 
-        private void checkBoxIsleLines_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBoxIsleLines.Checked)
+
+        private void generateWarehouseFishbone(UserData userData, WarehouseData warehouseData) {
+            DateTime start = DateTime.Now;
+            
+            //Set mywh object to null
+            mywh = null;
+            //Set Magnify factor
+            m = (float)Convert.ToDouble(textBoxMagnify.Text);
+            //Reset IDs
+            edge.nextID = 0;
+            region.nextID = 0;
+            node.nextID = 0;
+
+            //Create a new warehouse object
+            mywh = new warehouse();
+            //Set warehouse aspectratio
+            mywh.aspectratio = 0.5;
+            //Set warehouse area (CHANGE THIS TO CHANGE SIZE OF WAREHOUSE)
+            mywh.setArea(79000);
+            //Set warehouse cross aisle width
+            mywh.crossaislewidth = 12;
+            //Set warehouse picking aisle width
+            mywh.pickingaislewidth = 12;
+            //Set warehouse picking location width
+            mywh.pickinglocationwidth = 4;
+            //Set warehouse picking location depth
+            mywh.pickinglocationdepth = 4;
+
+            // USED IN ROUTING TAB
+            //Set size of picker used for visibility graph
+            mywh.pickersize = Convert.ToDouble(textBoxPickerSize.Text);
+            //Set which graph will be used Steiner or Visibility Graph
+            mywh.usevisibilitygraph = true;
+
+            // USED IN STORAGE TAB
+            //Set average pick list size (this is used for best location calculation
+            mywh.avgTourLength = Convert.ToDouble(textBoxAvgOrderSize.Text);
+            //Set number of colors
+            options.numbercolors = Convert.ToInt32(textBoxNumberColors.Text);
+
+
+            DateTime start1 = DateTime.Now;
+            //Create Warehouse in the background
+            //mywh.createSingleCrossAisleWarehouse(Convert.ToDouble(textBoxAngle1.Text), Convert.ToDouble(textBoxAngle2.Text), Convert.ToDouble(textBoxAdjuster1.Text), Convert.ToDouble(textBoxAdjuster2.Text), mywh.crossaislewidth, mywh.pickingaislewidth, mywh.pickinglocationwidth, mywh.pickinglocationdepth, Convert.ToDouble(textBoxE1.Text), Convert.ToDouble(textBoxE2.Text), Convert.ToDouble(textBoxpd.Text));
+            double[] angle = { 0.0, 0.0, 90.0, 90.0, 90.0, 90.0, 90.0, 90.0 };
+            double[] adjuster = { 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5 };
+            double[] pickadjuster = { 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5 };
+            double[] ext = { 0.0416, 0.2083, 0.625, 0.625 };
+            double[] intx = { 0.5 };
+            double[] inty = { 0.5 };
+            double[] pd = { 0.625 };
+            double aspectratio = 0.5;
+
+            bool[] connections = new bool[10];
+
+            connections[0] = false;
+            connections[1] = true;
+            connections[2] = false;
+            connections[3] = false;
+            connections[4] = true;
+            connections[5] = false;
+            connections[6] = false;
+            connections[7] = false;
+            connections[8] = false;
+            connections[9] = false;
+
+            //Adjust warehouse area until warehouse is fit
+            int increased = 0;
+            int decreased = 0;
+            bool warehousefit = false;
+            bool finalize = false;
+            bool resize = checkBoxResize.Checked;
+            if (resize) mywh.setArea(40000);//Set to a fixed point so it can find the best area from the same starting point
+            do
             {
-                // Fetch the necessary data
-                (var userData, var warehouseData) = Program.FetchData(selectedSessionID);
-                XY origin = new XY(panelDrawing.Size.Width / 2, (float)(panelDrawing.Size.Height * 0.95));
-                XY pixelPerMeter = new XY(
-                    panelDrawing.Size.Width / warehouseData.WarehouseWidth,
-                    panelDrawing.Size.Height / warehouseData.WarehouseDepth
-                );
-
-                Pen mypen = new Pen(Color.Black);
-
-                // Use the existing graphics to draw directly on the panel
-                using (Graphics g = panelDrawing.CreateGraphics())
+                mywh.resetNetwork();
+                mywh.setSKUs(myskus);
+                if (!mywh.createWarehouse(angle, adjuster, pickadjuster, ext, intx, inty, pd, aspectratio, mywh.crossaislewidth, mywh.pickingaislewidth, mywh.pickinglocationwidth, mywh.pickinglocationdepth, connections))
                 {
-                    for (int i = 0; i < warehouseData.RacksLocation.Count; i++)
+                    textBoxNeighbors.AppendText("Invalid design parameters\n");
+                    for (int i = 0; i < mywh.problematicconnections.Count(); i++)
                     {
-                        double x1 = warehouseData.RacksLocation[i].X2 * pixelPerMeter.X;
-                        double x2 = warehouseData.RacksLocation[i].X1 * pixelPerMeter.X;
-                        double y1 = warehouseData.RacksLocation[i].Y2 * pixelPerMeter.Y;
-                        double y2 = warehouseData.RacksLocation[i].Y1 * pixelPerMeter.Y;
-
-                        //debug
-                        Console.WriteLine("Should display aisle lines");
+                        textBoxNeighbors.AppendText(mywh.problematicconnections[i].ToString() + " ");
+                    }
+                    textBoxNeighbors.AppendText("\n");
+                    return;
+                }
+                if (!resize) break;
+                //Check warehouse size here before doing any other calculations and if size is not fit then adjust it approprately
+                int totalstoragelocations = mywh.totalNumberOfLocations();
+                if (increased > 0 && decreased > 0)//No exact number of locations but this is the smallest it can get then we stop
+                {
+                    if (mywh.getSKUs().Count > totalstoragelocations)//This check is necessary because last iteration it could have been decreased
+                    {
+                        mywh.setArea(mywh.area / options.warehouseadjustmentfactor);//Increase area
+                        increased++;
+                        finalize = true;
+                    }
+                    else if (mywh.getSKUs().Count < totalstoragelocations || finalize == true)
+                    {
+                        warehousefit = true;
+                        break;
                     }
                 }
-            }
-            else
-            {
-                // If the checkbox is unchecked, repaint to clear the debug drawing
-                panelDrawing.Invalidate();
-            }
-        }
-        private void checkBoxIsleBG_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBoxIsleBG.Checked)
-            {
-                // Fetch the necessary data
-                (var userData, var warehouseData) = Program.FetchData(selectedSessionID);
-                XY origin = new XY(panelDrawing.Size.Width / 2, (float)(panelDrawing.Size.Height * 0.95));
-                XY pixelPerMeter = new XY(
-                    panelDrawing.Size.Width / warehouseData.WarehouseWidth,
-                    panelDrawing.Size.Height / warehouseData.WarehouseDepth
-                );
-
-                Pen mypen = new Pen(Color.LightGray);
-
-                // Use the existing graphics to draw directly on the panel
-                using (Graphics g = panelDrawing.CreateGraphics())
+                if (mywh.getSKUs().Count > totalstoragelocations)
                 {
-                    for (int i = 0; i < warehouseData.RacksLocation.Count; i++)
-                    {
-                        double x1 = warehouseData.RacksLocation[i].X2 * pixelPerMeter.X;
-                        double x2 = warehouseData.RacksLocation[i].X1 * pixelPerMeter.X;
-                        double y1 = warehouseData.RacksLocation[i].Y2 * pixelPerMeter.Y;
-                        double y2 = warehouseData.RacksLocation[i].Y1 * pixelPerMeter.Y;
+                    mywh.setArea(mywh.area / options.warehouseadjustmentfactor);//Increase area
+                    increased++;
+                }
+                else if (mywh.getSKUs().Count < totalstoragelocations)
+                {
+                    mywh.setArea(mywh.area * options.warehouseadjustmentfactor);//Decrease area
+                    decreased++;
+                }
+                else if (mywh.getSKUs().Count == totalstoragelocations)
+                {
+                    warehousefit = true;
+                }
+            } while (!warehousefit);
+            if (mywh.getSKUs().Count > mywh.totalNumberOfLocations())
+            {
+                textBoxNeighbors.AppendText("Insufficient space\n");
+                labelTotalLocations.Text = "Total Locations: " + mywh.totalNumberOfLocations().ToString();
+                return;
+            }
+            //Set final area
+            textBoxArea.Text = mywh.area.ToString("R");//R is for making sure the double is converted to string exactly without losing precision
+            
+            //Set width of the warehouse
+            textBoxWHWidth.Text = mywh.getWidth().ToString();
+            //Set depth of the warehouse
+            textBoxWHDepth.Text = mywh.getDepth().ToString();
+            
+            //Set panel's width with consideration of margins of edge crossaisles
+            panelDrawing.Width = Convert.ToInt32(mywh.getWidth() * m);
+            //Set panel's height with consideration of margins of edge crossaisles
+            panelDrawing.Height = Convert.ToInt32(mywh.getDepth() * m);
+            myBitmap = new Bitmap(this.panelDrawing.Width, this.panelDrawing.Height, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+            //graphicsObj = this.panelDrawing.CreateGraphics();
+            //Create graphics object for drawing lines and shapes in panel
+            graphicsObj = Graphics.FromImage(myBitmap);
+            graphicsObj.Clear(Color.White);
+            //Create pen object for width and color of shapess
+            mypen = new Pen(System.Drawing.Color.Blue, 1);
+            //Set alignment to center so aisles are correctly aligned
+            mypen.Alignment = PenAlignment.Center;
+            //Clear svg content
+            mysvg = new svg(panelDrawing.Width, panelDrawing.Height);
+            //Clear ARDesign content
+            myardesign = new ardesign(mywh.getWidth(), mywh.getDepth(), mywh.pdnodes[0].getX(), mywh.pdnodes[0].getY(), mywh.pickinglocationwidth, mywh.pickinglocationdepth);
 
-                        mypen.Width = (float)(warehouseData.RackWidth * pixelPerMeter.X);
+            /* IMPLEMENTATION OF USER PATH */
+            XY origin = new XY(panelDrawing.Width / 2, (float)(panelDrawing.Height * 0.95));
+            XY pixelPerMeter = new XY(
+                panelDrawing.Size.Width / warehouseData.WarehouseWidth,
+                panelDrawing.Size.Height / warehouseData.WarehouseDepth
+            );
 
-                        g.DrawLine(mypen,(float)(origin.X + x1),(float)(y1 + origin.Y),(float)(origin.X + x2),(float)(y2 + origin.Y));
-                    }
+            Pen pen = new Pen(Color.FromArgb(255, 0, 0, 0));
+            pen.Width = 2;
+
+            // draw the user path
+            for (int i = 0; i < userData.x.Count - 1; i++)
+            {
+                double x1 = userData.x[i] * pixelPerMeter.X;
+                double y1 = userData.z[i] * pixelPerMeter.Y;
+                double x2 = userData.x[i + 1] * pixelPerMeter.X;
+                double y2 = userData.z[i + 1] * pixelPerMeter.Y;
+                this.drawPath(graphicsObj, pen, x1, y1, x2, y2, origin);
+            }
+
+            // Draw the pick list locations
+            Pen picklistPen = new Pen(Color.Red, 2);
+            foreach (var picklist in warehouseData.ObjectivesLocation)
+            {
+                foreach (var picklocation in picklist.Value)
+                {
+                    double x = picklocation.X * pixelPerMeter.X;
+                    double y = picklocation.Y * pixelPerMeter.Y;
+
+                    float drawX = (float)(origin.X - x);
+                    float drawY = (float)(y + origin.Y);
+
+                    // subtracted 10 and 5 because need to get the bottom right of the circle to spawn
+                    // the circle for the pick location (based on the width and height of circle 10x10)
+                    this.drawCircle(graphicsObj, picklistPen, drawX - 10, drawY - 5, 10, 10);
                 }
             }
+
+
+
+            TimeSpan elapsed1 = DateTime.Now - start1;
+            DateTime start2 = DateTime.Now;
+
+            //Create importantnodes shortest distances
+            if (!mywh.usevisibilitygraph) mywh.createImportantNodeShortestDistances();
+            TimeSpan elapsed2 = DateTime.Now - start2;
+            DateTime start3 = DateTime.Now;
+            TimeSpan elapsed9 = DateTime.Now - start2;
+            TimeSpan elapsed10 = DateTime.Now - start2;
+            TimeSpan elapsed11 = DateTime.Now - start2;
+
+            //Calculate Shortest Path Distances for Locations
+            if (!mywh.usevisibilitygraph) mywh.locationShortestDistance();
             else
             {
-                // If the checkbox is unchecked, repaint to clear the debug drawing
-                panelDrawing.Invalidate();
+                DateTime start9 = DateTime.Now;
+                mywh.createPolygonsandGraphNodes();
+                elapsed9 = DateTime.Now - start9;
+                DateTime start10 = DateTime.Now;
+                mywh.createVisibilityGraph();
+                elapsed10 = DateTime.Now - start10;
+                DateTime start11 = DateTime.Now;
+                mywh.fillGraphNodeDistances();
+                elapsed11 = DateTime.Now - start11;
             }
-        }
 
-        private void checkBoxDottedOutline_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBoxDottedOutline.Checked)
+            //Calculate Shortest Path Distances to PD
+            mywh.pdTotalDistances();
+            TimeSpan elapsed3 = DateTime.Now - start3;
+            DateTime start4 = DateTime.Now;
+
+            //Fulfill Total Distances to Each Locations
+            mywh.totalDistances();
+            TimeSpan elapsed4 = DateTime.Now - start4;
+            DateTime start5 = DateTime.Now;
+            //mywh.colorManytoMany();
+            //mywh.colorOnetoMany();
+            mywh.rankLocations(Convert.ToDouble(textBoxAvgOrderSize.Text));
+            mywh.colorOverall();
+            TimeSpan elapsed5 = DateTime.Now - start5;
+            DateTime start6 = DateTime.Now;
+
+            //Draw created warehouse to panel
+            this.drawWarehouse();
+
+            TimeSpan elapsed6 = DateTime.Now - start5;
+            labelTotalLocations.Text = "Total Locations: " + mywh.totalNumberOfLocations().ToString();
+            labelTotalAisles.Text = "Total Aisles: " + mywh.totalNumberOfAisles().ToString();
+            DateTime start7 = DateTime.Now;
+            int allocationmethod = 0;
+            if (checkBoxStraightAllocation.Checked) allocationmethod = 1;
+            al = new allocation(Convert.ToInt32(textBoxAllocationSeed.Text));
+            int warehouseareafit = al.allocateSKUs(mywh.getSKUs(), mywh, allocationmethod);
+            TimeSpan elapsed7 = DateTime.Now - start6;
+            if (warehouseareafit < 0) { textBoxNeighbors.AppendText("Insufficient space\n"); return; }
+            else if (warehouseareafit > 0) { textBoxNeighbors.AppendText("Too many empty locations\n"); return; };
+
+            //al.randomized(myskus);
+            mywh.setOrders(this.myorders);
+            //Add orders into ardesign
+            myardesign.addPickLists();
+            for (int i = 0; i < mywh.getOrders().Count; i++)
             {
-                // Fetch the necessary data
-                (var userData, var warehouseData) = Program.FetchData(selectedSessionID);
-                XY origin = new XY(panelDrawing.Size.Width / 2, (float)(panelDrawing.Size.Height * 0.95));
-                XY pixelPerMeter = new XY(
-                    panelDrawing.Size.Width / warehouseData.WarehouseWidth,
-                    panelDrawing.Size.Height / warehouseData.WarehouseDepth
-                );
-
-                Pen mypen = new Pen(Color.Black);
-                mypen.Width = 1 * (float)pixelPerMeter.X;
-
-                // Use the existing graphics to draw directly on the panel
-                using (Graphics g = panelDrawing.CreateGraphics())
+                myardesign.addPickList(mywh.getOrders()[i].getOrderID());
+                for (int j = 0; j < mywh.getOrders()[i].getOrderSkus().Count; j++)
                 {
-                    for (int i = 0; i < warehouseData.RacksLocation.Count; i++)
-                    {
-                        // Start and end points of the aisle
-                        double xStart = warehouseData.RacksLocation[i].X1 * pixelPerMeter.X;
-                        double yStart = warehouseData.RacksLocation[i].Y1 * pixelPerMeter.Y;
-                        double xEnd = warehouseData.RacksLocation[i].X2 * pixelPerMeter.X;
-                        double yEnd = warehouseData.RacksLocation[i].Y2 * pixelPerMeter.Y;
+                    double x = mywh.getOrders()[i].getOrderSkus()[j].location.getX();
+                    double y = mywh.getOrders()[i].getOrderSkus()[j].location.getY();
+                    //We make pd point as the starting point in ardesign
+                    //So when we start the camera in AR it starts from PD instead of top left corner which is 0,0 for GUI
+                    //But we want PD to act like 0,0 for ardesign
+                    x = x - mywh.pdnodes[0].getX();
+                    y = y - mywh.pdnodes[0].getY();
+                    myardesign.addPickLocation(x, y);
+                }
+                myardesign.closePickList();
+            }
+            myardesign.closePickLists();
+            myardesign.closeWarehouse();
+            //mywh.randomizeOrders();
+            double totalcost = 0;
+            int samplesize = Convert.ToInt32(textBoxSampleSize.Text);
+            //If you want to solve it on this computer
+            DateTime start8 = DateTime.Now;
+            //If you want to use aisle centers
+            if (!mywh.usevisibilitygraph)
+            {
+                //If you want to solve it using parallel computing
+                if (comboBoxComputing.SelectedIndex == 0)
+                {
+                    var sums = new ConcurrentBag<double>();
+                    var sums2 = new ConcurrentBag<int>();
+                    var sums3 = new ConcurrentBag<int>();
+                    string routingSolver = comboBoxRouting.GetItemText(comboBoxRouting.SelectedItem);
 
-                        //debug
-                        Console.WriteLine("Should display dotted outline");
+                    Parallel.For(0, samplesize, k =>
+                    //for (int k = 0; k < samplesize; k++)
+                    {
+                        warehouse tmpwh = mywh;
+                        List<order> tmporders = mywh.getOrders();
+                        routing rt = new routing();
+                        //totalcost += rt.tsp(tmpwh, tmporders[k]);
+                        double tourcost = 0;
+                        bool LKHdoneonce = false;
+                        while (tourcost == 0)
+                        {
+                            if (routingSolver == "Concorde" || LKHdoneonce)
+                            {
+                                tourcost = rt.tspOptSteiner(tmpwh, tmporders[k], k);
+                                if (tourcost == 0) break;//This means that tour cost is really zero
+                            }
+                            else if (routingSolver == "LKH")
+                            {
+                                tourcost = rt.tspLKHSteiner(tmpwh, tmporders[k], k);
+                                LKHdoneonce = true;
+                            }
+                            else if (routingSolver == "2-Opt")
+                            {
+                                tourcost = rt.tsp2OPTSteiner(tmpwh, tmporders[k], k);
+                                if (tourcost == 0) break;//This means that tour cost is really zero
+                            }
+                            else if (routingSolver == "Held-Karp")
+                            {
+                                tourcost = rt.tspHeldKarpSteiner(tmpwh, tmporders[k], k);
+                                if (tourcost == 0) break;//This means that tour cost is really zero
+                            }
+                        }
+                        sums.Add(tourcost);
+                        sums2.Add(tmporders[k].getOrderSize());
+                        sums3.Add(tmporders[k].getOrderID());
+                    });
+
+                    //Excel csv export (optional)
+                    if (checkBoxExport.Checked)
+                    {
+                        csvexport myexcel = new csvexport();
+                        for (int i = 0; i < sums.Count; i++)
+                        {
+                            myexcel.addRow();
+                            myexcel["tourcost"] = sums.ElementAt(i).ToString();
+                            myexcel["toursize"] = sums2.ElementAt(i).ToString();
+                            myexcel["orderid"] = sums3.ElementAt(i).ToString();
+                        }
+                        myexcel.exportToFile("export.csv");
+                    }
+                    totalcost = sums.Sum() / samplesize;
+                }
+                //If you want to solve it using distributed computing
+                else if (comboBoxComputing.SelectedIndex == 1)
+                {
+                    string routingSolver = comboBoxRouting.GetItemText(comboBoxRouting.SelectedItem);
+                    if (routingSolver == "Concorde")
+                    {
+                        socketservers mysocketservers = new socketservers();
+                        mysocketservers.checkAvailableConcordeServers();
+                        routing rt = new routing();
+                        totalcost = rt.tspOptNetSteiner(mywh, samplesize, mysocketservers, comboBoxNetSchedule.SelectedIndex);
+                    }
+                    else if (routingSolver == "LKH")
+                    {
+                        socketservers mysocketservers = new socketservers();
+                        mysocketservers.checkAvailableConcordeServers();
+                        routing rt = new routing();
+                        totalcost = rt.tspLKHNetSteiner(mywh, samplesize, mysocketservers, comboBoxNetSchedule.SelectedIndex);
                     }
                 }
+                //If you want to solve it using single threaded computing
+                else
+                {
+                    var sums = new ConcurrentBag<double>();
+                    var sums2 = new ConcurrentBag<int>();
+                    var sums3 = new ConcurrentBag<int>();
+                    string routingSolver = comboBoxRouting.GetItemText(comboBoxRouting.SelectedItem);
+
+                    //Parallel.For(0, samplesize, k =>
+                    for (int k = 0; k < samplesize; k++)
+                    {
+                        warehouse tmpwh = mywh;
+                        List<order> tmporders = mywh.getOrders();
+                        routing rt = new routing();
+                        //totalcost += rt.tsp(tmpwh, tmporders[k]);
+                        double tourcost = 0;
+                        bool LKHdoneonce = false;
+                        while (tourcost == 0)
+                        {
+                            if (routingSolver == "Concorde" || LKHdoneonce)
+                            {
+                                tourcost = rt.tspOptSteiner(tmpwh, tmporders[k], k);
+                                if (tourcost == 0) break;//This means that tour cost is really zero
+                            }
+                            else if (routingSolver == "LKH")
+                            {
+                                tourcost = rt.tspLKHSteiner(tmpwh, tmporders[k], k);
+                                LKHdoneonce = true;
+                            }
+                            else if (routingSolver == "2-Opt")
+                            {
+                                tourcost = rt.tsp2OPTSteiner(tmpwh, tmporders[k], k);
+                                if (tourcost == 0) break;//This means that tour cost is really zero
+                            }
+                            else if (routingSolver == "Held-Karp")
+                            {
+                                tourcost = rt.tspHeldKarpSteiner(tmpwh, tmporders[k], k);
+                                if (tourcost == 0) break;//This means that tour cost is really zero
+                            }
+                        }
+                        sums.Add(tourcost);
+                        sums2.Add(tmporders[k].getOrderSize());
+                        sums3.Add(tmporders[k].getOrderID());
+                    };
+
+                    //Excel csv export (optional)
+                    if (checkBoxExport.Checked)
+                    {
+                        csvexport myexcel = new csvexport();
+                        for (int i = 0; i < sums.Count; i++)
+                        {
+                            myexcel.addRow();
+                            myexcel["tourcost"] = sums.ElementAt(i).ToString();
+                            myexcel["toursize"] = sums2.ElementAt(i).ToString();
+                            myexcel["orderid"] = sums3.ElementAt(i).ToString();
+                        }
+                        myexcel.exportToFile("export.csv");
+                    }
+                    totalcost = sums.Sum() / samplesize;
+                }
             }
+            //If you want to use visibility graph
             else
             {
-                // If the checkbox is unchecked, repaint to clear the debug drawing
-                panelDrawing.Invalidate();
+                //If you want to solve it using parallel computing
+                if (comboBoxComputing.SelectedIndex == 0)
+                {
+                    var sums = new ConcurrentBag<double>();
+                    var sums2 = new ConcurrentBag<int>();
+                    var sums3 = new ConcurrentBag<int>();
+                    string routingSolver = comboBoxRouting.GetItemText(comboBoxRouting.SelectedItem);
+
+                    Parallel.For(0, samplesize, k =>
+                    {
+                        warehouse tmpwh = mywh;
+                        List<order> tmporders = mywh.getOrders();
+                        routing rt = new routing();
+                        //totalcost += rt.tsp(tmpwh, tmporders[k]);
+                        double tourcost = 0;
+                        bool LKHdoneonce = false;
+                        while (tourcost == 0)
+                        {
+                            if (routingSolver == "Concorde" || LKHdoneonce)
+                            {
+                                tourcost = rt.tspOptVisibility(tmpwh, tmporders[k], k);
+                                if (tourcost == 0) break;//This means that tour cost is really zero
+                            }
+                            else if (routingSolver == "LKH")
+                            {
+                                tourcost = rt.tspLKHVisibility(tmpwh, tmporders[k], k);
+                                LKHdoneonce = true;
+                            }
+                            else if (routingSolver == "2-Opt")
+                            {
+                                tourcost = rt.tsp2OPTVisibility(tmpwh, tmporders[k], k);
+                                if (tourcost == 0) break;//This means that tour cost is really zero
+                            }
+                            else if (routingSolver == "Held-Karp")
+                            {
+                                tourcost = rt.tsp2OPTVisibility(tmpwh, tmporders[k], k);
+                                if (tourcost == 0) break;//This means that tour cost is really zero
+                            }
+                        }
+                        sums.Add(tourcost);
+                        sums2.Add(tmporders[k].getOrderSize());
+                        sums3.Add(tmporders[k].getOrderID());
+                    });
+
+                    //Excel csv export (optional)
+                    if (checkBoxExport.Checked)
+                    {
+                        csvexport myexcel = new csvexport();
+                        for (int i = 0; i < sums.Count; i++)
+                        {
+                            myexcel.addRow();
+                            myexcel["tourcost"] = sums.ElementAt(i).ToString();
+                            myexcel["toursize"] = sums2.ElementAt(i).ToString();
+                            myexcel["orderid"] = sums3.ElementAt(i).ToString();
+                        }
+                        myexcel.exportToFile("export.csv");
+                    }
+                    totalcost = sums.Sum() / samplesize;
+                }
+                //If you want to solve it using distributed computing
+                else if (comboBoxComputing.SelectedIndex == 1)
+                {
+                    string routingSolver = comboBoxRouting.GetItemText(comboBoxRouting.SelectedItem);
+                    if (routingSolver == "Concorde")
+                    {
+                        socketservers mysocketservers = new socketservers();
+                        mysocketservers.checkAvailableConcordeServers();
+                        routing rt = new routing();
+                        totalcost = rt.tspOptNetVisibility(mywh, samplesize, mysocketservers, comboBoxNetSchedule.SelectedIndex);
+                    }
+                    else if (routingSolver == "LKH")
+                    {
+                        socketservers mysocketservers = new socketservers();
+                        mysocketservers.checkAvailableConcordeServers();
+                        routing rt = new routing();
+                        totalcost = rt.tspLKHNetVisibility(mywh, samplesize, mysocketservers, comboBoxNetSchedule.SelectedIndex);
+                    }
+                }
+                //If you want to solve it using single threaded computing
+                else
+                {
+                    var sums = new ConcurrentBag<double>();
+                    var sums2 = new ConcurrentBag<int>();
+                    var sums3 = new ConcurrentBag<int>();
+                    string routingSolver = comboBoxRouting.GetItemText(comboBoxRouting.SelectedItem);
+
+                    for (int k = 0; k < samplesize; k++)
+                    {
+                        warehouse tmpwh = mywh;
+                        List<order> tmporders = mywh.getOrders();
+                        routing rt = new routing();
+                        double tourcost = 0;
+                        bool LKHdoneonce = false;
+                        while (tourcost == 0)
+                        {
+                            if (routingSolver == "Concorde" || LKHdoneonce)
+                            {
+                                tourcost = rt.tspOptVisibility(tmpwh, tmporders[k], k);
+                                if (tourcost == 0) break;//This means that tour cost is really zero
+                            }
+                            else if (routingSolver == "LKH")
+                            {
+                                tourcost = rt.tspLKHVisibility(tmpwh, tmporders[k], k);
+                                LKHdoneonce = true;
+                            }
+                            else if (routingSolver == "2-Opt")
+                            {
+                                tourcost = rt.tsp2OPTVisibility(tmpwh, tmporders[k], k);
+                                if (tourcost == 0) break;//This means that tour cost is really zero
+                            }
+                        }
+                        sums.Add(tourcost);
+                        sums2.Add(tmporders[k].getOrderSize());
+                        sums3.Add(tmporders[k].getOrderID());
+                    };
+
+                    //Excel csv export (optional)
+                    if (checkBoxExport.Checked)
+                    {
+                        csvexport myexcel = new csvexport();
+                        for (int i = 0; i < sums.Count; i++)
+                        {
+                            myexcel.addRow();
+                            myexcel["tourcost"] = sums.ElementAt(i).ToString();
+                            myexcel["toursize"] = sums2.ElementAt(i).ToString();
+                            myexcel["orderid"] = sums3.ElementAt(i).ToString();
+                        }
+                        myexcel.exportToFile("export.csv");
+                    }
+                    totalcost = sums.Sum() / samplesize;
+                }
+            }
+            TimeSpan elapsed8 = DateTime.Now - start7;
+
+            labelDistanceOutput.Text = "Average Distance: " + totalcost.ToString("0.0");
+            //labelDistanceOutput.Text = "Average Distance: " + mywh.averageTotalDistancePerLocation().ToString();
+            //labelDistanceOutput.Text = "Average Distance: " + mywh.averageDistancetoPDPerLocation().ToString();
+            panelDrawing.BackgroundImage = myBitmap;
+            //Delete everything in the panel and refresh
+            panelDrawing.Refresh();
+            //graphicsObj.Dispose();
+            textBoxRegions.Text = "";
+            for (int i = 0; i < mywh.regionedges.Count; i++)
+            {
+                textBoxRegions.AppendText(
+                    visualmath.calculateAngle(mywh.regionedges[i].getStart().getX(), mywh.regionedges[i].getStart().getY(), mywh.regionedges[i].getEnd().getX(), mywh.regionedges[i].getEnd().getY()).ToString() + "\t" +
+                    mywh.regionedges[i].id.ToString() + "\t" +
+                    mywh.regionedges[i].getStart().id.ToString() + "\t" +
+                    mywh.regionedges[i].getStart().getX().ToString() + "\t" +
+                    mywh.regionedges[i].getStart().getY().ToString() + "\t" +
+                    mywh.regionedges[i].getEnd().id.ToString() + "\t" +
+                    mywh.regionedges[i].getEnd().getX().ToString() + "\t" +
+                    mywh.regionedges[i].getEnd().getY().ToString() + "\n");
+            }
+            textBoxNeighbors.Text = "";
+            for (int i = 0; i < mywh.regions.Count; i++)
+            {
+                textBoxNeighbors.AppendText("Region" + mywh.regions[i].getRegionID().ToString() + ":\t");
+                for (int j = 0; j < mywh.regions[i].regionedges.Count; j++)
+                {
+                    textBoxNeighbors.AppendText(mywh.regions[i].regionedges[j].id.ToString() + " ");
+                }
+                textBoxNeighbors.AppendText("\n");
+            }
+            TimeSpan elapsed = DateTime.Now - start;
+            textBoxNeighbors.AppendText("Create Single:" + elapsed1.ToString() + "\n");
+            textBoxNeighbors.AppendText("Important Node Shortest Dist:" + elapsed2.ToString() + "\n");
+            textBoxNeighbors.AppendText("Shortest Path Distances to Locations:" + elapsed3.ToString() + "\n");
+            textBoxNeighbors.AppendText("Shortest Path Distances Create:" + elapsed4.ToString() + "\n");
+            textBoxNeighbors.AppendText("Coloring:" + elapsed5.ToString() + "\n");
+            textBoxNeighbors.AppendText("Drawing:" + elapsed6.ToString() + "\n");
+            textBoxNeighbors.AppendText("Allocation:" + elapsed7.ToString() + "\n");
+            textBoxNeighbors.AppendText("TSP:" + elapsed8.ToString() + "\n");
+            textBoxNeighbors.AppendText("createPolygonsandGraphNodes" + elapsed9.ToString() + "\n");
+            if (mywh.usevisibilitygraph) textBoxNeighbors.AppendText("graphNodes: " + mywh.graphnodes.Count().ToString() + "\n");
+            textBoxNeighbors.AppendText("createVisibilityGraph:" + elapsed10.ToString() + "\n");
+            textBoxNeighbors.AppendText("fillGraphNodeDistances:" + elapsed11.ToString() + "\n");
+            textBoxNeighbors.AppendText("Total time:" + elapsed.ToString() + "\n");
+            textBoxNeighbors.AppendText("Total time (ms):" + elapsed.TotalMilliseconds.ToString() + "\n");
+        }
+
+        private void drawPickingAislesConditioned(Graphics graphicsObj, bool firstDebug, bool secondDebug, bool thirdDebug)
+        {
+            for (int i = 0; i < mywh.regions.Count; i++)
+            {
+                //Add region to Ardesign
+                //Clear ARDesign content
+                myardesign.addRegion(mywh.regions[i].angle);
+                for (int j = 0; j < mywh.regions[i].pickingaisleedges.Count; j++)
+                {
+                    if (firstDebug)
+                    {
+                        // FIRST DEBUG TO GET AISLE BACKGROUNDS 
+                        mypen.Color = System.Drawing.Color.LightGray;
+                        mypen.Width = (float)mywh.regions[i].pickingaisleedges[j].width * m;
+                        graphicsObj.DrawLine(mypen, (float)mywh.regions[i].pickingaisleedges[j].getStart().getX() * m, (float)mywh.regions[i].pickingaisleedges[j].getStart().getY() * m, (float)mywh.regions[i].pickingaisleedges[j].getEnd().getX() * m, (float)mywh.regions[i].pickingaisleedges[j].getEnd().getY() * m);
+                    } 
+
+                    else if (secondDebug)
+                    {
+                        // SECOND DEBUG TO GET DOTTED OUTLINE
+                        mypen.Color = System.Drawing.Color.Black;
+                        mypen.Width = 1 * m;
+                        graphicsObj.DrawEllipse(mypen, (float)mywh.regions[i].pickingaisleedges[j].getStart().getX() * m - m / 2, (float)mywh.regions[i].pickingaisleedges[j].getStart().getY() * m - m / 2, m, m);
+                        mysvg.addCircle((float)mywh.regions[i].pickingaisleedges[j].getStart().getX() * m, (float)mywh.regions[i].pickingaisleedges[j].getStart().getY() * m, m, mypen.Width, mypen.Color);
+                        graphicsObj.DrawEllipse(mypen, (float)mywh.regions[i].pickingaisleedges[j].getEnd().getX() * m - m / 2, (float)mywh.regions[i].pickingaisleedges[j].getEnd().getY() * m - m / 2, m, m);
+                        mysvg.addCircle((float)mywh.regions[i].pickingaisleedges[j].getEnd().getX() * m, (float)mywh.regions[i].pickingaisleedges[j].getEnd().getY() * m, m, mypen.Width, mypen.Color);
+                    }
+
+                    else if (thirdDebug)
+                    {
+                        // THIRD DEBUG TO GET AISLE LINES
+                        mypen.Color = System.Drawing.Color.Black;
+                        mypen.Width = m;
+                        graphicsObj.DrawLine(mypen, (float)mywh.regions[i].pickingaisleedges[j].getStart().getX() * m, (float)mywh.regions[i].pickingaisleedges[j].getStart().getY() * m, (float)mywh.regions[i].pickingaisleedges[j].getEnd().getX() * m, (float)mywh.regions[i].pickingaisleedges[j].getEnd().getY() * m);
+                        mysvg.addLine((float)mywh.regions[i].pickingaisleedges[j].getStart().getX() * m, (float)mywh.regions[i].pickingaisleedges[j].getStart().getY() * m, (float)mywh.regions[i].pickingaisleedges[j].getEnd().getX() * m, (float)mywh.regions[i].pickingaisleedges[j].getEnd().getY() * m, mypen.Width, mypen.Color);
+                    }
+
+
+                    drawPickingAisleLocations(mywh.regions[i].pickingaisleedges[j]);
+                }
+                //Close region tag in ardesign
+                myardesign.closeRegion();
             }
         }
+
     }
 }
